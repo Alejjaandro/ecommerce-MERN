@@ -1,0 +1,33 @@
+.nav-container {
+    height: 60px;
+    background-color: black;
+    color: white;
+    padding-left: 2%;
+    padding-right: 2%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.center-container {
+    font-weight: 600;
+    font-size: xx-large;
+}
+
+.right-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-search {
+    border-radius: 10px;
+    margin-right: .25rem;
+}
