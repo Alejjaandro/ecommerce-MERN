@@ -31,3 +31,10 @@
     border-radius: 10px;
     margin-right: .25rem;
 }
+
+
+@media (max-width: 480px) {
+    .left-container {
+        display: none;
+    }
+}
