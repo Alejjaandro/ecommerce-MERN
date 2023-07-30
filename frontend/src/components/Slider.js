@@ -7,13 +7,11 @@ import './Slider.css';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 
 // Products imgs
-import {productsEx, prod, prodImgs} from '../data/sliderData';
+import {images} from '../data/hardCodedData';
 
 function Slider() {
 
-    // console.log(prodImgs);
-
-    const productsImg = productsEx.slides;
+    const productsImg = images.slides;
 
     const [slide, setSlide] = useState(0);
 

@@ -1,0 +1,9 @@
+.cat-container {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    width: 100%;
+
+    text-transform: uppercase;
+    font-weight: 700;
+}

@@ -9,14 +9,12 @@
     position: relative;
 }
 
-.slider-container img {
-    width: 85%;
-    height: 80%;
-}
-
 .slide {
     border-radius: 0.5rem;
     box-shadow: 0px 0px 7px #666;
+
+    object-fit: cover;
+    flex: 1;
 }
 
 .slide-hidden {

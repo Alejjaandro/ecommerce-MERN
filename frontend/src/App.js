@@ -11,6 +11,7 @@ function App() {
     <main className=''>
       
       <Routes>
+
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         
