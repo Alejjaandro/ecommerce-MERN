@@ -7,9 +7,9 @@ export default function Products() {
   return (
     <div className='products-container'>
 
-        {products.map((item) => (
-            <Product item={item} key={item.id}/>
-        ))}
+      {products.map((item) => (
+        <Product item={item} key={item.id} />
+      ))}
 
     </div>
   )

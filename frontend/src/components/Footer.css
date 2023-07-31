@@ -1,0 +1,68 @@
+.foot-container {
+    background-color: black;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.foot-container h2 {
+    padding-bottom: 0.5rem;
+}
+
+.foot-icons-cont {
+    padding-bottom: 1rem;
+    width: 25%;
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.icon-facebook {
+    background-color: blue;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+.icon-twitter {
+    background-color: cyan;
+    color: black;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+.icon-insta {
+    background-color: palevioletred;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+.icon-mail {
+    background-color: red;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
