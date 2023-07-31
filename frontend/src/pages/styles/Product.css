@@ -1,0 +1,170 @@
+/* Misc */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== GENERAL ===== */
+.product-wrapper {
+    padding: 2rem;
+    display: flex;
+}
+
+.product-img {
+    flex: 1;
+    object-fit: contain;
+}
+
+.product-info-container {
+    flex: 1;
+
+    padding: 0 2rem;
+}
+
+.product-title {
+    font-weight: 200;
+}
+
+.product-description {
+    margin: 1rem 0;
+}
+
+.product-price {
+    font-weight: 100;
+    font-size: 3rem;
+}
+
+/* ===== SPECIFIC ===== */
+
+/* Product Options */
+.product-options-container {
+    width: 75%;
+    margin: 2rem 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.option-title {
+    font-size: 2rem;
+    font-weight: 200;
+}
+
+/* Color Options */
+.product-color-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option-color {
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    margin-bottom: 0.5rem;
+}
+
+.color-black {
+    background-color: black;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+
+.color-grey {
+    background-color: grey;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+
+.color-darkblue {
+    background-color: darkblue;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+
+/* RAM Options */
+.product-ram-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select-option {
+    margin-top: 1rem;
+}
+
+/* ADD CONTAINER */
+.add-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.amount-container {
+    padding: 1rem;
+    display: flex;
+
+    gap: 1rem;
+    font-weight: 700;
+}
+
+.remove {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+    border: 1px solid grey;
+    background-color: rgba(253, 0, 0, 0.603);
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+        background-color: red;
+    }
+}
+
+.add {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+    border: 1px solid grey;
+    background-color: rgba(0, 128, 0, 0.623);
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+        background-color: green;
+    }
+}
+
+.amount {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+
+    border: 1px solid black;
+}
+
+.to-cart {
+    padding: 1rem;
+
+    border: 2px solid grey;
+    background-color: lightgrey;
+
+    &:hover {
+        background-color: gray;
+        cursor: pointer;
+    }
+}
