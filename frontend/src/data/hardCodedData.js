@@ -7,15 +7,15 @@ const images = {
             "alt": "Image 1"
         },
         {
-            "src": "https://i.ibb.co/72bjXb5/Phone-1.jpg",
+            "src": "https://i.ibb.co/wQNMfpB/Phone-1.webp",
             "alt": "Image 2"
         },
         {
-            "src": "https://i.ibb.co/Vx323j3/Laptop-1.jpg",
+            "src": "https://i.ibb.co/6gfsw5b/Laptop-1.webp",
             "alt": "Image 3"
         },
         {
-            "src": "https://i.ibb.co/mCP0P3k/TV-1.jpg",
+            "src": "https://i.ibb.co/RynySvM/TV-1.webp",
             "alt": "Image 4"
         }
     ]
@@ -24,19 +24,46 @@ const images = {
 const categories = [
     {
         id: 1,
-        img: "https://i.ibb.co/mCP0P3k/TV-1.jpg",
+        img: "https://i.ibb.co/RynySvM/TV-1.webp",
         title: "tv"
     },
     {
         id: 2,
-        img: "https://i.ibb.co/72bjXb5/Phone-1.jpg",
+        img: "https://i.ibb.co/wQNMfpB/Phone-1.webp",
         title: "smartphones"
     },
     {
         id: 3,
-        img: "https://i.ibb.co/Vx323j3/Laptop-1.jpg",
+        img: "https://i.ibb.co/6gfsw5b/Laptop-1.webp",
         title: "laptops"
     }
 ];
 
-export {images, categories};
+const products = [
+    {
+        id: 1,
+        img: "https://i.ibb.co/HTvVjvW/Laptop-2.webp",
+    },
+    {
+        id: 2,
+        img: "https://i.ibb.co/y62wDvv/Laptop-3.webp",
+    },
+    {
+        id: 3,
+        img: "https://i.ibb.co/fD1VT8c/Phone-2.webp",
+    },
+    {
+        id: 4,
+        img: "https://i.ibb.co/gjsZJ0c/Phone-3.webp",
+    },
+    {
+        id: 5,
+        img: "https://i.ibb.co/RynySvM/TV-1.webp",
+    },
+    {
+        id: 6,
+        img: "https://i.ibb.co/0QwWgV1/TV-3.webp",
+    }
+];
+
+export {images, categories, products};
