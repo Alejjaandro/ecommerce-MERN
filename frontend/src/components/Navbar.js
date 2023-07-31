@@ -5,7 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // Styles
-import './Navbar.css'
+import './styles/Navbar.css';
 
 export default function Navbar() {
   return (

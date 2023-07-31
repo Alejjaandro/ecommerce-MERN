@@ -14,7 +14,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .center-container {
@@ -28,7 +27,6 @@
 }
 
 .nav-search {
-    border-radius: 10px;
     margin-right: .25rem;
 }
 

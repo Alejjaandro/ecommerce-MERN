@@ -1,4 +1,4 @@
-import './CategoryItem.css';
+import './styles/CategoryItem.css'
 
 export default function CategoryItem({ item }) {
 

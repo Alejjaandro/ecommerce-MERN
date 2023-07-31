@@ -1,4 +1,4 @@
-import './Product.css';
+import './styles/Product.css';
 
 // Icons
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';

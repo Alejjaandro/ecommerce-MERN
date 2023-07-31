@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // Styles
-import './Slider.css';
+import './styles/Slider.css';
 
 // Icons
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';

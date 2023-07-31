@@ -1,7 +1,7 @@
 import { categories } from "../data/hardCodedData";
 import CategoryItem from "./CategoryItem";
 
-import './Categories.css'
+import './styles/Categories.css'
 
 export default function Categories() {
 

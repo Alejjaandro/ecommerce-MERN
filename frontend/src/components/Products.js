@@ -1,6 +1,6 @@
 import { products } from '../data/hardCodedData';
 
-import './Products.css'
+import './styles/Products.css'
 import Product from './Product';
 
 export default function Products() {
