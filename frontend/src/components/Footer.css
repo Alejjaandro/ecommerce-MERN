@@ -1,24 +1,26 @@
+/* FOOTER CONTAINER */
 .foot-container {
+    padding: 0.5rem;
     background-color: black;
     color: white;
 
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
-.foot-container h2 {
-    padding-bottom: 0.5rem;
+/* LEFT Company info */
+.company-info {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
 }
 
 .foot-icons-cont {
-    padding-bottom: 1rem;
-    width: 25%;
-
+    margin-top: 1rem;
     display: flex;
-    justify-content: space-between;
-
+    justify-content: space-around;
 }
 
 .icon-facebook {
@@ -55,14 +57,34 @@
         cursor: pointer;
     }
 }
-.icon-mail {
-    background-color: red;
 
-    border-radius: 50%;
-    padding: 0.5rem;
+/* CENTER Useful Links */
+.useful-links {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.links {    
+    display: flex;
+    flex-direction: column;
+
+}
+
+.links a {
+    text-decoration: none;
+    color: white;
 
     &:hover {
-        transform: scale(1.2);
-        cursor: pointer;
+        color: gray;
+        transform: scale(1.1);
     }
+}
+
+/* RIGHT Contact */
+.contact {
+    display: flex;
+    flex-direction: column;
 }
