@@ -6,6 +6,8 @@
     margin: 1rem 1rem;
     text-transform: uppercase;
     font-weight: 300;
+
+    text-align: center;
 }
 
 .filter-container {

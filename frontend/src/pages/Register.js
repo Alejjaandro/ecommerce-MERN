@@ -28,7 +28,7 @@ export default function Register() {
                         <span className="register-agreement">
                             By creating an account,
                             I consent to the processing of my personal data according to our
-                            <strong> Privacy Policy</strong>.
+                            <b> Privacy Policy</b>.
                         </span>
 
 

@@ -1,0 +1,171 @@
+/* Misc */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hr {
+    border: none;
+    height: 1px;
+    background-color: grey;
+}
+
+/* ========== CONTAINER ========== */
+.cart-container {
+    height: 100vh;
+
+    padding: 1.5rem;
+}
+
+/* TITLE */
+.cart-title {
+    font-weight: 300;
+    text-align: center;
+}
+
+/* ===== CART TOP CONTAINER ===== */
+.cart-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 2rem;
+}
+
+.top-button {
+    padding: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover{
+        background-color: silver;
+    }
+}
+
+.top-text {
+    margin: 0 2rem;
+
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* ========== CART BODY CONTAINER ========== */
+.cart-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ==== Products List ==== */
+.product-list {
+    flex: 3;
+}
+
+/* Product details */
+.product {
+    display: flex;
+}
+
+.product-details {
+    display: flex;
+    flex: 1;
+}
+
+/* img */
+.info-img {
+    width: 10rem;
+    margin: 1rem;
+}
+
+/* details */
+.details {
+    padding: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.color {
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    background-color: black;
+}
+
+/* price & amount */
+.product-price {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-ammount {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    font-size: 3rem;
+}
+
+.ammount-icon {
+    cursor: pointer;
+}
+
+.price {
+    font-size: 2.5rem;
+}
+
+/* ==== Products Summary ==== */
+
+.product-summary {
+    flex: 1;
+    
+    /* background-color: white; */
+    border: 0.5px solid gray;
+    border-radius: 0.5rem;
+
+    padding: 1rem;
+}
+
+.summary-title {
+    font-size: 2.25rem;
+    font-weight: 200;
+}
+
+.summary-item {
+    font-size: larger;
+    margin: 1.5rem 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-total {
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+.summary-button {
+    width: 100%;
+    
+    font-weight: 500;
+    font-size: 1rem;
+
+    border-radius: 0.5rem;
+    border: none;
+
+    padding: 1rem 1rem;
+
+    background-color: grey;
+    color: white;
+
+    &:hover {
+        background-color: black;
+        cursor: pointer;
+    }
+
+}
