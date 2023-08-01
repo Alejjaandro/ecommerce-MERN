@@ -12,6 +12,7 @@ export default function Home() {
     <div>
 
       <Navbar />
+      
       <Slider />
       <Categories/>
       <Products/>
