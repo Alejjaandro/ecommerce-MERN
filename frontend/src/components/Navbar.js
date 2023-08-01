@@ -1,4 +1,4 @@
-import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 // Icons
 import SearchIcon from '@mui/icons-material/Search';
@@ -19,9 +19,11 @@ export default function Navbar() {
       <div className='center-container'>LOGO</div>
 
       <div className='right-container'>
-        <button className="btn btn-outline-secondary">Register</button>
-        <button className="btn btn-outline-secondary">Login</button>
-        <button className="btn btn-outline-secondary">Cart <ShoppingCartIcon /></button>
+
+        <NavLink to='/register' className="btn btn-outline-secondary">Register</NavLink>
+        <NavLink to='/login' className="btn btn-outline-secondary">Login</NavLink>
+        <NavLink to='/cart' className="btn btn-outline-secondary">Cart <ShoppingCartIcon/></NavLink>
+        
       </div>
 
     </div>
