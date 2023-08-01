@@ -1,5 +1,11 @@
 .productList-container {
+    height: 85vh;
+}
 
+.title {
+    margin: 1rem 1rem;
+    text-transform: uppercase;
+    font-weight: 300;
 }
 
 .filter-container {

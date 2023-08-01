@@ -6,6 +6,10 @@
 }
 
 /* ===== GENERAL ===== */
+.product-container {
+    height: 85vh;
+}
+
 .product-wrapper {
     padding: 2rem;
     display: flex;
