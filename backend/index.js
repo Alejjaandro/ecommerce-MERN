@@ -14,7 +14,16 @@ mongoose.connect(process.env.MONGO_URL)
 .then( () => console.log('-> DB Connected') )
 .catch( (error) => console.log(error) );
 
-// Stablish what port shuld the app listen to and a message to show it works
+// Importing endpoints.
+const userRoutes = require('./routes/user');
+
+// To read json files.
+app.use(express.json());
+
+// Using the endpoints. We stablish '/api/user' as prefix.
+app.use('/api/users', userRoutes);
+
+// Stablish what port should the app listen to and a message to show it works
 app.listen(process.env.PORT || 4000, () => {
-    console.log('Backend running');
+    console.log(`Backend running at http://localhost:4000/api`);
 });
