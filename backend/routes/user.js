@@ -1,4 +1,4 @@
-const { verifyTokenAndAuthorization } = require('../middleware/verifyToken');
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/verifyToken');
 const User = require('../models/User');
 
 const router = require('express').Router();
@@ -33,6 +33,37 @@ router.delete('/:id', verifyTokenAndAuthorization, async (req, res) => {
         await User.findByIdAndDelete(req.params.id);
 
         res.status(200).json('User Deleted');
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+// ===== GET user ===== //
+router.get('/find/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+        // We find the user by its id.
+        const user = await User.findById(req.params.id);
+
+        // In case we don't want to show the password.
+        const { password, ...noPassword } = user._doc;
+
+        res.status(200).json(noPassword);
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+// ===== GET all users ===== //
+router.get('/find', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+        // We find the user by its id.
+        const users = await User.find();
+
+        res.status(200).json(users);
 
     } catch (error) {
         res.status(500).json(error);

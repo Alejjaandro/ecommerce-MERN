@@ -24,6 +24,7 @@ const verifyToken = (req, res, next) => {
     })
 }
 
+// ===== ONLY FOR THE USER OR AN ADMIN ===== //
 const verifyTokenAndAuthorization = (req, res, next) => {
 
     // This verifies the token & checks if the user id of the DB and the one send by URL params match.
@@ -38,6 +39,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
     })
 }
 
+// ===== ONLY ADMIN ===== //
 const verifyTokenAndAdmin = (req, res, next) => {
 
     // This verifies the token & checks if the user is admin.

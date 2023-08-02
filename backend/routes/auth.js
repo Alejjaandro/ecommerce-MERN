@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
         username: req.body.username,
         email: req.body.email,
         // Encripting the password received from body.
-        password: bcrypt.hash(req.body.password, 10)
+        password: await bcrypt.hash(req.body.password, 10)
     });
 
     // "try/catch" to avoid code interruption.
