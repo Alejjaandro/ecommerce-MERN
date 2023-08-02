@@ -1,16 +1,28 @@
-// router is an express middleware to handle routes.
+const { verifyTokenAndAuthorization } = require('../middleware/verifyToken');
+const User = require('../models/User');
+
 const router = require('express').Router();
 
-// We create some endpoints for user that send a response. 
+router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
 
-router.get('/usertest', (req, res) => {
-    res.send("User test successfull");
+    if (req.body.password) {
+
+        req.body.password = bcrypt.hash(req.body.password, 10);
+    }
+
+    try {
+
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+            $set : req.body
+        }, {new: true})
+
+        res.status(200).json(updatedUser);
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+
 });
 
-router.post('/userpost', (req, res) => {
-    const username = req.body.username;
-
-    res.send(username);
-});
 
 module.exports = router;

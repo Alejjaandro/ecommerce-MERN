@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
         username: req.body.username,
         email: req.body.email,
         // Encripting the password received from body.
-        password: await bcrypt.hash(req.body.password, 10)
+        password: bcrypt.hash(req.body.password, 10)
     });
 
     // "try/catch" to avoid code interruption.
@@ -61,7 +61,8 @@ router.post('/login', async (req, res) => {
             {
                 id: user._id,
                 isAdmin: user.isAdmin
-            }, process.env.JWT_KEY,
+            }, 
+            process.env.JWT_KEY,
             { expiresIn: '1d' }
         );
 
