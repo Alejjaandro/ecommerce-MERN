@@ -7,6 +7,9 @@ const User = require("../models/User");
 // Importing bcrypt to encrypt passwords.
 const bcrypt = require('bcrypt');
 
+// Importing jsonwebtoken to provide a token for security.
+const jwt = require('jsonwebtoken');
+
 // We create the endpoints & send a response. 
 
 // ===== REGISTER ===== //
@@ -39,27 +42,34 @@ router.post('/login', async (req, res) => {
 
     try {
         // Search for the user by its email. If its email doesn't exists, sends an error.
-        const user = await User.findOne( { email: req.body.email } );
+        const user = await User.findOne({ email: req.body.email });
 
-        if(!user) {
-            return res.status(400).json({message: "This email doesn't exist"})
+        if (!user) {
+            return res.status(400).json({ message: "This email doesn't exist" })
         }
 
         // We compare the password received from the body with the one in the database.
         // If doesn't match sends an error.
         const passwordMatch = await bcrypt.compare(req.body.password, user.password);
 
-        if(!passwordMatch) {
-            return res.status(400).json({message: 'Wrong password'})
+        if (!passwordMatch) {
+            return res.status(400).json({ message: 'Wrong password' })
         }
 
-        res.status(200).json( {message:'Login successfull', user: user} );
+        // Create a security Token.
+        const accessToken = jwt.sign(
+            {
+                id: user._id,
+                isAdmin: user.isAdmin
+            }, process.env.JWT_KEY,
+            { expiresIn: '1d' }
+        );
+
+        res.status(200).json({ message: 'Login successfull', user: user, token: accessToken });
 
     } catch (error) {
         res.status(500).json(error);
     }
 });
-
-
 
 module.exports = router;
