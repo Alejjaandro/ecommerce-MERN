@@ -1,3 +1,5 @@
+// ========== SETUP ========== //
+
 // Import express as framework to build the backend.
 const express = require('express');
 const app = express();
@@ -14,13 +16,18 @@ mongoose.connect(process.env.MONGO_URL)
 .then( () => console.log('-> DB Connected') )
 .catch( (error) => console.log(error) );
 
-// Importing endpoints.
-const userRoutes = require('./routes/user');
-
 // To read json files.
 app.use(express.json());
 
-// Using the endpoints. We stablish '/api/user' as prefix.
+// ========== ENDPOINTS ========== //
+
+// Importing endpoints.
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+
+
+// Using the endpoints. We stablish some prefix for organization.
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 
 // Stablish what port should the app listen to and a message to show it works
