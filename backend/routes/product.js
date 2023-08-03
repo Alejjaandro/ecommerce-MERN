@@ -50,7 +50,7 @@ router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
 });
 
 // ===== GET Product ===== //
-router.get('/:id', async (req, res) => {
+router.get('/find/:id', async (req, res) => {
 
     try {
         const product = await Product.findById(req.params.id);
@@ -76,12 +76,12 @@ router.get('/', async (req, res) => {
         // We initialize a variable "products".
         let products;
 
-        // If qNew exists, search by {createsAt} and orders the result in descending order {-1},
+        // If qNew exists, searches by {createsAt} and orders the result in descending order {-1},
         // with a limit of 5 products.
         if (qNew) {
             products = await Product.find().sort( {createdAt: -1} ).limit(5);
         
-        // If qCategory exists, search for the products with the categories that we stablish in the query.
+        // If qCategory exists, searches for the products with the categories that we stablish in the query.
         // The "$in" operator selects the documents where the value of a field equals any value in the specified array. 
         } else if (qCategory) {
             products = await Product.find({
