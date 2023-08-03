@@ -60,7 +60,7 @@ router.get('/find/:id', verifyTokenAndAdmin, async (req, res) => {
 router.get('/find', verifyTokenAndAdmin, async (req, res) => {
 
     try {
-        // We find the user by its id.
+        // We find all users.
         const users = await User.find();
 
         res.status(200).json(users);

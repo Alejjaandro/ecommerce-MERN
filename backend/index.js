@@ -24,11 +24,13 @@ app.use(express.json());
 // Importing endpoints.
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+const productRoutes = require('./routes/product');
 
 
 // Using the endpoints. We stablish some prefix for organization.
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 // Stablish what port should the app listen to and a message to show it works
 app.listen(process.env.PORT || 4000, () => {
