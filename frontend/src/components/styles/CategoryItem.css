@@ -30,7 +30,8 @@
     margin-bottom: 20px;
 }
 
-.cat-button {
+.cat-link {
+    text-decoration: none;
     border: none;
     padding: 10px;
 

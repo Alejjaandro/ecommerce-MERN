@@ -25,17 +25,20 @@ const categories = [
     {
         id: 1,
         img: "https://i.ibb.co/RynySvM/TV-1.webp",
-        title: "tv"
+        title: "tv",
+        category: "tv"
     },
     {
         id: 2,
         img: "https://i.ibb.co/wQNMfpB/Phone-1.webp",
-        title: "smartphones"
+        title: "smartphones",
+        category: "smartphones"
     },
     {
         id: 3,
         img: "https://i.ibb.co/6gfsw5b/Laptop-1.webp",
-        title: "laptops"
+        title: "laptops",
+        category: "laptops"
     }
 ];
 

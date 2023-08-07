@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductList from './pages/ProductList';
 import Product from './pages/Product';
@@ -9,6 +9,9 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 
 function App() {
+
+  const user = true;
+
   return (
 
     <BrowserRouter>
@@ -17,11 +20,18 @@ function App() {
 
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/product-list" element={<ProductList />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/products/" element={<ProductList />} />
+        <Route path="/products/:category" element={<ProductList />} />
+        <Route path="/product/:id" element={<Product />} />
 
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />}>
+          {/* {user ? redirect('/') : null} */}
+        </Route>
+
+        <Route path="/login" element={<Login />}>
+          {/* {user ? redirect('/') : null} */}
+        </Route>
+
         <Route path="/cart" element={<Cart />} />
 
       </Routes>
