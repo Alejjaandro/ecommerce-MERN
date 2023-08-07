@@ -14,28 +14,41 @@ const ProductSchema = new mongoose.Schema(
             required: true
         },
         
-        img: {
-            type: String,
-            required: true,
-        },
-
-        categories: {
-            type: Array
-        },
-
-        color: {
-            type: String
-        },
-
-        ram: {
-            type: String
-        },
-        
         price: {
             type: Number,
             required: true,
         },
 
+        discountPercentage: {
+            type: Number
+        },
+
+        rating: {
+            type: Number
+        },
+        
+        stock: {
+            type: Number,
+        },
+
+        brand: {
+            type: String,
+            required: true
+        },
+
+        category: {
+            type: String,
+            required: true
+        },
+
+        thumbnail: {
+            type: String,
+            required: true
+        },
+
+        images: {
+            type: Array
+        }
     },
 
     {timestamps: true}

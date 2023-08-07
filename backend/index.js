@@ -8,6 +8,9 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 
+// cors to allow access the api from any origin.
+const cors = require("cors");
+
 // mongoose to connect to mongo DB. 
 //We stablish the connection string and send a message if is successfully connected.
 // catch the errors if it's not and show them on the terminal.
@@ -18,6 +21,8 @@ mongoose.connect(process.env.MONGO_URL)
 
 // To read json files.
 app.use(express.json());
+
+app.use(cors());
 
 // ========== ENDPOINTS ========== //
 
