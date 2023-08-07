@@ -7,11 +7,11 @@ import './styles/Slider.css';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 
 // Products imgs
-import {images} from '../data/hardCodedData';
+import { useImages } from '../hooks/useData';
 
 function Slider() {
 
-    const productsImg = images.slides;
+    const productsImg = useImages();
 
     const [slide, setSlide] = useState(0);
 
@@ -43,8 +43,8 @@ function Slider() {
                 return (
                     <img
                         className={slide === index ? "slide" : "slide slide-hidden"}
-                        src={img.src}
-                        alt={img.alt}
+                        src={img}
+                        alt=""
                         key={index}
                     />
                 );
