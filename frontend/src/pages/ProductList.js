@@ -23,12 +23,14 @@ export default function ProductList() {
 
     // Function to save the filters when selected.
     const handleFilters = (e) => {
+        // We save the option value in a variable.
         const value = e.target.value;
+
+        // We save category and brand selectors as an object with the selected "option" as value.
         setFilters({
             ...filters,
             [e.target.name]: value
         })
-
     }
 
     return (
