@@ -8,19 +8,18 @@ import { useLocation } from 'react-router-dom';
 import './styles/ProductList.css';
 
 export default function ProductList() {
-
-    const [filters, setFilters] = useState({});
-    const [sort, setSort] = useState('newest');
     /* 
     To extract the category param in the URL parameter we use {useLocation()} that returns
     an object with a "pathname" key that contains the URL. 
     {split("/")} splits "pathname" using the specified separator and return them as an array.
     */
-    const param = useLocation().pathname.split('/');
-
-    // We save the last array index wich contains the category param.
-    const cat = param[param.length - 1];
-
+   const param = useLocation().pathname.split('/');
+   
+   // We save the index [2] wich contains the category param.
+   const cat = param[2];
+   
+   const [filters, setFilters] = useState({});
+   const [sort, setSort] = useState('newest');
 
     // Function to save the filters when selected.
     const handleFilters = (e) => {
@@ -31,9 +30,6 @@ export default function ProductList() {
         })
 
     }
-
-    console.log(cat);
-    console.log(filters, sort);
 
     return (
         <>
@@ -49,7 +45,7 @@ export default function ProductList() {
                     <div className='filter'>
 
                         <span className='filter-text'>Filter Products:</span>
-                        {/* Type selector */}
+                        {/* Category selector */}
                         <select className='select' onChange={handleFilters} name='category'>
                             <option disabled>Category:</option>
                             <option>All</option>
@@ -72,17 +68,18 @@ export default function ProductList() {
                     <div className='filter'>
                         {/* Sort */}
                         <span className='filter-text'>Sort Products:</span>
-                        <select className='select'>
-                            <option>Newest</option>
-                            <option>Price (asc)</option>
-                            <option>Price (asc)</option>
+                        <select className='select' onChange={ (e) => setSort(e.target.value) }>
+                            <option value="newest">Newest</option>
+                            <option value="asc">Price (asc)</option>
+                            <option value="desc">Price (desc)</option>
                         </select>
 
                     </div>
 
                 </div>
 
-                <Products />
+                <Products cat={cat} filters={filters} sort={sort} />
+
             </div>
 
             <Footer />
