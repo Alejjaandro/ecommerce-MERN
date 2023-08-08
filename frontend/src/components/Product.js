@@ -5,15 +5,15 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-
-
 export default function Product({ item }) {
+
+  
   return (
     <div className='prod-container'>
 
         {/* <div className='prod-circle'></div> */}
 
-        <img className="prod-image" src={item.img} alt="" />
+        <img className="prod-image" src={item.thumbnail} alt="" />
         
         <div className="prod-info">
             <div className="prod-icon"><ShoppingCartIcon/></div>

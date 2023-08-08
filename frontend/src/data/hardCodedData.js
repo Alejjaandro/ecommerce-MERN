@@ -21,22 +21,22 @@ const images = {
     ]
 };
 
-const categories = [
+const hardCategories = [
     {
         id: 1,
-        img: "https://i.ibb.co/RynySvM/TV-1.webp",
+        thumbnail: "https://i.ibb.co/RynySvM/TV-1.webp",
         title: "tv",
         category: "tv"
     },
     {
         id: 2,
-        img: "https://i.ibb.co/wQNMfpB/Phone-1.webp",
+        thumbnail: "https://i.ibb.co/wQNMfpB/Phone-1.webp",
         title: "smartphones",
         category: "smartphones"
     },
     {
         id: 3,
-        img: "https://i.ibb.co/6gfsw5b/Laptop-1.webp",
+        thumbnail: "https://i.ibb.co/6gfsw5b/Laptop-1.webp",
         title: "laptops",
         category: "laptops"
     }
@@ -69,4 +69,4 @@ const products = [
     }
 ];
 
-export {images, categories, products};
+export {images, hardCategories, products};

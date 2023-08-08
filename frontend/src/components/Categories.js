@@ -1,15 +1,15 @@
-import { categories } from "../data/hardCodedData";
 import CategoryItem from "./CategoryItem";
+import './styles/Categories.css';
 
-import './styles/Categories.css'
+import { hardCategories } from "../data/hardCodedData";
 
 export default function Categories() {
-
+    
     return (
         <div className="cat-container">
 
-            {categories.map(item => (
-                <CategoryItem item={item} key={item.id}/>
+            {hardCategories.map(item => (
+                <CategoryItem item={item} key={item._id}/>
             ))}
 
         </div>
