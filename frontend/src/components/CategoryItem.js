@@ -5,7 +5,7 @@ export default function CategoryItem({ item }) {
 
     return (
 
-        <div className="cat-container">
+        <div className="cat-item-container">
 
             <img className="cat-image" src={item.thumbnail} alt="" />
 

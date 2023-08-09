@@ -1,6 +1,6 @@
-.cat-container {
+.cat-item-container {
     flex: 1;
-    margin: 3px;
+    margin: 0.25rem;
 
     position: relative;
 }
