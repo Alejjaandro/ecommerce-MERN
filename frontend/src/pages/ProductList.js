@@ -5,32 +5,38 @@ import Products from '../components/Products';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import { useCategoriesAndBrands } from '../hooks/useData';
+
 import './styles/ProductList.css';
 
 export default function ProductList() {
+
+    // Import categories & brands from useData.js.    
+    const categoriesAndBrands = useCategoriesAndBrands();
+    // We extract the keys of the objects that are the categories.
+    const categories = Object.keys(categoriesAndBrands);
+
     /* 
     To extract the category param in the URL parameter we use {useLocation()} that returns
     an object with a "pathname" key that contains the URL. 
     {split("/")} splits "pathname" using the specified separator and return them as an array.
+    
+    We save the index [2] wich contains the category param, if is undefined means that me didn't pass 
+    any param.
     */
-   const param = useLocation().pathname.split('/');
-   
-   // We save the index [2] wich contains the category param.
-   const cat = param[2];
-   
-   const [filters, setFilters] = useState({});
-   const [sort, setSort] = useState('newest');
+    const param = useLocation().pathname.split('/')[2];
+    
 
-    // Function to save the filters when selected.
-    const handleFilters = (e) => {
-        // We save the option value in a variable.
-        const value = e.target.value;
+    const [category, setCategory] = useState('All');
+    const [brand, setBrand] = useState('All');
+    const [sort, setSort] = useState('newest');
 
-        // We save category and brand selectors as an object with the selected "option" as value.
-        setFilters({
-            ...filters,
-            [e.target.name]: value
-        })
+    // Functions that change the value of the filters when other option is selected.
+    const handleCategories = (e) => {
+        setCategory(e.target.value);
+    }
+    const handleBrands = (e) => {
+        setBrand(e.target.value);
     }
 
     return (
@@ -47,16 +53,19 @@ export default function ProductList() {
                     <div className='filter'>
 
                         <span className='filter-text'>Filter Products:</span>
+
                         {/* Category selector */}
-                        <select className='select' onChange={handleFilters} name='category'>
+                        <select className='select' onChange={handleCategories} name='category'>
                             <option disabled>Category:</option>
                             <option>All</option>
-                            <option>Smartphones</option>
-                            <option>Laptops</option>
-                            <option>TVs</option>
+
+                            {categories.map((category, index) => {
+                                return <option key={index}>{category}</option>
+                            })}
                         </select>
+
                         {/* Brand selector */}
-                        <select className='select' onChange={handleFilters} name='brand'>
+                        <select className='select' onChange={handleBrands} name='brand'>
                             <option disabled>Brand:</option>
                             <option>All</option>
                             <option>Apple</option>
@@ -70,7 +79,7 @@ export default function ProductList() {
                     <div className='filter'>
                         {/* Sort */}
                         <span className='filter-text'>Sort Products:</span>
-                        <select className='select' onChange={ (e) => setSort(e.target.value) }>
+                        <select className='select' onChange={(e) => setSort(e.target.value)}>
                             <option value="newest">Newest</option>
                             <option value="asc">Price (asc)</option>
                             <option value="desc">Price (desc)</option>
@@ -80,7 +89,7 @@ export default function ProductList() {
 
                 </div>
 
-                <Products cat={cat} filters={filters} sort={sort} />
+                <Products param={param} category={category} brand={brand} sort={sort} />
 
             </div>
 

@@ -4,10 +4,11 @@ import Product from './Product';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-export default function Products({ cat, filters, sort }) {
+export default function Products({ param, category, brand, sort }) {
 
   const [products, setProducts] = useState([]);
 
+  // === FILTER BY CATEGORY === //
   useEffect(() => {
 
     const getProducts = async () => {
@@ -17,10 +18,11 @@ export default function Products({ cat, filters, sort }) {
         const res = await axios.get('http://localhost:4000/api/products');
         const resProducts = res.data;
 
-        // If the URL has a category parameter, then we filter the products
+        // If we choose a category filter, then we filter the products
         // and we save the ones that matches the category.
-        if (cat) {
-          setProducts(resProducts.filter(prod => prod.category === cat));
+        if ( category && (category !== "All")) {
+          
+          setProducts(resProducts.filter(prod => prod.category === category));
 
           // If not, then we save all products.
         } else {
@@ -34,9 +36,7 @@ export default function Products({ cat, filters, sort }) {
 
     getProducts();
 
-  }, [cat]);
-
-  // console.log(products);
+  }, [category]);
 
   return (
     <div className='products-container'>
