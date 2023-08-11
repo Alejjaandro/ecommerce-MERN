@@ -4,7 +4,7 @@ import Product from './Product';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-export default function Products({ param, category, brand, sort }) {
+export default function Products({ category, brand, sort }) {
 
   const [products, setProducts] = useState([]);
 
@@ -18,9 +18,9 @@ export default function Products({ param, category, brand, sort }) {
         const res = await axios.get('http://localhost:4000/api/products');
         const resProducts = res.data;
 
-        // If we choose a category filter, then we filter the products
-        // and we save the ones that matches the category.
-        if ( category && (category !== "All")) {
+        // If we choose a category filter or there is a category in the URL params, 
+        // then we filter the products and we save the ones that matches the category.
+        if ( category && (category !== "All") ) {
           
           setProducts(resProducts.filter(prod => prod.category === category));
 

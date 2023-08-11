@@ -24,10 +24,8 @@ export default function ProductList() {
     We save the index [2] wich contains the category param, if is undefined means that me didn't pass 
     any param.
     */
-    const param = useLocation().pathname.split('/')[2];
-    
+    const [category, setCategory] = useState(useLocation().pathname.split('/')[2]);
 
-    const [category, setCategory] = useState('All');
     const [brand, setBrand] = useState('All');
     const [sort, setSort] = useState('newest');
 
@@ -89,7 +87,7 @@ export default function ProductList() {
 
                 </div>
 
-                <Products param={param} category={category} brand={brand} sort={sort} />
+                <Products category={category} brand={brand} sort={sort} />
 
             </div>
 
