@@ -12,22 +12,30 @@
 
 .filter-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .filter {
-    margin: 20px;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.50rem;
+}
+
+.sort {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .filter-text {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 600;
 
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 /* Selectors */
 .select {
     padding: 1rem;
-    margin-right: 1rem;
 }

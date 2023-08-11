@@ -24,17 +24,17 @@ export default function ProductList() {
     We save the index [2] wich contains the category param, if is undefined means that me didn't pass 
     any param.
     */
-    const [category, setCategory] = useState(useLocation().pathname.split('/')[2]);
+    const [categoryFilter, setCategoryFilter] = useState(useLocation().pathname.split('/')[2]);
 
-    const [brand, setBrand] = useState('All');
+    const [brandFilter, setBrandFilter] = useState('All');
     const [sort, setSort] = useState('newest');
 
     // Functions that change the value of the filters when other option is selected.
     const handleCategories = (e) => {
-        setCategory(e.target.value);
+        setCategoryFilter(e.target.value);
     }
     const handleBrands = (e) => {
-        setBrand(e.target.value);
+        setBrandFilter(e.target.value);
     }
 
     return (
@@ -53,28 +53,38 @@ export default function ProductList() {
                         <span className='filter-text'>Filter Products:</span>
 
                         {/* Category selector */}
-                        <select className='select' onChange={handleCategories} name='category'>
-                            <option disabled>Category:</option>
+                        <select className='select' onChange={handleCategories}>
+                            <option disabled selected>Category:</option>
                             <option>All</option>
-
+                            {/* We go through the categories array and we return an option for each category */}
                             {categories.map((category, index) => {
                                 return <option key={index}>{category}</option>
                             })}
                         </select>
 
                         {/* Brand selector */}
-                        <select className='select' onChange={handleBrands} name='brand'>
-                            <option disabled>Brand:</option>
-                            <option>All</option>
-                            <option>Apple</option>
-                            <option>Acer</option>
-                            <option>LG</option>
-                            <option>Asus</option>
-                        </select>
+                        {/* If there isn't a category selected, brand selector won't be shown */}
+                        {categoryFilter && (categoryFilter !== "All") ? (
+
+                            <select className='select' onChange={handleBrands}>
+                                <option disabled selected>Brand:</option>
+                                <option>All</option>
+                                {/* 
+                                We search on {categoriesAndBrands} what matches with the value of {categoryFilter},
+                                we transform it into an array so we can map it and return an option for
+                                each brand of that category.
+                                */}
+                                {Array.from(categoriesAndBrands[categoryFilter]).map((brand, index) => {
+                                    return <option key={index}>{brand}</option>
+                                })}
+
+                            </select>
+
+                        ) : null}
 
                     </div>
 
-                    <div className='filter'>
+                    <div className='sort'>
                         {/* Sort */}
                         <span className='filter-text'>Sort Products:</span>
                         <select className='select' onChange={(e) => setSort(e.target.value)}>
@@ -87,7 +97,7 @@ export default function ProductList() {
 
                 </div>
 
-                <Products category={category} brand={brand} sort={sort} />
+                <Products category={categoryFilter} brand={brandFilter} sort={sort} />
 
             </div>
 

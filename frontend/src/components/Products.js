@@ -1,42 +1,38 @@
 import './styles/Products.css'
 
 import Product from './Product';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useProducts } from '../hooks/useData';
 
 export default function Products({ category, brand, sort }) {
 
-  const [products, setProducts] = useState([]);
-
   // === FILTER BY CATEGORY === //
-  useEffect(() => {
 
-    const getProducts = async () => {
+  // All explainations on how this function works is in "hooks/use.Data.js",
+  // what matters is that returns an array of products filtered by category.
+  let products = useProducts(category);
 
-      try {
-        // Make a get petition to the URL stablished in "/backend/routes/Product.js".
-        const res = await axios.get('http://localhost:4000/api/products');
-        const resProducts = res.data;
+  // === FILTER BY BRAND === //
 
-        // If we choose a category filter or there is a category in the URL params, 
-        // then we filter the products and we save the ones that matches the category.
-        if ( category && (category !== "All") ) {
-          
-          setProducts(resProducts.filter(prod => prod.category === category));
+  // If we choose a brand filter, 
+  // then we filter the products and we save the ones that matches the brand.
+  if (brand && (brand !== "All")) {
+    products = products.filter(product => product.brand === brand);
+  }
 
-          // If not, then we save all products.
-        } else {
-          setProducts(resProducts);
-        }
+  // === SORT === //
 
-      } catch (error) {
-        console.log(error);
+  if (sort) {
+    products = products.sort((a, b) => {
+
+      if (sort === "asc") {
+        return a.price - b.price;
+
+      } else if (sort === "desc") {
+        return b.price - a.price;
       }
-    }
-
-    getProducts();
-
-  }, [category]);
+      
+    });
+  }
 
   return (
     <div className='products-container'>
