@@ -4,6 +4,7 @@ import './styles/Product.css';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Link } from 'react-router-dom';
 
 export default function Product({ item }) {
 
@@ -16,9 +17,9 @@ export default function Product({ item }) {
         <img className="prod-image" src={item.thumbnail} alt="" />
         
         <div className="prod-info">
-            <div className="prod-icon"><ShoppingCartIcon/></div>
-            <div className="prod-icon"><SearchIcon/></div>
-            <div className="prod-icon"><FavoriteBorderIcon/></div>
+            <div className="prod-icon"><Link to='/cart'><ShoppingCartIcon/></Link></div>
+            <div className="prod-icon"><Link to={`/product/${item._id}`}><SearchIcon/></Link></div>
+            <div className="prod-icon"><Link to='/cart'><FavoriteBorderIcon/></Link></div>
         </div>
     </div>
   )

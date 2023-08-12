@@ -7,7 +7,7 @@
 
 /* ===== GENERAL ===== */
 .product-container {
-    height: 85vh;
+    height: 100%;
 }
 
 .product-wrapper {
@@ -17,7 +17,6 @@
 
 .product-img {
     flex: 1;
-    object-fit: contain;
 }
 
 .product-info-container {
