@@ -15,6 +15,11 @@ export default function ProductList() {
     const categoriesAndBrands = useCategoriesAndBrands();
     // We extract the keys of the objects that are the categories.
     const categories = Object.keys(categoriesAndBrands);
+    // Initialize brands as an empty array and with a for/in loop we extract each brand of each category .
+    const brands = [];
+    for (const category in categoriesAndBrands) {
+        brands.push(...categoriesAndBrands[category]);
+    }
 
     /* 
     To extract the category param in the URL parameter we use {useLocation()} that returns
@@ -80,7 +85,17 @@ export default function ProductList() {
 
                             </select>
 
-                        ) : null}
+                        ) : (
+
+                            <select className='select' onChange={handleBrands}>
+                                <option disabled selected>Brand:</option>
+                                <option>All</option>
+
+                                {brands.map((brand, index) => {
+                                    return <option key={index}>{brand}</option>
+                                })}
+                            </select>
+                        )}
 
                     </div>
 
@@ -97,7 +112,7 @@ export default function ProductList() {
 
                 </div>
 
-                <Products category={categoryFilter} brand={brandFilter} sort={sort} />
+                <Products category={categoryFilter} brand={brandFilter} setBrandFilter={setBrandFilter} sort={sort} />
 
             </div>
 
