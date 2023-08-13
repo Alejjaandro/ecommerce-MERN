@@ -17,15 +17,26 @@ const jwt = require('jsonwebtoken');
 
 router.post('/register', async (req, res) => {
 
-    const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        // Encripting the password received from body.
-        password: await bcrypt.hash(req.body.password, 10)
-    });
+    // Extract the info from the body.
+    const { name, lastname, username, email, password } = req.body;
 
     // "try/catch" to avoid code interruption.
     try {
+
+        // Check if the email is already registered.
+        const userFound = await User.findOne({ email })
+        if (userFound) {
+            return res.status(400).json(['This email already exists']);
+        }
+    
+        const newUser = new User({
+            name,
+            lastname,
+            username,
+            email,
+            // Encripting the password received from body.
+            password: await bcrypt.hash(password, 10)
+        });
 
         // save new user in the DB.
         const savedUser = await newUser.save();
@@ -33,7 +44,7 @@ router.post('/register', async (req, res) => {
         res.status(201).json(savedUser);
 
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json(error.message);
     }
 });
 
@@ -61,7 +72,7 @@ router.post('/login', async (req, res) => {
             {
                 id: user._id,
                 isAdmin: user.isAdmin
-            }, 
+            },
             process.env.JWT_KEY,
             { expiresIn: '1d' }
         );
@@ -69,7 +80,7 @@ router.post('/login', async (req, res) => {
         res.status(200).json({ message: 'Login successfull', user: user, token: accessToken });
 
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json(error.message);
     }
 });
 
