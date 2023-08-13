@@ -4,8 +4,42 @@ import Navbar from '../components/Navbar';
 import './styles/Register.css';
 
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from '../context/AuthContext.js';
 
 export default function Register() {
+
+    const navigate = useNavigate();
+    const { register, isAuthenticated } = useAuth();
+
+    const [name, setName] = useState({});
+    const [lastname, setLastname] = useState({});
+    const [email, setEmail] = useState({});
+    const [username, setUsername] = useState({});
+    const [password, setPassword] = useState({});
+    
+    // useEffect(() => {
+    //     if (isAuthenticated) {
+    //         navigate("/");
+    //     }
+    // }, [isAuthenticated]);
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
+        const user = {
+            name: name,
+            lastname: lastname,
+            email: email,
+            username: username,
+            password: password
+        }
+
+        await register(user);
+    }
+
     return (
         <>
             <Navbar />
@@ -18,12 +52,17 @@ export default function Register() {
 
                     <form className='register-form'>
 
-                        <input className='register-input' placeholder="Name" type='text' />
-                        <input className='register-input' placeholder="Last name" type='text' />
-                        <input className='register-input' placeholder="Email" type='email' />
-                        <input className='register-input' placeholder="Username" type='text' />
-                        <input className='register-input' placeholder="Password" type='password' />
-                        <input className='register-input' placeholder="Confirm Password" type='password' />
+                        <input className='register-input' name='name' placeholder="Name" type='text' 
+                        onChange={(e) => {setName(e.target.value)}}/>
+                        <input className='register-input' name='lastname' placeholder="Last name" type='text' 
+                        onChange={(e) => {setLastname(e.target.value)}}/>
+                        <input className='register-input' name='email' placeholder="Email" type='email' 
+                        onChange={(e) => {setEmail(e.target.value)}}/>
+                        <input className='register-input' name='username' placeholder="Username" type='text' 
+                        onChange={(e) => {setUsername(e.target.value)}}/>
+                        <input className='register-input' name='password' placeholder="Password" type='password' 
+                        onChange={(e) => {setPassword(e.target.value)}}/>
+                        <input className='register-input' name='confirmPassword' placeholder="Confirm Password" type='password' />
 
                         <span className="register-agreement">
                             By creating an account,
@@ -33,7 +72,7 @@ export default function Register() {
 
 
                         <div className='form-footer'>
-                            <button className='register-button'>REGISTER</button>
+                            <button className='register-button' onClick={handleRegister}>REGISTER</button>
 
                             <Link to='/login'>Already have an account?</Link>
                         </div>
