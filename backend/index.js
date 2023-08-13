@@ -1,20 +1,20 @@
 // ========== SETUP ========== //
 
 // Import express as framework to build the backend.
-const express = require('express');
+import express from 'express';
 const app = express();
 
 // dotenv to access .env files that contains vital info.
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 dotenv.config();
 
 // cors to allow access the api from any origin.
-const cors = require("cors");
+import cors from 'cors';
 
 // mongoose to connect to mongo DB. 
 //We stablish the connection string and send a message if is successfully connected.
 // catch the errors if it's not and show them on the terminal.
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 mongoose.connect(process.env.MONGO_URL)
 .then( () => console.log('-> DB Connected') )
 .catch( (error) => console.log(error) );
@@ -27,11 +27,11 @@ app.use(cors());
 // ========== ENDPOINTS ========== //
 
 // Importing endpoints.
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
-const productRoutes = require('./routes/product');
-const cartRoutes = require('./routes/cart');
-const orderRoutes = require('./routes/order');
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/user.js';
+import productRoutes from './routes/product.js';
+import cartRoutes from './routes/cart.js';
+import orderRoutes from './routes/order.js';
 
 
 // Using the endpoints. We stablish some prefix for organization.

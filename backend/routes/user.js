@@ -1,7 +1,8 @@
-const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/verifyToken');
-const User = require('../models/User');
+import { verifyTokenAndAuthorization, verifyTokenAndAdmin } from '../middleware/verifyToken.js';
+import User from '../models/User.js';
 
-const router = require('express').Router();
+import {Router} from 'express';
+const router = Router();
 
 // ===== PUT to updated user data ===== //
 router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
@@ -71,4 +72,4 @@ router.get('/find', verifyTokenAndAdmin, async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;

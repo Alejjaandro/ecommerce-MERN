@@ -1,8 +1,9 @@
-const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/verifyToken');
+import { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } from '../middleware/verifyToken.js';
 
-const Order = require('../models/Order');
+import Order from '../models/Order.js';
 
-const router = require('express').Router();
+import {Router} from 'express';
+const router = Router();
 
 // MORE EXPLANATIONS ON "/auth.js" & "/user.js" //
 
@@ -110,4 +111,4 @@ router.get('/income', verifyTokenAndAdmin, async (req, res) => {
 
 
 
-module.exports = router;
+export default router;

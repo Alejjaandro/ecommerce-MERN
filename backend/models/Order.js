@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Create the model data for cart.
 const OrderSchema = new mongoose.Schema(
@@ -41,4 +41,4 @@ const OrderSchema = new mongoose.Schema(
     {timestamps: true}
 );
 
-module.exports = mongoose.model('Order', OrderSchema);
+export default mongoose.model('Order', OrderSchema);

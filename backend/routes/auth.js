@@ -1,21 +1,26 @@
 // router is an express middleware to handle routes.
-const router = require('express').Router();
+import { Router } from "express";
+const router = Router();
 
 // Importing the model for user.
-const User = require("../models/User");
+import User from '../models/User.js';
 
 // Importing bcrypt to encrypt passwords.
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 // Importing jsonwebtoken to provide a token for security.
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+
+// Import validators
+import { validator } from "../middleware/validator.js";
+import { registerValidator, loginValidator } from "../validators/auth.validator.js";
 
 // We create the endpoints & send a response. 
 
 // ===== REGISTER ===== //
 // We use an async function to wait for the data before continuing with the code execution.
 
-router.post('/register', async (req, res) => {
+router.post('/register', validator(registerValidator), async (req, res) => {
 
     // Extract the info from the body.
     const { name, lastname, username, email, password } = req.body;
@@ -49,7 +54,7 @@ router.post('/register', async (req, res) => {
 });
 
 // ===== LOGIN ===== //
-router.post('/login', async (req, res) => {
+router.post('/login', validator(loginValidator), async (req, res) => {
 
     try {
         // Search for the user by its email. If its email doesn't exists, sends an error.
@@ -84,4 +89,4 @@ router.post('/login', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
