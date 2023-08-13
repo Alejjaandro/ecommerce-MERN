@@ -10,8 +10,9 @@ import { useAuth } from '../context/AuthContext.js';
 
 
 export default function Login() {
+
     const navigate = useNavigate();
-    const { login, isAuthenticated } = useAuth();
+    const { login, isAuthenticated, errors: loginErrors } = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -38,14 +39,24 @@ export default function Login() {
                 <div className="login-wrapper">
 
                     <h1 className='login-title'>SIGN IN</h1>
+                    {/* Errors */}
+                    {
+                        loginErrors.map((error, i) => (
+                            <div className='errors' key={i}>
+                                {error}
+                            </div>
+                        ))
+                    }
 
                     <form className='login-form'>
 
                         <input className='login-input' placeholder="Email" type='email'
-                            onChange={(e) => { setEmail(e.target.value) }} />
+                            onChange={(e) => { setEmail(e.target.value) }}
+                        />
 
                         <input className='login-input' placeholder="Password" type='password'
-                            onChange={(e) => { setPassword(e.target.value) }} />
+                            onChange={(e) => { setPassword(e.target.value) }}
+                        />
 
                         <button className='login-button' onClick={handleLogin}>LOGIN</button>
 

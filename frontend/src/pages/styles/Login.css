@@ -25,6 +25,10 @@
     font-weight: 300;
 }
 
+.errors {
+    color: red;
+}
+
 /* FORM */
 .login-form {
     display: flex;

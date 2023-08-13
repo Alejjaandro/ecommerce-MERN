@@ -24,6 +24,10 @@
     font-weight: 300;
 }
 
+.errors {
+    color: red;
+}
+
 /* FORM */
 .register-form {
     display: flex;

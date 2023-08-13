@@ -7,19 +7,22 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// To access the context.
 import { useAuth } from '../context/AuthContext.js';
 
 export default function Register() {
 
     const navigate = useNavigate();
-    const { register, isAuthenticated } = useAuth();
+    // Extract what we need. We change "errors" name to "registerErrors".
+    const { register, isAuthenticated, errors: registerErrors } = useAuth();
 
-    const [name, setName] = useState({});
-    const [lastname, setLastname] = useState({});
-    const [email, setEmail] = useState({});
-    const [username, setUsername] = useState({});
-    const [password, setPassword] = useState({});
-    
+    const [name, setName] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    // This redirects to the home page once the user is authenticated.
     // useEffect(() => {
     //     if (isAuthenticated) {
     //         navigate("/");
@@ -29,6 +32,7 @@ export default function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        // We save the user data. 
         const user = {
             name: name,
             lastname: lastname,
@@ -37,6 +41,7 @@ export default function Register() {
             password: password
         }
 
+        // Function that handle the register post to the DB with the user data.
         await register(user);
     }
 
@@ -49,19 +54,27 @@ export default function Register() {
                 <div className="register-wrapper">
 
                     <h1 className='register-title'>CREATE AN ACCOUNT</h1>
+                    {/* Errors */}
+                    {
+                        registerErrors && registerErrors.map((error, i) => (
+                            <div className='errors' key={i}>
+                                {error}
+                            </div>
+                        ))
+                    }
 
                     <form className='register-form'>
 
-                        <input className='register-input' name='name' placeholder="Name" type='text' 
-                        onChange={(e) => {setName(e.target.value)}}/>
-                        <input className='register-input' name='lastname' placeholder="Last name" type='text' 
-                        onChange={(e) => {setLastname(e.target.value)}}/>
-                        <input className='register-input' name='email' placeholder="Email" type='email' 
-                        onChange={(e) => {setEmail(e.target.value)}}/>
-                        <input className='register-input' name='username' placeholder="Username" type='text' 
-                        onChange={(e) => {setUsername(e.target.value)}}/>
-                        <input className='register-input' name='password' placeholder="Password" type='password' 
-                        onChange={(e) => {setPassword(e.target.value)}}/>
+                        <input className='register-input' name='name' placeholder="Name" type='text'
+                            onChange={(e) => { setName(e.target.value) }} />
+                        <input className='register-input' name='lastname' placeholder="Last name" type='text'
+                            onChange={(e) => { setLastname(e.target.value) }} />
+                        <input className='register-input' name='email' placeholder="Email" type='email'
+                            onChange={(e) => { setEmail(e.target.value) }} />
+                        <input className='register-input' name='username' placeholder="Username" type='text'
+                            onChange={(e) => { setUsername(e.target.value) }} />
+                        <input className='register-input' name='password' placeholder="Password" type='password'
+                            onChange={(e) => { setPassword(e.target.value) }} />
                         <input className='register-input' name='confirmPassword' placeholder="Confirm Password" type='password' />
 
                         <span className="register-agreement">

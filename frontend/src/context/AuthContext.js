@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
-            // setErrors(error.response.data);
+            setErrors(error.response.data);
             console.log(error.response.data);
         }
     }
@@ -49,9 +49,11 @@ export const AuthProvider = ({ children }) => {
 
             setUser(res.data);
             setIsAuthenticated(true);
-
         } catch (error) {
-            // setErrors([error.response.data.message]);
+            if (Array.isArray(error.response.data)) {
+                return setErrors(error.response.data)
+            }
+            setErrors([error.response.data.message]);
             console.log(error.response.data);
         }
 
