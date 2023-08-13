@@ -2,7 +2,17 @@ const mongoose = require('mongoose');
 
 // Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
 const UserSchema = new mongoose.Schema(
-    {
+    {   
+        name: {
+            type: String,
+            required: true,
+        },
+
+        lastname: {
+            type: String,
+            required: true,
+        },
+
         username: {
             type: String,
             required: true,
