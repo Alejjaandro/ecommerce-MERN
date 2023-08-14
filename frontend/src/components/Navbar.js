@@ -13,26 +13,15 @@ import { useEffect, useState } from 'react';
 
 export default function Navbar() {
 
-  const { isAuthenticated, user: response } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   
-  const [user, setUser] = useState();
   const [menuVisible, setMenuVisible] = useState(false);
-
-  useEffect(() => {
-
-    if (isAuthenticated) {
-      setUser(response.user);
-    } else {
-      setUser(null)
-    }
-    
-    console.log(user);
-  }, [isAuthenticated])
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
-    console.log(menuVisible);
   }
+
+  // console.log(user);
 
   return (
 
@@ -49,6 +38,7 @@ export default function Navbar() {
         </ul>
       </div>
 
+      {/* Login/Register - Profile */}
       {isAuthenticated && user ? (
         <div className='right-container'>
           <span>Hi! {user.username}</span>
@@ -65,19 +55,20 @@ export default function Navbar() {
         </div >
       )}
 
-      {menuVisible && (
+      {/* Profile Menu */}
+      {(menuVisible && user) ? (
         <div className="sub-menu-wrap">
           <div className="sub-menu">
             <div className="user-info">
               <h2>{user.name} {user.lastname}</h2>
               <hr />
             </div>
-            <Link to="#"><AccountBoxIcon /> My Profile</Link>
-            <Link to="#"><SettingsIcon /> Settings</Link>
-            <Link to="#"><LogoutIcon /> Logout</Link>
+            <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
+            <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
+            <button onClick={() => logout()}><LogoutIcon /> Logout</button>
           </div>
         </div>
-      )}
+      ) :  null}
 
     </div >
   )

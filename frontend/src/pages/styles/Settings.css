@@ -1,0 +1,77 @@
+/* CONATINERS */
+.settings-container {
+    height: 100vh;
+
+    background: rgb(99,99,99);
+    background: linear-gradient(0deg, rgba(99,99,99,1) 0%, rgba(131,131,131,1) 50%, rgba(99,99,99,1) 100%);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-wrapper {
+    width: 50%;
+    padding: 2rem;
+
+    background: white;
+}
+
+/* TITLE */
+.settings-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.settings-title svg {
+    font-size: 2.5rem;
+}
+
+/* FORM */
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.change-email, .change-username, .change-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+label {
+    font-size: larger;
+    font-weight: 400;
+}
+
+input {
+    min-width: 50%;
+
+    padding: 1rem;
+    margin: 1rem 0.5rem 0 0;
+}
+
+/* BUTTON */
+.settings-button {
+    font-weight: 500;
+    font-size: 1.5rem;
+
+    width: 50%;
+    border: none;
+    padding: 1rem 1rem;
+    margin: 1rem 0;
+
+    background-color: grey;
+    color: white;
+
+    &:hover {
+        background-color: rgb(95, 95, 95);
+        cursor: pointer;
+    }
+}
+

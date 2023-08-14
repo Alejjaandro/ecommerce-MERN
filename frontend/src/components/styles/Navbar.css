@@ -47,7 +47,7 @@
 .right-container {
     flex: 1;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     gap: 1rem;
 
@@ -85,6 +85,7 @@
     top: 100%;
     right: 0;
     width: 20rem;
+    z-index: 1;
 }
 
 .sub-menu {
@@ -104,6 +105,22 @@
 
     text-decoration: none;
     color: #333;
+
+    &&:hover {
+        text-decoration: underline;
+    }
+}
+
+.sub-menu button {
+    font-size: x-large;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    border: none;
+    background-color: white;
+    color: red;
 
     &&:hover {
         text-decoration: underline;
