@@ -2,6 +2,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 
+// We import "js-cookie" to read cookies from Front-End.
+import Cookies from "js-cookie";
+
 /* 
 Context provides a way to pass data through the component tree 
 without having to pass props down manually at every level.
@@ -47,7 +50,9 @@ export const AuthProvider = ({ children }) => {
             const res = await axios.post("http://localhost:4000/api/auth/login", user);
             console.log(res.data);
 
-            setUser(res.data);
+            Cookies.set('token', res.data.token);
+
+            setUser(res.data.user);
             setIsAuthenticated(true);
         } catch (error) {
             if (Array.isArray(error.response.data)) {
@@ -57,6 +62,13 @@ export const AuthProvider = ({ children }) => {
             console.log(error.response.data);
         }
 
+    }
+
+    // Remove the cookie with the token that grant access.
+    const logout = () => {
+        Cookies.remove('token');
+        setIsAuthenticated(false);
+        setUser(null);
     }
 
     // Timeout so the errors don't stay on screen undefinetly. 5000 ms = 5 sec.
@@ -69,11 +81,45 @@ export const AuthProvider = ({ children }) => {
         }
     }, [errors])
 
+    // To save the cookie even when refreshing the client.
+    // useEffect(() => {
+    //     async function checkLogin() {
+    //         // Extract cookie token.
+    //         const cookies = Cookies.get();
+
+    //         if (!cookies.token) {
+    //             setIsAuthenticated(false);
+    //             return setUser(null);
+    //         }
+
+    //         try {
+    //             // Verify cookie token with backend.
+    //             const res = await axios.get(`/verify`);
+    //             if (!res.data) {
+    //                 setIsAuthenticated(false);
+    //                 return;
+    //             }
+
+    //             setIsAuthenticated(true);
+    //             setUser(res.data);
+
+    //         } catch (error) {
+    //             setIsAuthenticated(false);
+    //             setUser(null);
+    //         }
+
+    //     }
+
+    //     checkLogin();
+    // }, [])
+
+
     // All the components inside AuthContext will be able to access it values.
     return (
         <AuthContext.Provider value={{
             register,
             login,
+            logout,
             isAuthenticated,
             errors,
             user,

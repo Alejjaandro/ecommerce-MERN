@@ -6,6 +6,8 @@ import ProductList from './pages/ProductList';
 import Product from './pages/Product';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Settings from './pages/Settings';
+import MyProfile from './pages/MyProfile';
 import Cart from './pages/Cart';
 
 // Context Provider
@@ -22,15 +24,16 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
+
           <Route path="/products/" element={<ProductList />} />
           <Route path="/products/:category" element={<ProductList />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/register" element={<Register />}>
-            {/* {user ? redirect('/') : null} */}
-          </Route>
-          <Route path="/login" element={<Login />}>
-            {/* {user ? redirect('/') : null} */}
-          </Route>
+
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/my-profile/:id" element={<MyProfile />} />
+          <Route path="/settings/:id" element={<Settings />} />
+          
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>

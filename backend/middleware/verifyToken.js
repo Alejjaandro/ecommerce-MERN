@@ -1,27 +1,48 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 // Function to validate Token.
 const verifyToken = (req, res, next) => {
 
-    // We extract the token saved on the header.
-    const headerToken = req.headers.token;
+    // // We extract the token saved on the header.
+    // const headerToken = req.headers.token;
 
-    if (!headerToken) {
-        return res.status(400).json({ messsage: 'No token. Denied Access.' });
-    }
+    // if (!headerToken) {
+    //     return res.status(400).json({ messsage: 'No token. Denied Access.' });
+    // }
 
-    // We verify the token
-    jwt.verify(headerToken, process.env.JWT_KEY, (error, user) => {
+    // // We verify the token
+    // jwt.verify(headerToken, process.env.JWT_KEY, (error, user) => {
 
-        if (error) {
-            return res.status(400).json({ messsage: 'Invalid Token.' });
-        }
+    //     if (error) {
+    //         return res.status(400).json({ messsage: 'Invalid Token.' });
+    //     }
+
+    //     // We save the decodified user in req.
+    //     req.user = user;
+
+    //     next();
+    // })
+
+    // Extract the cookie "token".
+    const { token } = req.cookies;
+
+    if (!token) { res.status(401).json({ message: "Unauthorized" }) }
+
+    // Verify cookie token.
+    jwt.verify(token, process.env.JWT_KEY, async (error, user) => {
+        if (error) { return res.status(401).json({ message: "Unauthorized" }) }
+
+        const userFound = await User.findById(user.id);
+
+        if (!userFound) { res.status(401).json({ message: "Unauthorized" }) }
 
         // We save the decodified user in req.
         req.user = user;
 
         next();
-    })
+    });
+
 }
 
 // ===== ONLY FOR THE USER OR AN ADMIN ===== //
@@ -53,4 +74,4 @@ const verifyTokenAndAdmin = (req, res, next) => {
     })
 }
 
-export {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin};
+export { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin };

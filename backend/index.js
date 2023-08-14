@@ -11,6 +11,11 @@ dotenv.config();
 // cors to allow access the api from any origin.
 import cors from 'cors';
 
+// Cookieparser to read requests cookies.
+import cookieParser from 'cookie-parser';
+app.use(cookieParser());
+
+
 // mongoose to connect to mongo DB. 
 //We stablish the connection string and send a message if is successfully connected.
 // catch the errors if it's not and show them on the terminal.

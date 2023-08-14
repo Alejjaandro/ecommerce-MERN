@@ -14,6 +14,7 @@ import jwt from 'jsonwebtoken';
 // Import validators
 import { validator } from "../middleware/validator.js";
 import { registerValidator, loginValidator } from "../validators/auth.validator.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 
 // We create the endpoints & send a response. 
 
@@ -81,6 +82,8 @@ router.post('/login', validator(loginValidator), async (req, res) => {
             process.env.JWT_KEY,
             { expiresIn: '1d' }
         );
+        
+        res.cookie('token', accessToken);
 
         res.status(200).json({ message: 'Login successfull', user: user, token: accessToken });
 
@@ -88,5 +91,20 @@ router.post('/login', validator(loginValidator), async (req, res) => {
         res.status(500).json(error.message);
     }
 });
+
+// ----- VERIFY TOKEN ----- //
+router.get('/verify', verifyToken);
+
+// ----- LOGOUT ----- //
+router.post('/logout', async (req, res) => {
+
+    // We clear the token to logout
+    res.cookie('token', "", {
+        expires: new Date(0)
+    });
+
+    return res.sendStatus(200);
+});
+
 
 export default router;
