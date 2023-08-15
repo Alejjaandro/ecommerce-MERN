@@ -11,7 +11,8 @@ import MyProfile from './pages/MyProfile';
 import Cart from './pages/Cart';
 
 // Context Provider
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext.js';
+import { ProductsProvider } from './context/ProductsContext.js';
 
 function App() {
 
@@ -20,23 +21,25 @@ function App() {
   return (
 
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<Home />} />
+      <ProductsProvider>
 
-          <Route path="/products/" element={<ProductList />} />
-          <Route path="/products/:category" element={<ProductList />} />
-          <Route path="/product/:id" element={<Product />} />
+        <BrowserRouter>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/products/" element={<ProductList />} />
+            <Route path="/products/:category" element={<ProductList />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/my-profile/:userId" element={<MyProfile />} />
+            <Route path="/settings/:userId" element={<Settings />} />
+        
+            <Route path="/cart/:userId" element={<Cart />} />
+          </Routes>
+        </BrowserRouter>
 
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/my-profile/:id" element={<MyProfile />} />
-          <Route path="/settings/:id" element={<Settings />} />
-          
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </BrowserRouter>
+      </ProductsProvider>
     </AuthProvider>
   );
 }
