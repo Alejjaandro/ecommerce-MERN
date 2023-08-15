@@ -15,7 +15,7 @@ export default function Categories() {
 
             try {
 
-                const res = await axios.get('http://localhost:4000/api/products');
+                const res = await axios.get('http://localhost:8000/api/products');
                 const products = res.data;
 
                 setCategories([...new Set(products.map((prod) => prod.category))]);

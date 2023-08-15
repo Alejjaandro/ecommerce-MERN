@@ -23,11 +23,11 @@ export default function Register() {
     const [password, setPassword] = useState("");
 
     // This redirects to the home page once the user is authenticated.
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         navigate("/");
-    //     }
-    // }, [isAuthenticated]);
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/");
+        }
+    }, [isAuthenticated]);
 
     const handleRegister = async (e) => {
         e.preventDefault();

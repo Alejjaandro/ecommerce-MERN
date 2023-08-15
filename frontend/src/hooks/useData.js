@@ -12,7 +12,7 @@ function useProducts(category) {
     
           try {
             // Make a get petition to the URL stablished in "/backend/routes/Product.js".
-            const res = await axios.get('http://localhost:4000/api/products');
+            const res = await axios.get('http://localhost:8000/api/products');
             const resProducts = res.data;
     
             // If we choose a category filter or there is a category in the URL params, 
@@ -49,7 +49,7 @@ function useImages() {
         const getImages = async () => {
 
             try {
-                const res = await axios.get('http://localhost:4000/api/products');
+                const res = await axios.get('http://localhost:8000/api/products');
 
                 // We only want 5 of them for the slider.
                 const someProd = res.data.splice(0, 5);
@@ -82,7 +82,7 @@ function useProdForCategory() {
 
             try {
 
-                const res = await axios.get('http://localhost:4000/api/products');
+                const res = await axios.get('http://localhost:8000/api/products');
                 const products = res.data;
 
                 setCategories([...new Set(products.map((prod) => prod.category))]);
@@ -117,7 +117,7 @@ function useCategoriesAndBrands() {
 
             try {
 
-                const res = await axios.get('http://localhost:4000/api/products');
+                const res = await axios.get('http://localhost:8000/api/products');
                 setProducts(res.data);
 
             } catch (error) {
