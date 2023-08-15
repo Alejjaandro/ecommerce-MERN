@@ -61,36 +61,9 @@ export const getProduct = async (req, res) => {
 // ===== GET all Products ===== //
 export const getAllProducts = async (req, res) => {
 
-    /* 
-    We can also make queries to mongoDB.
-    In this case we create 2 queries, "new" & "category", both are in request.
-    */
-    const qNew = req.query.new;
-    const qCategory = req.query.category;
-
     try {
-        // We initialize a variable "products".
-        let products;
 
-        // If qNew exists, searches by {createsAt} and orders the result in descending order {-1},
-        // with a limit of 5 products.
-        if (qNew) {
-            products = await Product.find().sort( {createdAt: -1} ).limit(5);
-        
-        // If qCategory exists, searches for the products with the categories that we stablish in the query.
-        // The "$in" operator selects the documents where the value of a field equals any value in the specified array. 
-        } else if (qCategory) {
-            products = await Product.find({
-                categories : {
-                    $in: [qCategory]
-                }
-            });
-        
-        // If there is no query, return all products.
-        } else {
-            products = await Product.find();
-        }
-
+        const products = await Product.find();
         res.status(200).json(products);
 
     } catch (error) {

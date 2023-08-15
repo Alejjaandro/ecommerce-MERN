@@ -13,6 +13,6 @@ import { registerValidator, loginValidator } from "../validators/auth.validator.
 // First we validate the form imputs data, then we make the pretition.
 
 router.post("/register", validator(registerValidator), register);
-router.post("/login", validator(registerValidator), login);
+router.post("/login", validator(loginValidator), login);
 
 export default router;
