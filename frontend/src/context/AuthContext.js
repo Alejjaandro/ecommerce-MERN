@@ -1,9 +1,5 @@
-
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
-
-// We import "js-cookie" to read cookies from Front-End.
-import Cookies from "js-cookie";
 
 /* 
 Context provides a way to pass data through the component tree 
@@ -33,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     const register = async (user) => {
         try {
             // Save the response sent after the post request.
-            const res = await axios.post("http://localhost:4000/api/auth/register", user);
+            const res = await axios.post("http://localhost:8000/api/auth/register", user);
             console.log(res.data);
 
             setUser(res.data);
@@ -47,13 +43,13 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (user) => {
         try {
-            const res = await axios.post("http://localhost:4000/api/auth/login", user);
-            console.log(res.data);
+            const res = await axios.post("http://localhost:8000/api/auth/login", user);
 
-            Cookies.set('token', res.data.token);
+            // console.log(res.data.message, res.data.token);
 
             setUser(res.data.user);
             setIsAuthenticated(true);
+
         } catch (error) {
             if (Array.isArray(error.response.data)) {
                 return setErrors(error.response.data)
@@ -64,9 +60,17 @@ export const AuthProvider = ({ children }) => {
 
     }
 
-    // Remove the cookie with the token that grant access.
+    // Save the user in local storage.
+    // useEffect(() => {
+
+    //     localStorage.setItem("user", JSON.stringify(user));
+
+    // }, [user])
+
+    // Remove the user from localStorage.
     const logout = () => {
-        Cookies.remove('token');
+        localStorage.clear();
+
         setIsAuthenticated(false);
         setUser(null);
     }
@@ -81,37 +85,6 @@ export const AuthProvider = ({ children }) => {
         }
     }, [errors])
 
-    // To save the cookie even when refreshing the client.
-    // useEffect(() => {
-    //     async function checkLogin() {
-    //         // Extract cookie token.
-    //         const cookies = Cookies.get();
-
-    //         if (!cookies.token) {
-    //             setIsAuthenticated(false);
-    //             return setUser(null);
-    //         }
-
-    //         try {
-    //             // Verify cookie token with backend.
-    //             const res = await axios.get(`/verify`);
-    //             if (!res.data) {
-    //                 setIsAuthenticated(false);
-    //                 return;
-    //             }
-
-    //             setIsAuthenticated(true);
-    //             setUser(res.data);
-
-    //         } catch (error) {
-    //             setIsAuthenticated(false);
-    //             setUser(null);
-    //         }
-
-    //     }
-
-    //     checkLogin();
-    // }, [])
 
 
     // All the components inside AuthContext will be able to access it values.

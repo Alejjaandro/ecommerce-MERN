@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 
 // Icons
@@ -9,9 +9,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 // Styles
 import './styles/Navbar.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Navbar() {
+
+  const navigate = useNavigate();
 
   const { isAuthenticated, user, logout } = useAuth();
   
@@ -20,8 +22,6 @@ export default function Navbar() {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   }
-
-  // console.log(user);
 
   return (
 
@@ -50,8 +50,6 @@ export default function Navbar() {
 
           <NavLink to='/register' className="btn btn-outline-secondary">Register</NavLink>
           <NavLink to='/login' className="btn btn-outline-secondary">Login</NavLink>
-          <NavLink to='/cart' className="btn btn-outline-secondary">Cart <ShoppingCartIcon /></NavLink>
-
         </div >
       )}
 
@@ -65,7 +63,8 @@ export default function Navbar() {
             </div>
             <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
             <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
-            <button onClick={() => logout()}><LogoutIcon /> Logout</button>
+            <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart</Link>
+            <button onClick={() => {logout(); navigate('/')}}><LogoutIcon /> Logout</button>
           </div>
         </div>
       ) :  null}

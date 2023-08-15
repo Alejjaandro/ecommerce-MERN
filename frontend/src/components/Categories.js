@@ -32,8 +32,8 @@ export default function Categories() {
         };
 
         getProdForCategory();
-        console.log(categories);
-        console.log(prodForCategory);
+        // console.log(categories);
+        // console.log(prodForCategory);
 
     }, []);
 
