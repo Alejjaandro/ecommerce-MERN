@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios.js';
 
 export default function Product() {
 
@@ -25,7 +25,7 @@ export default function Product() {
         const getProducts = async () => {
 
             try {
-                const res = await axios.get(`http://localhost:8000/api/products/find/${id}`);
+                const res = await axios.get(`/products/find/${id}`);
                 setProduct(res.data);
 
             } catch (error) {

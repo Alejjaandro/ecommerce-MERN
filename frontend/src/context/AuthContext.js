@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from 'axios';
+import axios from '../api/axios.js';
+import Cookies from 'js-cookie';
 
 /* 
 Context provides a way to pass data through the component tree 
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const register = async (user) => {
         try {
             // Save the response sent after the post request.
-            const res = await axios.post("http://localhost:8000/api/auth/register", user);
+            const res = await axios.post("/auth/register", user);
             console.log(res.data);
 
             setUser(res.data);
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (user) => {
         try {
-            const res = await axios.post("http://localhost:8000/api/auth/login", user);
+            const res = await axios.post("/auth/login", user);
 
             // console.log(res.data.message, res.data.token);
 
@@ -60,16 +61,10 @@ export const AuthProvider = ({ children }) => {
 
     }
 
-    // Save the user in local storage.
-    // useEffect(() => {
-
-    //     localStorage.setItem("user", JSON.stringify(user));
-
-    // }, [user])
-
-    // Remove the user from localStorage.
+    // Remove the token from cookies.
     const logout = () => {
-        localStorage.clear();
+
+        Cookies.remove("token");
 
         setIsAuthenticated(false);
         setUser(null);

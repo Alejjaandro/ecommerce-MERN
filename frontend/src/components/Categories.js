@@ -2,7 +2,7 @@ import CategoryItem from "./CategoryItem";
 import './styles/Categories.css';
 
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from '../api/axios';
 
 export default function Categories() {
 
@@ -15,7 +15,7 @@ export default function Categories() {
 
             try {
 
-                const res = await axios.get('http://localhost:8000/api/products');
+                const res = await axios.get('/products/');
                 const products = res.data;
 
                 setCategories([...new Set(products.map((prod) => prod.category))]);
