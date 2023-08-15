@@ -1,107 +1,17 @@
-import { verifyTokenAndAuthorization, verifyTokenAndAdmin } from '../middleware/verifyToken.js';
-
-import Product from '../models/Product.js';
-
-import {Router} from 'express';
+import { Router } from 'express';
 const router = Router();
 
-// MORE EXPLANATIONS ON "/auth.js" & "/user.js" //
+// Import Controllers
+import {createProduct, updateProduct, deleteProduct, getProduct, getAllProducts} from '../controllers/product.js';
+import { verifyAdmin } from '../middleware/verifyToken.js';
 
-// ===== CREATE Product ===== //
-router.post('/', verifyTokenAndAdmin, async (req, res) => {
+// We create the endpoints. 
 
-    const newProduct = new Product(req.body);
+router.post("/", verifyAdmin, createProduct);
+router.put("/:id", verifyAdmin, updateProduct);
+router.delete("/:id", verifyAdmin, deleteProduct);
 
-    try {
-        const savedProduct = await newProduct.save();
-
-        res.status(200).json(savedProduct);
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-});
-
-// ===== UPDATE Product ===== //
-router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
-
-    try {
-        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
-            $set: req.body
-        }, { new: true })
-
-        res.status(200).json(updatedProduct);
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-});
-
-// ===== DELETE Product ===== //
-router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
-
-    try {
-        await Product.findByIdAndDelete(req.params.id);
-
-        res.status(200).json('Product Deleted');
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-});
-
-// ===== GET Product ===== //
-router.get('/find/:id', async (req, res) => {
-
-    try {
-        const product = await Product.findById(req.params.id);
-
-        res.status(200).json(product);
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-});
-
-// ===== GET all Products ===== //
-router.get('/', async (req, res) => {
-
-    /* 
-    We can also make queries to mongoDB.
-    In this case we create 2 queries, "new" & "category", both are in request.
-    */
-    const qNew = req.query.new;
-    const qCategory = req.query.category;
-
-    try {
-        // We initialize a variable "products".
-        let products;
-
-        // If qNew exists, searches by {createsAt} and orders the result in descending order {-1},
-        // with a limit of 5 products.
-        if (qNew) {
-            products = await Product.find().sort( {createdAt: -1} ).limit(5);
-        
-        // If qCategory exists, searches for the products with the categories that we stablish in the query.
-        // The "$in" operator selects the documents where the value of a field equals any value in the specified array. 
-        } else if (qCategory) {
-            products = await Product.find({
-                categories : {
-                    $in: [qCategory]
-                }
-            });
-        
-        // If there is no query, return all products.
-        } else {
-            products = await Product.find();
-        }
-
-        res.status(200).json(products);
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-});
-
+router.get("/find/:userId", getProduct);
+router.get("/", getAllProducts);
 
 export default router;
