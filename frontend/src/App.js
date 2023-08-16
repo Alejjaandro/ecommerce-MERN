@@ -13,6 +13,7 @@ import Cart from './pages/Cart';
 // Context Provider
 import { AuthProvider } from './context/AuthContext.js';
 import { ProductsProvider } from './context/ProductsContext.js';
+import { CartProvider } from './context/CartContext.js';
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
   return (
 
     <AuthProvider>
-      <ProductsProvider>
+      <CartProvider>
 
         <BrowserRouter>
           <Routes>
@@ -39,7 +40,7 @@ function App() {
           </Routes>
         </BrowserRouter>
 
-      </ProductsProvider>
+      </CartProvider>
     </AuthProvider>
   );
 }

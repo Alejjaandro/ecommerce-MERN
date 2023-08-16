@@ -5,8 +5,25 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
 import './styles/Cart.css';
+import { useCart } from '../context/CartContext';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Cart() {
+
+    const { cartProducts, productsNumber, getCart } = useCart();
+
+
+    const userId = useLocation().pathname.split('/')[2];
+
+    useEffect(() => {
+
+        getCart(userId);
+
+    }, [productsNumber])
+    
+    console.log(productsNumber, cartProducts);
+
     return (
         <>
             <Navbar />
@@ -20,7 +37,7 @@ export default function Cart() {
                     <button className='top-button'>CONTINUE SHOPPING</button>
 
                     <div className='top-texts'>
-                        <span className='top-text'>Shopping Cart (2)</span>
+                        <span className='top-text'>Shopping Cart ({productsNumber})</span>
                         <span className='top-text'>Your Wishlist (0)</span>
                     </div>
 

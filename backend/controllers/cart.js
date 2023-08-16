@@ -2,30 +2,27 @@ import Cart from '../models/Cart.js';
 
 // MORE EXPLANATIONS ON "/auth.js" & "/user.js" //
 
-// ===== CREATE Cart ===== //
+// ===== CREATE & UPDATE Cart ===== //
 export const createCart = async (req, res) => {
 
-    const newCart = new Cart(req.body);
+    // We extract what we need from req.
+    const { userId } = req.params;
+    const { productId, quantity } = req.body;
 
     try {
-        const savedCart = await newCart.save();
+        // We search for a cart with the userId and we push into products array the new productId and its quantity.
+        // The option {upsert: true} tells mongoDB to create one if it didn't find one.
+        const updatedCart = await Cart.findOneAndUpdate(
+            userId,
+            { $push: { products: { productId, quantity } } },
+            { new: true, upsert: true }
+        );
 
-        res.status(200).json(savedCart);
+        if (!updatedCart) {
+            return res.status(404).json({ message: 'Cart not found' });
+        }
 
-    } catch (error) {
-        res.status(500).json(error);
-    }
-};
-
-// ===== UPDATE Cart ===== //
-export const updateCart = async (req, res) => {
-
-    try {
-        const updatedCart = await Cart.findByIdAndUpdate(req.params.id, {
-            $set: req.body
-        }, { new: true })
-
-        res.status(200).json(updatedCart);
+        res.status(200).json({ message: 'Product added to Cart', updatedCart });
 
     } catch (error) {
         res.status(500).json(error);
@@ -49,7 +46,11 @@ export const deleteCart = async (req, res) => {
 export const getUserCart = async (req, res) => {
 
     try {
-        const cart = await Cart.find({ userId: req.params.userId });
+        const cart = await Cart.findById(req.params.userId);
+
+        if (!cart) {
+            return res.status(404).json({ message: 'Cart not found' });
+        }
 
         res.status(200).json(cart);
 
