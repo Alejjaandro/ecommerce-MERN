@@ -15,7 +15,8 @@ export default function Cart() {
 
     const userId = useLocation().pathname.split('/')[2];
     let subtotal = 0;
-
+    let shippingCost = 0;
+    
     useEffect(() => {
 
         getCart(userId);
@@ -26,9 +27,9 @@ export default function Cart() {
 
     if (cartProducts) {
         subtotal = Array.from(cartProducts).reduce((total, product) => total + product.product.price, 0);
+        shippingCost = 10.50;
     }
 
-    const shippingCost = 10.50;
 
     return (
         <>
@@ -57,7 +58,7 @@ export default function Cart() {
                     {/* Product list container */}
                     <div className="product-list">
 
-                        {cartProducts && Array.from(cartProducts).map(product => {
+                        {cartProducts ? Array.from(cartProducts).map(product => {
                             return (
                                 <>
                                     <div className="product">
@@ -89,7 +90,9 @@ export default function Cart() {
                                     <hr />
                                 </>
                             );
-                        })}
+                        }) : (
+                            <div> No Producs in Cart</div>
+                        )}
 
                     </div>
 

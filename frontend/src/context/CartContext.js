@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
 
     const [productsNumber, setProductsNumber] = useState(0);
-    const [cartProducts, setCartProducts] = useState();
+    const [cartProducts, setCartProducts] = useState(null);
 
     const addToCart = async (userId, product, quantity) => {
 
@@ -48,7 +48,11 @@ export const CartProvider = ({ children }) => {
     }
 
     const getCart = async (userId) => {
+        setProductsNumber(0);
+        setCartProducts(null);
+
         try {
+
             const res = await axios.get(`/carts/find/${userId}`);
 
             setProductsNumber(res.data.products.length);
