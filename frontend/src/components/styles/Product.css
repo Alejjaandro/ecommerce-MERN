@@ -52,8 +52,10 @@
 .prod-icon {
     width: 40px;
     height: 40px;
+    border: none;
     border-radius: 50%;
     background-color: white;
+    color: black;
 
     display: flex;
     align-items: center;

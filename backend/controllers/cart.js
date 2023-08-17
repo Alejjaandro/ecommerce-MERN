@@ -6,15 +6,14 @@ import Cart from '../models/Cart.js';
 export const createCart = async (req, res) => {
 
     // We extract what we need from req.
-    const { userId } = req.params;
-    const { productId, quantity } = req.body;
+    const { userId, product, quantity } = req.body;
 
     try {
-        // We search for a cart with the userId and we push into products array the new productId and its quantity.
+        // We search for a cart with the userId and we push into products array the new product and its quantity.
         // The option {upsert: true} tells mongoDB to create one if it didn't find one.
         const updatedCart = await Cart.findOneAndUpdate(
-            userId,
-            { $push: { products: { productId, quantity } } },
+            { _id: userId},
+            { $push: { products: { product, quantity } } },
             { new: true, upsert: true }
         );
 

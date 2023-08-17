@@ -21,22 +21,25 @@ export const CartProvider = ({ children }) => {
     const [productsNumber, setProductsNumber] = useState(0);
     const [cartProducts, setCartProducts] = useState();
 
-    const addToCart = async (userId, productId, quantity) => {
+    const addToCart = async (userId, product, quantity) => {
 
         if (user) {
+            // console.log(product);
 
-            try {
-                const res = await axios.post(`/carts/${userId}`, {
-                    productId: productId,
-                    quantity: quantity || 1
-                });
+                try {
+                    const res = await axios.post(`/carts/${userId}`, {
+                        userId: userId,
+                        product: product,
+                        quantity: quantity || 1
+                    });
 
-                console.log(res.data);
-                setProductsNumber(productsNumber + 1);
+                    console.log(res.data);
 
-            } catch (error) {
-                console.log(error);
-            }
+                    setProductsNumber(productsNumber + 1);
+
+                } catch (error) {
+                    console.log(error);
+                }
 
         } else {
             console.log("You need to be logged");
@@ -45,11 +48,15 @@ export const CartProvider = ({ children }) => {
     }
 
     const getCart = async (userId) => {
-        const res = await axios.get(`/carts/find/${userId}`);
-        console.log(res.data);
+        try {
+            const res = await axios.get(`/carts/find/${userId}`);
 
-        setProductsNumber(res.data.length);
-        setCartProducts(res.data);
+            setProductsNumber(res.data.products.length);
+            setCartProducts(res.data.products);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // Timeout so the errors don't stay on screen undefinetly. 5000 ms = 5 sec.

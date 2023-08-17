@@ -11,35 +11,36 @@ import { useCart } from '../context/CartContext';
 
 export default function Product({ item }) {
 
-  const {user} = useAuth();
+  const { user } = useAuth();
   const { addToCart, errors } = useCart();
-  
+
   const handleShoppingCart = async (e) => {
     e.preventDefault();
 
     // We stablish a condition where you can only add if you are logged.
-    user ? await addToCart(user._id, item._id) : console.log("You aren't logged");
+    user ? await addToCart(user._id, item) : console.log("You aren't logged");
   }
 
 
   return (
     <div className='prod-container'>
 
-      {/* <div className='prod-circle'></div> */}
-
       <img className="prod-image" src={item.thumbnail} alt="" />
 
       <div className="prod-info">
 
-        <div className="prod-icon">
-          <button onClick={(e) => handleShoppingCart(e)}>
-            <ShoppingCartIcon />
-          </button>
-        </div>
+        <button className="prod-icon" onClick={(e) => handleShoppingCart(e)}>
+          <ShoppingCartIcon />
+        </button>
 
-        <div className="prod-icon"><Link to='#'><FavoriteBorderIcon /></Link></div>
+        <button className="prod-icon">
+          <FavoriteBorderIcon />
+        </button>
 
-        <div className="prod-icon"><Link to={`/product/${item._id}`}><SearchIcon /></Link></div>
+        <Link className="prod-icon" to={`/product/${item._id}`}>
+          <SearchIcon />
+        </Link>
+
       </div>
     </div>
   )

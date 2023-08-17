@@ -13,16 +13,22 @@ export default function Cart() {
 
     const { cartProducts, productsNumber, getCart } = useCart();
 
-
     const userId = useLocation().pathname.split('/')[2];
+    let subtotal = 0;
 
     useEffect(() => {
 
         getCart(userId);
 
-    }, [productsNumber])
-    
+    }, [])
+
     console.log(productsNumber, cartProducts);
+
+    if (cartProducts) {
+        subtotal = Array.from(cartProducts).reduce((total, product) => total + product.product.price, 0);
+    }
+
+    const shippingCost = 10.50;
 
     return (
         <>
@@ -51,65 +57,39 @@ export default function Cart() {
                     {/* Product list container */}
                     <div className="product-list">
 
-                        {/* Product 1 */}
-                        <div className="product">
+                        {cartProducts && Array.from(cartProducts).map(product => {
+                            return (
+                                <>
+                                    <div className="product">
 
-                            {/* Product details container*/}
-                            <div className='product-details'>
+                                        <div className='product-details'>
 
-                                <img className='info-img' src="https://i.ibb.co/HTvVjvW/Laptop-2.webp" alt="" />
+                                            <img className='info-img' src={`${product.product.thumbnail}`} alt="" />
 
-                                <div className='details'>
-                                    <span className='name'><b>Product:</b> ACER LAPTOP</span>
-                                    <span className='id'><b>ID:</b> 3452335346</span>
-                                    <span className='ram'><b>RAM:</b> 500GB</span>
-                                    <div className='color' />
-                                </div>
-                            </div>
+                                            <div className='details'>
+                                                <span className='name'><b>Product:</b>{product.product.title}</span>
+                                                <span className='id'><b>ID:</b>{product.product._id}</span>
+                                                <span className='ram'><b>RAM:</b> 500GB</span>
+                                                <div className='color' />
+                                            </div>
+                                        </div>
 
-                            {/* Product price container*/}
-                            <div className="product-price">
+                                        <div className="product-price">
 
-                                <div className="product-ammount">
-                                    <div className="remove-icon flex-center"><RemoveIcon /></div>
-                                    <span className="amount-num flex-center">1</span>
-                                    <div className="add-icon flex-center"><AddIcon /></div>
-                                </div>
+                                            <div className="product-ammount">
+                                                <div className="remove-icon flex-center"><RemoveIcon /></div>
+                                                <span className="amount-num flex-center">{product.quantity}</span>
+                                                <div className="add-icon flex-center"><AddIcon /></div>
+                                            </div>
 
-                                <div className="price">$750</div>
-                            </div>
+                                            <div className="price">${product.product.price}</div>
+                                        </div>
 
-                        </div>
-                        
-                        <hr className='hr'/>
-                        {/* Product 2 */}
-                        <div className="product">
-
-                            {/* Product details container*/}
-                            <div className='product-details'>
-
-                                <img className='info-img' src="https://i.ibb.co/0JYbtGt/TV-2.jpg" alt="" />
-
-                                <div className='details'>
-                                    <span className='name'><b>Product:</b> XIAOMI TV</span>
-                                    <span className='id'><b>ID:</b> 98242353</span>
-                                    <div className='color' />
-                                </div>
-                            </div>
-
-                            {/* Product price container*/}
-                            <div className="product-price">
-
-                                <div className="product-ammount">
-                                    <div className="ammount-icon flex-center"><RemoveIcon /></div>
-                                    <span className="amount-num flex-center">1</span>
-                                    <div className="ammount-icon flex-center"><AddIcon /></div>
-                                </div>
-
-                                <div className="price">$1.500</div>
-                            </div>
-
-                        </div>
+                                    </div>
+                                    <hr />
+                                </>
+                            );
+                        })}
 
                     </div>
 
@@ -120,23 +100,25 @@ export default function Cart() {
 
                         <div className="summary-item">
                             <span className='summary-item-text'>Subtotal: </span>
-                            <span className='summary-item-price'>$3.500</span>
+                            <span className='summary-item-price'>
+                                ${subtotal}
+                            </span>
                         </div>
 
                         <div className="summary-item">
                             <span className='summary-item-text'>Shipping: </span>
-                            <span className='summary-item-price'>$10.50</span>
+                            <span className='summary-item-price'>${shippingCost}</span>
                         </div>
 
                         <div className="summary-item summary-total">
                             <span className='summary-item-totalText'>Total: </span>
-                            <span className='summary-item-totalPrice'>$3.510.50</span>
+                            <span className='summary-item-totalPrice'>${subtotal + shippingCost}</span>
                         </div>
 
                         <button className='summary-button'>BUY NOW</button>
+
                     </div>
                 </div>
-
             </div>
 
             <Footer />
