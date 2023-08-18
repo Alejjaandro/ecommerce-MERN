@@ -10,13 +10,15 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function Cart() {
-
+    // We extract what we need from the context.
     const { cartProducts, productsNumber, getCart } = useCart();
 
+    // Initialize some variables for later
     const userId = useLocation().pathname.split('/')[2];
     let subtotal = 0;
     let shippingCost = 0;
     
+    // We call getCart with the userId.
     useEffect(() => {
 
         getCart(userId);
@@ -25,7 +27,9 @@ export default function Cart() {
 
     console.log(productsNumber, cartProducts);
 
+    // We calculate the subtotal by summing the products cost. 
     if (cartProducts) {
+        // We use Array.from() so we can access arrays methods.
         subtotal = Array.from(cartProducts).reduce((total, product) => total + product.product.price, 0);
         shippingCost = 10.50;
     }
@@ -57,7 +61,10 @@ export default function Cart() {
 
                     {/* Product list container */}
                     <div className="product-list">
-
+                        {/* 
+                        We render the products only if "cartProducts" exists and 
+                        we access its data to complete the info on the page 
+                        */}
                         {cartProducts ? Array.from(cartProducts).map(product => {
                             return (
                                 <>

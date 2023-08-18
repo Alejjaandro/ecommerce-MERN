@@ -85,9 +85,9 @@ function useProdForCategory() {
                 const res = await axios.get('/products');
                 const products = res.data;
 
-                setCategories([...new Set(products.map((prod) => prod.category))]);
+                products && setCategories([...new Set(products.map((prod) => prod.category))]);
 
-                setProdForCategory(
+                categories && setProdForCategory(
                     categories.map(category => {
                         return products.find(product => product.category === category);
                     })
@@ -101,7 +101,7 @@ function useProdForCategory() {
         getProdForCategory();
 
     }, []);
-
+    
     return prodForCategory;
 };
 

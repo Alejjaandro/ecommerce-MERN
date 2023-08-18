@@ -37,7 +37,7 @@ export default function Products({ category, brand, sort }) {
   return (
     <div className='products-container'>
 
-      {products.map((item) => (
+      {products && products.map((item) => (
         <Product item={item} key={item._id} />
       ))}
 

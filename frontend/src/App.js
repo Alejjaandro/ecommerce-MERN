@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter, Route, Routes, redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductList from './pages/ProductList';
 import Product from './pages/Product';
@@ -17,30 +17,30 @@ import { CartProvider } from './context/CartContext.js';
 
 function App() {
 
-  const user = true;
-
   return (
 
     <AuthProvider>
-      <CartProvider>
+      <ProductsProvider>
+        <CartProvider>
 
-        <BrowserRouter>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/products/" element={<ProductList />} />
-            <Route path="/products/:category" element={<ProductList />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/my-profile/:userId" element={<MyProfile />} />
-            <Route path="/settings/:userId" element={<Settings />} />
-        
-            <Route path="/cart/:userId" element={<Cart />} />
-          </Routes>
-        </BrowserRouter>
+          <BrowserRouter>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/products/" element={<ProductList />} />
+              <Route path="/products/:category" element={<ProductList />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/my-profile/:userId" element={<MyProfile />} />
+              <Route path="/settings/:userId" element={<Settings />} />
 
-      </CartProvider>
+              <Route path="/cart/:userId" element={<Cart />} />
+            </Routes>
+          </BrowserRouter>
+
+        </CartProvider>
+      </ProductsProvider>
     </AuthProvider>
   );
 }

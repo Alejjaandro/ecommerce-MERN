@@ -23,18 +23,18 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = async (userId, product, quantity) => {
 
+        // First we chack if user is logged. 
         if (user) {
-            // console.log(product);
 
                 try {
+                    // we send a post with the info of the user.
                     const res = await axios.post(`/carts/${userId}`, {
                         userId: userId,
                         product: product,
                         quantity: quantity || 1
                     });
 
-                    console.log(res.data);
-
+                    // We update the number of products in cart.
                     setProductsNumber(productsNumber + 1);
 
                 } catch (error) {
@@ -48,13 +48,15 @@ export const CartProvider = ({ children }) => {
     }
 
     const getCart = async (userId) => {
+        // we reset ProductsNumber and CartProducts.
         setProductsNumber(0);
         setCartProducts(null);
 
         try {
-
+            // We send a petition to get the cart of the user.
             const res = await axios.get(`/carts/find/${userId}`);
 
+            // We update ProductsNumber and CartProducts with the new info.
             setProductsNumber(res.data.products.length);
             setCartProducts(res.data.products);
 

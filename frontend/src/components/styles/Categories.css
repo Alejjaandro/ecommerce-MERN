@@ -1,8 +1,10 @@
 .cat-container {
-    display: flex;
+    
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
 
     padding: 0.5rem;
-    justify-content: space-between;
 
     text-transform: uppercase;
     font-weight: 700;

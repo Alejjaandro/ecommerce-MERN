@@ -39,7 +39,7 @@ function Slider() {
         <div className="slider-container">
             <BsArrowLeftCircleFill className='arrow arrow-left' onClick={prevSlide} />
 
-            {productsImg.map((img, index) => {
+            { productsImg && productsImg.map((img, index) => {
                 return (
                     <img
                         className={slide === index ? "slide" : "slide slide-hidden"}

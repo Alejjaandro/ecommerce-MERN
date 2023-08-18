@@ -1,6 +1,8 @@
 .cat-item-container {
-    flex: 1;
-    margin: 0.25rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+
+    background-color: silver;
 
     position: relative;
 }
@@ -26,8 +28,11 @@
 }
 
 .cat-title {
-    color: white;
-    margin-bottom: 20px;
+    background-color: white;
+    color: black;
+    
+    padding: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .cat-link {
@@ -35,7 +40,7 @@
     border: none;
     padding: 10px;
 
-    background-color: white;
+    background-color: lightgray;
     color: black;
     cursor: pointer;
 

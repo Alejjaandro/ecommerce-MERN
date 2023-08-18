@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from 'axios';
+import axios from '../api/axios.js';
 
 export const ProductsContext = createContext();
 
@@ -14,18 +14,13 @@ export const useProducts = () => {
 export const ProductsProvider = ({ children }) => {
 
     const [products, setProducts] = useState([]);
-    const [sliderImages, setSliderImages] = useState([]);
-
-    const [categories, setCategories] = useState([]);
-    const [prodForCategory, setProdForCategory] = useState([]);
-
 
     // ========== FUNCTION ALL PRODUCTS & CATEGORY PRODUCTS ========== //
     const getProducts = async (category) => {
 
         try {
             // Make a get petition to the URL stablished in "/backend/routes/Product.js".
-            const res = await axios.get('http://localhost:8000/api/products');
+            const res = await axios.get('/products');
             const resProducts = res.data;
 
             // If we choose a category filter or there is a category in the URL params, 
@@ -45,10 +40,12 @@ export const ProductsProvider = ({ children }) => {
     }
 
     // ========== FUNCTION TO GET THUMBNAIL IMGS ========== //
+    const [sliderImages, setSliderImages] = useState([]);
+
     const getSliderImages = async () => {
 
         try {
-            const res = await axios.get('http://localhost:8000/api/products');
+            const res = await axios.get('/products');
 
             // We only want 5 of them for the slider.
             const someProd = res.data.splice(0, 5);
@@ -60,26 +57,28 @@ export const ProductsProvider = ({ children }) => {
         }
     };
 
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NOT WORKING !!!!!!!!!!!!!!!!!!!!!!!!!! */
     // ========== FUNCTION TO GET A PRODUCT FOR EACH CATEGORY ========== //
-    const getProdForCategory = async () => {
+    const [prodForCategory, setProdForCategory] = useState([]);
+
+    const getCategories = async () => {
 
         try {
-            const res = await axios.get('http://localhost:8000/api/products');
+            // We make get all products.
+            const res = await axios.get('/products');
             const products = res.data;
 
-            setCategories([...new Set(products.map((prod) => prod.category))]);
+            // We extract the categories.
+            // we use Set to create an array with the unique categories.
+            const categories = [...new Set(products.map(product => product.category))]
 
-            setProdForCategory(
-                categories.map(category => {
-                    return products.find(product => product.category === category);
-                })
-            );
+            // We save the first product that matches each category.
+            setProdForCategory(categories.map(category => products.find(product => product.category === category)));
 
         } catch (error) {
             console.log(error);
         }
-    };
+    }
+
 
     // ============================ REVISE ============================================
     // ========== FUNCTION TO GET CATEGORIES & BRANDS ========== //
@@ -93,7 +92,7 @@ export const ProductsProvider = ({ children }) => {
 
     //             try {
 
-    //                 const res = await axios.get('http://localhost:8000/api/products');
+    //                 const res = await axios.get('/products');
     //                 setProducts(res.data);
 
     //             } catch (error) {
@@ -128,8 +127,9 @@ export const ProductsProvider = ({ children }) => {
         <ProductsContext.Provider value={{
             getProducts,
             getSliderImages,
-            getProdForCategory,
-            // categoriesAndBrands
+
+            getCategories,
+            prodForCategory
         }}>
             {children}
         </ProductsContext.Provider>
