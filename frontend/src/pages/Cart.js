@@ -25,8 +25,6 @@ export default function Cart() {
 
     }, [])
 
-    console.log(productsNumber, cartProducts);
-
     // We calculate the subtotal by summing the products cost. 
     if (cartProducts) {
         // We use Array.from() so we can access arrays methods.
@@ -75,7 +73,7 @@ export default function Cart() {
                                             <img className='info-img' src={`${product.product.thumbnail}`} alt="" />
 
                                             <div className='details'>
-                                                <span className='name'><b>Product:</b>{product.product.title}</span>
+                                                <span className='name'><b>Product:</b> {product.product.title}</span>
                                                 <span className='id'><b>ID:</b>{product.product._id}</span>
                                                 <span className='ram'><b>RAM:</b> 500GB</span>
                                                 <div className='color' />
