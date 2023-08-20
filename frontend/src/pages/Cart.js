@@ -63,10 +63,10 @@ export default function Cart() {
                         We render the products only if "cartProducts" exists and 
                         we access its data to complete the info on the page 
                         */}
-                        {cartProducts ? Array.from(cartProducts).map(product => {
+                        {cartProducts ? Array.from(cartProducts).map((product) => {
                             return (
                                 <>
-                                    <div className="product">
+                                    <div className="product" key={product.product._id}>
 
                                         <div className='product-details'>
 

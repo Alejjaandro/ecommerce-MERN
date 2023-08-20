@@ -16,7 +16,6 @@ export const useCart = () => {
 export const CartProvider = ({ children }) => {
 
     const { user } = useAuth();
-    const [errors, setErrors] = useState([]);
 
     const [productsNumber, setProductsNumber] = useState(0);
     const [cartProducts, setCartProducts] = useState(null);
@@ -65,26 +64,13 @@ export const CartProvider = ({ children }) => {
         }
     }
 
-    // Timeout so the errors don't stay on screen undefinetly. 5000 ms = 5 sec.
-    useEffect(() => {
-        if (errors.length > 0) {
-            const timer = setTimeout(() => {
-                setErrors([]);
-            }, 5000)
-            return () => clearTimeout(timer);
-        }
-    }, [errors])
-
-
-
     // All the components inside AuthContext will be able to access it values.
     return (
         <CartContext.Provider value={{
             addToCart,
             getCart,
             productsNumber,
-            cartProducts,
-            errors
+            cartProducts
         }}>
             {children}
         </CartContext.Provider>

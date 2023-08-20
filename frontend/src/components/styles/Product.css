@@ -17,7 +17,7 @@
     height: 200px;
     border-radius: 50%;
     background-color: white;
-    
+
     position: absolute;
 }
 
@@ -68,4 +68,35 @@
         transform: scale(1.1);
         cursor: pointer;
     }
+}
+
+/* ALERT MESSAGE */
+.added-alert {
+    position: fixed;
+
+    top: 50%;
+    right: 40%;
+
+    background-color: green;
+    color: white;
+
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    z-index: 1;
+}
+
+.error-alert {
+    position: fixed;
+
+    top: 50%;
+    right: 40%;
+
+    background-color: #f44336;
+    color: white;
+
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    z-index: 1;
 }

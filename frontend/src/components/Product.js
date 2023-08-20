@@ -1,26 +1,45 @@
 import './styles/Product.css';
 
-// Icons
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import SearchIcon from '@mui/icons-material/Search';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import { useAuth } from '../context/AuthContext.js';
 import { useCart } from '../context/CartContext';
 
+// Icons
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import SearchIcon from '@mui/icons-material/Search';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 export default function Product({ item }) {
 
   const { user } = useAuth();
-  const { addToCart, errors } = useCart();
+  const { addToCart } = useCart();
+
+  const [alertMessage, setAlertMessage] = useState(false);
+  const [addedMessage, setAddedMessage] = useState(false);
 
   const handleShoppingCart = async (e) => {
     e.preventDefault();
 
     // We stablish a condition where you can only add if you are logged.
-    user ? await addToCart(user._id, item) : console.log("You aren't logged");
-  }
+    // If not it will display an alert message.
+    if (user) {
+      await addToCart(user._id, item);
 
+      setAddedMessage(true);
+      setTimeout(() => {
+        setAddedMessage(false);
+      }, 3000);
+
+    } else {
+
+      setAlertMessage(true);
+      setTimeout(() => {
+        setAlertMessage(false);
+      }, 3000);
+    }
+  }
 
   return (
     <div className='prod-container'>
@@ -42,6 +61,15 @@ export default function Product({ item }) {
         </Link>
 
       </div>
+
+      {/* ALERTS */}
+      {addedMessage && (
+        <div className="added-alert">Product added {item.title} to Cart</div>
+      )}
+      {alertMessage && (
+        <div className="error-alert">You must be logged.</div>
+      )}
+
     </div>
   )
 }
