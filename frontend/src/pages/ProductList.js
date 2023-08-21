@@ -1,36 +1,31 @@
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Products from '../components/Products';
-
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-
-import { useCategoriesAndBrands } from '../hooks/useData';
+import CategoriesNavbar from '../components/CategoriesNavbar';
 
 import './styles/ProductList.css';
 
+import { useEffect, useState } from 'react';
+import { useCategoriesAndBrands } from '../hooks/useData';
+import { useProducts } from '../context/ProductsContext.js';
+
 export default function ProductList() {
 
-    // Import categories & brands from useData.js.    
-    const categoriesAndBrands = useCategoriesAndBrands();
+    // Import what we need from context.
+    const {getCategoriesAndBrands, categoriesAndBrands} = useProducts();
+
+    useEffect(() => { getCategoriesAndBrands() }, []);
+    
     // We extract the keys of the objects that are the categories.
-    const categories = Object.keys(categoriesAndBrands);
+    const categories = categoriesAndBrands ? Object.keys(categoriesAndBrands) : [];
+
     // Initialize brands as an empty array and with a for/in loop we extract each brand of each category .
     const brands = [];
     for (const category in categoriesAndBrands) {
         brands.push(...categoriesAndBrands[category]);
     }
 
-    /* 
-    To extract the category param in the URL parameter we use {useLocation()} that returns
-    an object with a "pathname" key that contains the URL. 
-    {split("/")} splits "pathname" using the specified separator and return them as an array.
-    
-    We save the index [2] wich contains the category param, if is undefined means that me didn't pass 
-    any param.
-    */
-    const [categoryFilter, setCategoryFilter] = useState(useLocation().pathname.split('/')[2]);
-
+    const [categoryFilter, setCategoryFilter] = useState('All');
     const [brandFilter, setBrandFilter] = useState('All');
     const [sort, setSort] = useState('newest');
 
@@ -47,6 +42,8 @@ export default function ProductList() {
             <Navbar />
 
             <div className='productList-container'>
+
+                <CategoriesNavbar/>
 
                 <h1 className='title'>Products</h1>
 
@@ -112,7 +109,7 @@ export default function ProductList() {
 
                 </div>
 
-                <Products category={categoryFilter} brand={brandFilter} setBrandFilter={setBrandFilter} sort={sort} />
+                <Products category={categoryFilter} brand={brandFilter} sort={sort} />
 
             </div>
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 import axios from '../api/axios.js';
 import { useAuth } from "./AuthContext";
@@ -27,7 +27,7 @@ export const CartProvider = ({ children }) => {
 
                 try {
                     // we send a post with the info of the user.
-                    const res = await axios.post(`/carts/${userId}`, {
+                    await axios.post(`/carts/${userId}`, {
                         userId: userId,
                         product: product,
                         quantity: quantity || 1

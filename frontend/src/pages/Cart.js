@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import './styles/Cart.css';
 import { useCart } from '../context/CartContext';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function Cart() {
@@ -31,7 +31,6 @@ export default function Cart() {
         subtotal = Array.from(cartProducts).reduce((total, product) => total + product.product.price, 0);
         shippingCost = 10.50;
     }
-
 
     return (
         <>

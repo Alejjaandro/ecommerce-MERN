@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Styles
 import './styles/Slider.css';
@@ -6,15 +6,16 @@ import './styles/Slider.css';
 // Icons
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 
-// Products imgs
-import { useImages } from '../hooks/useData';
+// Context
+import { useProducts } from '../context/ProductsContext';
 
-function Slider() {
+export default function Slider() {
+    // we extract what we need form context.
+    const {getSliderImages, sliderImages} = useProducts();
 
-    const productsImg = useImages();
-
+    useEffect(() => { getSliderImages() }, []);
+    
     const [slide, setSlide] = useState(0);
-
     const nextSlide = () => {
         /* 
         This condition checks that {slide} doesn't pass the length of dataImg, because it won't show any image.
@@ -24,14 +25,14 @@ function Slider() {
         the loop again.
         */
         setSlide(
-            slide !== productsImg.length - 1 ? slide + 1 : 0
+            slide !== sliderImages.length - 1 ? slide + 1 : 0
         );
     }
 
     const prevSlide = () => {
         // Same as above but to decrease.
         setSlide(
-            slide !== 0 ? slide - 1 : productsImg.length - 1
+            slide !== 0 ? slide - 1 : sliderImages.length - 1
         );
     }
 
@@ -39,7 +40,7 @@ function Slider() {
         <div className="slider-container">
             <BsArrowLeftCircleFill className='arrow arrow-left' onClick={prevSlide} />
 
-            { productsImg && productsImg.map((img, index) => {
+            { sliderImages && sliderImages.map((img, index) => {
                 return (
                     <img
                         className={slide === index ? "slide" : "slide slide-hidden"}
@@ -53,7 +54,7 @@ function Slider() {
             <BsArrowRightCircleFill className='arrow arrow-right' onClick={nextSlide} />
 
             <span className='indicators'>
-                {productsImg.map((_, index) => {
+                {sliderImages.map((_, index) => {
                     return (
                         <button
                             key={index}
@@ -68,5 +69,3 @@ function Slider() {
         </div>
     );
 }
-
-export default Slider;

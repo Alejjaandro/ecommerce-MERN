@@ -112,21 +112,15 @@ function useCategoriesAndBrands() {
     const categoriasConMarcas = {};
 
     useEffect(() => {
-
         const getProducts = async () => {
-
             try {
-
                 const res = await axios.get('/products');
                 setProducts(res.data);
-
             } catch (error) {
                 console.log(error);
             }
         };
-
         getProducts();
-
     }, []);
 
     products.forEach(product => {

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import axios from '../api/axios.js';
 
 export const ProductsContext = createContext();
@@ -13,9 +13,9 @@ export const useProducts = () => {
 
 export const ProductsProvider = ({ children }) => {
 
+    // ========== FUNCTION TO GET ALL PRODUCTS & CATEGORY PRODUCTS ========== //
     const [products, setProducts] = useState([]);
 
-    // ========== FUNCTION ALL PRODUCTS & CATEGORY PRODUCTS ========== //
     const getProducts = async (category) => {
 
         try {
@@ -34,6 +34,19 @@ export const ProductsProvider = ({ children }) => {
                 setProducts(resProducts);
             }
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // ========== FUNCTION TO GET A SINGLE PRODUCT ========== //
+    const [product, setProduct] = useState({});
+
+    // Works similar to "getProducts" but with the product id.
+    const getProduct = async (id) => {
+        try {
+            const res = await axios.get(`/products/find/${id}`);
+            setProduct(res.data);
         } catch (error) {
             console.log(error);
         }
@@ -63,7 +76,7 @@ export const ProductsProvider = ({ children }) => {
     const getCategories = async () => {
 
         try {
-            // We make get all products.
+            // We get all products.
             const res = await axios.get('/products');
             const products = res.data;
 
@@ -79,57 +92,50 @@ export const ProductsProvider = ({ children }) => {
         }
     }
 
-
-    // ============================ REVISE ============================================
     // ========== FUNCTION TO GET CATEGORIES & BRANDS ========== //
-    // const categoriesAndBrands = () => {
+    const [categoriesAndBrands, setCategoriesAndBrands] = useState();
 
-    //     const categoriasConMarcas = {};
+    const getCategoriesAndBrands = async () => {
+        const res = await axios.get('/products');
+        const products = res.data;
 
-    //     useEffect(() => {
+        const brands = {};
 
-    //         const getProducts = async () => {
+        products.forEach(product => {
 
-    //             try {
+            const { category, brand } = product;
 
-    //                 const res = await axios.get('/products');
-    //                 setProducts(res.data);
+            if (!brands[category]) {
 
-    //             } catch (error) {
-    //                 console.log(error);
-    //             }
-    //         };
+                return brands[category] = [brand];
 
-    //         getProducts();
+            } else if (!brands[category].includes(brand)) {
 
-    //     }, []);
+                return brands[category].push(brand);
 
-    //     products.forEach(product => {
+            }
+        });
 
-    //         const { category, brand } = product;
-
-    //         if (!categoriasConMarcas[category]) {
-
-    //             return categoriasConMarcas[category] = [brand];
-
-    //         } else if (!categoriasConMarcas[category].includes(brand)) {
-
-    //             return categoriasConMarcas[category].push(brand);
-
-    //         }
-    //     });
-
-    //     return categoriasConMarcas;
-    // };
+        setCategoriesAndBrands(brands);
+    };
 
 
     return (
         <ProductsContext.Provider value={{
+            products,
             getProducts,
+
+            getProduct,
+            product,
+
             getSliderImages,
+            sliderImages,
 
             getCategories,
-            prodForCategory
+            prodForCategory,
+
+            categoriesAndBrands,
+            getCategoriesAndBrands
         }}>
             {children}
         </ProductsContext.Provider>

@@ -1,20 +1,23 @@
 import './styles/Products.css'
 
 import Product from './Product';
-import { useProducts } from '../hooks/useData';
+// import { useProducts } from '../hooks/useData';
+import { useProducts } from '../context/ProductsContext';
+import { useEffect } from 'react';
 
 export default function Products({ category, brand, sort }) {
 
+  let { getProducts, products} = useProducts();
+
   // === FILTER BY CATEGORY === //
 
-  // All explainations on how this function works is in "hooks/use.Data.js",
-  // what matters is that returns an array of products filtered by category.
-  let products = useProducts(category);
+  // All explainations on how this function works is in "context/ProductContext.js",
+  useEffect(() => { getProducts(category) }, [category]);
 
   // === FILTER BY BRAND === //
 
   // If we choose a brand filter, 
-  // then we filter the products and we save the ones that matches the brand.
+  // we filter the products and we save the ones that matches the brand.
   if (brand && (brand !== "All")) {
     products = products.filter(product => product.brand === brand);
   }

@@ -8,34 +8,21 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from '../api/axios.js';
+import {useProducts} from '../context/ProductsContext.js';
 
 export default function Product() {
 
+    const {getProduct, product} = useProducts();
+
     const id = useLocation().pathname.split('/')[2];
 
-    const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("");
     const [ram, setRam] = useState("");
 
     // Get product by id.
-    useEffect(() => {
-
-        const getProducts = async () => {
-
-            try {
-                const res = await axios.get(`/products/find/${id}`);
-                setProduct(res.data);
-
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        getProducts();
-
-    }, [id]);
+    useEffect(() => { getProduct(id) }, [])
+    
 
     // Handle color and RAM
     const handleColor = (e) => {
@@ -52,8 +39,6 @@ export default function Product() {
     const removeQuantity = () => {
         quantity > 1 && setQuantity(quantity - 1);
     }
-
-    console.log(color, ram);
 
     return (
 
