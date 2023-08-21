@@ -1,0 +1,19 @@
+.categories {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: silver;
+}
+
+.categories a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+
+    padding: 1rem;
+
+    &&:hover {
+        background-color: grey;
+    }
+}
