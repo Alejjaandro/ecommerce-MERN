@@ -11,7 +11,7 @@ export const updateUser = async (req, res) => {
     // We find the user by its id and we set all the values that contains the body to modify.
     // The $set operator replaces the value of a field with the specified value.
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.params._id, {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, { new: true })
 
