@@ -17,6 +17,13 @@ export default function Settings() {
 
                     <form className='settings-form'>
 
+                        <div className="change-picture">
+                            <label htmlFor="changePicture">Change Profile Picture: </label>
+                            <input placeholder="New Picture" type='text' name='changePicture'
+                                // onChange={}
+                            />
+                        </div>
+
                         <div className="change-email">
                             <label htmlFor="changeEmail">Change your Email: </label>
                             <input placeholder="New Email" type='email' name='changeEmail'

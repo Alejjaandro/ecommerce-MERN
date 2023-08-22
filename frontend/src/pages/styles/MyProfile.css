@@ -5,7 +5,13 @@
     align-items: center;
 
     padding: 1rem;
-    min-height: 80vh;
+    min-height: 85vh;
+}
+
+.profile-name, .profile-lastname, .profile-username, .profile-email, .profile-created, .profile-updated {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Profile Image */
@@ -14,76 +20,48 @@
     flex-direction: column;
     align-items: center;
 }
+.profile-image svg {
+    width: max-content;
+    height: max-content;
+}
+
 .profile-image img {
     border-radius: 50%;
 }
-.profile-image p {
-    font-size: larger;
-    font-weight: 600;
+
+.profile-image h1 {
+    font-size: x-large;
+    font-weight: 400;
+    
+    margin-bottom: 4rem;
 }
 
 /* Profile Name */
-.profile-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .profile-name p {
-    font-size: larger;
+    font-size: x-large;
 }
 
 /* Profile Lastname */
-.profile-lastname {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .profile-lastname p {
-    font-size: larger;
+    font-size: x-large;
 }
 
 /* Profile Username */
-.profile-username {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .profile-username p {
-    font-size: larger;
+    font-size: x-large;
 }
 
 /* Profile Email */
-.profile-email {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .profile-email p {
-    font-size: larger;
+    font-size: x-large;
 }
 
 /* Profile Created */
-.profile-created {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .profile-created p {
-    font-size: larger;
+    font-size: x-large;
 }
 
 /* Profile Updated */
-.profile-updated {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .profile-updated p {
-    font-size: larger;
+    font-size: x-large;
 }

@@ -2,6 +2,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 import './styles/MyProfile.css';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 import { useAuth } from '../context/AuthContext';
 import {format} from 'date-fns';
@@ -23,8 +24,8 @@ export default function MyProfile() {
       <div className="profile-container">
 
         <div className="profile-image">
-          <img src={user.image} alt="profile-img"/>
-          <p>Profile picture</p>
+          {user.image ? <img src={user.image}/> : <AccountBoxIcon/> }
+          <h1>Profile picture</h1>
         </div>
 
         <div className="profile-name">

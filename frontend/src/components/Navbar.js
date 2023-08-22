@@ -56,7 +56,11 @@ export default function Navbar() {
         // If there is a user logged it will show its name and an icon that display a sub-menu when clicked.
         <div className='right-container'>
           <span>Hi! {user.username}</span>
-          <button className='userIcon' onClick={toggleMenu}><AccountBoxIcon /></button>
+          <button className='userIcon' onClick={toggleMenu}>
+
+            {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}
+
+          </button>
         </div>
 
       ) : (
@@ -74,14 +78,18 @@ export default function Navbar() {
         (menuVisible && user) ? (
           <div className="sub-menu-wrap">
             <div className="sub-menu">
+
               <div className="user-info">
                 <h2>{user.name} {user.lastname}</h2>
                 <hr />
               </div>
+
               <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
               <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
               <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart ({productsNumber})</Link>
+
               <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>
+              
             </div>
           </div>
         ) : null

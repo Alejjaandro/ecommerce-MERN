@@ -55,6 +55,7 @@
     font-size: x-large;
 
 }
+
 .right-container a {
     font-size: large;
 
@@ -67,8 +68,8 @@
     justify-content: center;
     align-items: center;
 
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 4rem;
+    height: 4rem;
 
     background-color: white;
     color: black;
@@ -76,13 +77,16 @@
     border-radius: 50%;
 }
 
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 10%;
-    width: 320px;
-    background-color: #333;
-    color: white;
+.userIcon svg {
+    width: 3rem;
+    height: 3rem;
+}
+
+.userIcon img {
+    width: 4rem;
+    height: 4rem;
+
+    border-radius: 50%;
 }
 
 /* SUB-MENU */
@@ -91,15 +95,17 @@
     top: 100%;
     right: 0;
     width: 20rem;
+    
     z-index: 1;
 }
 
 .sub-menu {
     border-radius: 10%;
 
-    background-color: white;
     padding: 1rem;
     margin: 1rem;
+
+    background-color: whitesmoke;
 }
 
 .sub-menu a {
@@ -118,6 +124,7 @@
 }
 
 .sub-menu button {
+    background-color: inherit;
     font-size: x-large;
 
     display: flex;
@@ -125,7 +132,6 @@
     gap: 1rem;
 
     border: none;
-    background-color: white;
     color: red;
 
     &&:hover {
