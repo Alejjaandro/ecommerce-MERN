@@ -1,0 +1,89 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    min-height: 80vh;
+}
+
+/* Profile Image */
+.profile-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-image img {
+    border-radius: 50%;
+}
+.profile-image p {
+    font-size: larger;
+    font-weight: 600;
+}
+
+/* Profile Name */
+.profile-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-name p {
+    font-size: larger;
+}
+
+/* Profile Lastname */
+.profile-lastname {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-lastname p {
+    font-size: larger;
+}
+
+/* Profile Username */
+.profile-username {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-username p {
+    font-size: larger;
+}
+
+/* Profile Email */
+.profile-email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-email p {
+    font-size: larger;
+}
+
+/* Profile Created */
+.profile-created {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-created p {
+    font-size: larger;
+}
+
+/* Profile Updated */
+.profile-updated {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-updated p {
+    font-size: larger;
+}
