@@ -1,7 +1,5 @@
 import './styles/Footer.css';
 
-import { Link } from 'react-router-dom';
-
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -9,7 +7,13 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import RoomIcon from '@mui/icons-material/Room';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
+import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
+
+  const { user } = useAuth();
+  
   return (
     <div className='foot-container'>
 
@@ -32,9 +36,9 @@ export default function Footer() {
 
         <div className='links'>
           <Link to='/'> - Home</Link>
-          <Link to='/cart'> - Cart</Link>
-          <Link to='/wishlist'> - Wishlist</Link>
-          <Link to='/my-account'> - My Account</Link>
+          <Link to='/cart'> - About Us</Link>
+          <Link to='/wishlist'> - Contact</Link>
+          <Link to={user ? `/my-profile/${user._id}` : '/login'}> - My Account</Link>
         </div>
       </div>
 
@@ -48,5 +52,6 @@ export default function Footer() {
       </div>
 
     </div>
+
   )
 }

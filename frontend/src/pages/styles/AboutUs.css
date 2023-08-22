@@ -1,0 +1,33 @@
+.aboutUs-container {
+    min-height: 100vh;
+    background-color: lightgray;
+
+    display: flex;
+    align-items: center;
+}
+
+.aboutUs-wrapper {
+    display: flex;
+    gap: 1rem;
+
+    padding: 2rem;
+}
+
+.aboutUs-image {    
+    width: 50%;
+    border-radius: 1rem;
+}
+
+.aboutUs-text {
+    width: 50%;
+}
+
+.aboutUs-text h1 {
+    font-weight: 800;
+    font-size: xx-large;
+}
+
+.aboutUs-text p {
+    font-weight: 500;
+    font-size: large;
+}

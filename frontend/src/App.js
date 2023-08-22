@@ -2,6 +2,8 @@ import './App.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
+import Contact from './pages/Contact';
 import ProductList from './pages/ProductList';
 import Product from './pages/Product';
 import Register from './pages/Register';
@@ -29,6 +31,8 @@ function App() {
 
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/products/" element={<ProductList />} />
               <Route path="/products/:category" element={<CategoryProducts />} />
               <Route path="/product/:id" element={<Product />} />

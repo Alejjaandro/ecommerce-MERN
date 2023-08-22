@@ -1,0 +1,105 @@
+.contact-container {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    gap: 1rem;
+
+    padding: 1rem;
+}
+
+.contact-image {
+    width: 75%;
+    border-radius: 1rem;
+}
+
+.contact-text h1 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.contact-text p {
+    font-size: x-large;
+}
+
+.social-media {
+    margin-top: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.social-media h1 {
+    font-size: xx-large;
+    font-weight: 500;
+}
+/* ICONS */
+.icons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.icon-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.whatsapp {
+    background-color: green;
+    color: white;
+    width: min-content;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+.facebook {
+    background-color: blue;
+    color: white;
+    width: min-content;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+.twitter {
+    background-color: cyan;
+    color: black;
+    width: min-content;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+.insta {
+    background-color: palevioletred;
+    color: white;
+    width: min-content;
+
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+
