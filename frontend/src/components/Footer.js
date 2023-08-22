@@ -36,8 +36,8 @@ export default function Footer() {
 
         <div className='links'>
           <Link to='/'> - Home</Link>
-          <Link to='/cart'> - About Us</Link>
-          <Link to='/wishlist'> - Contact</Link>
+          <Link to='/about-us'> - About Us</Link>
+          <Link to='/contact'> - Contact</Link>
           <Link to={user ? `/my-profile/${user._id}` : '/login'}> - My Account</Link>
         </div>
       </div>
