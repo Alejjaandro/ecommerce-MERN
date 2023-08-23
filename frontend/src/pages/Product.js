@@ -8,21 +8,25 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import {useProducts} from '../context/ProductsContext.js';
+import { useProducts } from '../context/ProductsContext.js';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 export default function Product() {
-
-    const {getProduct, product} = useProducts();
-
-    const id = useLocation().pathname.split('/')[2];
+    const { getProduct, product } = useProducts();
+    const { addToCart } = useCart();
+    const { user } = useAuth();
 
     const [quantity, setQuantity] = useState(1);
-    const [color, setColor] = useState("");
-    const [ram, setRam] = useState("");
+    const [color, setColor] = useState("black");
+    const [ram, setRam] = useState("500 GB");
+
+    const [addedMessage, setAddedMessage] = useState(false);
+    const [alertMessage, setAlertMessage] = useState(false);
 
     // Get product by id.
+    const id = useLocation().pathname.split('/')[2];
     useEffect(() => { getProduct(id) }, [])
-    
 
     // Handle color and RAM
     const handleColor = (e) => {
@@ -32,6 +36,8 @@ export default function Product() {
         setRam(e.target.value);
     }
 
+    console.log(color, ram);
+
     // Handle increase and decrease buttons.
     const addQuantity = () => {
         setQuantity(quantity + 1);
@@ -40,8 +46,26 @@ export default function Product() {
         quantity > 1 && setQuantity(quantity - 1);
     }
 
-    return (
+    // Handle Add to Cart & Errors.
+    const handleAddToCart = async (e) => {
+        e.preventDefault();
 
+        if (user) {
+            await addToCart(user._id, product, quantity, color, ram);
+
+            setAddedMessage(true);
+            setTimeout(() => {
+                setAddedMessage(false);
+            }, 3000);
+        } else {
+            setAlertMessage(true);
+            setTimeout(() => {
+                setAlertMessage(false);
+            }, 3000);
+        }
+    }
+
+    return (
         <>
             <Navbar />
 
@@ -99,11 +123,19 @@ export default function Product() {
 
                             </div>
 
-                            <button className='to-cart'>ADD TO CART</button>
+                            <button onClick={(e) => handleAddToCart(e)} className='to-cart'>ADD TO CART</button>
                         </div>
                     </div>
 
                 </div>
+
+                {/* ALERTS */}
+                {addedMessage && (
+                    <div className="added-alert">Product added {product.title} to Cart</div>
+                )}
+                {alertMessage && (
+                    <div className="error-alert">You must be logged.</div>
+                )}
 
             </div>
 

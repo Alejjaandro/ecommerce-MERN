@@ -18,38 +18,13 @@ export const CartProvider = ({ children }) => {
     const { user } = useAuth();
 
     const [productsNumber, setProductsNumber] = useState(0);
-    const [cartProducts, setCartProducts] = useState(null);
+    const [cart, setCart] = useState([]);
 
-    const addToCart = async (userId, product, quantity) => {
-
-        // First we chack if user is logged. 
-        if (user) {
-
-                try {
-                    // we send a post with the info of the user.
-                    await axios.post(`/carts/${userId}`, {
-                        userId: userId,
-                        product: product,
-                        quantity: quantity || 1
-                    });
-
-                    // We update the number of products in cart.
-                    setProductsNumber(productsNumber + 1);
-
-                } catch (error) {
-                    console.log(error);
-                }
-
-        } else {
-            console.log("You need to be logged");
-        }
-
-    }
-
+    // ===== GET USER CART ===== //
     const getCart = async (userId) => {
         // we reset ProductsNumber and CartProducts.
         setProductsNumber(0);
-        setCartProducts(null);
+        setCart([]);
 
         try {
             // We send a petition to get the cart of the user.
@@ -57,20 +32,62 @@ export const CartProvider = ({ children }) => {
 
             // We update ProductsNumber and CartProducts with the new info.
             setProductsNumber(res.data.products.length);
-            setCartProducts(res.data.products);
+            setCart(res.data.products);
 
         } catch (error) {
             console.log(error);
         }
     }
 
+    // ===== ADD TO CART ===== //
+    const addToCart = async (userId, product, quantity, color, ram) => {
+
+        // First we chack if user is logged. 
+        if (user) {
+            try {
+                // we send a post with the info of the user.
+                await axios.post(`/carts/${userId}`, {
+                    userId: userId,
+                    product: product,
+                    quantity: quantity || 1,
+                    color: color || null,
+                    ram: ram || null
+                });
+
+                // We update the user cart.
+                await getCart(userId);
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        } else {
+            console.log("You need to be logged");
+        }
+    }
+
+    // ===== REMOVE PRODUCT FROM CART ===== //
+    const deleteProduct = async (userId, productId) => {
+        try {
+
+            await axios.delete(`/carts/${userId}/${productId}`);
+            await getCart(userId);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     // All the components inside AuthContext will be able to access it values.
     return (
         <CartContext.Provider value={{
+            productsNumber,
+            cart,
+
             addToCart,
             getCart,
-            productsNumber,
-            cartProducts
+            deleteProduct
         }}>
             {children}
         </CartContext.Provider>

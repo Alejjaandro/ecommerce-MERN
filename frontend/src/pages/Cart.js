@@ -11,25 +11,21 @@ import { useLocation } from 'react-router-dom';
 
 export default function Cart() {
     // We extract what we need from the context.
-    const { cartProducts, productsNumber, getCart } = useCart();
+    const { cart, productsNumber, getCart, deleteProduct } = useCart();
 
     // Initialize some variables for later
-    const userId = useLocation().pathname.split('/')[2];
     let subtotal = 0;
     let shippingCost = 0;
-    
+
     // We call getCart with the userId.
-    useEffect(() => {
-
-        getCart(userId);
-
-    }, [])
+    const userId = useLocation().pathname.split('/')[2];
+    useEffect(() => { getCart(userId) }, []);
 
     // We calculate the subtotal by summing the products cost. 
-    if (cartProducts) {
-        // We use Array.from() so we can access arrays methods.
-        subtotal = Array.from(cartProducts).reduce((total, product) => total + product.product.price, 0);
-        shippingCost = 10.50;
+    if (cart) {
+        subtotal = cart.reduce((total, product) => total + (product.product.price * product.quantity), 0);
+        // shippingCost is hard coded just as example.
+        (subtotal > 0) ? shippingCost = 10.50 : shippingCost = 0;
     }
 
     return (
@@ -59,10 +55,10 @@ export default function Cart() {
                     {/* Product list container */}
                     <div className="product-list">
                         {/* 
-                        We render the products only if "cartProducts" exists and 
-                        we access its data to complete the info on the page 
+                        We render the products only if "cart" exists and it has at least 1 product,
+                        then we access its data to complete the info on the page.
                         */}
-                        {cartProducts ? Array.from(cartProducts).map((product) => {
+                        {(cart && cart.length >= 1) ? Array.from(cart).map((product) => {
                             return (
                                 <>
                                     <div className="product" key={product.product._id}>
@@ -72,22 +68,28 @@ export default function Cart() {
                                             <img className='info-img' src={`${product.product.thumbnail}`} alt="" />
 
                                             <div className='details'>
+                                                <span className='id'><b>ID:</b> {product.product._id}</span>
                                                 <span className='name'><b>Product:</b> {product.product.title}</span>
-                                                <span className='id'><b>ID:</b>{product.product._id}</span>
-                                                <span className='ram'><b>RAM:</b> 500GB</span>
-                                                <div className='color' />
+                                                <span className='ram'><b>RAM:</b> {product.ram}</span>
+                                                <span><b>Color:</b> {product.color}</span>
                                             </div>
                                         </div>
 
                                         <div className="product-price">
 
                                             <div className="product-ammount">
-                                                <div className="remove-icon flex-center"><RemoveIcon /></div>
+                                                <button className="ammount-icon flex-center"><RemoveIcon /></button>
                                                 <span className="amount-num flex-center">{product.quantity}</span>
-                                                <div className="add-icon flex-center"><AddIcon /></div>
+                                                <button className="ammount-icon flex-center"><AddIcon /></button>
                                             </div>
 
-                                            <div className="price">${product.product.price}</div>
+                                            <div className="price">${(product.product.price * product.quantity)}</div>
+                                            <button
+                                                onClick={() => deleteProduct(userId, product.product._id)}
+                                                className='delete-button'
+                                            >
+                                                Remove Product
+                                            </button>
                                         </div>
 
                                     </div>
