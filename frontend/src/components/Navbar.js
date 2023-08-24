@@ -55,7 +55,7 @@ export default function Navbar() {
       {isAuthenticated && user ? (
         // If there is a user logged it will show its name and an icon that display a sub-menu when clicked.
         <div className='right-container'>
-          <span>Hi! {user.username}</span>
+          <span>{user.username}</span>
           <button className='userIcon' onClick={toggleMenu}>
 
             {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}

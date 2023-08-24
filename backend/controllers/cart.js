@@ -12,8 +12,6 @@ export const createCart = async (req, res) => {
     // To avoid letting the fields empty if the user doesn't choose.
     color ? color = color : color = "Not Choosen";
     ram ? ram = ram : ram = "Not Choosen";
-
-    console.log(userId, product._id, quantity);
     
     try {
         // We check if the product already exists in the cart.

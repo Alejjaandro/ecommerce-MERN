@@ -17,6 +17,7 @@ import CategoryProducts from './pages/CategoryProducts';
 import { AuthProvider } from './context/AuthContext.js';
 import { ProductsProvider } from './context/ProductsContext.js';
 import { CartProvider } from './context/CartContext.js';
+import { UserProvider } from './context/UserContext';
 
 function App() {
 
@@ -25,27 +26,29 @@ function App() {
     <AuthProvider>
       <ProductsProvider>
         <CartProvider>
+          <UserProvider>
 
-          <BrowserRouter>
-            <Routes>
+            <BrowserRouter>
+              <Routes>
 
-              {/* Public Routes */}
-              <Route path="/" element={<Home />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/products/" element={<ProductList />} />
-              <Route path="/products/:category" element={<CategoryProducts />} />
-              <Route path="/product/:id" element={<Product />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
+                {/* Public Routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/products/" element={<ProductList />} />
+                <Route path="/products/:category" element={<CategoryProducts />} />
+                <Route path="/product/:id" element={<Product />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
 
-              {/* Users Routes */}
-              <Route path="/my-profile/:userId" element={<MyProfile />} />
-              <Route path="/settings/:userId" element={<Settings />} />
-              <Route path="/cart/:userId" element={<Cart />} />
-            </Routes>
-          </BrowserRouter>
+                {/* Users Routes */}
+                <Route path="/my-profile/:userId" element={<MyProfile />} />
+                <Route path="/settings/:userId" element={<Settings />} />
+                <Route path="/cart/:userId" element={<Cart />} />
+              </Routes>
+            </BrowserRouter>
 
+          </UserProvider>
         </CartProvider>
       </ProductsProvider>
     </AuthProvider>

@@ -6,7 +6,7 @@ export const ProductsContext = createContext();
 export const useProducts = () => {
     const context = useContext(ProductsContext);
     if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
+        throw new Error("useProducts must be used within an AuthProvider");
     }
     return context;
 }
