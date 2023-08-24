@@ -12,6 +12,7 @@ router.get("/find/:userId", verifyUser, getUserCart);
 router.post("/:userId", verifyUser, createCart);
 
 router.delete("/:userId/:productId", verifyUser, deleteProduct);
+
 router.delete("/:userId", verifyUser, deleteCart);
 
 router.get("/", verifyAdmin, getAllCarts);

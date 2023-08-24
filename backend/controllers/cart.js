@@ -13,6 +13,8 @@ export const createCart = async (req, res) => {
     color ? color = color : color = "Not Choosen";
     ram ? ram = ram : ram = "Not Choosen";
 
+    console.log(userId, product._id, quantity);
+    
     try {
         // We check if the product already exists in the cart.
         const productExists = await Cart.findOne({ _id: userId, 'products.product._id': product._id });
@@ -38,7 +40,6 @@ export const createCart = async (req, res) => {
                 return res.status(404).json({ message: 'Cart not found' });
             }
         }
-
 
         res.status(200).json({ message: 'Product added to Cart' });
 

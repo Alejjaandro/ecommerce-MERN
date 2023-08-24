@@ -45,7 +45,7 @@ export const CartProvider = ({ children }) => {
         // First we chack if user is logged. 
         if (user) {
             try {
-                // we send a post with the info of the user.
+                // we send a post with the userId and the product with its features.
                 await axios.post(`/carts/${userId}`, {
                     userId: userId,
                     product: product,
