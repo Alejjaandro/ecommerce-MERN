@@ -65,16 +65,10 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: 'Wrong password' })
         }
 
-        // Create a security Token.
+        // Create a security Token without the password.
+        const { password, ...userWithoutPassword } = user.toObject();
         const accessToken = jwt.sign(
-            {
-                id: user._id,
-                name: user.name,
-                lastname: user.lastname,
-                username: user.username,
-                email: user.email,
-                isAdmin: user.isAdmin
-            },
+            userWithoutPassword,
             process.env.JWT_KEY,
             { expiresIn: '1d' }
         );

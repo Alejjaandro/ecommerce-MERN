@@ -32,9 +32,9 @@ export default function Cart() {
     // Function to decrease product ammount and delete it if its quantity is 1.  
     const decreaseAmmount = (userId, product) => {
         if (product.quantity > 1) {
-            addToCart(userId, product.product, quantity = -1)
+            addToCart(userId, product.product, quantity = -1);
         } else {
-            deleteProduct(userId, product.product._id)
+            deleteProduct(userId, product.product._id);
         }
     }
 

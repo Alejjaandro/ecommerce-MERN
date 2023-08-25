@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 import axios from '../api/axios.js';
 import { useAuth } from "./AuthContext";
@@ -77,6 +79,15 @@ export const CartProvider = ({ children }) => {
             console.log(error);
         }
     }
+
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+
+            const decodedToken = jwt_decode(token);
+            getCart(decodedToken._id)
+        }
+    }, []);
 
 
     // All the components inside AuthContext will be able to access it values.

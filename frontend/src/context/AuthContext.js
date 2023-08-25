@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from '../api/axios.js';
+
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 /* 
 Context provides a way to pass data through the component tree 
@@ -31,7 +33,6 @@ export const AuthProvider = ({ children }) => {
         try {
             // Save the response sent after the post request.
             const res = await axios.post("/auth/register", user);
-            console.log(res.data);
 
             setUser(res.data);
             setIsAuthenticated(true);
@@ -46,8 +47,6 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await axios.post("/auth/login", user);
 
-            // console.log(res.data.message, res.data.token);
-
             setUser(res.data.user);
             setIsAuthenticated(true);
 
@@ -58,7 +57,6 @@ export const AuthProvider = ({ children }) => {
             setErrors([error.response.data.message]);
             console.log(error.response.data);
         }
-
     }
 
     // Remove the token from cookies.
@@ -78,9 +76,60 @@ export const AuthProvider = ({ children }) => {
             }, 5000)
             return () => clearTimeout(timer);
         }
-    }, [errors])
+    }, [errors]);
 
+    // Function to verify the token with the backend.
+    async function verifyToken(token) {
 
+        if (token) {
+            try {
+                const response = await axios.get('/auth/verifyToken', {
+                    headers: { 'token': token }
+                });
+
+                if (response.status === 200) {
+                    // Token is valid and has not expired.
+                    setIsAuthenticated(true);
+                    setUser(response.data);
+                }
+            } catch (error) {
+                if (error) {
+                    // Token isn't valid or has expired.
+                    Cookies.remove('token');
+                    setIsAuthenticated(false);
+                    setUser(null);
+                    setErrors([error.response.data.message]);
+                }
+            }
+        }
+    }
+
+    // This checks if the cookie token exists and it didn't expired,
+    // while it exists the user will be authenticated.
+    useEffect(() => {
+        const token = Cookies.get('token');
+
+        if (token) {
+            try {
+                // We verify the token with the backend.
+                verifyToken(token);
+
+                const decodedToken = jwt_decode(token);
+
+                // Verifies if the token expired:
+                const currentTime = Date.now().valueOf() / 1000;
+                if (decodedToken.exp < currentTime) {
+                    // If the token expired:
+                    Cookies.remove('token');
+                    setIsAuthenticated(false);
+                    setUser(null);
+                }
+
+            } catch (error) {
+                console.log('Error decodifying the token: ', error);
+            }
+        }
+    }, []);
 
     // All the components inside AuthContext will be able to access it values.
     return (
@@ -88,6 +137,7 @@ export const AuthProvider = ({ children }) => {
             register,
             login,
             logout,
+
             isAuthenticated,
             errors,
             user,
