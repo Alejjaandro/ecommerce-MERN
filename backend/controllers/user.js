@@ -47,7 +47,7 @@ export const updateUser = async (req, res) => {
             $set: req.body
         }, { new: true })
 
-        res.status(200).json(updatedUser);
+        res.status(200).json('User info Updated');
 
     } catch (error) {
         res.status(500).json(error);
@@ -58,8 +58,8 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
 
     try {
-        // We find the user by its id and we delete it.
-        await User.findByIdAndDelete(req.params.id);
+        // // We find the user by its id and we delete it.
+        // await User.findByIdAndDelete(req.params.id);
 
         res.status(200).json('User Deleted');
 

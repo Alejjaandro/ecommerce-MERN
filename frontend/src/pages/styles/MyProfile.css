@@ -12,6 +12,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    font-size: x-large;
 }
 
 /* Profile Image */
@@ -33,35 +35,40 @@
     font-size: x-large;
     font-weight: 400;
     
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
-/* Profile Name */
-.profile-name p {
-    font-size: x-large;
+/* Profile Buttons */
+.profile-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 1rem;
+    font-weight: 500;
+    font-size: 1.5rem;
 }
 
-/* Profile Lastname */
-.profile-lastname p {
-    font-size: x-large;
+.profile-edit {
+    padding: .5rem;
+    border: .05rem solid black;
+    background-color: orange;
+
+    &&:hover {
+        background-color: #ff8c00;
+    }
+}
+.profile-edit a {
+    text-decoration: none;
+    color: black;
 }
 
-/* Profile Username */
-.profile-username p {
-    font-size: x-large;
-}
+.profile-delete {
+    padding: .5rem;
+    border: .05rem solid black;
+    background-color: rgba(255, 0, 0, 0.774);
 
-/* Profile Email */
-.profile-email p {
-    font-size: x-large;
-}
-
-/* Profile Created */
-.profile-created p {
-    font-size: x-large;
-}
-
-/* Profile Updated */
-.profile-updated p {
-    font-size: x-large;
+    &&:hover {
+        background-color: red;
+    }
 }

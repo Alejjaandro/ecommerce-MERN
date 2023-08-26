@@ -68,7 +68,7 @@ export const login = async (req, res) => {
         const accessToken = jwt.sign(
             userWithoutPassword,
             process.env.JWT_KEY,
-            { expiresIn: '10000' }
+            { expiresIn: '1h' }
         );
         
         return res.cookie('token', accessToken, {httpOnly : false})

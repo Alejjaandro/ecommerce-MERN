@@ -6,11 +6,12 @@ import './styles/Settings.css';
 
 import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
+import { Link } from 'react-router-dom';
 
 export default function Settings() {
 
     const { user } = useAuth();
-    const { updateUser, errors } = useUser();
+    const { updateUser, errors, success } = useUser();
 
     const handleChange = async (e) => {
         e.preventDefault();
@@ -30,7 +31,13 @@ export default function Settings() {
             }
         }
 
+        // Petition to update user data.
         await updateUser(user._id, data);
+
+        // Timer to empty form fields when finished.
+        setTimeout(() => {
+            e.target.reset();
+        }, 5000);
     };
 
     return (
@@ -65,13 +72,23 @@ export default function Settings() {
                         </div>
 
                         {/* Errors */}
-                        <div className='errors'>
-                            {errors.map((error, i) => (
-                                <p key={i}>{error}</p>
-                            ))}
-                        </div>
+                        {errors.map((error, i) => (
+                            <div className='errors' key={i}>
+                                <p>{error}</p>
+                            </div>
+                        ))}
 
-                        <button type='submit' className='settings-button'>CHANGE</button>
+                        {/* Success */}
+                        {success && (
+                            <div className='success'>
+                                <p>{success}</p>
+                            </div>
+                        )}
+
+                        <div class="settings-buttons">
+                            <button type='submit' className='settings-button'>CHANGE</button>
+                            <Link to={`/my-profile/${user._id}`} className="profile-link">Your Profile</Link>
+                        </div>
 
                     </form>
                 </div>
