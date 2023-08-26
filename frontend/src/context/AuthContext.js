@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
 
     // To check errors.
     const [errors, setErrors] = useState([]);

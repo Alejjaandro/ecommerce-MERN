@@ -1,6 +1,6 @@
-.nav-container {
+.admin-nav-container {
     height: 5rem;
-    background-color: grey;
+    background-color: goldenrod;
 
     padding: 1.5rem;
 
@@ -12,19 +12,19 @@
 }
 
 /* LEFT CONTAINER */
-.left-container {
-    color: black;
+.admin-left-container {
+    color: white;
 
     font-weight: 600;
     font-size: xx-large;
 }
 
 /* CENTER CONTAINER */
-.center-container {
+.admin-center-container {
     flex: 2;
 }
 
-.center-container ul {
+.admin-center-container ul {
     margin: 0;
     list-style: none;
 
@@ -32,42 +32,32 @@
     justify-content: space-around;
 }
 
-.center-container ul li a {
+.admin-center-container ul li a {
     font-size: x-large;
 
     text-decoration: none;
-    color: rgba(0, 0, 0, 0.603);
+    color: white;
 
     &&:hover {
-        color: black;
+        color: gray;
     }
 }
 
 /* RIGHT CONTAINER */
-.right-container {
+.admin-right-container {
     flex: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 1rem;
-}
 
-.right-container span {
-    color: black;
-}
-
-.right-container a {
-    background-color: rgba(0, 0, 0, 0.726);
     color: white;
-    border-radius: 10%;
-    
-    text-decoration: none;
-    font-size: large;
-    padding: 0.75rem;
+}
 
-    &&:hover {
-        background-color: black;
-    }
+.admin-right-container a {
+    font-size: large;
+
+    padding: 0.75rem;
 }
 
 /* USER LOGIN */
@@ -98,7 +88,7 @@
 }
 
 /* SUB-MENU */
-.sub-menu-wrap {
+.admin-sub-menu-wrap {
     position: absolute;
     top: 100%;
     right: 0;
@@ -107,7 +97,7 @@
     z-index: 1;
 }
 
-.sub-menu {
+.admin-sub-menu {
     border-radius: 10%;
 
     padding: 1rem;
@@ -116,7 +106,7 @@
     background-color: whitesmoke;
 }
 
-.sub-menu a {
+.admin-sub-menu a {
     font-size: x-large;
 
     display: flex;
@@ -131,7 +121,7 @@
     }
 }
 
-.sub-menu button {
+.admin-sub-menu button {
     background-color: inherit;
     font-size: x-large;
 
@@ -149,11 +139,4 @@
 
 .user-info {
     text-align: center;
-}
-
-
-@media (max-width: 480px) {
-    .left-container {
-        display: none;
-    }
 }

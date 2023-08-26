@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState(undefined);
 
-    // ===== UUPDATE user ===== //
+    // ===== UPDATE user ===== //
     const updateUser = async (userId, data) => {
         try {
             const response = await axios.put(`/users/${userId}`, data);
@@ -47,6 +47,17 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    // ===== GET ALL USERS ===== //
+    const [allUsers, setAllUsers] = useState([]);
+    const getAllUsers = async () => {
+        try {
+            const response = await axios.get('/users/');
+            setAllUsers(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // Timeout so the errors don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
         if (errors.length > 0 || success) {
@@ -62,7 +73,9 @@ export const UserProvider = ({ children }) => {
         <UserContext.Provider value={{
             updateUser,
             deleteUser,
+            getAllUsers,
 
+            allUsers,
             errors,
             success
         }}>

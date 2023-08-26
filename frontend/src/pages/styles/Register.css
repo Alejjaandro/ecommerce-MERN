@@ -53,12 +53,11 @@
     width: 100%;
 
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    gap: 1rem;
 }
 
 .form-footer a {
-    margin: 0.25rem;
     font-size: large;
 
     text-transform: uppercase;

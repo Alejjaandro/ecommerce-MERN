@@ -72,6 +72,7 @@ export const ProductsProvider = ({ children }) => {
 
     // ========== FUNCTION TO GET A PRODUCT FOR EACH CATEGORY ========== //
     const [prodForCategory, setProdForCategory] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     const getCategories = async () => {
 
@@ -82,7 +83,8 @@ export const ProductsProvider = ({ children }) => {
 
             // We extract the categories.
             // we use Set to create an array with the unique categories.
-            const categories = [...new Set(products.map(product => product.category))]
+            const categories = [...new Set(products.map(product => product.category))];
+            setCategories(categories);
 
             // We save the first product that matches each category.
             setProdForCategory(categories.map(category => products.find(product => product.category === category)));
@@ -133,6 +135,7 @@ export const ProductsProvider = ({ children }) => {
 
             getCategories,
             prodForCategory,
+            categories,
 
             categoriesAndBrands,
             getCategoriesAndBrands

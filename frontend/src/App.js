@@ -10,10 +10,15 @@ import Product from './pages/Product';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import CategoryProducts from './pages/CategoryProducts';
+
 import ProtectedRoutes from './middleware/ProtectedRoutes';
 import Settings from './pages/Settings';
 import Cart from './pages/Cart';
 import MyProfile from './pages/MyProfile';
+
+import AdminRoutes from './middleware/AdminRoutes';
+import AllProducts from './pages/admin pages/AllProducts';
+import AllUsers from './pages/admin pages/AllUsers';
 
 // Context Provider
 import { AuthProvider } from './context/AuthContext.js';
@@ -48,6 +53,12 @@ function App() {
                   <Route path="/my-profile/:userId" element={<MyProfile />} />
                   <Route path="/settings/:userId" element={<Settings />} />
                   <Route path="/cart/:userId" element={<Cart />} />
+                </Route>
+
+                {/* Admin Routes */}
+                <Route element={<AdminRoutes/>}>
+                  <Route path="/all-products/" element={<AllProducts />} />
+                  <Route path="/all-users/" element={<AllUsers />} />
                 </Route>
 
               </Routes>

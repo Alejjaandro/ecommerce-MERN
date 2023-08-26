@@ -11,13 +11,10 @@ import { useProducts } from '../context/ProductsContext.js';
 export default function ProductList() {
 
     // Import what we need from context.
-    const {getCategoriesAndBrands, categoriesAndBrands} = useProducts();
+    const {getCategoriesAndBrands, categoriesAndBrands, categories} = useProducts();
 
     useEffect(() => { getCategoriesAndBrands() }, []);
     
-    // We extract the keys of the objects that are the categories.
-    const categories = categoriesAndBrands ? Object.keys(categoriesAndBrands) : [];
-
     // Initialize brands as an empty array and with a for/in loop we extract each brand of each category .
     const brands = [];
     for (const category in categoriesAndBrands) {

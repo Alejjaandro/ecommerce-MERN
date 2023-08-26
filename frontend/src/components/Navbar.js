@@ -1,5 +1,6 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
+import AdminNavbar from './AdminNavbar.js';
 
 // Icons
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -34,67 +35,72 @@ export default function Navbar() {
   // To navigate to the home page after logging out.
   const navigate = useNavigate();
 
-  return (
+  // If the user is an admin, it will show the admin navbar.
+  if (user && user.isAdmin) {
+    return (<AdminNavbar />)
+  } else {
 
-    <div className='nav-container'>
+    return (
+      <div className='nav-container'>
 
-      <div className='left-container'>
-        LOGO
-      </div>
-
-      <div className="center-container">
-        <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/products'>Products</Link></li>
-          <li><Link to='/about-us'>About Us</Link></li>
-          <li><Link to='/contact'>Contact</Link></li>
-        </ul>
-      </div>
-
-      {/* Login/Register - Profile */}
-      {isAuthenticated && user ? (
-        // If there is a user logged it will show its name and an icon that display a sub-menu when clicked.
-        <div className='right-container'>
-          <span>{user.username}</span>
-          <button className='userIcon' onClick={toggleMenu}>
-
-            {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}
-
-          </button>
+        <div className='left-container'>
+          LOGO
         </div>
 
-      ) : (
-        // If there is no user, it will show login and register buttons.
-        < div className='right-container'>
-          <NavLink to='/register' className="btn btn-outline-secondary">Register</NavLink>
-          <NavLink to='/login' className="btn btn-outline-secondary">Login</NavLink>
-        </div >
-      )
-      }
+        <div className="center-container">
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/products'>Products</Link></li>
+            <li><Link to='/about-us'>About Us</Link></li>
+            <li><Link to='/contact'>Contact</Link></li>
+          </ul>
+        </div>
 
-      {/* Profile Menu */}
-      {
-        // Checks if there is a user loggen and, if the alternator is true, displays the sub-menu.
-        (menuVisible && user) ? (
-          <div className="sub-menu-wrap">
-            <div className="sub-menu">
+        {/* Login/Register - Profile */}
+        {isAuthenticated && user ? (
+          // If there is a user logged it will show its name and an icon that display a sub-menu when clicked.
+          <div className='right-container'>
+            <span>{user.username}</span>
+            <button className='userIcon' onClick={toggleMenu}>
 
-              <div className="user-info">
-                <h2>{user.name} {user.lastname}</h2>
-                <hr />
-              </div>
+              {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}
 
-              <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
-              <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
-              <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart ({productsNumber})</Link>
-
-              <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>
-              
-            </div>
+            </button>
           </div>
-        ) : null
-      }
 
-    </div >
-  )
+        ) : (
+          // If there is no user, it will show login and register buttons.
+          < div className='right-container'>
+            <NavLink to='/register'>Register</NavLink>
+            <NavLink to='/login'>Login</NavLink>
+          </div >
+        )
+        }
+
+        {/* Profile Menu */}
+        {
+          // Checks if there is a user loggen and, if the alternator is true, displays the sub-menu.
+          (menuVisible && user) ? (
+            <div className="sub-menu-wrap">
+              <div className="sub-menu">
+
+                <div className="user-info">
+                  <h2>{user.name} {user.lastname}</h2>
+                  <hr />
+                </div>
+
+                <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
+                <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
+                <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart ({productsNumber})</Link>
+
+                <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>
+
+              </div>
+            </div>
+          ) : null
+        }
+
+      </div >
+    )
+  }
 }

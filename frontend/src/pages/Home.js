@@ -1,17 +1,20 @@
-import { useEffect } from 'react'
-import Navbar from '../components/Navbar'
-import Slider from '../components/Slider'
-import Categories from '../components/Categories'
-import Product from '../components/Product'
+import { useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import AdminNavbar from '../components/AdminNavbar';
+import Slider from '../components/Slider';
+import Categories from '../components/Categories';
+import Product from '../components/Product';
 import Footer from '../components/Footer';
 
+import { useAuth } from '../context/AuthContext';
 import { useProducts } from '../context/ProductsContext.js';
-
 import { Link } from 'react-router-dom';
 
 import './styles/Home.css';
 
 export default function Home() {
+
+  const { user } = useAuth();
 
   const { getProducts} = useProducts();
   let { products } = useProducts();
@@ -21,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      {(!user || !user.isAdmin) ? <Navbar /> : <AdminNavbar />}
 
       <Slider />
       <Categories />
