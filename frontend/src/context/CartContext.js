@@ -10,7 +10,7 @@ export const CartContext = createContext();
 export const useCart = () => {
     const context = useContext(CartContext);
     if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
+        throw new Error("useCart must be used within an AuthProvider");
     }
     return context;
 }
@@ -28,16 +28,18 @@ export const CartProvider = ({ children }) => {
         setProductsNumber(0);
         setCart([]);
 
-        try {
-            // We send a petition to get the cart of the user.
-            const res = await axios.get(`/carts/find/${userId}`);
-
-            // We update ProductsNumber and CartProducts with the new info.
-            setProductsNumber(res.data.products.length);
-            setCart(res.data.products);
-
-        } catch (error) {
-            console.log(error);
+        if (user) {
+            try {
+                // We send a petition to get the cart of the user.
+                const res = await axios.get(`/carts/find/${userId}`);
+    
+                // We update ProductsNumber and CartProducts with the new info.
+                setProductsNumber(res.data.products.length);
+                setCart(res.data.products);
+    
+            } catch (error) {
+                console.log(error.response.data);
+            }
         }
     }
 
@@ -80,14 +82,19 @@ export const CartProvider = ({ children }) => {
         }
     }
 
-    useEffect(() => {
-        const token = Cookies.get('token');
-        if (token) {
+    // useEffect(() => {
 
-            const decodedToken = jwt_decode(token);
-            getCart(decodedToken._id)
-        }
-    }, []);
+    //     try {            
+    //         const token = Cookies.get('token');
+    //         if (token) {
+    
+    //             const decodedToken = jwt_decode(token);
+    //             getCart(decodedToken._id);
+    //         }
+    //     } catch (error) {
+    //         throw new Error('Token expired');
+    //     }
+    // }, []);
 
 
     // All the components inside AuthContext will be able to access it values.

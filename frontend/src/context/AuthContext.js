@@ -79,6 +79,7 @@ export const AuthProvider = ({ children }) => {
     }, [errors]);
 
     // Function to verify the token with the backend.
+
     async function verifyToken(token) {
 
         if (token) {
@@ -98,7 +99,7 @@ export const AuthProvider = ({ children }) => {
                     Cookies.remove('token');
                     setIsAuthenticated(false);
                     setUser(null);
-                    setErrors([error.response.data.message]);
+                    alert("Session Expired");
                 }
             }
         }
@@ -137,6 +138,7 @@ export const AuthProvider = ({ children }) => {
             register,
             login,
             logout,
+            verifyToken,
 
             isAuthenticated,
             errors,

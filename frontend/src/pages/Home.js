@@ -1,11 +1,11 @@
-import React from 'react'
+import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Slider from '../components/Slider'
 import Categories from '../components/Categories'
 import Product from '../components/Product'
 import Footer from '../components/Footer';
 
-import { useProducts } from '../hooks/useData';
+import { useProducts } from '../context/ProductsContext.js';
 
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,11 @@ import './styles/Home.css';
 
 export default function Home() {
 
-  let products = useProducts().slice(0,15);
+  const { getProducts} = useProducts();
+  let { products } = useProducts();
+
+  useEffect(() => {getProducts()}, []);  
+  products = products.slice(0,15);
 
   return (
     <>

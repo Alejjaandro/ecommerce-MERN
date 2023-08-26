@@ -5,22 +5,18 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
 import './styles/Cart.css';
+import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 export default function Cart() {
     // We extract what we need from the context.
+    const { user } = useAuth();
     const { cart, productsNumber, getCart, deleteProduct, addToCart } = useCart();
-
+        
     // Initialize some variables for later
     let subtotal;
     let shippingCost;
     let quantity;
-
-    // We call getCart with the userId.
-    const userId = useLocation().pathname.split('/')[2];
-    useEffect(() => { getCart(userId) }, []);
 
     // We calculate the subtotal by summing the products cost.
     if (cart) {
@@ -88,19 +84,19 @@ export default function Cart() {
                                         <div className="product-price">
 
                                             <div className="product-ammount">
-                                                <button onClick={() => decreaseAmmount(userId, product)} className="ammount-icon flex-center">
+                                                <button onClick={() => decreaseAmmount(user._id, product)} className="ammount-icon flex-center">
                                                     <RemoveIcon />
                                                 </button>
 
                                                 <span className="amount-num flex-center">{product.quantity}</span>
 
-                                                <button onClick={() => addToCart(userId, product.product)} className="ammount-icon flex-center">
+                                                <button onClick={() => addToCart(user._id, product.product)} className="ammount-icon flex-center">
                                                     <AddIcon />
                                                 </button>
                                             </div>
 
                                             <div className="price">${(product.product.price * product.quantity)}</div>
-                                            <button onClick={() => deleteProduct(userId, product.product._id)} className='delete-button'>
+                                            <button onClick={() => deleteProduct(user._id, product.product._id)} className='delete-button'>
                                                 Remove Product
                                             </button>
                                         </div>

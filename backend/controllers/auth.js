@@ -37,12 +37,10 @@ export const register = async (req, res, next) => {
         // save new user in the DB.
         const savedUser = await newUser.save();
 
-        res.status(201).json(savedUser);
-
-        next();
-
+        return res.status(201).json(savedUser);
+        
     } catch (error) {
-        res.status(500).json(error.message);
+        return res.status(500).json(error.message);
     }
 };
 
@@ -70,7 +68,7 @@ export const login = async (req, res) => {
         const accessToken = jwt.sign(
             userWithoutPassword,
             process.env.JWT_KEY,
-            { expiresIn: '1d' }
+            { expiresIn: '10000' }
         );
         
         return res.cookie('token', accessToken, {httpOnly : false})
@@ -78,7 +76,7 @@ export const login = async (req, res) => {
         .json({ message: 'Login successfull', user: user, token: accessToken });
 
     } catch (error) {
-        res.status(500).json(error.message);
+        return res.status(500).json(error.message);
     }
 };
 
@@ -89,4 +87,27 @@ export const logout = async (req, res) => {
     return res.clearCookie('token')
     .status(200)
     .json({message: "Successfully Logout"});
+};
+
+// ----- VERIFY TOKEN ----- //
+export const verifyToken = async (req, res) => {
+
+    try {
+        const token = req.headers['token'];
+
+        if (!token) {
+            return res.status(403).send({ message: 'No token provided.' });
+        }
+    
+        jwt.verify(token, process.env.JWT_KEY, (error, decoded) => {
+            if (error) {
+                return res.status(500).send({ message: 'Token expired.' });
+            }
+            // If the token is valid, returns the info.
+            return res.status(200).send(decoded);
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
 };

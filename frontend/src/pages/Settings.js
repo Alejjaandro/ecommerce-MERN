@@ -4,13 +4,13 @@ import Footer from '../components/Footer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import './styles/Settings.css';
 
+import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
-import { useLocation } from 'react-router-dom';
 
 export default function Settings() {
 
+    const { user } = useAuth();
     const { updateUser, errors } = useUser();
-    const userId = useLocation().pathname.split('/')[2];
 
     const handleChange = async (e) => {
         e.preventDefault();
@@ -30,10 +30,9 @@ export default function Settings() {
             }
         }
 
-        await updateUser(userId, data);
+        await updateUser(user._id, data);
     };
 
-    console.log(errors);
     return (
         <>
             <Navbar />
@@ -68,7 +67,7 @@ export default function Settings() {
                         {/* Errors */}
                         <div className='errors'>
                             {errors.map((error, i) => (
-                                <p key={i}>{ error }</p>
+                                <p key={i}>{error}</p>
                             ))}
                         </div>
 

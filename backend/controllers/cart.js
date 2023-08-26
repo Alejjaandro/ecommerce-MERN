@@ -39,10 +39,10 @@ export const createCart = async (req, res) => {
             }
         }
 
-        res.status(200).json({ message: 'Product added to Cart' });
+        return res.status(200).json({ message: 'Product added to Cart' });
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -58,10 +58,10 @@ export const deleteProduct = async (req, res) => {
         cart.products = cart.products.filter((product) => product.product._id !== productId);
         // Save changes.
         await cart.save();
-        res.status(200).json({ message: 'Product Deleted' });
+        return res.status(200).json({ message: 'Product Deleted' });
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -72,10 +72,10 @@ export const deleteCart = async (req, res) => {
 
     try {
         await Cart.findOneAndDelete({ _id: userId });
-        res.status(200).json({ message: 'Cart Deleted' });
+        return res.status(200).json({ message: 'Cart Deleted' });
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -92,7 +92,7 @@ export const getUserCart = async (req, res) => {
         res.status(200).json(cart);
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -102,9 +102,9 @@ export const getAllCarts = async (req, res) => {
     try {
         const carts = await Cart.find();
 
-        res.status(200).json(carts);
+        return res.status(200).json(carts);
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };

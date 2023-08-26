@@ -6,7 +6,6 @@ import CategoriesNavbar from '../components/CategoriesNavbar';
 import './styles/ProductList.css';
 
 import { useEffect, useState } from 'react';
-import { useCategoriesAndBrands } from '../hooks/useData';
 import { useProducts } from '../context/ProductsContext.js';
 
 export default function ProductList() {

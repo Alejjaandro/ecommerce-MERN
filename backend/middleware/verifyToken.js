@@ -6,16 +6,15 @@ export const verifyToken = (req, res, next) => {
         // Extract the cookie "token".
         const token = req.cookies.token;
 
-        if (!token) { res.status(401).json({ message: "Unauthorized" }) }
+        if (!token) { return res.status(401).json({ message: "Unauthorized" }) }
 
         // Verify cookie token.
-        jwt.verify(token, process.env.JWT_KEY, (err, user) => {
-            if (err) { res.status(403).json({ message: "Token is not valid!" }) };
+        jwt.verify(token, process.env.JWT_KEY, (error, user) => {
+            if (error) { return res.status(403).json({ message: "Token is not valid!" }) };
 
             req.user = user;
             next();
         });
-
     } catch (error) {
         console.log(error);
     }
@@ -31,9 +30,8 @@ export const verifyUser = (req, res, next) => {
 
         if (req.user.id === req.params.id || req.user.isAdmin) {
             next();
-
         } else {
-            res.status(403).json("You are not authorized.");
+            return res.status(403).json("You are not authorized.");
         }
     })
 }
@@ -46,9 +44,8 @@ export const verifyAdmin = (req, res, next) => {
 
         if (req.user.isAdmin) {
             next();
-
         } else {
-            res.status(403).json("You are not an Admin.")
+            return res.status(403).json("You are not an Admin.");
         }
     })
 }
