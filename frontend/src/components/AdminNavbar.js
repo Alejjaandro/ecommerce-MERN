@@ -6,6 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 // Styles
 import './styles/AdminNavbar.css';
@@ -38,10 +39,12 @@ export default function Navbar() {
 
     <div className='admin-nav-container'>
 
+      {/* LEFT - LOGO */}
       <div className='admin-left-container'>
         LOGO
       </div>
 
+      {/* CENTER - LINKS */}
       <div className="admin-center-container">
         <ul>
           <li><Link to='/'>Home</Link></li>
@@ -51,29 +54,18 @@ export default function Navbar() {
         </ul>
       </div>
 
-      {/* Login/Register - Profile */}
-      {isAuthenticated && user ? (
-        // If there is a user logged it will show its name and an icon that display a sub-menu when clicked.
-        <div className='admin-right-container'>
-          <span>ADMIN {user.username}</span>
-          <button className='userIcon' onClick={toggleMenu}>
+      {/* RIGHT - USER LOGO */}
+      <div className='admin-right-container'>
+        <span>ADMIN {user.username}</span>
+        <button className='userIcon' onClick={toggleMenu}>
 
-            {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}
+          {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}
 
-          </button>
-        </div>
+        </button>
+      </div>
 
-      ) : (
-        // If there is no user, it will show login and register buttons.
-        < div className='admin-right-container'>
-          <NavLink to='/register' className="btn btn-outline-secondary">Register</NavLink>
-          <NavLink to='/login' className="btn btn-outline-secondary">Login</NavLink>
-        </div >
-      )
-      }
-
-      {/* Profile Menu */}
-      {
+        {/* PROFILE SUB MENU */}
+        {
         // Checks if there is a user loggen and, if the alternator is true, displays the sub-menu.
         (menuVisible && user) ? (
           <div className="admin-sub-menu-wrap">
@@ -87,9 +79,10 @@ export default function Navbar() {
               <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
               <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
               <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart ({productsNumber})</Link>
+              <Link to={`/create-product`}><AddBoxIcon /> Create New Product</Link>
 
               <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>
-              
+
             </div>
           </div>
         ) : null

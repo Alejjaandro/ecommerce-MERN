@@ -20,6 +20,7 @@ import AdminRoutes from './middleware/AdminRoutes';
 import AllProducts from './pages/admin pages/AllProducts';
 import AllUsers from './pages/admin pages/AllUsers';
 import EditProduct from './pages/admin pages/EditProduct';
+import CreateProduct from './pages/admin pages/CreateProduct';
 
 // Context Provider
 import { AuthProvider } from './context/AuthContext.js';
@@ -61,6 +62,7 @@ export default function App() {
                   <Route path="/all-products/" element={<AllProducts />} />
                   <Route path="/all-users/" element={<AllUsers />} />
                   <Route path="/edit-product/:productId" element={<EditProduct />} />
+                  <Route path="/create-product" element={<CreateProduct />} />
                 </Route>
 
               </Routes>

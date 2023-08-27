@@ -43,10 +43,12 @@ export default function Navbar() {
     return (
       <div className='nav-container'>
 
+        {/* LEFT - LOGO */}
         <div className='left-container'>
           LOGO
         </div>
 
+        {/* CENTER - LINKS */}
         <div className="center-container">
           <ul>
             <li><Link to='/'>Home</Link></li>
@@ -56,7 +58,7 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Login/Register - Profile */}
+      {/* RIGHT - LOGIN/REGISTER/USER LOGO */}
         {isAuthenticated && user ? (
           // If there is a user logged it will show its name and an icon that display a sub-menu when clicked.
           <div className='right-container'>
@@ -77,7 +79,7 @@ export default function Navbar() {
         )
         }
 
-        {/* Profile Menu */}
+        {/* PROFILE SUB MENU */}
         {
           // Checks if there is a user loggen and, if the alternator is true, displays the sub-menu.
           (menuVisible && user) ? (
