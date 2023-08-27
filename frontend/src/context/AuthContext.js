@@ -79,28 +79,29 @@ export const AuthProvider = ({ children }) => {
     }, [errors]);
 
     // Function to verify the token with the backend.
-
     async function verifyToken(token) {
+        try {
+            const response = await axios.get('/auth/verifyToken', {
+                headers: { 'token': token }
+            });
 
-        if (token) {
-            try {
-                const response = await axios.get('/auth/verifyToken', {
-                    headers: { 'token': token }
-                });
-
-                if (response.status === 200) {
-                    // Token is valid and has not expired.
-                    setIsAuthenticated(true);
-                    setUser(response.data);
-                }
-            } catch (error) {
-                if (error) {
-                    // Token isn't valid or has expired.
-                    Cookies.remove('token');
-                    setIsAuthenticated(false);
-                    setUser(null);
-                    alert("Session Expired");
-                }
+            if (response.status === 200) {
+                // Token is valid and has not expired.
+                setIsAuthenticated(true);
+                setUser(response.data);
+            } else {
+                // Token is invalid.
+                Cookies.remove('token');
+                setIsAuthenticated(false);
+                setUser(null);
+            }
+        } catch (error) {
+            if (error) {
+                // Token isn't valid or has expired.
+                Cookies.remove('token');
+                setIsAuthenticated(false);
+                setUser(null);
+                alert("Session Expired");
             }
         }
     }

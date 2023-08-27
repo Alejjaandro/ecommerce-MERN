@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from '../api/axios.js';
 
 export const ProductsContext = createContext();
@@ -58,12 +58,6 @@ export const ProductsProvider = ({ children }) => {
             const res = await axios.put(`/products/${productId}`, data);
             console.log(res.data);
             setSuccess(res.data.message);
-
-            // Timer to clear success message.
-            setTimeout(() => {
-                setSuccess();
-            }, 5000);
-
         } catch (error) {
             console.log(error);
         }
@@ -78,6 +72,13 @@ export const ProductsProvider = ({ children }) => {
             console.log(error);
         }
     }
+
+    // Timer to clear success message.
+    useEffect(() => {
+        setTimeout(() => {
+            setSuccess();
+        }, 5000);
+    }, [success]);
 
     // ========== FUNCTION TO GET THUMBNAIL IMGS ========== //
     const [sliderImages, setSliderImages] = useState([]);

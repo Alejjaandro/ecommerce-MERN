@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 export default function AllProducts() {
 
-    const { products, getProducts } = useProducts();
+    const { products, getProducts, deleteProduct } = useProducts();
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => { getProducts() }, []);
@@ -61,7 +61,7 @@ export default function AllProducts() {
                                 <td>
                                     <button className="btn-edit"><Link to={`/edit-product/${product._id}`}>Edit</Link></button>
 
-                                    <button className="btn-remove">Remove</button>
+                                    <button className="btn-remove" onClick={() => deleteProduct(product._id)}>Remove</button>
                                 </td>
                             </tr>
                         ))}
