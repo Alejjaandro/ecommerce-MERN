@@ -19,6 +19,7 @@ import MyProfile from './pages/MyProfile';
 import AdminRoutes from './middleware/AdminRoutes';
 import AllProducts from './pages/admin pages/AllProducts';
 import AllUsers from './pages/admin pages/AllUsers';
+import EditProduct from './pages/admin pages/EditProduct';
 
 // Context Provider
 import { AuthProvider } from './context/AuthContext.js';
@@ -26,7 +27,7 @@ import { ProductsProvider } from './context/ProductsContext.js';
 import { CartProvider } from './context/CartContext.js';
 import { UserProvider } from './context/UserContext';
 
-function App() {
+export default function App() {
   
   return (
 
@@ -59,6 +60,7 @@ function App() {
                 <Route element={<AdminRoutes/>}>
                   <Route path="/all-products/" element={<AllProducts />} />
                   <Route path="/all-users/" element={<AllUsers />} />
+                  <Route path="/edit-product/:productId" element={<EditProduct />} />
                 </Route>
 
               </Routes>
@@ -70,5 +72,3 @@ function App() {
     </AuthProvider>
   );
 }
-
-export default App;

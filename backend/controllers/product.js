@@ -25,7 +25,7 @@ export const updateProduct = async (req, res) => {
             $set: req.body
         }, { new: true })
 
-        res.status(200).json(updatedProduct);
+        res.status(200).json({message: "Product Updated", updateProduct: updatedProduct});
 
     } catch (error) {
         res.status(500).json(error);

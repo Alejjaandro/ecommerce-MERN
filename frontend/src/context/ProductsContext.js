@@ -15,7 +15,6 @@ export const ProductsProvider = ({ children }) => {
 
     // ========== FUNCTION TO GET ALL PRODUCTS & CATEGORY PRODUCTS ========== //
     const [products, setProducts] = useState([]);
-
     const getProducts = async (category) => {
 
         try {
@@ -41,12 +40,39 @@ export const ProductsProvider = ({ children }) => {
 
     // ========== FUNCTION TO GET A SINGLE PRODUCT ========== //
     const [product, setProduct] = useState({});
-
     // Works similar to "getProducts" but with the product id.
     const getProduct = async (id) => {
         try {
             const res = await axios.get(`/products/find/${id}`);
             setProduct(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // ========== FUNCTION TO MODIIFY A PRODUCT ========== //
+    const [success, setSuccess] = useState();
+    const updateProduct = async (productId, data) => {
+        try {
+            const res = await axios.put(`/products/${productId}`, data);
+            console.log(res.data);
+            setSuccess(res.data.message);
+
+            // Timer to clear success message.
+            setTimeout(() => {
+                setSuccess();
+            }, 5000);
+    
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // ========== FUNCTION TO DELETE A PRODUCT ========== //
+    const deleteProduct = async (productId) => {
+        try {
+            const res = await axios.delete(`/products/${productId}`);
+            console.log(res.data);
         } catch (error) {
             console.log(error);
         }
@@ -134,11 +160,15 @@ export const ProductsProvider = ({ children }) => {
 
     return (
         <ProductsContext.Provider value={{
-            products,
             getProducts,
+            products,
 
             getProduct,
             product,
+
+            updateProduct,
+            deleteProduct,
+            success,
 
             getSliderImages,
             sliderImages,
