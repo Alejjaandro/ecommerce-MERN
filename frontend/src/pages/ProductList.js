@@ -11,16 +11,10 @@ import { useProducts } from '../context/ProductsContext.js';
 export default function ProductList() {
 
     // Import what we need from context.
-    const {getCategoriesAndBrands, categoriesAndBrands, categories} = useProducts();
+    const {getCategoriesAndBrands, categoriesAndBrands, brands, getCategories, categories} = useProducts();
 
-    useEffect(() => { getCategoriesAndBrands() }, []);
+    useEffect(() => { getCategories(); getCategoriesAndBrands(); }, []);
     
-    // Initialize brands as an empty array and with a for/in loop we extract each brand of each category .
-    const brands = [];
-    for (const category in categoriesAndBrands) {
-        brands.push(...categoriesAndBrands[category]);
-    }
-
     const [categoryFilter, setCategoryFilter] = useState('All');
     const [brandFilter, setBrandFilter] = useState('All');
     const [sort, setSort] = useState('newest');

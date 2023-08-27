@@ -59,9 +59,10 @@ export const ProductsProvider = ({ children }) => {
 
         try {
             const res = await axios.get('/products');
+            const products = res.data;
 
             // We only want 5 of them for the slider.
-            const someProd = res.data.splice(0, 5);
+            const someProd = products.splice(0, 5);
 
             setSliderImages(someProd.map((prod) => prod.thumbnail));
 
@@ -96,31 +97,40 @@ export const ProductsProvider = ({ children }) => {
 
     // ========== FUNCTION TO GET CATEGORIES & BRANDS ========== //
     const [categoriesAndBrands, setCategoriesAndBrands] = useState();
+    const [brands, setBrands] = useState([]);
 
     const getCategoriesAndBrands = async () => {
+        await getCategories();
+
         const res = await axios.get('/products');
         const products = res.data;
 
-        const brands = {};
+        const catAndBrands = {};
+        const brands = [];
 
         products.forEach(product => {
 
             const { category, brand } = product;
 
-            if (!brands[category]) {
+            if (!catAndBrands[category]) {
 
-                return brands[category] = [brand];
+                catAndBrands[category] = [brand];
 
-            } else if (!brands[category].includes(brand)) {
+            } else if (!catAndBrands[category].includes(brand)) {
 
-                return brands[category].push(brand);
+                catAndBrands[category].push(brand);
 
             }
         });
 
-        setCategoriesAndBrands(brands);
-    };
+        setCategoriesAndBrands(catAndBrands);
 
+        for (const category in categoriesAndBrands) {
+            brands.push(...categoriesAndBrands[category]);
+        }
+
+        setBrands(brands);
+    };
 
     return (
         <ProductsContext.Provider value={{
@@ -136,6 +146,7 @@ export const ProductsProvider = ({ children }) => {
             getCategories,
             prodForCategory,
             categories,
+            brands,
 
             categoriesAndBrands,
             getCategoriesAndBrands
@@ -143,6 +154,4 @@ export const ProductsProvider = ({ children }) => {
             {children}
         </ProductsContext.Provider>
     )
-
 };
-

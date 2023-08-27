@@ -32,8 +32,6 @@ export default function CategoryProducts() {
     // If the "categoriesAndBrands" array exists, we extract the ones under the param category.
     const brands = categoriesAndBrands ? categoriesAndBrands[category] : [];
 
-    // We extract the keys of the objects that are the categories.
-    const categories = categoriesAndBrands ? Object.keys(categoriesAndBrands) : [];
     const [brandFilter, setBrandFilter] = useState('All');
     const [sort, setSort] = useState('newest');
 
