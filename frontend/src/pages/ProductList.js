@@ -12,17 +12,27 @@ import { useProducts } from '../context/ProductsContext.js';
 export default function ProductList() {
 
     // Import what we need from context.
-    const {getCategoriesAndBrands, getCategories} = useProducts();
+    const {getCategoriesAndBrands, getProducts, products } = useProducts();
 
-    useEffect(() => { getCategories(); getCategoriesAndBrands(); }, []);
+    // We call getCategoriesAndBrands and getProducts when the page loads.
+    useEffect(() => { getCategoriesAndBrands(); getProducts(); }, []);
     
     const [sort, setSort] = useState('newest');
-    const [categoryFilter, setCategoryFilter] = useState('All');
-    const [brandFilter, setBrandFilter] = useState('All');
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
-    const handleFilter = ({ category, brand }) => {
-        setCategoryFilter(category);
-        setBrandFilter(brand);
+    // This function is called when the user filters the products.
+    const onFilter = (category, brand) => {
+        // We initialize "filtered" with all the products.
+        let filtered = products;
+        // If the user selected a category or brand, we filter the products.
+        if (category && (category !== "All")) {
+            filtered = filtered.filter(product => product.category === category);
+        }
+        if (brand && (brand !== "All")) {
+            filtered = filtered.filter(product => product.brand === brand);
+        }
+        // We update the state with the filtered products.
+        setFilteredProducts(filtered);
     }
 
     return (
@@ -39,10 +49,10 @@ export default function ProductList() {
 
                     {/* Filters */}
                     {/* We send useProducts to the component so it can use context logic*/}
-                    <FilterNavbar useProducts={useProducts} onFilter={handleFilter} />
+                    <FilterNavbar useProducts={useProducts} onFilter={onFilter} />
 
+                    {/* Sort */}
                     <div className='sort'>
-                        {/* Sort */}
                         <span className='filter-text'>Sort Products:</span>
                         <select className='select' onChange={(e) => setSort(e.target.value)}>
                             <option value="newest">Newest</option>
@@ -54,7 +64,7 @@ export default function ProductList() {
 
                 </div>
 
-                <Products category={categoryFilter} brand={brandFilter} sort={sort} />
+                <Products products={filteredProducts} sort={sort} />
 
             </div>
 

@@ -5,7 +5,7 @@ import Product from '../components/Product';
 import './styles/CategoryProducts.css';
 
 import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { useProducts } from '../context/ProductsContext';
 import CategoriesNavbar from '../components/CategoriesNavbar';
@@ -13,8 +13,8 @@ import CategoriesNavbar from '../components/CategoriesNavbar';
 export default function CategoryProducts() {
     // We extract what we need from context.
     const { getProducts, getCategoriesAndBrands, categoriesAndBrands } = useProducts();
-    // Define products as a variable to change its value when filtering.
-    let { products } = useProducts();
+    // Define filteredProducts as a variable to redefine its value when filtering.
+    let { filteredProducts } = useProducts();
 
     // Extract the category from the URL params.
     const category = useLocation().pathname.split("/")[2];
@@ -37,12 +37,12 @@ export default function CategoryProducts() {
 
     // === FILTER BY BRAND === //
     if (brandFilter && (brandFilter !== "All")) {
-        products = products.filter(product => product.brand === brandFilter);
+        filteredProducts = filteredProducts.filter(product => product.brand === brandFilter);
     }
 
     // === SORT === //
     if (sort) {
-        products.sort((a, b) => {
+        filteredProducts.sort((a, b) => {
             if (sort === "asc") {
                 return a.price - b.price;
             } else if (sort === "desc") {
@@ -55,7 +55,7 @@ export default function CategoryProducts() {
         <>
             <Navbar />
 
-            <CategoriesNavbar/>
+            <CategoriesNavbar />
 
             <div className='brand-sort'>
 
@@ -63,10 +63,8 @@ export default function CategoryProducts() {
                     <span className='filter-text'>Select Brand:</span>
 
                     {/* Brand selector */}
-                    <select className='select'
-                        onChange={(e) => { setBrandFilter(e.target.value) }}
-                    >
-                        <option selected>All</option>
+                    <select className='select' onChange={(e) => { setBrandFilter(e.target.value) }} value={brandFilter}>
+                        <option>All</option>
                         {brands.map((brand, index) => {
                             return <option key={index}>{brand}</option>
                         })}
@@ -86,7 +84,7 @@ export default function CategoryProducts() {
 
             <div className='products-container'>
 
-                {products && products.map((item) => (
+                {filteredProducts && filteredProducts.map((item) => (
                     <Product item={item} key={item._id} />
                 ))}
 

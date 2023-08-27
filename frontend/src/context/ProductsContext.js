@@ -15,6 +15,7 @@ export const ProductsProvider = ({ children }) => {
 
     // ========== FUNCTION TO GET ALL PRODUCTS & CATEGORY PRODUCTS ========== //
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const getProducts = async (category) => {
 
         try {
@@ -26,7 +27,7 @@ export const ProductsProvider = ({ children }) => {
             // then we filter the products and we save the ones that matches the category.
             if (category && (category !== "All")) {
 
-                setProducts(resProducts.filter(prod => prod.category === category));
+                setFilteredProducts(resProducts.filter(prod => prod.category === category));
 
                 // If not, then we save all products.
             } else {
@@ -62,7 +63,7 @@ export const ProductsProvider = ({ children }) => {
             setTimeout(() => {
                 setSuccess();
             }, 5000);
-    
+
         } catch (error) {
             console.log(error);
         }
@@ -162,6 +163,7 @@ export const ProductsProvider = ({ children }) => {
         <ProductsContext.Provider value={{
             getProducts,
             products,
+            filteredProducts,
 
             getProduct,
             product,

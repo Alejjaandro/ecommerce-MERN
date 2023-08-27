@@ -10,12 +10,12 @@ import { Link } from "react-router-dom";
 
 export default function AllProducts() {
 
-    let { products, getProducts } = useProducts();
+    const { products, getProducts } = useProducts();
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => { getProducts() }, []);
 
-    const onFilter = ({ category, brand }) => {
+    const onFilter = (category, brand) => {
         let filtered = products;
 
         if (category && (category !== "All")) {

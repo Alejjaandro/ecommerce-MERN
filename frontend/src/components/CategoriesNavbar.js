@@ -5,13 +5,9 @@ import { NavLink } from 'react-router-dom';
 import './styles/CategoriesNavbar.css';
 
 export default function CategoriesNavbar() {
-    const { getCategoriesAndBrands, categoriesAndBrands } = useProducts();
+    const { getCategoriesAndBrands, categories } = useProducts();
 
-    useEffect(() => {
-        getCategoriesAndBrands();
-    }, [])
-
-    const categories = categoriesAndBrands ? Object.keys(categoriesAndBrands) : [];
+    useEffect(() => { getCategoriesAndBrands() }, [])
 
     return (
         <div className="categories">

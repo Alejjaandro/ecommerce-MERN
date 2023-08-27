@@ -4,12 +4,12 @@ export default function FilterNavbar({ useProducts, onFilter }) {
     // We extract what we need from context
     const { getCategoriesAndBrands, categoriesAndBrands, brands, getCategories, categories } = useProducts();
 
-    const [categoryFilter, setCategoryFilter] = useState('All');
-    const [brandFilter, setBrandFilter] = useState('All');
-
     // We use useEffect to call getCategories and getCategoriesAndBrands functions 
     // when the component mounts.
     useEffect(() => { getCategories(); getCategoriesAndBrands(); }, []);
+
+    const [categoryFilter, setCategoryFilter] = useState('All');
+    const [brandFilter, setBrandFilter] = useState('All');
 
     // Functions to update categoryFilter and brandFilter respectively 
     // when the user selects a different category or brand.
@@ -21,9 +21,10 @@ export default function FilterNavbar({ useProducts, onFilter }) {
     }
 
     // We call onFilter when categoryFilter or brandFilter change.
-    useEffect(() => {
-        onFilter({ category: categoryFilter, brand: brandFilter });
-    }, [categoryFilter, brandFilter]);
+    useEffect(() => { onFilter(categoryFilter, brandFilter) }, [categoryFilter, brandFilter]);
+
+    // We reset the filters when we leave the page.
+    useEffect(() => {return () => {setCategoryFilter('All'); setBrandFilter('All')}}, []);
 
     return (
         <div className='filter'>
