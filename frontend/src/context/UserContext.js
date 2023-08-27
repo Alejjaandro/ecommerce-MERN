@@ -17,6 +17,13 @@ export const UserProvider = ({ children }) => {
 
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState(undefined);
+    const {setUser, setIsAuthenticated} = useAuth();
+
+    // ===== GET user ===== //
+    const getUser = async (userId) => {
+        const response = await axios.get(`/users/find/${userId}`);
+        setUser(response.data);
+    }
 
     // ===== UPDATE user ===== //
     const updateUser = async (userId, data) => {
@@ -29,8 +36,6 @@ export const UserProvider = ({ children }) => {
     }
 
     // ===== DELETE user ===== //
-    const {setUser, setIsAuthenticated} = useAuth();
-
     const deleteUser = async (userId) => {
         try {
             const response = await axios.delete(`/users/${userId}`);
@@ -74,6 +79,7 @@ export const UserProvider = ({ children }) => {
             updateUser,
             deleteUser,
             getAllUsers,
+            getUser,
 
             allUsers,
             errors,

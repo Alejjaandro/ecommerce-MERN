@@ -6,15 +6,15 @@ export const getUser = async (req, res) => {
 
     try {
         // We find the user by its id.
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.userId);
 
         // In case we don't want to show the password.
         const { password, ...noPassword } = user._doc;
 
-        res.status(200).json(noPassword);
+        return res.status(200).json(noPassword);
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -36,7 +36,7 @@ export const updateUser = async (req, res) => {
         if (passwordMatch) {
             return res.status(400).json({ error: 'New Password cannot be the same as the old Password.' });
         } else {
-            req.body.password = bcrypt.hash(req.body.password, 10);
+            return req.body.password = bcrypt.hash(req.body.password, 10);
         }
     }
 
@@ -47,10 +47,10 @@ export const updateUser = async (req, res) => {
             $set: req.body
         }, { new: true })
 
-        res.status(200).json('User info Updated');
+        return res.status(200).json('User info Updated');
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -61,10 +61,10 @@ export const deleteUser = async (req, res) => {
         // // We find the user by its id and we delete it.
         // await User.findByIdAndDelete(req.params.id);
 
-        res.status(200).json('User Deleted');
+        return res.status(200).json('User Deleted');
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -75,9 +75,9 @@ export const getAllUsers = async (req, res) => {
         // We find all users.
         const users = await User.find();
 
-        res.status(200).json(users);
+        return res.status(200).json(users);
 
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };

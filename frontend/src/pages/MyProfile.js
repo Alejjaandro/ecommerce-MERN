@@ -8,11 +8,14 @@ import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
 import {format} from 'date-fns';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function MyProfile() {
 
   const { user } = useAuth();
-  const { deleteUser } = useUser();
+  const { getUser, deleteUser } = useUser();
+
+  useEffect(() => { user && getUser(user._id) }, []);
 
   const createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
   const createdHour = format(new Date(user.createdAt), "HH:mm:ss");
