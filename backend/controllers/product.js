@@ -9,9 +9,7 @@ export const createProduct = async (req, res) => {
 
     try {
         const savedProduct = await newProduct.save();
-
-        res.status(200).json(savedProduct);
-
+        res.status(200).json({message: "Product Created", newProduct: savedProduct});
     } catch (error) {
         res.status(500).json(error);
     }

@@ -6,9 +6,28 @@ import './styles/CreateProduct.css';
 
 export default function CreateProduct() {
 
-    // const { createProduct, success } = useProducts();
+    const { createProduct, success, errors } = useProducts();
 
-    const handleSubmit = async (e) => {};
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+
+        // Removing empty fields and converting fields to numbers.
+        for (let key in data) {
+            if (data[key] === '') {
+                delete data[key];
+            } else
+            if (!isNaN(data[key])) {
+                data[key] = Number(data[key]);
+            }
+        }
+
+        createProduct(data);
+    };
+
+    console.log(success);
 
     return (
         <>
@@ -21,16 +40,24 @@ export default function CreateProduct() {
                     <h1 className="newProduct-title">Create New Product</h1>
 
                     {/* Success */}
-                    {/* {success && (
+                    {success && (
                         <div className='success'>
                             <p>{success}</p>
                         </div>
-                    )} */}
+                    )}
+                    {/* Errors */}
+                    {errors && (
+                        <div className='errors'>
+                            {errors.map((error) => (
+                            <p>{error}</p>
+                            ))}
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="newProduct-form">
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Thumbnail Image: </label>
-                            <input type="file" className="newProduct-form-input" name='image'/>
+                            <input type="text" className="newProduct-form-input" name='thumbnail'/>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Title: </label>
@@ -38,7 +65,7 @@ export default function CreateProduct() {
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Price: </label>
-                            <input type="number" className="newProduct-form-input" name='price'/>
+                            <input type="number" step="any" className="newProduct-form-input" name='price'/>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Discount %: </label>
@@ -59,6 +86,10 @@ export default function CreateProduct() {
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Description: </label>
                             <textarea className="newProduct-form-input" name='description'/>
+                        </div>
+                        <div className="newProduct-form-group">
+                            <label className="newProduct-form-label">Images: </label>
+                            <input type='file' multiple className="newProduct-form-input" name='images'/>
                         </div>
                         <button type="submit" className="newProduct-submit-button">Create Product</button>
                     </form>

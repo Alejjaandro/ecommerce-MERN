@@ -51,8 +51,22 @@ export const ProductsProvider = ({ children }) => {
         }
     }
 
-    // ========== FUNCTION TO MODIIFY A PRODUCT ========== //
+    // ========== FUNCTION TO CREATE A PRODUCT ========== //
     const [success, setSuccess] = useState();
+    const [errors, setErrors] = useState();
+    const createProduct = async (data) => {
+        try {
+            console.log(data);
+            const res = await axios.post(`/products`, data);
+            setSuccess(res.data.message);
+            console.log(res.data.newProduct);
+        } catch (error) {
+            console.log(error);
+            setErrors(error.response.data.errors);
+        }
+    }
+
+    // ========== FUNCTION TO MODIIFY A PRODUCT ========== //
     const updateProduct = async (productId, data) => {
         try {
             const res = await axios.put(`/products/${productId}`, data);
@@ -73,16 +87,21 @@ export const ProductsProvider = ({ children }) => {
         }
     }
 
-    // Timer to clear success message.
+    // Timer to clear success & errors messages.
     useEffect(() => {
         setTimeout(() => {
             setSuccess();
         }, 5000);
     }, [success]);
+    
+    useEffect(() => {
+        setTimeout(() => {
+            setErrors();
+        }, 5000);
+    }, [errors]);
 
     // ========== FUNCTION TO GET THUMBNAIL IMGS ========== //
     const [sliderImages, setSliderImages] = useState([]);
-
     const getSliderImages = async () => {
 
         try {
@@ -102,7 +121,6 @@ export const ProductsProvider = ({ children }) => {
     // ========== FUNCTION TO GET A PRODUCT FOR EACH CATEGORY ========== //
     const [prodForCategory, setProdForCategory] = useState([]);
     const [categories, setCategories] = useState([]);
-
     const getCategories = async () => {
 
         try {
@@ -126,7 +144,6 @@ export const ProductsProvider = ({ children }) => {
     // ========== FUNCTION TO GET CATEGORIES & BRANDS ========== //
     const [categoriesAndBrands, setCategoriesAndBrands] = useState();
     const [brands, setBrands] = useState([]);
-
     const getCategoriesAndBrands = async () => {
         await getCategories();
 
@@ -169,9 +186,11 @@ export const ProductsProvider = ({ children }) => {
             getProduct,
             product,
 
+            createProduct,
             updateProduct,
             deleteProduct,
             success,
+            errors,
 
             getSliderImages,
             sliderImages,
