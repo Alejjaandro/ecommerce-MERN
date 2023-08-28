@@ -1,7 +1,7 @@
 import { useAuth } from "../context/AuthContext.js";
 import { Navigate, Outlet } from "react-router-dom";
 
-export default function ProtectedRoutes() {
+export default function AdminRoutes() {
 
     const { user } = useAuth();
 

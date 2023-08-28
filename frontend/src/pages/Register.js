@@ -29,19 +29,12 @@ export default function Register() {
         }
     }, [isAuthenticated]);
 
+    // Function that handle the register post to the DB with the user data.
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        // We save the user data. 
-        const user = {
-            name: name,
-            lastname: lastname,
-            email: email,
-            username: username,
-            password: password
-        }
-
-        // Function that handle the register post to the DB with the user data.
+        const formData = new FormData(e.target);
+        const user = Object.fromEntries(formData);
         await register(user);
     }
 
@@ -63,7 +56,7 @@ export default function Register() {
                         ))
                     }
 
-                    <form className='register-form'>
+                    <form className='register-form' onSubmit={handleRegister}>
 
                         <input className='register-input' name='name' placeholder="Name" type='text'
                             onChange={(e) => { setName(e.target.value) }} />
@@ -85,8 +78,7 @@ export default function Register() {
 
 
                         <div className='form-footer'>
-                            <button className='register-button' onClick={handleRegister}>REGISTER</button>
-
+                            <button className='register-button' type='submit'>REGISTER</button>
                             <Link to='/login'>Already have an account?</Link>
                         </div>
 

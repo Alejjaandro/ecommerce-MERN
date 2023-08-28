@@ -12,7 +12,6 @@ import jwt from 'jsonwebtoken';
 // We use an async function to wait for the data before continuing with the code execution.
 
 export const register = async (req, res, next) => {
-
     // Extract the info from the body.
     const { name, lastname, username, email, password } = req.body;
 
@@ -24,7 +23,7 @@ export const register = async (req, res, next) => {
         if (userFound) {
             return res.status(400).json(['This email already exists']);
         }
-    
+
         const newUser = new User({
             name,
             lastname,
@@ -33,12 +32,21 @@ export const register = async (req, res, next) => {
             // Encripting the password received from body.
             password: await bcrypt.hash(password, 10)
         });
-
         // save new user in the DB.
         const savedUser = await newUser.save();
 
-        return res.status(201).json(savedUser);
-        
+        // Create a security Token without the password.
+        const { password: savedPassword, ...userWithoutPassword } = savedUser.toObject();
+        const accessToken = jwt.sign(
+            userWithoutPassword,
+            process.env.JWT_KEY,
+            { expiresIn: '1h' }
+        );
+
+        return res.cookie('token', accessToken, { httpOnly: false })
+        .status(200)
+        .json({ message: 'Login successfull', user: savedUser, token: accessToken });
+
     } catch (error) {
         return res.status(500).json(error.message);
     }
@@ -70,10 +78,10 @@ export const login = async (req, res) => {
             process.env.JWT_KEY,
             { expiresIn: '1h' }
         );
-        
-        return res.cookie('token', accessToken, {httpOnly : false})
-        .status(200)
-        .json({ message: 'Login successfull', user: user, token: accessToken });
+
+        return res.cookie('token', accessToken, { httpOnly: false })
+            .status(200)
+            .json({ message: 'Login successfull', user: user, token: accessToken });
 
     } catch (error) {
         return res.status(500).json(error.message);
@@ -85,8 +93,8 @@ export const logout = async (req, res) => {
 
     // We clear the token to logout
     return res.clearCookie('token')
-    .status(200)
-    .json({message: "Successfully Logout"});
+        .status(200)
+        .json({ message: "Successfully Logout" });
 };
 
 // ----- VERIFY TOKEN ----- //
@@ -98,7 +106,7 @@ export const verifyToken = async (req, res) => {
         if (!token) {
             return res.status(403).send({ message: 'No token provided.' });
         }
-    
+
         jwt.verify(token, process.env.JWT_KEY, (error, decoded) => {
             if (error) {
                 return res.status(500).send({ message: 'Token expired.' });

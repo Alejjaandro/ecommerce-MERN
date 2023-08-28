@@ -31,10 +31,15 @@ export const AuthProvider = ({ children }) => {
     // Use the info sent by the form in "/pages/Register.js" to make the post request.
     const register = async (user) => {
         try {
+            // Check if the passwords match.
+            if (user.password !== user.confirmPassword) {
+                return setErrors(["Passwords don't match"]);
+            }
+
             // Save the response sent after the post request.
             const res = await axios.post("/auth/register", user);
 
-            setUser(res.data);
+            setUser(res.data.user);
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
@@ -130,7 +135,17 @@ export const AuthProvider = ({ children }) => {
             } catch (error) {
                 console.log('Error decodifying the token: ', error);
             }
+        // If the token doesn't exist:
+        } else {
+            setIsAuthenticated(false);
+            setUser(null);
         }
+
+        // We verify the token every 30 min.
+        setInterval(() => {
+            verifyToken(token);
+        }, 1800000);
+
     }, []);
 
     // All the components inside AuthContext will be able to access it values.
