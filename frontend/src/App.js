@@ -17,10 +17,10 @@ import Cart from './pages/Cart';
 import MyProfile from './pages/MyProfile';
 
 import AdminRoutes from './middleware/AdminRoutes';
-import AllProducts from './pages/admin pages/AllProducts';
-import AllUsers from './pages/admin pages/AllUsers';
-import EditProduct from './pages/admin pages/EditProduct';
-import CreateProduct from './pages/admin pages/CreateProduct';
+import AllProducts from './pages/AdminPages/AllProducts';
+import AllUsers from './pages/AdminPages/AllUsers';
+import EditProduct from './pages/AdminPages/EditProduct';
+import CreateProduct from './pages/AdminPages/CreateProduct';
 
 // Context Provider
 import { AuthProvider } from './context/AuthContext.js';
