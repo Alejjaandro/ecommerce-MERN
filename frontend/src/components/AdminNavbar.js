@@ -71,7 +71,7 @@ export default function Navbar() {
           <div className="admin-sub-menu-wrap">
             <div className="admin-sub-menu">
 
-              <div className="user-info">
+              <div className="admin-user-info">
                 <h2>{user.name} {user.lastname}</h2>
                 <hr />
               </div>
