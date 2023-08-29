@@ -17,9 +17,8 @@ export const UserProvider = ({ children }) => {
 
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState([]);
-    const [user, setUser] = useState([]);
 
-    const {setIsAuthenticated} = useAuth();
+    const {setUser, setIsAuthenticated} = useAuth();
 
     // ===== GET user ===== //
     const getUser = async (userId) => {
@@ -35,17 +34,9 @@ export const UserProvider = ({ children }) => {
     const updateUser = async (userId, data) => {
         try {
             const response = await axios.put(`/users/${userId}`, data);
+            getUser(userId);
+            setSuccess(response.data);
             console.log(response.data);
-        } catch (error) {
-            setErrors(Object.values(error.response.data));
-        }
-    }
-
-    // ===== ADMIN UPDATE user ===== //
-    const adminUpdateUser = async (userId, data) => {
-        try {
-            const response = await axios.put(`/users/adminUpdate/${userId}`, data);
-            setSuccess(Object.values(response.data));
         } catch (error) {
             setErrors(Object.values(error.response.data));
         }
@@ -56,6 +47,7 @@ export const UserProvider = ({ children }) => {
         try {
             const response = await axios.delete(`/users/${userId}`);
 
+            setUser(null);
             setIsAuthenticated(false);
             Cookies.remove('token');
 
@@ -64,17 +56,6 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
             console.log(error);
             setErrors(Object.values(error.response.data));
-        }
-    }
-
-    // ===== GET ALL USERS ===== //
-    const [allUsers, setAllUsers] = useState([]);
-    const getAllUsers = async () => {
-        try {
-            const response = await axios.get('/users/');
-            setAllUsers(response.data);
-        } catch (error) {
-            console.log(error);
         }
     }
 
@@ -91,15 +72,11 @@ export const UserProvider = ({ children }) => {
 
     return (
         <UserContext.Provider value={{
-            updateUser,
-            adminUpdateUser,
-            deleteUser,
-            getAllUsers,
             getUser,
+            updateUser,
+            deleteUser,
             
-            user,
             setUser,
-            allUsers,
             errors,
             success
         }}>
