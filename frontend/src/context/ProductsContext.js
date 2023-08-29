@@ -51,55 +51,6 @@ export const ProductsProvider = ({ children }) => {
         }
     }
 
-    // ========== FUNCTION TO CREATE A PRODUCT ========== //
-    const [success, setSuccess] = useState();
-    const [errors, setErrors] = useState();
-    const createProduct = async (data) => {
-        try {
-            console.log(data);
-            const res = await axios.post(`/products`, data);
-            setSuccess(res.data.message);
-            console.log(res.data.newProduct);
-        } catch (error) {
-            console.log(error);
-            setErrors(error.response.data.errors);
-        }
-    }
-
-    // ========== FUNCTION TO MODIIFY A PRODUCT ========== //
-    const updateProduct = async (productId, data) => {
-        try {
-            const res = await axios.put(`/products/${productId}`, data);
-            console.log(res.data);
-            setSuccess(res.data.message);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // ========== FUNCTION TO DELETE A PRODUCT ========== //
-    const deleteProduct = async (productId) => {
-        try {
-            const res = await axios.delete(`/products/${productId}`);
-            console.log(res.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // Timer to clear success & errors messages.
-    useEffect(() => {
-        setTimeout(() => {
-            setSuccess();
-        }, 5000);
-    }, [success]);
-    
-    useEffect(() => {
-        setTimeout(() => {
-            setErrors();
-        }, 5000);
-    }, [errors]);
-
     // ========== FUNCTION TO GET THUMBNAIL IMGS ========== //
     const [sliderImages, setSliderImages] = useState([]);
     const getSliderImages = async () => {
@@ -185,12 +136,6 @@ export const ProductsProvider = ({ children }) => {
 
             getProduct,
             product,
-
-            createProduct,
-            updateProduct,
-            deleteProduct,
-            success,
-            errors,
 
             getSliderImages,
             sliderImages,

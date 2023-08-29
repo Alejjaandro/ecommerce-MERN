@@ -28,6 +28,10 @@
     vertical-align: center;
 }
 
+.admin-row {
+    background-color: rgba(218, 165, 32, 0.329);
+}
+
 .btn-edit {
     background-color: #4CAF50;
     color: white;

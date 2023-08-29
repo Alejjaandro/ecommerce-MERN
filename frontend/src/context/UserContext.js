@@ -16,20 +16,36 @@ export const useUser = () => {
 export const UserProvider = ({ children }) => {
 
     const [errors, setErrors] = useState([]);
-    const [success, setSuccess] = useState(undefined);
-    const {setUser, setIsAuthenticated} = useAuth();
+    const [success, setSuccess] = useState([]);
+    const [user, setUser] = useState([]);
+
+    const {setIsAuthenticated} = useAuth();
 
     // ===== GET user ===== //
     const getUser = async (userId) => {
-        const response = await axios.get(`/users/find/${userId}`);
-        setUser(response.data);
+        try {            
+            const response = await axios.get(`/users/find/${userId}`);
+            setUser(response.data);
+        } catch (error) {
+            console.log(error.response);
+        }
     }
 
     // ===== UPDATE user ===== //
     const updateUser = async (userId, data) => {
         try {
             const response = await axios.put(`/users/${userId}`, data);
-            setSuccess(response.data);
+            console.log(response.data);
+        } catch (error) {
+            setErrors(Object.values(error.response.data));
+        }
+    }
+
+    // ===== ADMIN UPDATE user ===== //
+    const adminUpdateUser = async (userId, data) => {
+        try {
+            const response = await axios.put(`/users/adminUpdate/${userId}`, data);
+            setSuccess(Object.values(response.data));
         } catch (error) {
             setErrors(Object.values(error.response.data));
         }
@@ -40,7 +56,6 @@ export const UserProvider = ({ children }) => {
         try {
             const response = await axios.delete(`/users/${userId}`);
 
-            setUser(null);
             setIsAuthenticated(false);
             Cookies.remove('token');
 
@@ -63,7 +78,7 @@ export const UserProvider = ({ children }) => {
         }
     }
 
-    // Timeout so the errors don't stay on screen undefinetly. 5000 ms = 5 sec.
+    // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
         if (errors.length > 0 || success) {
             const timer = setTimeout(() => {
@@ -77,10 +92,13 @@ export const UserProvider = ({ children }) => {
     return (
         <UserContext.Provider value={{
             updateUser,
+            adminUpdateUser,
             deleteUser,
             getAllUsers,
             getUser,
-
+            
+            user,
+            setUser,
             allUsers,
             errors,
             success

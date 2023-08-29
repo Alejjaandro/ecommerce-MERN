@@ -1,12 +1,12 @@
 import Footer from '../../components/Footer';
 import AdminNavbar from '../../components/AdminNavbar';
-import { useProducts } from '../../context/ProductsContext';
+import { useAdmin } from '../../context/AdminContext';
 
 import './styles/CreateProduct.css';
 
 export default function CreateProduct() {
 
-    const { createProduct, success, errors } = useProducts();
+    const { createProduct, success, errors } = useAdmin();
 
     const handleSubmit = async (e) => {
         e.preventDefault();

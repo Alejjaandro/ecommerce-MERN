@@ -3,16 +3,15 @@ import AdminNav from "../../components/AdminNavbar";
 
 import "./styles/AllUsers.css";
 
-import { useUser } from "../../context/UserContext";
+import { useAdmin } from "../../context/AdminContext";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function AllUsers() {
 
-  const { getAllUsers, allUsers } = useUser();
+  const { getAllUsers, allUsers, adminDeleteUser, success } = useAdmin();
 
   useEffect(() => { getAllUsers() }, []);
-
-  console.log(allUsers);
 
   return (
     <>
@@ -35,8 +34,9 @@ export default function AllUsers() {
           </thead>
 
           <tbody className="users-table-body">
+            {/* We map all users and we show them in a table. Added a distinction for admin users. */}
             {allUsers.map((user) => (
-              <tr key={user._id}>
+              <tr key={user._id} className={user.isAdmin ? 'admin-row' : ''}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.lastname}</td>
@@ -44,8 +44,8 @@ export default function AllUsers() {
                 <td>{user.email}</td>
                 <td>{user.isAdmin ? "Yes" : "No"}</td>
                 <td>
-                  <button className="btn-edit">Edit</button>
-                  <button className="btn-remove">Remove</button>
+                  <button className="btn-edit"><Link to={`/edit-user/${user._id}`}>Edit</Link></button>
+                  <button className="btn-remove" onClick={() => adminDeleteUser(user._id)}>Remove</button>
                 </td>
               </tr>
             ))}
@@ -53,8 +53,7 @@ export default function AllUsers() {
         </table>
 
       </div>
-
-
+      
       <Footer />
     </>
   )

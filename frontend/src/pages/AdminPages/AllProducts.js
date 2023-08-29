@@ -5,12 +5,14 @@ import FilterNavbar from "../../components/FilterNavbar";
 import "./styles/AllProducts.css";
 
 import { useProducts } from "../../context/ProductsContext";
+import { useAdmin } from "../../context/AdminContext";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function AllProducts() {
 
-    const { products, getProducts, deleteProduct } = useProducts();
+    const { products, getProducts } = useProducts();
+    const { deleteProduct } = useAdmin();
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => { getProducts() }, []);

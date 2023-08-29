@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import AdminNavbar from '../../components/AdminNavbar';
 import { useProducts } from '../../context/ProductsContext';
+import { useAdmin } from '../../context/AdminContext';
 
 import './styles/EditProduct.css';
 
 export default function EditProduct() {
 
-    const { getProduct, product, updateProduct, success } = useProducts();
+    const { getProduct, product } = useProducts();
+    const { updateProduct, success } = useAdmin();
 
     const productId = window.location.pathname.split("/")[2];
     useEffect(() => { getProduct(productId) }, []);
