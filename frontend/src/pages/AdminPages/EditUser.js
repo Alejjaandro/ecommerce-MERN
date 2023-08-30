@@ -3,7 +3,7 @@ import Footer from '../../components/Footer';
 import AdminNavbar from '../../components/AdminNavbar';
 import { useAdmin } from '../../context/AdminContext';
 
-import './styles/EditProduct.css';
+import './styles/EditUser.css';
 
 export default function EditUser() {
 
@@ -34,12 +34,12 @@ export default function EditUser() {
         <>
             <AdminNavbar />
 
-            <div className="edit-product-container">
+            <div className="edit-user-container">
 
-                <div className="edit-product-wrapper">
+                <div className="edit-user-wrapper">
 
-                    <h1 className="product-title">Edit {user.username}</h1>
-                    <img className="user-image" src={user.image} />
+                    <h1 className="user-title">Edit {user.username}</h1>
+                    <div class="user-image"><img src={user.image} /></div>
 
                     {errors && errors.map((message, index) => (
                         <p key={index} className="errors">{message}</p>
@@ -48,7 +48,7 @@ export default function EditUser() {
                         <p key={index} className="success">{message}</p>
                     ))}
 
-                    <form onSubmit={handleSubmit} className="product-form">
+                    <form onSubmit={handleSubmit} className="user-form">
                         <div className="form-group">
                             <label className="form-label">Name: </label>
                             <input type="text" defaultValue={user.name} className="form-input" name='name' />

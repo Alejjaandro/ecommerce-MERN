@@ -28,6 +28,7 @@
 }
 
 .profile-image img {
+    max-height: 10rem;
     border-radius: 50%;
 }
 

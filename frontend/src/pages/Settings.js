@@ -53,7 +53,11 @@ export default function Settings() {
 
                         <div className="change-picture">
                             <label>Change Profile Picture: </label>
-                            <input type='file' name='image' accept="image/*" />
+                            <input placeholder="New Picture URL" type='text' name='image' />
+                            <span>
+                                First you nedd to upload your picture to <Link to='https://imgbb.com/' target="_blank">ImgBB</Link>,
+                                then copy the URL and paste it here.
+                            </span>
                         </div>
 
                         <div className="change-email">
