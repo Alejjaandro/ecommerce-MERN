@@ -7,12 +7,13 @@ import AddIcon from '@mui/icons-material/Add';
 import './styles/Cart.css';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useEffect } from 'react';
 
 export default function Cart() {
     // We extract what we need from the context.
     const { user } = useAuth();
-    const { cart, productsNumber, getCart, deleteProduct, addToCart } = useCart();
-        
+    const { cart, productsNumber, deleteProduct, deleteCart, addToCart } = useCart();
+
     // Initialize some variables for later
     let subtotal;
     let shippingCost;
@@ -33,6 +34,12 @@ export default function Cart() {
             deleteProduct(userId, product.product._id);
         }
     }
+
+    useEffect(() => {
+        if (cart && cart.length < 1) {
+            deleteCart(user._id);
+        }
+    }, [cart]);
 
     return (
         <>

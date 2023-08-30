@@ -24,19 +24,16 @@ export const CartProvider = ({ children }) => {
 
     // ===== GET USER CART ===== //
     const getCart = async (userId) => {
-        // we reset ProductsNumber and CartProducts.
-        setProductsNumber(0);
-        setCart([]);
 
         if (user) {
             try {
                 // We send a petition to get the cart of the user.
                 const res = await axios.get(`/carts/find/${userId}`);
-    
+
                 // We update ProductsNumber and CartProducts with the new info.
                 setProductsNumber(res.data.products.length);
                 setCart(res.data.products);
-    
+
             } catch (error) {
                 console.log(error.response.data);
             }
@@ -50,7 +47,7 @@ export const CartProvider = ({ children }) => {
         if (user) {
             try {
                 // we send a post with the userId and the product with its features.
-                await axios.post(`/carts/${userId}`, {
+                const response = await axios.post(`/carts/${userId}`, {
                     userId: userId,
                     product: product,
                     quantity: quantity || 1,
@@ -58,8 +55,9 @@ export const CartProvider = ({ children }) => {
                     ram: ram || null
                 });
 
-                // We update the user cart.
-                await getCart(userId);
+                // // We update the user cart.
+                setCart(response.data.newCart.products);
+                setProductsNumber(response.data.newCart.products.length);
 
             } catch (error) {
                 console.log(error);
@@ -73,29 +71,24 @@ export const CartProvider = ({ children }) => {
     // ===== REMOVE PRODUCT FROM CART ===== //
     const deleteProduct = async (userId, productId) => {
         try {
-
-            await axios.delete(`/carts/${userId}/${productId}`);
-            await getCart(userId);
-
+            const response = await axios.delete(`/carts/${userId}/${productId}`);
+            // // We update the user cart.
+            setCart(response.data.updatedCart.products);
+            setProductsNumber(response.data.updatedCart.products.length);
         } catch (error) {
             console.log(error);
         }
     }
 
-    // useEffect(() => {
-
-    //     try {            
-    //         const token = Cookies.get('token');
-    //         if (token) {
-    
-    //             const decodedToken = jwt_decode(token);
-    //             getCart(decodedToken._id);
-    //         }
-    //     } catch (error) {
-    //         throw new Error('Token expired');
-    //     }
-    // }, []);
-
+    // ===== DELETE CART ===== //
+    const deleteCart = async (userId) => {
+        try {
+            await axios.delete(`/carts/${userId}`);
+            console.log("Cart deleted");
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // All the components inside AuthContext will be able to access it values.
     return (
@@ -105,7 +98,8 @@ export const CartProvider = ({ children }) => {
 
             addToCart,
             getCart,
-            deleteProduct
+            deleteProduct,
+            deleteCart
         }}>
             {children}
         </CartContext.Provider>

@@ -10,25 +10,28 @@ export const createCart = async (req, res) => {
     let { color, ram } = req.body;
 
     // To avoid letting the fields empty if the user doesn't choose.
-    color ? color = color : color = "Not Choosen";
-    ram ? ram = ram : ram = "Not Choosen";
+    color ? color = color : color = " - ";
+    ram ? ram = ram : ram = " - ";
     
     try {
+        let updatedCart;
+
         // We check if the product already exists in the cart.
         const productExists = await Cart.findOne({ _id: userId, 'products.product._id': product._id });
 
         if (productExists) {
             // If it does, update its quantity using $inc.
-            await Cart.findOneAndUpdate(
+            updatedCart = await Cart.findOneAndUpdate(
                 { _id: userId, 'products.product._id': product._id },
-                { $inc: { 'products.$.quantity': quantity } }
+                { $inc: { 'products.$.quantity': quantity } },
+                { new: true }
             );
             
         } else {
 
             // We search for a cart with the userId and we push into products array the new product and its features.
             // The option {upsert: true} tells mongoDB to create one if it didn't find one.
-            const updatedCart = await Cart.findOneAndUpdate(
+            updatedCart = await Cart.findOneAndUpdate(
                 { _id: userId},
                 { $push: { products: { product, quantity, color, ram } } },
                 { new: true, upsert: true }
@@ -39,7 +42,7 @@ export const createCart = async (req, res) => {
             }
         }
 
-        return res.status(200).json({ message: 'Product added to Cart' });
+        return res.status(200).json({ message: 'Product added to Cart', newCart: updatedCart });
 
     } catch (error) {
         return res.status(500).json(error);
@@ -58,7 +61,7 @@ export const deleteProduct = async (req, res) => {
         cart.products = cart.products.filter((product) => product.product._id !== productId);
         // Save changes.
         await cart.save();
-        return res.status(200).json({ message: 'Product Deleted' });
+        return res.status(200).json({ message: 'Product Deleted', updatedCart: cart });
 
     } catch (error) {
         return res.status(500).json(error);
@@ -89,7 +92,7 @@ export const getUserCart = async (req, res) => {
             return res.status(404).json({ message: 'Cart not found' });
         }
 
-        res.status(200).json(cart);
+        return res.status(200).json(cart);
 
     } catch (error) {
         return res.status(500).json(error);
@@ -101,7 +104,6 @@ export const getAllCarts = async (req, res) => {
 
     try {
         const carts = await Cart.find();
-
         return res.status(200).json(carts);
 
     } catch (error) {

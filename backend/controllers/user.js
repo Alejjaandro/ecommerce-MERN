@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Cart from '../models/Cart.js';
 import bcrypt from 'bcrypt';
 
 // ===== GET user ===== //
@@ -84,6 +85,9 @@ export const adminUpdateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
 
     try {
+        // Delete the user's cart
+        await Cart.findOneAndDelete({ _id: req.params.id });
+        
         // // We find the user by its id and we delete it.
         await User.findByIdAndDelete(req.params.id);
         return res.status(200).json('User Deleted');
