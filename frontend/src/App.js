@@ -19,6 +19,7 @@ import MyProfile from './pages/MyProfile';
 import AdminRoutes from './middleware/AdminRoutes';
 import AllProducts from './pages/AdminPages/AllProducts';
 import AllUsers from './pages/AdminPages/AllUsers';
+import AllCarts from './pages/AdminPages/AllCarts';
 import EditProduct from './pages/AdminPages/EditProduct';
 import EditUser from './pages/AdminPages/EditUser';
 import CreateProduct from './pages/AdminPages/CreateProduct';
@@ -61,6 +62,7 @@ export default function App() {
                   <Route element={<AdminRoutes/>}>
                     <Route path="/all-products/" element={<AllProducts />} />
                     <Route path="/all-users/" element={<AllUsers />} />
+                    <Route path="/all-carts/" element={<AllCarts />} />
                     <Route path="/edit-product/:productId" element={<EditProduct />} />
                     <Route path="/edit-user/:userId" element={<EditUser />} />
                     <Route path="/create-product" element={<CreateProduct />} />

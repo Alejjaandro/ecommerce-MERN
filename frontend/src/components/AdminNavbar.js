@@ -51,6 +51,7 @@ export default function Navbar() {
           <li><Link to='/products'>Products</Link></li>
           <li><Link to='/all-products'>All Products</Link></li>
           <li><Link to='/all-users'>All Users</Link></li>
+          <li><Link to='/all-carts'>All Carts</Link></li>
         </ul>
       </div>
 

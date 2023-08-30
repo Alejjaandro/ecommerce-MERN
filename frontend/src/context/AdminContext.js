@@ -1,7 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from '../api/axios.js';
-import { useAuth } from "./AuthContext.js";
-import Cookies from 'js-cookie';
 
 export const AdminContext = createContext();
 
@@ -17,11 +15,9 @@ export const AdminProvider = ({ children }) => {
 
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState([]);
-    const [user, setUser] = useState([]);
-
-    const {setIsAuthenticated} = useAuth();
-
+    
     // ===== ADMIN GET user ===== //
+    const [user, setUser] = useState([]);
     const adminGetUser = async (userId) => {
         try {
             const response = await axios.get(`/users/find/${userId}`);
@@ -100,6 +96,31 @@ export const AdminProvider = ({ children }) => {
         }
     }
 
+    // ===== GET ALL CARTS ===== //
+    const [allCarts, setAllCarts] = useState([]);
+    const getAllCarts = async () => {
+        try {
+            // We send a petition to get the cart of the user.
+            const res = await axios.get(`/carts/`);
+            setAllCarts(res.data);
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+
+    // ===== DELETE CART ===== //
+    const adminDeleteCart = async (userId) => {
+        try {
+            await axios.delete(`/carts/${userId}`);
+            // Update the allCarts.
+            await getAllCarts();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
         if (errors.length > 0 || success) {
@@ -114,17 +135,22 @@ export const AdminProvider = ({ children }) => {
     return (
         <AdminContext.Provider value={{
             adminGetUser,
+            user,
+            setUser,
+
             adminUpdateUser,
             adminDeleteUser,
             getAllUsers,
+            allUsers,
 
             createProduct,
             updateProduct,
             deleteProduct,
 
-            user,
-            setUser,
-            allUsers,
+            getAllCarts,
+            adminDeleteCart,
+            allCarts,
+
             errors,
             success
         }}>

@@ -12,7 +12,9 @@ import { useEffect } from 'react';
 export default function Cart() {
     // We extract what we need from the context.
     const { user } = useAuth();
-    const { cart, productsNumber, deleteProduct, deleteCart, addToCart } = useCart();
+    const { getCart, cart, productsNumber, deleteProduct, deleteCart, addToCart } = useCart();
+
+    useEffect(() => {getCart(user._id)}, []);
 
     // Initialize some variables for later
     let subtotal;

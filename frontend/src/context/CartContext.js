@@ -35,6 +35,11 @@ export const CartProvider = ({ children }) => {
                 setCart(res.data.products);
 
             } catch (error) {
+                // If the cart is empty we set ProductsNumber to 0 and CartProducts to an empty array.
+                if (error.response.status === 404) {
+                    setProductsNumber(0);
+                    setCart([]);
+                }
                 console.log(error.response.data);
             }
         }
@@ -84,7 +89,6 @@ export const CartProvider = ({ children }) => {
     const deleteCart = async (userId) => {
         try {
             await axios.delete(`/carts/${userId}`);
-            console.log("Cart deleted");
         } catch (error) {
             console.log(error);
         }
