@@ -1,6 +1,7 @@
 import Footer from '../../components/Footer';
 import AdminNavbar from '../../components/AdminNavbar';
 import { useAdmin } from '../../context/AdminContext';
+import { Link } from 'react-router-dom';
 
 import './styles/CreateProduct.css';
 
@@ -58,6 +59,10 @@ export default function CreateProduct() {
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Thumbnail Image: </label>
                             <input type="text" className="newProduct-form-input" name='thumbnail'/>
+                            <span>
+                                First you nedd to upload your picture to <Link to='https://imgbb.com/' target="_blank">ImgBB</Link>,
+                                then copy the URL and paste it here.
+                            </span>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Title: </label>

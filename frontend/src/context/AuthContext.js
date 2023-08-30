@@ -37,9 +37,9 @@ export const AuthProvider = ({ children }) => {
             }
 
             // Save the response sent after the post request.
-            const res = await axios.post("/auth/register", user);
+            const response = await axios.post("/auth/register", user);
 
-            setUser(res.data.user);
+            setUser(response.data.user);
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
@@ -50,9 +50,9 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (user) => {
         try {
-            const res = await axios.post("/auth/login", user);
+            const response = await axios.post("/auth/login", user);
 
-            setUser(res.data.user);
+            setUser(response.data.user);
             setIsAuthenticated(true);
 
         } catch (error) {
