@@ -1,0 +1,178 @@
+.editProduct-container {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.editProduct-wrapper {
+    margin: 0 auto;
+}
+
+.editProduct-title {
+    font-size: 1.5rem;
+}
+
+.editProduct-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.editProduct-imageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editProduct-infoImg {
+    width: 100%;
+    max-width: 18.75rem;
+}
+
+.editProduct-details {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editProduct-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.editProduct-quantityControl {
+    display: flex;
+    align-items: center;
+}
+
+.editProduct-ammountIcon {
+    margin: 0 1rem;
+    border-radius: 50%;
+}
+.editProduct-quantity {
+    font-size: x-large;
+}
+
+.editProduct-price {
+    font-size: xx-large;
+}
+
+.editProduct-deleteButton {
+    background-color: #f44336;
+    border-radius: 1rem;
+    color: white;
+    padding: 1rem;
+    font-size: large;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        background-color: #d32f2f;
+    }
+}
+
+.editProduct-summaryContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editProduct-summaryTitle {
+    font-size: xx-large;
+    margin-bottom: 2rem;
+}
+
+.editProduct-summaryItem {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.editProduct-summaryTotal {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.editProduct-btnRemove {
+    background-color: #f44336;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 2rem;
+    &:hover {
+        background-color: #d32f2f;
+    }
+}
+
+.noProducts {
+    font-size: larger;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+@media (min-width: 768px) {
+    .editProduct-container {
+        padding: 3rem;
+    }
+
+    .editProduct-wrapper {
+        max-width: 80rem;
+    }
+
+    .editProduct-title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .editProduct-details {
+        font-size: large;
+    }
+
+    .editProduct-infoImg {
+        max-width: 40rem;
+    }
+
+    .editProduct-actions {
+        margin-top: 1rem;
+    }
+
+    .editProduct-ammountIcon {
+        margin: 0 2rem;
+    }
+
+    .editProduct-deleteButton {
+        padding: 1rem;
+    }
+
+    .editProduct-summaryContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .editProduct-summaryTitle {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .editProduct-summaryItem {
+        font-size: x-large;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .editProduct-summaryTotal {
+        font-size: xx-large;
+        font-weight: bold;
+    }    
+
+    .editProduct-btnRemove {
+        font-size: x-large;
+        padding: 2rem;
+    }
+}

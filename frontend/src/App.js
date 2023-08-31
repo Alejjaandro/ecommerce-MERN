@@ -22,6 +22,7 @@ import AllUsers from './pages/AdminPages/AllUsers';
 import AllCarts from './pages/AdminPages/AllCarts';
 import EditProduct from './pages/AdminPages/EditProduct';
 import EditUser from './pages/AdminPages/EditUser';
+import EditCart from './pages/AdminPages/EditCart';
 import CreateProduct from './pages/AdminPages/CreateProduct';
 
 // Context Provider
@@ -65,6 +66,7 @@ export default function App() {
                     <Route path="/all-carts/" element={<AllCarts />} />
                     <Route path="/edit-product/:productId" element={<EditProduct />} />
                     <Route path="/edit-user/:userId" element={<EditUser />} />
+                    <Route path="/edit-cart/:cartId" element={<EditCart />} />
                     <Route path="/create-product" element={<CreateProduct />} />
                   </Route>
                 </Routes>

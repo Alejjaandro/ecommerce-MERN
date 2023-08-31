@@ -119,8 +119,6 @@ export const AdminProvider = ({ children }) => {
         }
     }
 
-
-
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
         if (errors.length > 0 || success) {

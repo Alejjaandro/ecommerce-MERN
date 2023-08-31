@@ -44,10 +44,10 @@ export const register = async (req, res, next) => {
             process.env.JWT_KEY,
             { expiresIn: '1h' }
         );
-
+        
         return res.cookie('token', accessToken, { httpOnly: false })
         .status(200)
-        .json({ message: 'Login successfull', user: savedUser, token: accessToken });
+        .json({ message: 'Login successfull', user: userWithoutPassword, token: accessToken });
 
     } catch (error) {
         return res.status(500).json(error.message);
@@ -83,7 +83,7 @@ export const login = async (req, res) => {
 
         return res.cookie('token', accessToken, { httpOnly: false })
             .status(200)
-            .json({ message: 'Login successfull', user: user, token: accessToken });
+            .json({ message: 'Login successfull', user: userWithoutPassword, token: accessToken });
 
     } catch (error) {
         return res.status(500).json(error.message);

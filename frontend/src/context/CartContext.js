@@ -89,6 +89,8 @@ export const CartProvider = ({ children }) => {
     const deleteCart = async (userId) => {
         try {
             await axios.delete(`/carts/${userId}`);
+            setCart([]);
+            setProductsNumber(0);
         } catch (error) {
             console.log(error);
         }
