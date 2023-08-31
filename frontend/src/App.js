@@ -33,14 +33,14 @@ import { UserProvider } from './context/UserContext';
 import { AdminProvider } from './context/AdminContext';
 
 export default function App() {
-  
+
   return (
 
     <AuthProvider>
-      <AdminProvider>
-        <ProductsProvider>
-          <CartProvider>
-            <UserProvider>
+      <ProductsProvider>
+        <CartProvider>
+          <UserProvider>
+            <AdminProvider>
 
               <BrowserRouter>
                 <Routes>
@@ -54,13 +54,13 @@ export default function App() {
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   {/* Users Routes */}
-                  <Route element={<ProtectedRoutes/>}>
+                  <Route element={<ProtectedRoutes />}>
                     <Route path="/my-profile/:userId" element={<MyProfile />} />
                     <Route path="/settings/:userId" element={<Settings />} />
                     <Route path="/cart/:userId" element={<Cart />} />
                   </Route>
                   {/* Admin Routes */}
-                  <Route element={<AdminRoutes/>}>
+                  <Route element={<AdminRoutes />}>
                     <Route path="/all-products/" element={<AllProducts />} />
                     <Route path="/all-users/" element={<AllUsers />} />
                     <Route path="/all-carts/" element={<AllCarts />} />
@@ -72,10 +72,10 @@ export default function App() {
                 </Routes>
               </BrowserRouter>
 
-            </UserProvider>
-          </CartProvider>
-        </ProductsProvider>
-      </AdminProvider>
+            </AdminProvider>
+          </UserProvider>
+        </CartProvider>
+      </ProductsProvider>
     </AuthProvider>
   );
 }

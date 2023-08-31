@@ -31,7 +31,7 @@ export const AdminProvider = ({ children }) => {
     const adminUpdateUser = async (userId, data) => {
         try {
             const response = await axios.put(`/users/adminUpdate/${userId}`, data);
-            setSuccess(Object.values(response.data));
+            setSuccess([response.data.message]);
         } catch (error) {
             setErrors(Object.values(error.response.data));
         }

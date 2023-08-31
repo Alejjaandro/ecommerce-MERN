@@ -47,7 +47,7 @@ export const updateUser = async (req, res) => {
             $set: req.body
         }, { new: true })
 
-        return res.status(200).json('User info Updated');
+        return res.status(200).json({message: 'User info Updated', updatedUser: updatedUser});
 
     } catch (error) {
         return res.status(500).json(error);
@@ -74,7 +74,8 @@ export const adminUpdateUser = async (req, res) => {
             $set: req.body
         }, { new: true })
 
-        return res.status(200).json({ message: 'User info Updated' });
+        const { password, ...noPasswordUpdatedUser } = updatedUser._doc;
+        return res.status(200).json({ message: 'User info Updated', updatedUser: noPasswordUpdatedUser });
 
     } catch (error) {
         return res.status(500).json(error);

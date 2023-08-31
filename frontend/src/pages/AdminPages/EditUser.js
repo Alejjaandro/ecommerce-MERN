@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import AdminNavbar from '../../components/AdminNavbar';
 import { useAdmin } from '../../context/AdminContext';
+import { useAuth } from '../../context/AuthContext';
+import { useUser } from '../../context/UserContext';
 
 import './styles/EditUser.css';
 
 export default function EditUser() {
 
     const { adminGetUser, user, setUser, adminUpdateUser, success, errors } = useAdmin();
+    const { getUser } = useUser();
+    const {user: currentAdmin} = useAuth();
 
     const userId = window.location.pathname.split("/")[2];
     useEffect(() => {
@@ -26,8 +30,14 @@ export default function EditUser() {
 
         if (data.password === '') { delete data.password; }
 
-        // Petition to modify user data.
-        await adminUpdateUser(userId, data);
+        // Petitions to modify user data.
+        // If the admin is modifying his own data, we need to update the user state.
+        if (user._id === currentAdmin._id) {
+            await adminUpdateUser(currentAdmin._id, data);
+            await getUser(currentAdmin._id);
+        } else {
+            await adminUpdateUser(userId, data);
+        }
     };
 
     return (
