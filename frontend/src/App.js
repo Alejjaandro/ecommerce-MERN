@@ -13,8 +13,9 @@ import CategoryProducts from './pages/CategoryProducts';
 
 import ProtectedRoutes from './middleware/ProtectedRoutes';
 import Settings from './pages/Settings';
-import Cart from './pages/Cart';
 import MyProfile from './pages/MyProfile';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 
 import AdminRoutes from './middleware/AdminRoutes';
 import AllProducts from './pages/AdminPages/AllProducts';
@@ -58,6 +59,7 @@ export default function App() {
                     <Route path="/my-profile/:userId" element={<MyProfile />} />
                     <Route path="/settings/:userId" element={<Settings />} />
                     <Route path="/cart/:userId" element={<Cart />} />
+                    <Route path="/checkout/:userId" element={<Checkout />} />
                   </Route>
                   {/* Admin Routes */}
                   <Route element={<AdminRoutes />}>

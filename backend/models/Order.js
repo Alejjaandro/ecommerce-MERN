@@ -3,28 +3,12 @@ import mongoose from 'mongoose';
 // Create the model data for cart.
 const OrderSchema = new mongoose.Schema(
     {
-        userId: {
-            type: String,
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
             required: true
         },
 
-        products: [
-            {
-                productId: {
-                    type: String
-                },
-                
-                quantity: {
-                    type: Number,
-                    default: 1
-                }
-            }
-        ],
-
-        ammount: {
-            type: Number,
-            required: true
-        },
+        products: [],
 
         address: {
             type: Object,

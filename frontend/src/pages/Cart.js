@@ -8,6 +8,7 @@ import './styles/Cart.css';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Cart() {
     // We extract what we need from the context.
@@ -53,15 +54,14 @@ export default function Cart() {
 
                 <div className="cart-top">
 
-                    <button className='top-button'>CONTINUE SHOPPING</button>
+                    <Link to='/products'><button className='top-button'>CONTINUE SHOPPING</button></Link>
 
                     <div className='top-texts'>
                         <span className='top-text'>Shopping Cart ({productsNumber})</span>
                         <span className='top-text'>Your Wishlist (0)</span>
                     </div>
 
-                    <button className='top-button'>CHECKOUT NOW</button>
-
+                    <Link to={`/checkout/${user._id}`}><button className='top-button'>CHECKOUT NOW</button></Link>
                 </div>
 
                 {/* Body container */}
