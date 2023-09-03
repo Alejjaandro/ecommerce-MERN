@@ -28,8 +28,6 @@ export default function CreateProduct() {
         createProduct(data);
     };
 
-    console.log(success);
-
     return (
         <>
             <AdminNavbar />

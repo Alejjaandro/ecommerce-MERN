@@ -3,14 +3,14 @@ import mongoose from 'mongoose';
 // Create the model data for cart.
 const OrderSchema = new mongoose.Schema(
     {
-        _id: {
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true
         },
 
         products: [],
 
-        address: {
+        orderInfo: {
             type: Object,
             required: true,
         },
@@ -19,7 +19,7 @@ const OrderSchema = new mongoose.Schema(
             type: String,
             default: "Pending"
         }
-        
+
     },
 
     {timestamps: true}

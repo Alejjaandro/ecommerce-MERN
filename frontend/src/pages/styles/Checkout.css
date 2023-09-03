@@ -43,6 +43,10 @@
     flex-wrap: wrap;
 }
 
+.payment-info input {
+    width: 100%;
+}
+
 .checkout-buttons {
     display: flex;
     justify-content: space-between;

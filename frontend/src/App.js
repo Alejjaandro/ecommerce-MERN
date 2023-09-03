@@ -32,6 +32,7 @@ import { ProductsProvider } from './context/ProductsContext.js';
 import { CartProvider } from './context/CartContext.js';
 import { UserProvider } from './context/UserContext';
 import { AdminProvider } from './context/AdminContext';
+import { OrderProvider } from './context/OrderContext';
 
 export default function App() {
 
@@ -42,6 +43,7 @@ export default function App() {
         <CartProvider>
           <UserProvider>
             <AdminProvider>
+              <OrderProvider>
 
               <BrowserRouter>
                 <Routes>
@@ -74,6 +76,7 @@ export default function App() {
                 </Routes>
               </BrowserRouter>
 
+              </OrderProvider>
             </AdminProvider>
           </UserProvider>
         </CartProvider>

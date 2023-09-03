@@ -5,29 +5,33 @@ import './styles/Checkout.css';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 // "react-country-region-selector" provides a pair of React components to display connected country and region dropdowns.
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 // A simple and reusable Datepicker component for React.
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useOrder } from '../context/OrderContext';
 
 export default function Checkout() {
 
     const { user } = useAuth();
     const { getCart, cart } = useCart();
-
-    let subtotal;
-    let shippingCost;
+    const { createOrder, success } = useOrder();
+    const navigate = useNavigate();
 
     useEffect(() => { getCart(user._id) }, []);
 
+    // Calculate the subtotal and shipping cost.
+    let subtotal;
+    let shippingCost;
     if (cart) {
         subtotal = cart.reduce((total, product) => total + (product.product.price * product.quantity), 0);
         // shippingCost is hard coded just as example.
         (subtotal > 0) ? shippingCost = 10.50 : shippingCost = 0;
     }
 
+    // For the country and region dropdowns, and the expiration date.
     const [country, setCountry] = useState('');
     const [region, setRegion] = useState('');
     const [startDate, setStartDate] = useState(new Date());
@@ -35,16 +39,25 @@ export default function Checkout() {
     // For the checkbox "Same as Customer".
     const [sameAsCustomer, setSameAsCustomer] = useState(false);
 
+    // Handle the form submit.
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-
-        // Here you would typically send the data to your backend
-        console.log(data);
+        createOrder(user._id, data, cart);
     };
 
+    // If the order is created successfully, redirect to home page after 5 seconds.
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => {
+                navigate('/');
+            }, 5000);
+            // Clear timeout if the component is unmounted.
+            return () => clearTimeout(timer);
+        }
+    }, [success]);
     return (
         <>
             <Navbar />
@@ -111,10 +124,6 @@ export default function Checkout() {
                                 <input className="checkout-input" type="number" name='cardNumber' required />
                             </div>
                             <div className="field">
-                                <label>Billing Zip:</label>
-                                <input className="checkout-input" type="number" name='billingZip' required />
-                            </div>
-                            <div className="field">
                                 <label>Expiration Date:</label>
                                 <DatePicker
                                     name='expirationDate'
@@ -134,7 +143,7 @@ export default function Checkout() {
                         {/* BILLING ADRESS */}
                         <h1>Billing Adress</h1>
                         <span> Same as Customer: <input className="checkout-input" type="checkbox" onChange={(e) => setSameAsCustomer(e.target.checked)} /></span>
-                        <div class="billing-address">
+                        <div className="billing-address">
                             <div className="field">
                                 <label>Billing Name:</label>
                                 <input
@@ -181,6 +190,11 @@ export default function Checkout() {
                             </div>
                         </div>
 
+                        {/* Success */}
+                        {success && success.map((message, index) => (
+                            <p key={index} className="success">{message}</p>
+                        ))}
+
                         <div className="checkout-buttons">
                             <button className='checkout-button' type='submit'>CHECKOUT</button>
                             <Link className='cart-link' to={`/cart/${user._id}`}>Back To Cart</Link>
@@ -221,7 +235,6 @@ export default function Checkout() {
                         <span>Total: </span>
                         <span>${subtotal + shippingCost}</span>
                     </div>
-
                 </div>
             </div>
             <Footer />
