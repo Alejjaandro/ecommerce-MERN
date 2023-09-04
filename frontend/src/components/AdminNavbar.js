@@ -7,6 +7,8 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+
 
 // Styles
 import './styles/AdminNavbar.css';
@@ -52,6 +54,7 @@ export default function Navbar() {
           <li><Link to='/all-products'>All Products</Link></li>
           <li><Link to='/all-users'>All Users</Link></li>
           <li><Link to='/all-carts'>All Carts</Link></li>
+          <li><Link to='/all-orders'>All Orders</Link></li>
         </ul>
       </div>
 
@@ -80,6 +83,7 @@ export default function Navbar() {
               <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
               <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
               <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart ({productsNumber})</Link>
+              <Link to={`/my-orders/${user._id}`}><AssessmentIcon /> My Orders</Link>
               <Link to={`/create-product`}><AddBoxIcon /> Create New Product</Link>
 
               <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>

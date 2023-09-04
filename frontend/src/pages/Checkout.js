@@ -24,11 +24,13 @@ export default function Checkout() {
 
     // Calculate the subtotal and shipping cost.
     let subtotal;
+    let total;
     let shippingCost;
     if (cart) {
         subtotal = cart.reduce((total, product) => total + (product.product.price * product.quantity), 0);
         // shippingCost is hard coded just as example.
         (subtotal > 0) ? shippingCost = 10.50 : shippingCost = 0;
+        total = subtotal + shippingCost;
     }
 
     // For the country and region dropdowns, and the expiration date.
@@ -43,8 +45,9 @@ export default function Checkout() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-
+        let data = Object.fromEntries(formData);
+        // Add the cost to the data object.
+        data = { ...data, subtotal, shippingCost, total };
         createOrder(user._id, data, cart);
     };
 
@@ -58,6 +61,7 @@ export default function Checkout() {
             return () => clearTimeout(timer);
         }
     }, [success]);
+
     return (
         <>
             <Navbar />
@@ -156,12 +160,12 @@ export default function Checkout() {
                             </div>
                             <div className="field">
                                 <label>Address:</label>
-                                <input className="checkout-input" type="text" name='address' required disabled={sameAsCustomer} />
+                                <input className="checkout-input" type="text" name='billingAddress' required disabled={sameAsCustomer} />
                             </div>
                             <div className="field">
                                 <label>Country:</label>
                                 <CountryDropdown
-                                    name='country'
+                                    name='billingCountry'
                                     value={country}
                                     onChange={(value) => setCountry(value)}
                                     className="checkout-input"
@@ -170,12 +174,12 @@ export default function Checkout() {
                             </div>
                             <div className="field">
                                 <label>State:</label>
-                                <input className="checkout-input" type="text" name='state' required disabled={sameAsCustomer} />
+                                <input className="checkout-input" type="text" name='billingState' disabled={sameAsCustomer} />
                             </div>
                             <div className="field">
                                 <label>City:</label>
                                 <RegionDropdown
-                                    name='city'
+                                    name='billingCity'
                                     className="checkout-input"
                                     disableWhenEmpty={true}
                                     country={country}
@@ -186,7 +190,7 @@ export default function Checkout() {
                             </div>
                             <div className="field">
                                 <label>Zip Code:</label>
-                                <input className="checkout-input" type="number" name='zipcode' required disabled={sameAsCustomer} />
+                                <input className="checkout-input" type="number" name='billingZipcode' required disabled={sameAsCustomer} />
                             </div>
                         </div>
 

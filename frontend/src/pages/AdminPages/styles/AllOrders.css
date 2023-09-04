@@ -1,0 +1,27 @@
+.allOrders-container {
+    width: 100%;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.allOrders-container h1 {
+    text-align: center;
+}
+
+.allOrders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.allOrders-table-head th {
+    text-align: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.allOrders-table-body td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+@media (min-width: 768px) {}

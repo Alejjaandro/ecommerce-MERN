@@ -15,12 +15,15 @@ import ProtectedRoutes from './middleware/ProtectedRoutes';
 import Settings from './pages/Settings';
 import MyProfile from './pages/MyProfile';
 import Cart from './pages/Cart';
+import MyOrders from './pages/MyOrders';
 import Checkout from './pages/Checkout';
 
 import AdminRoutes from './middleware/AdminRoutes';
 import AllProducts from './pages/AdminPages/AllProducts';
 import AllUsers from './pages/AdminPages/AllUsers';
 import AllCarts from './pages/AdminPages/AllCarts';
+import AllOrders from './pages/AdminPages/AllOrders';
+import OrderDetails from './pages/AdminPages/OrderDetails';
 import EditProduct from './pages/AdminPages/EditProduct';
 import EditUser from './pages/AdminPages/EditUser';
 import EditCart from './pages/AdminPages/EditCart';
@@ -61,16 +64,19 @@ export default function App() {
                     <Route path="/my-profile/:userId" element={<MyProfile />} />
                     <Route path="/settings/:userId" element={<Settings />} />
                     <Route path="/cart/:userId" element={<Cart />} />
+                    <Route path="/my-orders/:userId" element={<MyOrders />} />
                     <Route path="/checkout/:userId" element={<Checkout />} />
                   </Route>
                   {/* Admin Routes */}
                   <Route element={<AdminRoutes />}>
                     <Route path="/all-products/" element={<AllProducts />} />
-                    <Route path="/all-users/" element={<AllUsers />} />
-                    <Route path="/all-carts/" element={<AllCarts />} />
                     <Route path="/edit-product/:productId" element={<EditProduct />} />
+                    <Route path="/all-users/" element={<AllUsers />} />
                     <Route path="/edit-user/:userId" element={<EditUser />} />
+                    <Route path="/all-carts/" element={<AllCarts />} />
                     <Route path="/edit-cart/:cartId" element={<EditCart />} />
+                    <Route path="/all-orders/" element={<AllOrders />} />
+                    <Route path="/order-details/:orderId" element={<OrderDetails />} />
                     <Route path="/create-product" element={<CreateProduct />} />
                   </Route>
                 </Routes>

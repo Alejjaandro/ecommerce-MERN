@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 // Styles
 import './styles/Navbar.css';
@@ -94,6 +95,7 @@ export default function Navbar() {
                 <Link to={`/my-profile/${user._id}`}><AccountBoxIcon /> My Profile</Link>
                 <Link to={`/settings/${user._id}`}><SettingsIcon /> Settings</Link>
                 <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart ({productsNumber})</Link>
+                <Link to={`/my-orders/${user._id}`}><AssessmentIcon /> My Orders</Link>
 
                 <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>
 

@@ -16,8 +16,7 @@ export const OrderProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState([]);
 
-    // Create Order
-    const [order, setOrder] = useState();
+    // ===== CREATE ORDER ===== //
     const createOrder = async (userId, order, cart) => {
         try {
             const response = await axios.post("/orders/", {userId, order, cart});
@@ -28,7 +27,37 @@ export const OrderProvider = ({ children }) => {
         }
     }
 
+    // ===== GET USER ORDERS ===== //
+    const [orders, setOrders] = useState();
+    const getOrders = async (userId) => {
+        try {
+            const response = await axios.get(`orders/find/${userId}`);
+            setOrders(response.data);
+        } catch (error) {
+            console.log(error);;
+        }
+    }
 
+    // ===== GET SINGLE ORDER ===== //
+    const [order, setOrder] = useState();
+    const getOrder = async (orderId) => {
+        try {
+            const response = await axios.get(`orders/find/${orderId}`);
+            setOrder(response.data);
+        } catch (error) {
+            console.log(error);;
+        }
+    }
+
+    // ===== DELETE ORDER ===== //
+    const deleteOrder = async (orderId) => {
+        try {
+            const response = await axios.delete(`orders/${orderId}`);
+            console.log(response.data);        
+        } catch (error) {
+            console.log(error);;
+        }
+    }
 
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
@@ -44,7 +73,11 @@ export const OrderProvider = ({ children }) => {
     return (
         <OrderContext.Provider value={{
             createOrder,
+            getOrders,
+            orders,
+            getOrder,
             order,
+            deleteOrder,
 
             success,
         }}>

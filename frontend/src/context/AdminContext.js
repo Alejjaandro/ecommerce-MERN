@@ -119,6 +119,17 @@ export const AdminProvider = ({ children }) => {
         }
     }
 
+    // ===== GET ALL ORDERS ===== //
+    const [allOrders, setAllOrders] = useState([]);
+    const getAllOrders = async () => {
+        try {
+            const response = await axios.get('/orders/');
+            setAllOrders(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
         if (errors.length > 0 || success) {
@@ -148,6 +159,9 @@ export const AdminProvider = ({ children }) => {
             getAllCarts,
             adminDeleteCart,
             allCarts,
+
+            getAllOrders,
+            allOrders,
 
             errors,
             success

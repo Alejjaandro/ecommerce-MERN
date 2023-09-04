@@ -23,11 +23,11 @@ export const createOrder = async (req, res) => {
 // ===== UPDATE Order ===== //
 export const updateOrder = async (req, res) => {
     try {
-        const updatedCart = await Cart.findByIdAndUpdate(req.params.id, {
+        const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, { new: true })
 
-        res.status(200).json(updatedCart);
+        res.status(200).json(updatedOrder);
 
     } catch (error) {
         res.status(500).json(error);
@@ -36,10 +36,9 @@ export const updateOrder = async (req, res) => {
 
 // ===== DELETE Order ===== //
 export const deleteOrder = async (req, res) => {
-
     try {
-        await Cart.findByIdAndDelete(req.params.id);
-
+        console.log(req.params.id);
+        await Order.findByIdAndDelete(req.params.id);
         res.status(200).json('Order Deleted');
 
     } catch (error) {
@@ -49,12 +48,20 @@ export const deleteOrder = async (req, res) => {
 
 // ===== GET User Order ===== //
 export const getUserOrder = async (req, res) => {
-
     try {
-        const orders = await Order.findOne({ userId: req.params.userId });
-
+        const orders = await Order.find({ userId: req.params.userId });
         res.status(200).json(orders);
 
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+// ===== GET single Order ===== //
+export const getOrder = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.orderId);
+        res.status(200).json(order);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -65,7 +72,6 @@ export const getAllOrders = async (req, res) => {
 
     try {
         const orders = await Order.find();
-
         res.status(200).json(orders);
 
     } catch (error) {
