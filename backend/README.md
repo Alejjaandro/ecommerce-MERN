@@ -4,16 +4,18 @@ This project is a full-stack application with a backend built using Node.js, Exp
 
 ## Technologies Used
 
-- Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine.
-- Express.js: A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-- MongoDB: A source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.
-- Mongoose: An Object Data Modeling (ODM) library for MongoDB and Node.js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
-- Dotenv: A zero-dependency module that loads environment variables from a .env file into process.env.
-- Cors: A Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
-- Cookie-parser: A middleware which parses cookies attached to the client request object.
-- Morgan: An HTTP request logger middleware for Node.js.
-- Bcrypt: A library to help you hash passwords.
-- Jsonwebtoken: An implementation of JSON Web Tokens.
+- [Node.js:](https://nodejs.org/es/about) A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [Express.js:](https://expressjs.com/) A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+- [MongoDB:](https://www.mongodb.com/es) A source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.
+- [Mongoose:](https://mongoosejs.com/) An Object Data Modeling (ODM) library for MongoDB and Node.js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
+- [Dotenv:](https://github.com/motdotla/dotenv#readme) A zero-dependency module that loads environment variables from a .env file into process.env.
+- [Cors:](https://github.com/expressjs/cors#readme) A Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+- [Cookie-parser:](https://github.com/expressjs/cookie-parser#readme) A middleware which parses cookies attached to the client request object.
+- [Morgan:](https://github.com/expressjs/morgan#readme) An HTTP request logger middleware for Node.js.
+- [Bcrypt:](https://github.com/kelektiv/node.bcrypt.js#readme) A library to help you hash passwords.
+- [Jsonwebtoken:](https://github.com/auth0/node-jsonwebtoken#readme) An implementation of JSON Web Tokens.
+- [zod:](https://zod.dev/) A TypeScript-first schema declaration and validation library.
+- [nodemon:](https://nodemon.io/) Simple monitor script for use during development of a Node.js app.
 
 ## Project Structure
 
@@ -36,7 +38,7 @@ The backend provides several API endpoints grouped by their functionality:
 
 ## Running the Backend
 
-To run the backend, use the following command: npm start
+To run the backend, use the following command: `npm start`
 
 This will start the server at <http://localhost:8000/api>.
 
@@ -49,6 +51,7 @@ The backend uses the following environment variables:
 - ADMIN_KEY: The key for creating admin users.
 
 These should be defined in a .env file in the root directory of the backend.
-Conclusion
+
+## Conclusion
 
 This backend provides a robust API for the frontend, handling all necessary CRUD operations and user authentication.
