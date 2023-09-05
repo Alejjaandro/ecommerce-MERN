@@ -138,10 +138,9 @@
 }
 
 /* ==== Products Summary ==== */
-
 .product-summary {
     flex: 1;
-    
+    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -153,6 +152,7 @@
 }
 
 .summary-title {
+    text-align: center;
     font-size: 2.25rem;
     font-weight: 200;
 }
@@ -167,7 +167,7 @@
 
 .summary-total {
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .summary-button {
