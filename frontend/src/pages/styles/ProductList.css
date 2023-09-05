@@ -3,7 +3,7 @@
 }
 
 .title {
-    margin: 1rem 1rem;
+    margin: 1rem;
     text-transform: uppercase;
     font-weight: 300;
 
@@ -15,27 +15,40 @@
     justify-content: space-around;
 }
 
-.filter {
-    margin: 1rem;
+.filter, .sort {
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.50rem;
 }
 
-.sort {
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
 .filter-text {
-    font-size: 1.25rem;
+    font-size: medium;
     font-weight: 600;
-
-    margin-right: 0.5rem;
 }
 
 /* Selectors */
 .select {
-    padding: 1rem;
+    width: 75%;
+    padding: 0.5rem;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
+    .filter-text {
+        font-size: 1.25rem;
+    }
+
+    .select {
+        width: 100%;
+    }
+}
+/* Deskop styles */
+@media (min-width: 1024px) {
+    .filter {
+        gap: 1rem;
+    }
+    .filter-text {
+        font-size: 1.5rem;
+    }
 }

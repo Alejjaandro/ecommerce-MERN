@@ -9,10 +9,10 @@ import { useEffect } from 'react';
 
 export default function MyOrders() {
 
-    const { getOrders, orders } = useOrder();
+    const { getUserOrders, orders } = useOrder();
     const userId = window.location.pathname.split('/')[2];
 
-    useEffect(() => { getOrders(userId) }, []);
+    useEffect(() => { getUserOrders(userId) }, []);
     console.log(orders);
 
     // Function to format the date.
@@ -51,6 +51,7 @@ export default function MyOrders() {
                                     </div>
                                 ))}
                             </div>
+                            <h1><strong>Total:</strong> ${order.orderInfo.total}</h1>
                         </div>
                     )) : <h1>You don't have any orders yet.</h1>}
                 </div>

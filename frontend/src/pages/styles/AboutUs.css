@@ -8,26 +8,38 @@
 
 .aboutUs-wrapper {
     display: flex;
-    gap: 1rem;
-
+    justify-content: center;
     padding: 2rem;
 }
 
-.aboutUs-image {    
-    width: 50%;
-    border-radius: 1rem;
-}
-
-.aboutUs-text {
-    width: 50%;
+.aboutUs-image {
+    display: none;
 }
 
 .aboutUs-text h1 {
     font-weight: 800;
     font-size: xx-large;
+    margin-bottom: 1rem;
 }
 
 .aboutUs-text p {
     font-weight: 500;
     font-size: large;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+
+    .aboutUs-wrapper {
+        gap: 1rem;
+    }
+    .aboutUs-image {
+        display: block;
+        width: 50%;
+        border-radius: 1rem;
+    }
+
+    .aboutUs-text {
+        width: 50%;
+    }    
 }

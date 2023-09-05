@@ -52,10 +52,6 @@ export default function Product({ item }) {
           <ShoppingCartIcon />
         </button>
 
-        <button className="prod-icon">
-          <FavoriteBorderIcon />
-        </button>
-
         <Link className="prod-icon" to={`/product/${item._id}`}>
           <SearchIcon />
         </Link>

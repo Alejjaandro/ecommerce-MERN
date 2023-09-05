@@ -90,10 +90,6 @@ export default function CreateProduct() {
                             <label className="newProduct-form-label">Description: </label>
                             <textarea className="newProduct-form-input" name='description'/>
                         </div>
-                        <div className="newProduct-form-group">
-                            <label className="newProduct-form-label">Images: </label>
-                            <input type='file' multiple className="newProduct-form-input" name='images'/>
-                        </div>
                         <button type="submit" className="newProduct-submit-button">Create Product</button>
                     </form>
                 </div>

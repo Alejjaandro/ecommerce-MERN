@@ -15,7 +15,7 @@ export default function Cart() {
     const { user } = useAuth();
     const { getCart, cart, productsNumber, deleteProduct, deleteCart, addToCart } = useCart();
 
-    useEffect(() => {getCart(user._id)}, []);
+    useEffect(() => { getCart(user._id) }, []);
 
     // Initialize some variables for later
     let subtotal;
@@ -56,10 +56,7 @@ export default function Cart() {
 
                     <Link to='/products'><button className='top-button'>CONTINUE SHOPPING</button></Link>
 
-                    <div className='top-texts'>
-                        <span className='top-text'>Shopping Cart ({productsNumber})</span>
-                        <span className='top-text'>Your Wishlist (0)</span>
-                    </div>
+                    <span className='top-texts'>Shopping Cart ({productsNumber})</span>
 
                     <Link to={`/checkout/${user._id}`}><button className='top-button'>CHECKOUT NOW</button></Link>
                 </div>
@@ -111,7 +108,7 @@ export default function Cart() {
                                         </div>
 
                                     </div>
-                                    <hr />
+                                    <hr className='hr' />
                                 </>
                             );
                         }) : (

@@ -1,19 +1,22 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-
     padding: 1rem;
-    min-height: 85vh;
+    min-height: 100vh;
 }
 
+.profile-name h1, .profile-lastname h1, .profile-username h1, .profile-email h1, .profile-created h1, .profile-updated h1 {
+    font-size: x-large;
+}
 .profile-name, .profile-lastname, .profile-username, .profile-email, .profile-created, .profile-updated {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.5rem;
 
-    font-size: x-large;
+    font-size: large;
 }
 
 /* Profile Image */
@@ -21,6 +24,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.5rem;
 }
 .profile-image svg {
     width: max-content;
@@ -35,7 +39,6 @@
 .profile-image h1 {
     font-size: x-large;
     font-weight: 400;
-    
     margin-bottom: 2rem;
 }
 
@@ -72,4 +75,25 @@
     &&:hover {
         background-color: red;
     }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .profile-name h1, .profile-lastname h1, .profile-username h1, .profile-email h1, .profile-created h1, .profile-updated h1 {
+        font-size: xx-large;
+    }
+    .profile-name, .profile-lastname, .profile-username, .profile-email, .profile-created, .profile-updated {
+        font-size: x-large;
+    }
+    
+}
+/* Deskop Styles */
+@media (min-width: 1024px) {
+    .profile-name h1, .profile-lastname h1, .profile-username h1, .profile-email h1, .profile-created h1, .profile-updated h1 {
+        font-size: 3rem;
+    }
+    .profile-name, .profile-lastname, .profile-username, .profile-email, .profile-created, .profile-updated {
+        font-size: 2rem;
+    }
+    
 }

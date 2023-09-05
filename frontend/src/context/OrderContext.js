@@ -29,9 +29,10 @@ export const OrderProvider = ({ children }) => {
 
     // ===== GET USER ORDERS ===== //
     const [orders, setOrders] = useState();
-    const getOrders = async (userId) => {
+    const getUserOrders = async (userId) => {
         try {
-            const response = await axios.get(`orders/find/${userId}`);
+            const response = await axios.get(`/orders/find/${userId}`);
+            console.log(response.data);
             setOrders(response.data);
         } catch (error) {
             console.log(error);;
@@ -42,7 +43,7 @@ export const OrderProvider = ({ children }) => {
     const [order, setOrder] = useState();
     const getOrder = async (orderId) => {
         try {
-            const response = await axios.get(`orders/find/${orderId}`);
+            const response = await axios.get(`/findOrder/find/${orderId}`);
             setOrder(response.data);
         } catch (error) {
             console.log(error);;
@@ -52,7 +53,7 @@ export const OrderProvider = ({ children }) => {
     // ===== DELETE ORDER ===== //
     const deleteOrder = async (orderId) => {
         try {
-            const response = await axios.delete(`orders/${orderId}`);
+            const response = await axios.delete(`/orders/${orderId}`);
             console.log(response.data);        
         } catch (error) {
             console.log(error);;
@@ -73,7 +74,7 @@ export const OrderProvider = ({ children }) => {
     return (
         <OrderContext.Provider value={{
             createOrder,
-            getOrders,
+            getUserOrders,
             orders,
             getOrder,
             order,

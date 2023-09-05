@@ -5,7 +5,7 @@ import './styles/Checkout.css';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // "react-country-region-selector" provides a pair of React components to display connected country and region dropdowns.
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 // A simple and reusable Datepicker component for React.
@@ -226,7 +226,7 @@ export default function Checkout() {
                                         <span><strong>${(product.product.price * product.quantity)}</strong></span>
                                     </div>
                                 </div>
-                                <hr />
+                                <hr className='hr'/>
                             </>
                         ))}
                     </div>
