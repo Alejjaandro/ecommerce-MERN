@@ -23,11 +23,11 @@ MORE DETAILS ON BACKEND AND FRONTEND README.md
 
 ## Installation
 
-To install the project, clone the repository and install the dependencies using npm install.
+To install the project, clone the repository and install the dependencies using `npm install`.
 
 ## Usage
 
-To start the server, use the command npm start. The server will start on the port specified in the .env file or port 8000 by default.
+To start the server, use the command `npm start`. The server will start on the port specified in the `.env` file or port `8000` by default.
 
 ## API Endpoints
 
