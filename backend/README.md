@@ -30,11 +30,11 @@ The backend is structured into models, routes, controllers, and middleware.
 
 The backend provides several API endpoints grouped by their functionality:
 
-- Auth: Handles user registration and login.
-- Users: Handles CRUD operations for users.
-- Products: Handles CRUD operations for products.
-- Carts: Handles operations for user carts.
-- Orders: Handles operations for user orders.
+- Auth: `/api/auth` Handles user registration and login. 
+- Users: `/api/users` Handles CRUD operations for users. 
+- Products: `/api/products` Handles CRUD operations for products. 
+- Carts: `/api/carts` Handles operations for user carts. 
+- Orders: `/api/orders` Handles operations for user orders.
 
 ## Running the Backend
 
