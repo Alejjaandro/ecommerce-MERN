@@ -1,9 +1,6 @@
 .cat-item-container {
-    margin: 0.5rem;
     padding: 0.5rem;
-
     background-color: silver;
-
     position: relative;
 }
 
@@ -28,17 +25,18 @@
 }
 
 .cat-title {
+    text-align: center;
     background-color: white;
     color: black;
     
-    padding: 0.5rem;
+    padding: 0.25rem;
     margin-bottom: 1rem;
 }
 
 .cat-link {
     text-decoration: none;
     border: none;
-    padding: 10px;
+    padding: 0.25rem;
 
     background-color: lightgray;
     color: black;
@@ -46,5 +44,21 @@
 
     &:hover {
         background-color: gray;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
+    .cat-title, .cat-link {
+        font-size: x-large;
+        padding: 0.5rem;
+    }
+}
+
+/* Laptop styles */
+@media (min-width: 1024px) {
+    .cat-title, .cat-link {
+        font-size: xx-large;
+        padding: 1rem;
     }
 }

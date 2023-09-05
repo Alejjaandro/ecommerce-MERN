@@ -1,7 +1,7 @@
 import CategoryItem from "./CategoryItem";
 import './styles/Categories.css';
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useProducts } from '../context/ProductsContext.js';
 

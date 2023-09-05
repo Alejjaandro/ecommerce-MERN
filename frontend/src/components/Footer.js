@@ -32,7 +32,7 @@ export default function Footer() {
       {/* CENTER */}
       <div className="useful-links">
 
-        <h3>Useful Links</h3>
+        <h2>Useful Links</h2>
 
         <div className='links'>
           <Link to='/'> - Home</Link>
@@ -44,7 +44,7 @@ export default function Footer() {
 
       {/* LEFT */}
       <div className="contact">
-        <h3>Contact</h3>
+        <h2>Contact</h2>
         <p><RoomIcon /> C/ example, 23</p>
         <p><LocalPhoneIcon />+34 914 827 549</p>
         <p><AlternateEmailIcon /> example@example.com</p>

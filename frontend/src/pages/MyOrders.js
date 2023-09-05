@@ -27,7 +27,7 @@ export default function MyOrders() {
             <div className='myOrders-container'>
                 <h1>My Orders</h1>
                 <div className='myOrders'>
-                    {orders?.map(order => (
+                    {orders ? orders.map(order => (
                         <div className='myOrder' key={order._id}>
                             <div class="myOrder-info-container">
                                 <div class="myOrder-info">
@@ -52,7 +52,7 @@ export default function MyOrders() {
                                 ))}
                             </div>
                         </div>
-                    ))}
+                    )) : <h1>You don't have any orders yet.</h1>}
                 </div>
             </div>
             <Footer />

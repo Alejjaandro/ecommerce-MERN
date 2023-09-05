@@ -1,87 +1,91 @@
-/* FOOTER CONTAINER */
+/* Mobile styles */
 .foot-container {
     padding: 0.5rem;
-    background-color: black;
-    color: white;
-    
     display: flex;
+    align-items: center;
     justify-content: space-around;
+    color: white;
+    background-color: black;
 }
 
-/* LEFT Company info */
-.company-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.company-info h2, .useful-links h2, .contact h2 {
+    display: none;
 }
 
 .foot-icons-cont {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-around;
-}
-
-.icon-facebook {
-    background-color: blue;
-
-    border-radius: 50%;
-    padding: 0.5rem;
-
-    &:hover {
-        transform: scale(1.2);
-        cursor: pointer;
-    }
-}
-.icon-twitter {
-    background-color: cyan;
-    color: black;
-
-    border-radius: 50%;
-    padding: 0.5rem;
-
-    &:hover {
-        transform: scale(1.2);
-        cursor: pointer;
-    }
-}
-.icon-insta {
-    background-color: palevioletred;
-
-    border-radius: 50%;
-    padding: 0.5rem;
-
-    &:hover {
-        transform: scale(1.2);
-        cursor: pointer;
-    }
-}
-
-/* CENTER Useful Links */
-.useful-links {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
+    gap: 0.5rem;
+}
+.icon-facebook, .icon-twitter, .icon-insta {
+    display: flex;
     align-items: center;
 }
 
-.links {    
+.icon-facebook {
+    background-color: #3b5998;
+}
+
+.icon-twitter {
+    background-color: #00acee;
+}
+
+.icon-insta {
+    background-color: #e4405f;
+}
+
+.links {
+    font-size: small;
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.5rem;
 }
 
 .links a {
     text-decoration: none;
     color: white;
-
     &:hover {
-        color: gray;
-        transform: scale(1.1);
+        text-decoration: underline;
     }
 }
 
-/* RIGHT Contact */
 .contact {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+}
+.contact p {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.contact, .contact svg {
+    font-size: small;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
+    .foot-container {
+        padding: 1rem;
+    }
+
+    .company-info h2, .useful-links h2, .contact h2 {
+        display: inline;
+    }
+
+    .company-info, .useful-links, .contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .links {
+        font-size: medium;
+    }
+
+    .contact p, .contact svg {
+        font-size: medium;
+    }
 }

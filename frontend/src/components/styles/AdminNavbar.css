@@ -1,115 +1,195 @@
+/* Mobile styles */
 .admin-nav-container {
-    height: 5rem;
-    background-color: goldenrod;
-
-    padding: 1.5rem;
-
+    padding: 0.75rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-
+    justify-content: space-between;
+    background-color: goldenrod;
     position: relative;
 }
 
-/* LEFT CONTAINER */
+/* ADMIN LEFT CONTAINER */
 .admin-left-container {
-    color: white;
-
-    font-weight: 600;
-    font-size: xx-large;
+    display: none;
 }
 
-/* CENTER CONTAINER */
+/* ADMIN CENTER CONTAINER */
 .admin-center-container {
     flex: 2;
 }
 
 .admin-center-container ul {
-    margin: 0;
-    list-style: none;
-
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    gap: 0.75rem;
+    list-style: none;
 }
 
-.admin-center-container ul li a {
-    font-size: large;
-
+.admin-center-container ul a {
+    font-size: small;
     text-decoration: none;
     color: white;
-
-    &&:hover {
-        color: gray;
-    }
 }
 
-/* RIGHT CONTAINER */
+/* ADMIN RIGHT CONTAINER - ICON */
 .admin-right-container {
-    flex: 1;
+    font-size: small;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    gap: 1rem;
-
-    color: white;
+    gap: 0.25rem;
 }
 
-.admin-right-container a {
-    font-size: large;
-    padding: 0.75rem;
+.admin-right-container span {
+    display: none;
 }
 
-/* SUB-MENU */
+.userIcon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.userIcon, .userIcon img {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+/* ADMIN SUB-MENU */
 .admin-sub-menu-wrap {
     position: absolute;
     top: 100%;
     right: 0;
-    width: 20rem;
-    
+    width: 40%;
+
     z-index: 1;
 }
 
 .admin-sub-menu {
     border-radius: 10%;
-
-    padding: 1rem;
-    margin: 1rem;
-
     background-color: goldenrod;
+    padding: 1rem;
+    margin: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+}
+
+.admin-sub-menu,
+.admin-sub-menu a,
+.admin-sub-menu a svg,
+.admin-sub-menu button,
+.admin-sub-menu button svg {
+    font-size: small;
 }
 
 .admin-user-info {
-    text-align: center;
     color: white;
+    text-align: center;
+}
+
+.admin-user-info hr {
+    background-color: black;
+    margin: 0.5rem auto;
 }
 
 .admin-sub-menu a {
-    font-size: x-large;
-
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 
     text-decoration: none;
     color: white;
 
-    &&:hover {
+    &:hover {
         text-decoration: underline;
     }
 }
 
 .admin-sub-menu button {
     background-color: inherit;
-    font-size: x-large;
-
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 
     border: none;
     color: red;
 
-    &&:hover {
+    &:hover {
+        cursor: pointer;
         text-decoration: underline;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
+    .admin-nav-container {
+        padding: 1rem;
+        font-size: x-large;
+    }
+
+    .admin-left-container {
+        flex: 0.5;
+        display: inline;
+        font-size: xx-large;
+        font-weight: bold;
+        color: white;
+    }
+
+    .admin-center-container ul {
+        justify-content: space-around;
+    }
+    .admin-center-container ul a {
+        font-size: large;
+    }
+
+    .admin-right-container {
+        flex: 0.5;
+        padding: 0.5rem;
+    }
+    
+    .admin-right-container span {
+        display: inline;
+        font-size: medium;
+        text-align: center;
+        color: black;
+    }
+    .userIcon img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .admin-sub-menu,
+    .admin-sub-menu a,
+    .admin-sub-menu a svg,
+    .admin-sub-menu button,
+    .admin-sub-menu button svg {
+        font-size: x-large;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+    .admin-center-container ul a {
+        font-size: 1.5rem;
+    }
+    
+    .admin-right-container span {
+        font-size: 1.25rem;
+    }
+
+    .userIcon img {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .admin-sub-menu,
+    .admin-sub-menu a,
+    .admin-sub-menu a svg,
+    .admin-sub-menu button,
+    .admin-sub-menu button svg {
+        font-size: xx-large;
     }
 }
