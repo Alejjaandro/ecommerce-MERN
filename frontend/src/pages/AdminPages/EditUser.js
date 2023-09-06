@@ -44,50 +44,49 @@ export default function EditUser() {
         <>
             <AdminNavbar />
 
-            <div className="edit-user-container">
+            <div className="editUser-container">
 
-                <div className="edit-user-wrapper">
+                <div className="editUser-wrapper">
 
-                    <h1 className="user-title">Edit {user.username}</h1>
-                    <div class="user-image"><img src={user.image} /></div>
+                    <h1 className="editUser-title">Edit {user.username}</h1>
+                    <div class="editUser-image"><img src={user.image} /></div>
 
                     {errors && errors.map((message, index) => (
-                        <p key={index} className="errors">{message}</p>
+                        <p key={index} className="editUser-errors">{message}</p>
                     ))}
                     {success && success.map((message, index) => (
-                        <p key={index} className="success">{message}</p>
+                        <p key={index} className="editUser-success">{message}</p>
                     ))}
 
-                    <form onSubmit={handleSubmit} className="user-form">
-                        <div className="form-group">
-                            <label className="form-label">Name: </label>
-                            <input type="text" defaultValue={user.name} className="form-input" name='name' />
+                    <form onSubmit={handleSubmit} className="editUser-form">
+                        <div className="editUser-form-group">
+                            <label className="editUser-form-label">Name: </label>
+                            <input type="text" defaultValue={user.name} className="editUser-form-input" name='name' />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">Lastname: </label>
-                            <input type="text" defaultValue={user.lastname} className="form-input" name='lastname' />
+                        <div className="editUser-form-group">
+                            <label className="editUser-form-label">Lastname: </label>
+                            <input type="text" defaultValue={user.lastname} className="editUser-form-input" name='lastname' />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">Username: </label>
-                            <input type="text" defaultValue={user.username} className="form-input" name='username' />
+                        <div className="editUser-form-group">
+                            <label className="editUser-form-label">Username: </label>
+                            <input type="text" defaultValue={user.username} className="editUser-form-input" name='username' />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">Email: </label>
-                            <input type="text" defaultValue={user.email} className="form-input" name='email' />
+                        <div className="editUser-form-group">
+                            <label className="editUser-form-label">Email: </label>
+                            <input type="text" defaultValue={user.email} className="editUser-form-input" name='email' />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">Password: </label>
-                            <input type="text" className="form-input" name='password' />
+                        <div className="editUser-form-group">
+                            <label className="editUser-form-label">Password: </label>
+                            <input type="text" className="editUser-form-input" name='password' />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">isAdmin: </label>
-                            <input type="text" defaultValue={user.isAdmin} className="form-input" name='isAdmin' />
+                        <div className="editUser-form-group">
+                            <label className="editUser-form-label">isAdmin: </label>
+                            <input type="text" defaultValue={user.isAdmin} className="editUser-form-input" name='isAdmin' />
                         </div>
-                        <button type="submit" className="submit-button">Update User</button>
+                        <button type="submit" className="editUser-submit-button">Update User</button>
                     </form>
                 </div>
             </div>
-
             <Footer />
         </>
     );

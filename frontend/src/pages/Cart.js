@@ -54,18 +54,18 @@ export default function Cart() {
 
                 <div className="cart-top">
 
-                    <Link to='/products'><button className='top-button'>CONTINUE SHOPPING</button></Link>
+                    <Link to='/products'><button className='cart-top-button'>CONTINUE SHOPPING</button></Link>
 
-                    <span className='top-texts'>Shopping Cart ({productsNumber})</span>
+                    <span className='cart-top-texts'>Shopping Cart ({productsNumber})</span>
 
-                    <Link to={`/checkout/${user._id}`}><button className='top-button'>CHECKOUT NOW</button></Link>
+                    <Link to={`/checkout/${user._id}`}><button className='cart-top-button'>CHECKOUT NOW</button></Link>
                 </div>
 
                 {/* Body container */}
                 <div className="cart-body">
 
                     {/* Product list container */}
-                    <div className="product-list">
+                    <div className="cart-product-list">
                         {/* 
                         We render the products only if "cart" exists and it has at least 1 product,
                         then we access its data to complete the info on the page.
@@ -73,13 +73,13 @@ export default function Cart() {
                         {(cart && cart.length >= 1) ? Array.from(cart).map((product) => {
                             return (
                                 <>
-                                    <div className="product" key={product.product._id}>
+                                    <div className="cart-product" key={product.product._id}>
 
-                                        <div className='product-details'>
+                                        <div className='cart-product-details'>
 
-                                            <img className='info-img' src={`${product.product.thumbnail}`} alt="" />
+                                            <img className='cart-info-img' src={`${product.product.thumbnail}`} alt="" />
 
-                                            <div className='details'>
+                                            <div className='cart-details'>
                                                 <span className='id'><b>ID:</b> {product.product._id}</span>
                                                 <span className='name'><b>Product:</b> {product.product.title}</span>
                                                 <span className='ram'><b>RAM:</b> {product.ram}</span>
@@ -87,28 +87,27 @@ export default function Cart() {
                                             </div>
                                         </div>
 
-                                        <div className="product-price">
+                                        <div className="cart-product-price">
 
-                                            <div className="product-ammount">
-                                                <button onClick={() => decreaseAmmount(user._id, product)} className="ammount-icon flex-center">
+                                            <div className="cart-product-ammount">
+                                                <button onClick={() => decreaseAmmount(user._id, product)} className="cart-ammount-icon flex-center">
                                                     <RemoveIcon />
                                                 </button>
 
-                                                <span className="amount-num flex-center">{product.quantity}</span>
+                                                <span className="cart-amount-num flex-center">{product.quantity}</span>
 
-                                                <button onClick={() => addToCart(user._id, product.product)} className="ammount-icon flex-center">
+                                                <button onClick={() => addToCart(user._id, product.product)} className="cart-ammount-icon flex-center">
                                                     <AddIcon />
                                                 </button>
                                             </div>
 
-                                            <div className="price">${(product.product.price * product.quantity)}</div>
+                                            <div className="cart-price">${(product.product.price * product.quantity)}</div>
                                             <button onClick={() => deleteProduct(user._id, product.product._id)} className='delete-button'>
                                                 Remove Product
                                             </button>
                                         </div>
 
                                     </div>
-                                    <hr className='hr' />
                                 </>
                             );
                         }) : (
@@ -118,28 +117,28 @@ export default function Cart() {
                     </div>
 
                     {/* Product Summary container */}
-                    <div className="product-summary">
+                    <div className="cart-product-summary">
 
-                        <h1 className='summary-title'>ORDER SUMMARY</h1>
+                        <h1 className='cart-summary-title'>ORDER SUMMARY</h1>
 
-                        <div className="summary-item">
-                            <span className='summary-item-text'>Subtotal: </span>
-                            <span className='summary-item-price'>
+                        <div className="cart-summary-item">
+                            <span className='cart-summary-item-text'>Subtotal: </span>
+                            <span className='cart-summary-item-price'>
                                 ${subtotal}
                             </span>
                         </div>
 
-                        <div className="summary-item">
-                            <span className='summary-item-text'>Shipping: </span>
-                            <span className='summary-item-price'>${shippingCost}</span>
+                        <div className="cart-summary-item">
+                            <span className='cart-summary-item-text'>Shipping: </span>
+                            <span className='cart-summary-item-price'>${shippingCost}</span>
                         </div>
 
-                        <div className="summary-item summary-total">
-                            <span className='summary-item-totalText'>Total: </span>
-                            <span className='summary-item-totalPrice'>${subtotal + shippingCost}</span>
+                        <div className="cart-summary-item summary-total">
+                            <span className='cart-summary-item-totalText'>Total: </span>
+                            <span className='cart-summary-item-totalPrice'>${subtotal + shippingCost}</span>
                         </div>
 
-                        <button className='summary-button'>BUY NOW</button>
+                        <button className='cart-summary-button'>BUY NOW</button>
 
                     </div>
                 </div>

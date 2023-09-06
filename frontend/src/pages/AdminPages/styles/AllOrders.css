@@ -1,11 +1,17 @@
 .allOrders-container {
     width: 100%;
-    padding: 2rem;
+    padding: 1rem;
     min-height: 100vh;
 }
 
 .allOrders-container h1 {
     text-align: center;
+    margin-bottom: 1rem;
+}
+
+.allOrders-table-container {
+    width: 100%;
+    overflow-x: auto;
 }
 
 .allOrders-table {
@@ -17,6 +23,7 @@
     text-align: center;
     padding: 0.5rem;
     border-bottom: 1px solid #ddd;
+    background-color: #f2f2f2;
 }
 
 .allOrders-table-body td {
@@ -24,4 +31,44 @@
     border-bottom: 1px solid #ddd;
 }
 
-@media (min-width: 768px) {}
+.allOrders-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.allOrders-link-details, .allOrders-btn-remove {
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+.allOrders-link-details {
+    background-color: lightskyblue;
+    &:hover {
+        background-color: skyblue;
+    }
+}
+
+.allOrders-btn-remove {
+    background-color: #f44336;
+    &:hover {
+        background-color: #a52a1c;
+    }
+}
+
+/* Deskop styles */
+@media (min-width: 1024px) {
+    .allOrders-table-head th, .allOrders-table-body td {
+        font-size: 1.25rem;
+    }
+    
+    .allOrders-link-details, .allOrders-btn-remove {
+        text-align: center;
+        font-size: 1.25rem;
+        padding: 0.75rem;
+    }
+}

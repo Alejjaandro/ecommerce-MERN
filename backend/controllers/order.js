@@ -37,7 +37,6 @@ export const updateOrder = async (req, res) => {
 // ===== DELETE Order ===== //
 export const deleteOrder = async (req, res) => {
     try {
-        console.log(req.params.id);
         await Order.findByIdAndDelete(req.params.id);
         res.status(200).json('Order Deleted');
 
@@ -49,7 +48,6 @@ export const deleteOrder = async (req, res) => {
 // ===== GET User Order ===== //
 export const getUserOrder = async (req, res) => {
     try {
-        console.log("fjakfjzhsbdvjhzsh");
         const orders = await Order.find({ userId: req.params.userId });
         res.status(200).json(orders);
 

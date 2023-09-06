@@ -81,7 +81,6 @@ export default function Product() {
                         <p className='product-description'>
                             {product.description}
                         </p>
-                        <span className='product-price'>${product.price}</span>
 
                         {/* PRODUCT OPTIONS */}
                         <div className="product-options-container">
@@ -90,10 +89,12 @@ export default function Product() {
                             <div className="product-color-option">
 
                                 <span className='option-title'>Color</span>
+                                <div>
 
-                                <div className="option-color color-black" name="black" onClick={handleColor} />
-                                <div className="option-color color-grey" name="grey" onClick={handleColor} />
-                                <div className="option-color color-darkblue" name="darkblue" onClick={handleColor} />
+                                    <div className="option-color color-black" name="black" onClick={handleColor} />
+                                    <div className="option-color color-grey" name="grey" onClick={handleColor} />
+                                    <div className="option-color color-darkblue" name="darkblue" onClick={handleColor} />
+                                </div>
 
                             </div>
 
@@ -112,13 +113,15 @@ export default function Product() {
 
                         </div>
 
+                        <span className='product-price'>${product.price}</span>
+
                         {/* ADD CONTAINER */}
                         <div className="add-container">
 
-                            <div className="amount-container">
+                            <div className="ammount-container">
 
                                 <div className="remove flex-center" onClick={removeQuantity}><RemoveIcon /></div>
-                                <span className="amount flex-center">{quantity}</span>
+                                <span className="ammount flex-center">{quantity}</span>
                                 <div className="add flex-center" onClick={addQuantity}><AddIcon /></div>
 
                             </div>

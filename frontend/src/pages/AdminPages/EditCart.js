@@ -47,53 +47,51 @@ export default function EditCart() {
         <>
             <AdminNavbar />
 
-            <div className="editProduct-container">
+            <div className="editCart-container">
 
-                <div className="editProduct-wrapper">
-
-                    <h1 className="editProduct-title">Edit {user.username} Cart</h1>
-
+                <h1 className="editCart-title">Edit {user.username} Cart</h1>
+                <div className="editCart-wrapper">
                     {/* Product list container */}
                     <div>
                         {(cart && cart.length >= 1) ? Array.from(cart).map((product) => {
                             return (
                                 <>
-                                    <div key={product.product._id} className="editProduct-container">
+                                    <div key={product.product._id} className="editCart-product-container">
 
-                                        <div className="editProduct-imageContainer">
+                                        <div className="editCart-imageContainer">
 
-                                            <img className='editProduct-infoImg' src={`${product.product.thumbnail}`} alt="" />
+                                            <img className='editCart-infoImg' src={`${product.product.thumbnail}`} alt="" />
 
-                                            <div className="editProduct-details">
-                                                <span className="editProduct-id"><b>ID:</b> {product.product._id}</span>
-                                                <span className="editProduct-product"><b>Product:</b> {product.product.title}</span>
-                                                <span className="editProduct-ram"><b>RAM:</b> {product.ram}</span>
-                                                <span className="editProduct-color"><b>Color:</b> {product.color}</span>
+                                            <div className="editCart-details">
+                                                <span className="editCart-id"><b>ID:</b> {product.product._id}</span>
+                                                <span className="editCart-product"><b>Product:</b> {product.product.title}</span>
+                                                <span className="editCart-ram"><b>RAM:</b> {product.ram}</span>
+                                                <span className="editCart-color"><b>Color:</b> {product.color}</span>
                                             </div>
                                         </div>
 
-                                        <div className="editProduct-actions">
+                                        <div className="editCart-actions">
 
-                                            <div className="editProduct-quantityControl">
-                                                <button onClick={() => decreaseAmmount(user._id, product)} className="editProduct-ammountIcon editProduct-flexCenter">
+                                            <div className="editCart-quantityControl">
+                                                <button onClick={() => decreaseAmmount(user._id, product)} className="editCart-ammountIcon editCart-flexCenter">
                                                     <RemoveIcon />
                                                 </button>
 
-                                                <span className="editProduct-quantity">{product.quantity}</span>
+                                                <span className="editCart-quantity">{product.quantity}</span>
 
-                                                <button onClick={() => addToCart(user._id, product.product)} className="editProduct-ammountIcon editProduct-flexCenter">
+                                                <button onClick={() => addToCart(user._id, product.product)} className="editCart-ammountIcon editCart-flexCenter">
                                                     <AddIcon />
                                                 </button>
                                             </div>
 
-                                            <div className="editProduct-price">${(product.product.price * product.quantity)}</div>
-                                            <button onClick={() => deleteProduct(user._id, product.product._id)} className='editProduct-deleteButton'>
+                                            <div className="editCart-price">${(product.product.price * product.quantity)}</div>
+                                            <button onClick={() => deleteProduct(user._id, product.product._id)} className='editCart-deleteButton'>
                                                 Remove Product
                                             </button>
                                         </div>
 
                                     </div>
-                                    <hr className="editProduct-divider" />
+                                    <hr className="editCart-divider" />
                                 </>
                             );
                         }) : (
@@ -102,28 +100,28 @@ export default function EditCart() {
                     </div>
 
                     {/* Product Summary container */}
-                    <div className="editProduct-summaryContainer">
+                    <div className="editCart-summaryContainer">
 
-                        <h1 className="editProduct-summaryTitle">ORDER SUMMARY</h1>
+                        <h1 className="editCart-summaryTitle">ORDER SUMMARY</h1>
 
-                        <div className="editProduct-summaryItem">
-                            <span className='editProduct-summaryItemText'>Subtotal: </span>
-                            <span className='editProduct-summaryItemPrice'>
+                        <div className="editCart-summaryItem">
+                            <span className='editCart-summaryItemText'>Subtotal: </span>
+                            <span className='editCart-summaryItemPrice'>
                                 ${subtotal}
                             </span>
                         </div>
 
-                        <div className="editProduct-summaryItem">
-                            <span className='editProduct-summaryItemText'>Shipping: </span>
-                            <span className='editProduct-summaryItemPrice'>${shippingCost}</span>
+                        <div className="editCart-summaryItem">
+                            <span className='editCart-summaryItemText'>Shipping: </span>
+                            <span className='editCart-summaryItemPrice'>${shippingCost}</span>
                         </div>
 
-                        <div className="editProduct-summaryItem editProduct-summaryTotal">
-                            <span className='editProduct-summaryItemTotalText'>Total: </span>
-                            <span className='editProduct-summaryItemTotalPrice'>${subtotal + shippingCost}</span>
+                        <div className="editCart-summaryItem editCart-summaryTotal">
+                            <span className='editCart-summaryItemTotalText'>Total: </span>
+                            <span className='editCart-summaryItemTotalPrice'>${subtotal + shippingCost}</span>
                         </div>
-                        <button className='editProduct-btnRemove'
-                            onClick={() => { deleteCart(userId); getCart(userId)}}
+                        <button className='editCart-btnRemove'
+                            onClick={() => { deleteCart(userId); getCart(userId) }}
                         >
                             DELETE CART
                         </button>

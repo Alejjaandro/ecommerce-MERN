@@ -41,6 +41,10 @@
     background-color: silver;
     text-decoration: none;
     color: black;
+
+    &:hover {
+        background-color: rgb(151, 151, 151);
+    }
 }
 
 /* RIGHT CONTAINER / USER LOGGED */
@@ -197,6 +201,11 @@
 
 /* Desktop styles */
 @media (min-width: 1024px) {
+
+    .right-container a {
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
 
     .sub-menu,
     .sub-menu a,

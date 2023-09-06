@@ -43,7 +43,7 @@ export const OrderProvider = ({ children }) => {
     const [order, setOrder] = useState();
     const getOrder = async (orderId) => {
         try {
-            const response = await axios.get(`/findOrder/find/${orderId}`);
+            const response = await axios.get(`orders/findOrder/${orderId}`);
             setOrder(response.data);
         } catch (error) {
             console.log(error);;

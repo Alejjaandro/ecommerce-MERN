@@ -38,37 +38,37 @@ export default function AllProducts() {
 
                 <FilterNavbar useProducts={useProducts} onFilter={onFilter} />
 
-                <table className="products-table">
-                    <thead className="products-table-head">
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Category</th>
-                            <th>Brand</th>
-                            <th>Stock</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody className="products-table-body">
-                        {filteredProducts.map((product) => (
-                            <tr key={product._id}>
-                                <td>{product._id}</td>
-                                <td>{product.title}</td>
-                                <td>${product.price}</td>
-                                <td className="td-category">{product.category}</td>
-                                <td>{product.brand}</td>
-                                <td>{product.stock}</td>
-                                <td>
-                                    <button className="btn-edit"><Link to={`/edit-product/${product._id}`}>Edit</Link></button>
-
-                                    <button className="btn-remove" onClick={() => deleteProduct(product._id)}>Remove</button>
-                                </td>
+                <div className="allProducts-table-container">
+                    <table className="allProducts-table">
+                        <thead className="allProducts-table-head">
+                            <tr>
+                                <th className="allProducts-id">ID</th>
+                                <th>Name</th>
+                                <th className="allProducts-price">Price</th>
+                                <th>Category</th>
+                                <th>Brand</th>
+                                <th className="allProducts-stock">Stock</th>
+                                <th></th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="allProducts-table-body">
+                            {filteredProducts.map((product) => (
+                                <tr key={product._id}>
+                                    <td className="allProducts-id">{product._id}</td>
+                                    <td>{product.title}</td>
+                                    <td className="allProducts-price">${product.price}</td>
+                                    <td>{product.category}</td>
+                                    <td>{product.brand}</td>
+                                    <td className="allProducts-stock">{product.stock}</td>
+                                    <td className="allProducts-options">
+                                        <Link to={`/edit-product/${product._id}`} className="allProducts-link-edit">Edit</Link>
+                                        <button className="allProducts-btn-remove" onClick={() => deleteProduct(product._id)}>Remove</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <Footer />
