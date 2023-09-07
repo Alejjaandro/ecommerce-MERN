@@ -14,6 +14,12 @@ MORE DETAILS ON BACKEND AND FRONTEND README.md
 - Database: MongoDB.
 - Other Libraries: bcrypt, jsonwebtoken, mongoose, cors, cookie-parser, morgan.
 
+## Data API
+
+Although the project was made thinking in a technology e-commerce, the products of the web were take from a public API:
+<https://dummyjson.com/products>, that contains products of all type. 
+Anyway, the web allows admins to add and delete products so you can change it manually or, if you have a JSON file with technology products you can just add them directly to your mongoDB collection of products.
+
 ## Features
 
 - User registration and login.
