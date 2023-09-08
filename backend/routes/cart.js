@@ -17,6 +17,4 @@ router.delete("/:userId", verifyUser, deleteCart);
 
 router.get("/", verifyAdmin, getAllCarts);
 
-// router.put("/:id", verifyUser, updateCart);
-
 export default router;
