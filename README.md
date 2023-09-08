@@ -23,30 +23,30 @@ Anyway, the web allows admins to add and delete products so you can change it ma
 
 Node.js is a JavaScript runtime that allows you to run JavaScript on your server. npm (Node Package Manager) is a tool that will allow you to install libraries (like Express.js and React.js) that your project depends on.
 
-- Download and install Node.js from the official website. npm is included with Node.js.
-- Verify the installation by running node -v and npm -v in your terminal. You should see the installed versions of Node.js and npm.
+- Download and install [Node.js](https://nodejs.org/es) from the official website. npm is included with Node.js.
+- Verify the installation by running `node -v` and `npm -v` in your terminal. You should see the installed versions of Node.js and npm.
 
 ### 2. Express.js
 
 Express.js is a web application framework for Node.js. It simplifies the process of building web applications.
 
-- You can install Express.js in your project by running npm install express in your project directory.
+- You can install [Express.js](https://expressjs.com/) in your project by running `npm install express` in your project directory.
 
-## 3. React.js
+### 3. React.js
 
-React.js is a JavaScript library for building user interfaces.
+[React.js](https://es.react.dev/) is a JavaScript library for building user interfaces.
 
-- You can create a new React.js application by running npx create-react-app your-app-name in your terminal. Replace your-app-name with the name you want to give to your application.
-- Navigate into your new project directory with cd your-app-name.
+- You can create a new React.js application by running `npx create-react-app your-app-name` in your terminal. Replace "your-app-name" with the name you want to give to your application.
+- Navigate into your new project directory with `cd your-app-name`.
 
 ### 4. MongoDB and MongoDB Compass
 
 1. MongoDB is a NoSQL database. You can use it to store your application's data.
 
-   - Download and install MongoDB from the official website.
+   - Download and install [MongoDB](https://www.mongodb.com/es) from the official website.
    - Follow the instructions in the MongoDB installation wizard.
 
-2. MongoDB Compass is a graphical user interface for MongoDB. It allows you to visually explore your data, run ad-hoc queries, interact with your data with full CRUD functionality, and view real-time server statistics.
+2. [MongoDB Compass](https://www.mongodb.com/products/tools/compass) is a graphical user interface for MongoDB. It allows you to visually explore your data, run ad-hoc queries, interact with your data with full CRUD functionality, and view real-time server statistics.
 
 Here's how you can install MongoDB Compass:
 
@@ -55,14 +55,12 @@ Here's how you can install MongoDB Compass:
    2. Install MongoDB Compass: Open the downloaded file and follow the installation wizard. The steps will vary depending on your operating system:
 
       - Windows: Run the MongoDB Compass installer that you downloaded. Follow the installation wizard to complete the installation.
-
       - macOS: Open the MongoDB Compass .dmg file that you downloaded. Drag the MongoDB Compass application to your Applications folder.
-
       - Linux: Extract the .tar.gz file you downloaded. Run the MongoDB Compass binary inside the extracted directory.
 
    3. Launch MongoDB Compass: You can start MongoDB Compass by finding it in your installed applications and clicking on it.
 
-   4. Connect to your MongoDB database: In MongoDB Compass, you can connect to your MongoDB database by entering your connection string in the connection dialog. If you're running MongoDB locally, you can use the connection string mongodb://localhost:27017.
+   4. Connect to your MongoDB database: In MongoDB Compass, you can connect to your MongoDB database by entering your connection string in the connection dialog. If you're running MongoDB locally, you can use the connection string "mongodb://localhost:27017".
 
 Remember, MongoDB Compass is just a tool to interact with your MongoDB databases. You still need to have MongoDB installed and running on your machine or have access to a MongoDB database on a server.
 
@@ -118,54 +116,54 @@ The backend provides several API endpoints grouped by their functionality:
 
 1. /api/auth: This endpoint is responsible for user authentication. It includes two main routes:
 
-   - POST /api/auth/register: This route is used to register a new user. It expects a JSON body with user details such as username, email, and password.
+   - POST `/api/auth/register/` - This route is used to register a new user. It expects a JSON body with user details such as username, email, and password.
 
-   - POST /api/auth/login: This route is used to log in an existing user. It expects a JSON body with email and password.
+   - POST `/api/auth/login/` - This route is used to log in an existing user. It expects a JSON body with email and password.
 
 2. /api/users: This endpoint handles user-related operations. It includes several routes:
 
-   - GET /api/users/: This route is used to fetch all users. It's typically used for admin purposes.
-   - GET /api/users/:userId: This route is used to fetch a specific user by their id.
+   - GET `/api/users/` - This route is used to fetch all users. It's typically used for admin purposes.
+   - GET `/api/users/:userId` - This route is used to fetch a specific user by their id.
 
-   - PUT /api/users/:userId: This route is used to update a specific user's details. It expects a JSON body with the details to be updated.
-   - PUT /api/users/adminUpdate/:userId This route is used by admins to update a specific user's details. It expects a JSON body with the details to be updated.
+   - PUT `/api/users/:userId` - This route is used to update a specific user's details. It expects a JSON body with the details to be updated.
+   - PUT `/api/users/adminUpdate/:userId` - This route is used by admins to update a specific user's details. It expects a JSON body with the details to be updated.
 
-   - DELETE /api/users/:userIdid: This route is used to delete a specific user by their id.
+   - DELETE `/api/users/:userId` - This route is used to delete a specific user by their id.
 
 3. /api/products: This endpoint handles product-related operations. It includes several routes:
 
-   - GET /api/products/: This route is used to fetch all products.
-   - GET /api/products/find/:id: This route is used to fetch a specific product by its id.
+   - GET `/api/products/` - This route is used to fetch all products.
+   - GET `/api/products/find/:id` - This route is used to fetch a specific product by its id.
 
-   - POST /api/products/: This route is used by admins to create a new product. It expects a JSON body with product details such as name, description, price, and image.
+   - POST `/api/products/` - This route is used by admins to create a new product. It expects a JSON body with product details such as name, description, price, and image.
 
-   - PUT /api/products/:id: This route is used to update a specific product's details. It expects a JSON body with the details to be updated.
+   - PUT `/api/products/:id` - This route is used to update a specific product's details. It expects a JSON body with the details to be updated.
 
-   - DELETE /api/products/:id: This route is used by admins to delete a specific product by its id.
+   - DELETE `/api/products/:id` - This route is used by admins to delete a specific product by its id.
 
 4. /api/carts: This endpoint handles cart-related operations. It includes several routes:
 
-   - GET /api/carts/: This route is used by admins to fetch all carts.
-   - GET /api/carts/find/:userId: This route is used to fetch a specific user cart by its id. The "Id" of the cart is the "id" of the user.
+   - GET `/api/carts/` - This route is used by admins to fetch all carts.
+   - GET `/api/carts/find/:userId` - This route is used to fetch a specific user cart by its id. The "Id" of the cart is the "id" of the user.
 
-   - POST /api/carts/:userId: This route is used to create a new cart for the user. It expects a JSON body with cart details such as userId and products (an array of products). The same route is used to update the cart of the user when he chages it.
+   - POST `/api/carts/:userId` - This route is used to create a new cart for the user. It expects a JSON body with cart details such as userId and products (an array of products). The same route is used to update the cart of the user when he chages it.
 
-   - DELETE /api/carts/:userId/:productId: This route is used to delete a specific product from the user cart.
-   - DELETE /api/carts/:userId: This route is used to delete completely the user cart.
+   - DELETE `/api/carts/:userId/:productId` - This route is used to delete a specific product from the user cart.
+   - DELETE `/api/carts/:userId` - This route is used to delete completely the user cart.
 
 5. /api/orders: This endpoint handles order-related operations. It includes several routes:
 
-   - GET /api/orders/: This route is used by admins to fetch all orders.
-   - GET /api/orders/findOrder/:orderId: This route is used by admins to fetch a specific order by its id.
-   - GET /api/orders/find/:userId: This route is used to fetch all orders of a specific user by his id.
+   - GET `/api/orders/` - This route is used by admins to fetch all orders.
+   - GET `/api/orders/findOrder/:orderId` - This route is used by admins to fetch a specific order by its id.
+   - GET `/api/orders/find/:userId` - This route is used to fetch all orders of a specific user by his id.
 
-   - POST /api/orders/: This route is used to create a new order. It expects a JSON body with order details such as userId, products (an array of products), and orderInfo (object that contains user adress and other information of the order like the total price).
+   - POST `/api/orders/` - This route is used to create a new order. It expects a JSON body with order details such as userId, products (an array of products), and orderInfo (object that contains user adress and other information of the order like the total price).
 
-   - PUT /api/orders/:orderId: This route is used to update a specific order's details. It expects a JSON body with the details to be updated.
+   - PUT `/api/orders/:orderId` - This route is used to update a specific order's details. It expects a JSON body with the details to be updated.
 
-   - DELETE /api/orders/:orderId: This route is used to delete a specific order by its id.
+   - DELETE `/api/orders/:orderId` - This route is used to delete a specific order by its id.
 
-Remember, for routes that require authentication, you'll need to include a valid JWT (JSON Web Token) in the Authorization header of your request. The token is typically obtained from the /api/auth/login endpoint.
+Remember, for routes that require authentication, you'll need to include a valid JWT (JSON Web Token) in the Authorization header of your request. The token is typically obtained from the `/api/auth/` endpoint.
 
 ### Environment Variables
 
