@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // "react-country-region-selector" provides a pair of React components to display connected country and region dropdowns.
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 // A simple and reusable Datepicker component for React.
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -51,12 +51,12 @@ export default function Checkout() {
         createOrder(user._id, data, cart);
     };
 
-    // If the order is created successfully, redirect to home page after 5 seconds.
+    // If the order is created successfully, redirect to home page after 3 seconds.
     useEffect(() => {
         if (success) {
             const timer = setTimeout(() => {
-                navigate('/');
-            }, 5000);
+                navigate(`/thank-you/${user._id}`);
+            }, 3000);
             // Clear timeout if the component is unmounted.
             return () => clearTimeout(timer);
         }

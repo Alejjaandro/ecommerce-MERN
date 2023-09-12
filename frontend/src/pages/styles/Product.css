@@ -90,6 +90,10 @@
     }
 }
 
+.selected {
+    transform: scale(1.5);
+}
+
 .color-grey {
     background-color: grey;
 }

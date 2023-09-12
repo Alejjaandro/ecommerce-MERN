@@ -56,8 +56,8 @@ export const CartProvider = ({ children }) => {
                     userId: userId,
                     product: product,
                     quantity: quantity || 1,
-                    color: color || null,
-                    ram: ram || null
+                    color: color ? color : null,
+                    ram: ram ? ram : null
                 });
 
                 // // We update the user cart.
@@ -88,7 +88,8 @@ export const CartProvider = ({ children }) => {
     // ===== DELETE CART ===== //
     const deleteCart = async (userId) => {
         try {
-            await axios.delete(`/carts/${userId}`);
+            const response = await axios.delete(`/carts/${userId}`);
+            console.log(response.data.message);
         } catch (error) {
             console.log(error);
         }

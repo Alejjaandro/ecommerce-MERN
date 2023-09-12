@@ -88,12 +88,20 @@ export default function Product() {
                             {/* COLOR OPTIONS */}
                             <div className="product-color-option">
 
-                                <span className='option-title'>Color</span>
+                                <span className='option-title'>Color:</span>
                                 <div>
-
-                                    <div className="option-color color-black" name="black" onClick={handleColor} />
-                                    <div className="option-color color-grey" name="grey" onClick={handleColor} />
-                                    <div className="option-color color-darkblue" name="darkblue" onClick={handleColor} />
+                                    <div
+                                        className={`option-color color-black ${color === 'black' ? 'selected' : ''}`}
+                                        name="black" onClick={handleColor}
+                                    />
+                                    <div
+                                        className={`option-color color-grey ${color === 'grey' ? 'selected' : ''}`}
+                                        name="grey" onClick={handleColor}
+                                    />
+                                    <div
+                                        className={`option-color color-darkblue ${color === 'darkblue' ? 'selected' : ''}`}
+                                        name="darkblue" onClick={handleColor}
+                                    />
                                 </div>
 
                             </div>
@@ -101,7 +109,7 @@ export default function Product() {
                             {/* RAM OPTIONS */}
                             <div className="product-ram-option">
 
-                                <span className='option-title'>RAM</span>
+                                <span className='option-title'>RAM:</span>
 
                                 <select className='select-option' onChange={handleRam}>
                                     <option className="select-ram">500 GB</option>

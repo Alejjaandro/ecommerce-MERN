@@ -17,6 +17,7 @@ import MyProfile from './pages/MyProfile';
 import Cart from './pages/Cart';
 import MyOrders from './pages/MyOrders';
 import Checkout from './pages/Checkout';
+import ThankYou from './pages/ThankYou';
 
 import AdminRoutes from './middleware/AdminRoutes';
 import AllProducts from './pages/AdminPages/AllProducts';
@@ -66,6 +67,7 @@ export default function App() {
                     <Route path="/cart/:userId" element={<Cart />} />
                     <Route path="/my-orders/:userId" element={<MyOrders />} />
                     <Route path="/checkout/:userId" element={<Checkout />} />
+                  <Route path="/thank-you/:userId" element={<ThankYou />} />
                   </Route>
                   {/* Admin Routes */}
                   <Route element={<AdminRoutes />}>

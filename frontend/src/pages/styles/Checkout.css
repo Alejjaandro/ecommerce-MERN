@@ -175,4 +175,8 @@
     .checkout-form {
         font-size: 1.5rem;
     }
+
+    .field input {
+        font-size: 1.5rem;
+    }
 }

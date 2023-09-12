@@ -28,11 +28,10 @@ export const OrderProvider = ({ children }) => {
     }
 
     // ===== GET USER ORDERS ===== //
-    const [orders, setOrders] = useState();
+    const [orders, setOrders] = useState([]);
     const getUserOrders = async (userId) => {
         try {
             const response = await axios.get(`/orders/find/${userId}`);
-            console.log(response.data);
             setOrders(response.data);
         } catch (error) {
             console.log(error);;
