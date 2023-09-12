@@ -9,12 +9,6 @@ Please check that you have installed:
 - [MongoDB](https://www.mongodb.com/es)
 - [MongoDB Compass](https://www.mongodb.com/products/tools/compass)
 
-## Data API
-
-Although the project was made thinking in a technology e-commerce, the products of the web were take from a public API:
-<https://dummyjson.com/products>, that contains products of all type.
-Anyway, the web allows admins to add and delete products so you can change it manually or, if you have a JSON file with technology products you can just add them directly to your mongoDB collection of products as is explained below.
-
 ## How To Install
 ### 1. First clone this repository:
 ```
@@ -26,6 +20,8 @@ Run in each dependency the following command:
 npm install
 ```
 ### 3. If you want to clone my database in MongoDB Compass (JSON collections inside `/dataBaseCollections`):
+Although the project was made thinking in a technology e-commerce, the products of the web were take from a public API: <https://dummyjson.com/products>, 
+that contains products of all type. I used this API to populate the web with differents categories and brands.
 
 All the data in your MongoDB database is stored in JSON-like documents. You can import JSON data into MongoDB Compass by following these steps or [see official docs](https://www.mongodb.com/docs/compass/current/import-export/):
 
