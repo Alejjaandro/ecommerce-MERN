@@ -19,13 +19,18 @@ export default function CreateProduct() {
         for (let key in data) {
             if (data[key] === '') {
                 delete data[key];
-            } else
-            if (!isNaN(data[key])) {
+            } else if (!isNaN(data[key])) {
                 data[key] = Number(data[key]);
             }
         }
 
-        createProduct(data);
+        await createProduct(data);
+
+        // Timer to empty form fields when finished.
+        setTimeout(() => {
+            e.target.reset();
+        }, 5000);
+
     };
 
     return (
@@ -38,25 +43,10 @@ export default function CreateProduct() {
 
                     <h1 className="newProduct-title">Create New Product</h1>
 
-                    {/* Success */}
-                    {success && (
-                        <div className='success'>
-                            <p>{success}</p>
-                        </div>
-                    )}
-                    {/* Errors */}
-                    {errors && (
-                        <div className='errors'>
-                            {errors.map((error) => (
-                            <p>{error}</p>
-                            ))}
-                        </div>
-                    )}
-
                     <form onSubmit={handleSubmit} className="newProduct-form">
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Thumbnail Image: </label>
-                            <input type="text" className="newProduct-form-input" name='thumbnail'/>
+                            <input type="text" className="newProduct-form-input" name='thumbnail' />
                             <span>
                                 First you nedd to upload your picture to <Link to='https://imgbb.com/' target="_blank">ImgBB</Link>,
                                 then copy the URL and paste it here.
@@ -64,32 +54,48 @@ export default function CreateProduct() {
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Title: </label>
-                            <input type="text" className="newProduct-form-input" name='title'/>
+                            <input type="text" className="newProduct-form-input" name='title' />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Price: </label>
-                            <input type="number" step="any" className="newProduct-form-input" name='price'/>
+                            <input type="number" step="any" className="newProduct-form-input" name='price' />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Discount %: </label>
-                            <input type="number" className="newProduct-form-input" name='discountPercentage'/>
+                            <input type="number" className="newProduct-form-input" name='discountPercentage' />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Category: </label>
-                            <input type="text" className="newProduct-form-input" name='category'/>
+                            <input type="text" className="newProduct-form-input" name='category' />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Brand: </label>
-                            <input type="text" className="newProduct-form-input" name='brand'/>
+                            <input type="text" className="newProduct-form-input" name='brand' />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Stock: </label>
-                            <input type="number" className="newProduct-form-input" name='stock'/>
+                            <input type="number" className="newProduct-form-input" name='stock' />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Description: </label>
-                            <textarea className="newProduct-form-input" name='description'/>
+                            <textarea className="newProduct-form-input" name='description' />
                         </div>
+
+                        {/* Success */}
+                        {success && (
+                            <div className='newProduct-success'>
+                                <p>{success}</p>
+                            </div>
+                        )}
+                        {/* Errors */}
+                        {errors && (
+                            <div className='newProduct-errors'>
+                                {errors.map((error) => (
+                                    <p>{error}</p>
+                                ))}
+                            </div>
+                        )}
+
                         <button type="submit" className="newProduct-submit-button">Create Product</button>
                     </form>
                 </div>

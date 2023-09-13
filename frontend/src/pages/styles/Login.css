@@ -71,10 +71,20 @@
     .login-title {
         font-size: 2rem;
     }
+    .login-input {
+        font-size: 1.5rem;
+    }
     .login-link {
         font-size: large;
     }
     .login-button {
         font-size: 1.5rem;
     }
+}
+/* Deskop styles */
+@media (min-width: 1024px) {
+    .login-wrapper {
+    width: 50%;
+}
+
 }

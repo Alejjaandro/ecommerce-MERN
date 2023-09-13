@@ -21,6 +21,7 @@
 }
 
 .product-info-container {
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,6 +186,9 @@
     .product-wrapper {
         gap: 2rem;
     }
+    .product-info-container {
+        padding: 1rem;
+    }
 
     .product-color-option,
     .product-ram-option {
@@ -209,7 +213,19 @@
     .add-container {
         flex-direction: column;
     }
-
+    .product-wrapper {
+        align-items: center;
+    }
+    .product-img {
+        width: 50%;
+    }
+    .product-title {
+        font-size: 3.5rem;
+    }
+    .product-description {
+        width: 50%;
+        font-size: 1.5rem;
+    }
     .product-options-container {
         gap: 2rem;
     }
