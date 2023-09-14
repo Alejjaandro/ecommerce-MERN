@@ -39,36 +39,36 @@ export default function AllCarts() {
                                     <td>{cart._id}</td>
                                     <td>
                                         <div className='allCarts-row-td-container'>
-                                            {cart.products.map(item => (
-                                                <p>{item.product.title}</p>
+                                            {cart.products.map((item, index) => (
+                                                <p key={index}>{item.product.title}</p>
                                             ))}
                                         </div>
                                     </td>
                                     <td>
                                         <div className='allCarts-row-td-container'>
-                                            {cart.products.map(item => (
-                                                <p>{item.quantity}</p>
+                                            {cart.products.map((item, index) => (
+                                                <p key={index}>{item.quantity}</p>
                                             ))}
                                         </div>
                                     </td>
                                     <td className='allCarts-products-color'>
                                         <div className='allCarts-row-td-container'>
-                                            {cart.products.map(item => (
-                                                <p>{item.color}</p>
+                                            {cart.products.map((item, index) => (
+                                                <p key={index}>{item.color}</p>
                                             ))}
                                         </div>
                                     </td>
                                     <td className='allCarts-products-ram'>
                                         <div className='allCarts-row-td-container'>
-                                            {cart.products.map(item => (
-                                                <p>{item.ram}</p>
+                                            {cart.products.map((item, index) => (
+                                                <p key={index}>{item.ram}</p>
                                             ))}
                                         </div>
                                     </td>
                                     <td>
                                         <div className='allCarts-row-td-container'>
-                                            {cart.products.map(item => (
-                                                <p>${item.product.price * item.quantity}</p>
+                                            {cart.products.map((item, index) => (
+                                                <p key={index}>${item.product.price * item.quantity}</p>
                                             ))}
                                         </div>
                                     </td>

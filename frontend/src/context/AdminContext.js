@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from '../api/axios.js';
+import { useProducts } from "./ProductsContext.js";
 
 export const AdminContext = createContext();
 
@@ -15,6 +16,7 @@ export const AdminProvider = ({ children }) => {
 
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState([]);
+    const { getProducts } = useProducts();
     
     // ===== ADMIN GET user ===== //
     const [user, setUser] = useState([]);
@@ -89,7 +91,10 @@ export const AdminProvider = ({ children }) => {
     const deleteProduct = async (productId) => {
         try {
             const response = await axios.delete(`/products/${productId}`);
-            setSuccess(Object.values(response.data));
+            console.log(response.data.message);
+            setSuccess(response.data.message);
+            // We update the products after deleting.
+            getProducts();
         } catch (error) {
             console.log(error);
             setErrors(Object.values(error.response.data));

@@ -12,15 +12,16 @@ import { useProducts } from '../context/ProductsContext.js';
 export default function ProductList() {
 
     // Import what we need from context.
-    const {getCategoriesAndBrands, getProducts, products } = useProducts();
+    const { getCategoriesAndBrands, getProducts, products } = useProducts();
 
     // We call getCategoriesAndBrands and getProducts when the page loads.
-    useEffect(() => { getCategoriesAndBrands(); getProducts(); }, []);
+    useEffect(() => {
+        getCategoriesAndBrands(); 
+        getProducts();
+    }, []);
     
-    const [sort, setSort] = useState('newest');
-    const [filteredProducts, setFilteredProducts] = useState([]);
-
     // This function is called when the user filters the products.
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const onFilter = (category, brand) => {
         // We initialize "filtered" with all the products.
         let filtered = products;
@@ -35,13 +36,15 @@ export default function ProductList() {
         setFilteredProducts(filtered);
     }
 
+    const [sort, setSort] = useState('newest');
+
     return (
         <>
             <Navbar />
 
             <div className='productList-container'>
 
-                <CategoriesNavbar/>
+                <CategoriesNavbar />
 
                 <h1 className='title'>Products</h1>
 

@@ -16,20 +16,21 @@ export const ProductsProvider = ({ children }) => {
     // ========== FUNCTION TO GET ALL PRODUCTS & CATEGORY PRODUCTS ========== //
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const getProducts = async (category) => {
+    const [categoryFilter, setCategoryFilter] = useState('All');
+    const [brandFilter, setBrandFilter] = useState('All');
+
+    const getProducts = async (categoryFilter) => {
 
         try {
             // Make a get petition to the URL stablished in "/backend/routes/Product.js".
             const res = await axios.get('/products');
-            const resProducts = res.data;
+            let resProducts = res.data;
 
-            // If we choose a category filter or there is a category in the URL params, 
-            // then we filter the products and we save the ones that matches the category.
-            if (category && (category !== "All")) {
-
-                setFilteredProducts(resProducts.filter(prod => prod.category === category));
-
-                // If not, then we save all products.
+            // If we choose a category or brand filter, 
+            // then we filter the products and we save the ones that matches the filters.
+            if (categoryFilter && (categoryFilter !== "All")) {
+                resProducts = resProducts.filter(prod => prod.category === categoryFilter);
+                setFilteredProducts(resProducts.filter(prod => prod.category === categoryFilter));
             } else {
                 setProducts(resProducts);
             }
@@ -133,6 +134,10 @@ export const ProductsProvider = ({ children }) => {
             getProducts,
             products,
             filteredProducts,
+            categoryFilter,
+            brandFilter,
+            setCategoryFilter,
+            setBrandFilter,
 
             getProduct,
             product,

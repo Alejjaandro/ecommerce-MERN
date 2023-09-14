@@ -114,6 +114,7 @@ export const AuthProvider = ({ children }) => {
     // This checks if the cookie token exists and it didn't expired,
     // while it exists the user will be authenticated.
     useEffect(() => {
+
         const token = Cookies.get('token');
 
         if (token) {
@@ -135,18 +136,18 @@ export const AuthProvider = ({ children }) => {
             } catch (error) {
                 console.log('Error decodifying the token: ', error);
             }
-        // If the token doesn't exist:
+            // If the token doesn't exist:
         } else {
             setIsAuthenticated(false);
             setUser(null);
         }
-
-        // We verify the token every 30 min.
-        setInterval(() => {
-            verifyToken(token);
-        }, 1800000);
-
     }, []);
+
+    // We verify the token every 30 min.
+    // setInterval(() => {
+    //     verifyToken(token);
+    // }, 1800000);
+
 
     // All the components inside AuthContext will be able to access it values.
     return (

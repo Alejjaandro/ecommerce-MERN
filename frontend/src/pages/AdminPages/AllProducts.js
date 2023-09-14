@@ -11,12 +11,12 @@ import { Link } from "react-router-dom";
 
 export default function AllProducts() {
 
-    const { products, getProducts } = useProducts();
-    const { deleteProduct } = useAdmin();
-    const [filteredProducts, setFilteredProducts] = useState([]);
-
+    const { products, getProducts, categoryFilter, brandFilter } = useProducts();
+    const { deleteProduct, success } = useAdmin();
+    
     useEffect(() => { getProducts() }, []);
-
+    
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const onFilter = (category, brand) => {
         let filtered = products;
 
@@ -29,6 +29,9 @@ export default function AllProducts() {
         setFilteredProducts(filtered);
     }
 
+    // We use useEffect to update the filteredProducts after deleting a product.
+    useEffect(() => {onFilter(categoryFilter, brandFilter)}, [products]);
+
     return (
         <>
             <AdminNav />
@@ -37,6 +40,13 @@ export default function AllProducts() {
                 <h1>All Products</h1>
 
                 <FilterNavbar useProducts={useProducts} onFilter={onFilter} />
+                
+                {/* Success */}
+                {success && (
+                    <div className='allProducts-success'>
+                        <p>{success}</p>
+                    </div>
+                )}
 
                 <div className="allProducts-table-container">
                     <table className="allProducts-table">

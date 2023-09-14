@@ -69,6 +69,17 @@
     }
 }
 
+.allProducts-success {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.allProducts-success {
+    color: green;
+}
+
 /* Tablet Styles */
 @media (min-width: 768px) {
     .allProducts-stock, .allProducts-price {

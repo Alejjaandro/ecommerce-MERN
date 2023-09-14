@@ -23,7 +23,7 @@ export default function EditProduct() {
         // Petition to modify product data.
         await updateProduct(productId, data);
     };
-    
+
     return (
         <>
             <AdminNavbar />
@@ -34,13 +34,6 @@ export default function EditProduct() {
 
                     <h1 className="editProduct-title">Edit {product.title}</h1>
                     <img className="editProduct-thumbnail" src={product.thumbnail} />
-
-                    {/* Success */}
-                    {success && (
-                        <div className='success'>
-                            <p>{success}</p>
-                        </div>
-                    )}
 
                     <form onSubmit={handleSubmit} className="editProduct-form">
                         <div className="editProduct-form-group">
@@ -71,6 +64,14 @@ export default function EditProduct() {
                             <label className="editProduct-form-label">Description: </label>
                             <textarea defaultValue={product.description} className="editProduct-form-input" name='description' />
                         </div>
+
+                        {/* Success */}
+                        {success && (
+                            <div className='editProduct-success'>
+                                <p>{success}</p>
+                            </div>
+                        )}
+
                         <button type="submit" className="editProduct-submit-button">Update Product</button>
                     </form>
                 </div>

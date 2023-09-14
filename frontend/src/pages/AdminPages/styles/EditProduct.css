@@ -59,8 +59,23 @@
     margin-top: 1rem;
 }
 
+.editProduct-success {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.editProduct-success {
+    color: green;
+}
+
 /* Deskop Styles */
 @media (min-width: 1024px) {
+    .editProduct-thumbnail {
+        width: 50%;
+    }
+
     .editProduct-form-label {
         font-size: 1.5rem;
     }
@@ -68,5 +83,10 @@
     .editProduct-form-input {
         font-size: 1.25rem;
         padding: 0.75rem;
+    }
+
+    .editProduct-success {
+        text-align: center;
+        font-size: 1.5rem;
     }    
 }

@@ -12,28 +12,26 @@ import CategoriesNavbar from '../components/CategoriesNavbar';
 
 export default function CategoryProducts() {
     // We extract what we need from context.
-    const { getProducts, getCategoriesAndBrands, categoriesAndBrands } = useProducts();
+    const { getProducts, getCategoriesAndBrands, categoriesAndBrands, categoryFilter, setCategoryFilter, brandFilter, setBrandFilter } = useProducts();
     // Define filteredProducts as a variable to redefine its value when filtering.
     let { filteredProducts } = useProducts();
 
     // Extract the category from the URL params.
-    const category = useLocation().pathname.split("/")[2];
+    setCategoryFilter(useLocation().pathname.split("/")[2]);
 
     // Call the functions to get the products with the category param, 
     // and the array of categories with brands every time the URL param changes.
     useEffect(() => {
-        getProducts(category);
+        getProducts(categoryFilter);
         getCategoriesAndBrands();
 
-        setBrandFilter('All');
         setSort('newest');
-    }, [category])
+        // We reset the brand filter when the category changes.
+        return () => {setBrandFilter('All')}
+    }, [categoryFilter])
 
-    // If the "categoriesAndBrands" array exists, we extract the ones under the param category.
-    const brands = categoriesAndBrands ? categoriesAndBrands[category] : [];
-
-    const [brandFilter, setBrandFilter] = useState('All');
-    const [sort, setSort] = useState('newest');
+    // If the "categoriesAndBrands" array exists, we extract the brands of the category param.
+    const brands = categoriesAndBrands ? categoriesAndBrands[categoryFilter] : [];
 
     // === FILTER BY BRAND === //
     if (brandFilter && (brandFilter !== "All")) {
@@ -41,12 +39,16 @@ export default function CategoryProducts() {
     }
 
     // === SORT === //
+    const [sort, setSort] = useState('newest');
+
     if (sort) {
         filteredProducts.sort((a, b) => {
             if (sort === "asc") {
                 return a.price - b.price;
             } else if (sort === "desc") {
                 return b.price - a.price;
+            } else {
+                return b.createdAt - a.createdAt;
             }
         });
     }
@@ -65,7 +67,7 @@ export default function CategoryProducts() {
                     {/* Brand selector */}
                     <select className='select' onChange={(e) => { setBrandFilter(e.target.value) }} value={brandFilter}>
                         <option>All</option>
-                        {brands.map((brand, index) => {
+                        {brands && brands.map((brand, index) => {
                             return <option key={index}>{brand}</option>
                         })}
                     </select>
