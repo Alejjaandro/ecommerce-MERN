@@ -17,7 +17,6 @@ export const productValidator = z.object({
         required_error: 'Price is required'
     }).transform(parseFloat),
 
-    
     stock: z.number({
         invalid_type_error: "Stock must be a number",
         required_error: 'A Stock number is required'

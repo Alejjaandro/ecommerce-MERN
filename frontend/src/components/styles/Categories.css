@@ -3,8 +3,22 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
 
-    padding: 0.5rem;
+    padding: 1rem;
 
     text-transform: uppercase;
     font-weight: 700;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .cat-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Deskop Styles */
+@media (min-width: 1024px) {
+    .cat-container {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }

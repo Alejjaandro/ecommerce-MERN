@@ -58,7 +58,7 @@
 /* Laptop styles */
 @media (min-width: 1024px) {
     .cat-title, .cat-link {
-        font-size: xx-large;
+        font-size: 1rem;
         padding: 1rem;
     }
 }

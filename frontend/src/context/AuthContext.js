@@ -148,7 +148,6 @@ export const AuthProvider = ({ children }) => {
     //     verifyToken(token);
     // }, 1800000);
 
-
     // All the components inside AuthContext will be able to access it values.
     return (
         <AuthContext.Provider value={{
