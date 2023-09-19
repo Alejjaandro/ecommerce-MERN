@@ -274,6 +274,10 @@ Example of a Order document:
 
 The backend uses the following environment variables:
 - MONGO_URL: The connection string for the MongoDB database.
+  
+***On windows there is an error when trying to connect to the database using "mongodb://localhost:27017", so I used "mongodb://127.0.0.1:27017" instead.***
+
+- PORT: Port in wich the backend will run.
 - JWT_KEY: The secret key for signing JSON Web Tokens.
 - ADMIN_KEY: The key for creating admin users.
 
