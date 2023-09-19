@@ -20,20 +20,16 @@ Run in each dependency the following command:
 npm install
 ```
 ### 3. If you want to clone my database in MongoDB Compass (JSON collections inside `/dataBaseCollections`):
-Although the project was made thinking in a technology e-commerce, the products of the web were take from a public API: <https://dummyjson.com/products>, 
-that contains products of all type. I used this API to populate the web with differents categories and brands.
-
 All the data in your MongoDB database is stored in JSON-like documents. You can import JSON data into MongoDB Compass by following these steps or [see official docs](https://www.mongodb.com/docs/compass/current/import-export/):
 
-   1. Open MongoDB Compass and connect to your MongoDB instance.
+   1. Open MongoDB Compass and connect to your MongoDB instance. Usually `mongodb://localhost:27017`
 
    2. Select Database and Collection: In the left-hand panel, select the database into which you want to import data. If the database doesn't exist, you can create it by clicking on "CREATE DATABASE". Then, select the collection you want to import data into. If the collection doesn't exist, you can create it by clicking on "CREATE COLLECTION".
 
-   3. Import Data: Click on the "Collection" tab in the top menu, then select "Import Data".
+   3. Import Data: Click on the "Collection" tab in the top menu, then select   
+`"Add Data" -> "Import JSON or CSV file"` to import the file or `"Insert Document"` if you want to copy/paste the info manually or edit it.
 
-   4. Choose File and Format: In the dialog box that appears, click on "Select File" and navigate to the JSON file you want to import. Make sure the "JSON" option is selected as the import format.
-
-   5. Import: Click on the "Import" button to start the import process. MongoDB Compass will import the data from the JSON file into the selected collection.
+   4. Choose File: In the dialog box that appears, click on the JSON file you want to import.
 
 Remember, the JSON file should contain an array of documents that you want to import. Each document should be a separate object in the array, like the data in your users.json file.
 
