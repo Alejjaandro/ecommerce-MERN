@@ -42,9 +42,9 @@ export default function Login() {
                     {/* Errors */}
                     {
                         loginErrors.map((error, i) => (
-                            <div className='errors' key={i}>
+                            <p className='errors' key={i}>
                                 {error}
-                            </div>
+                            </p>
                         ))
                     }
 
@@ -61,7 +61,6 @@ export default function Login() {
                         <button className='login-button' onClick={handleLogin}>LOGIN</button>
 
                         <Link className='login-link' to='/register'>Don't have an account?</Link>
-                        <Link className='login-link' to='/register'>Forget your password?</Link>
                     </form>
                 </div>
             </div>

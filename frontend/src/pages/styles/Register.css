@@ -84,14 +84,11 @@
     .register-title {
         font-size: 2rem;
     }
-    .form-footer {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
+
     .form-footer a {
-        font-size: large;
+        font-size: 1.5rem;
     }
+    
     .register-button {
         font-size: 1.5rem;
     }

@@ -11,6 +11,6 @@ export const validator = (schema) => (req, res, next) => {
         // ".errors" is an array inside zod that is not transformed to json, 
         // so we go through the array to extract the message of each error &
         // we send the errors as response.
-        .json({message: 'Validating Error', errors: error.errors.map((error) => error.message)});
+        .json({message: error.errors.map((error) => error.message)});
     }
 }

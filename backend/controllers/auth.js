@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
 
 export const register = async (req, res, next) => {
     // Extract the info from the body.
-    const { name, lastname, username, email, password, adminKey } = req.body;
+    const { name, lastname, username, email, password } = req.body;
 
     // "try/catch" to avoid code interruption.
     try {
@@ -31,8 +31,6 @@ export const register = async (req, res, next) => {
             email,
             // Encripting the password received from body.
             password: await bcrypt.hash(password, 10),
-            // If the adminKey is the same as the one in the .env file, the user will be an admin.
-            isAdmin: adminKey === process.env.ADMIN_KEY ? true : false
         });
         // save new user in the DB.
         const savedUser = await newUser.save();
@@ -86,7 +84,7 @@ export const login = async (req, res) => {
             .json({ message: 'Login successfull', user: userWithoutPassword, token: accessToken });
 
     } catch (error) {
-        return res.status(500).json(error.message);
+        return res.status(500).json(error);
     }
 };
 

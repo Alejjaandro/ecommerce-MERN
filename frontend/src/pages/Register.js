@@ -58,7 +58,6 @@ export default function Register() {
                         <input className='register-input' name='username' placeholder="Username" type='text'/>
                         <input className='register-input' name='password' placeholder="Password" type='password'/>
                         <input className='register-input' name='confirmPassword' placeholder="Confirm Password" type='password' />
-                        <input className='register-input' name='adminKey' placeholder="Admin Key" type='password' />
 
                         <span className="register-agreement">
                             By creating an account,
