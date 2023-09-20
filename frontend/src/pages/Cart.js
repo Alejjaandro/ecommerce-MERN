@@ -138,7 +138,9 @@ export default function Cart() {
                             <span className='cart-summary-item-totalPrice'>${subtotal + shippingCost}</span>
                         </div>
 
-                        <button className='cart-summary-button'>BUY NOW</button>
+                        <Link to={`/checkout/${user._id}`}>
+                            <button className='cart-summary-button'>BUY NOW</button>
+                        </Link>
 
                     </div>
                 </div>
