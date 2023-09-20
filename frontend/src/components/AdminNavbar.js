@@ -17,7 +17,7 @@ import { useCart } from '../context/CartContext.js';
 
 export default function Navbar() {
   // We extract what we will nedd from the contexts files.
-  const { isAuthenticated, user, logout } = useAuth();
+  const { user, logout } = useAuth();
   const { productsNumber, getCart } = useCart();
 
   // We create a variable to control if the sub-menu appears or not.
@@ -62,14 +62,12 @@ export default function Navbar() {
       <div className='admin-right-container'>
         <span>ADMIN {user.username}</span>
         <button className='admin-userIcon' onClick={toggleMenu}>
-
           {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}
-
         </button>
       </div>
 
-        {/* PROFILE SUB MENU */}
-        {
+      {/* PROFILE SUB MENU */}
+      {
         // Checks if there is a user loggen and, if the alternator is true, displays the sub-menu.
         (menuVisible && user) ? (
           <div className="admin-sub-menu-wrap">

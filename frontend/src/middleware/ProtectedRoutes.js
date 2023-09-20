@@ -1,12 +1,11 @@
-import { useAuth } from "../context/AuthContext.js";
 import { Navigate, Outlet } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export default function ProtectedRoutes() {
 
-    const { user, isAuthenticated } = useAuth();
+    const token = Cookies.get("token");
 
-    // Check if you are authenticated.
-    if (!user || !isAuthenticated) {
+    if (!token) {
         return <Navigate to="/" replace />
     }
 

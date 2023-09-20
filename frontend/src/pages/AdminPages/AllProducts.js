@@ -1,5 +1,5 @@
 import Footer from "../../components/Footer";
-import AdminNav from "../../components/AdminNavbar";
+import Navbar from "../../components/Navbar";
 import FilterNavbar from "../../components/FilterNavbar";
 
 import "./styles/AllProducts.css";
@@ -34,7 +34,7 @@ export default function AllProducts() {
 
     return (
         <>
-            <AdminNav />
+            <Navbar />
 
             <div className="allProducts-container">
                 <h1>All Products</h1>

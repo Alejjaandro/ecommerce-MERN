@@ -1,4 +1,4 @@
-import AdminNavbar from '../../components/AdminNavbar';
+import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -45,7 +45,7 @@ export default function EditCart() {
 
     return (
         <>
-            <AdminNavbar />
+            <Navbar />
 
             <div className="editCart-container">
 

@@ -40,26 +40,28 @@
     gap: 1rem;
 }
 
-.change-picture,
-.change-email,
-.change-username,
-.change-password {
+.change-data {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 0.5rem;
 }
 
-.change-picture label, .change-email label, .change-username label, .change-password label {
+.change-data label {
     font-size: larger;
     font-weight: 400;
 }
 
-.change-picture input, .change-email input, .change-username input, .change-password input {
+.change-data input {
+    font-size: larger;
+    padding: 0.25rem;
+}
+/* .change-picture input, .change-email input, .change-username input, .change-password input {
     min-width: 50%;
 
     padding: 1rem;
     margin: 0.5rem 0;
-}
+} */
 
 /* BUTTONS */
 
@@ -124,6 +126,7 @@
 }
 /* Deskop Styles */
 @media (min-width: 1024px) {
+
     .settings-title {
         gap: 0.5rem;
     
@@ -135,7 +138,7 @@
         font-size: 3rem;
     }
 
-    .change-picture label, .change-email label, .change-username label, .change-password label {
+    .change-data label {
         font-size: 1.5rem;
     }
     

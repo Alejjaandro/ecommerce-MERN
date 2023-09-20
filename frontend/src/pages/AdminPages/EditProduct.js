@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Footer from '../../components/Footer';
-import AdminNavbar from '../../components/AdminNavbar';
+import Navbar from '../../components/Navbar';
 import { useProducts } from '../../context/ProductsContext';
 import { useAdmin } from '../../context/AdminContext';
 
@@ -26,7 +26,7 @@ export default function EditProduct() {
 
     return (
         <>
-            <AdminNavbar />
+            <Navbar />
 
             <div className="editProduct-container">
 

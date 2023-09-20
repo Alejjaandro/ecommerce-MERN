@@ -1,5 +1,5 @@
 import Footer from '../../components/Footer';
-import AdminNavbar from '../../components/AdminNavbar';
+import Navbar from '../../components/Navbar';
 import { useAdmin } from '../../context/AdminContext';
 import { Link } from 'react-router-dom';
 
@@ -35,7 +35,7 @@ export default function CreateProduct() {
 
     return (
         <>
-            <AdminNavbar />
+            <Navbar />
 
             <div className="create-product-container">
 

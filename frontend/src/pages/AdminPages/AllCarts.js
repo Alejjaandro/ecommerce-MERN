@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import AdminNav from '../../components/AdminNavbar.js';
+import Navbar from '../../components/Navbar.js';
 import Footer from '../../components/Footer.js';
 import { useAdmin } from '../../context/AdminContext.js';
 
@@ -13,7 +13,7 @@ export default function AllCarts() {
 
     return (
         <>
-            <AdminNav />
+            <Navbar />
 
             <div className="allCarts-container">
                 <h1>All Carts</h1>
@@ -82,7 +82,7 @@ export default function AllCarts() {
                                 </tr>
                             )) : (
                                 <tr>
-                                    <td className='noCarts' colspan="8">No Carts</td>
+                                    <td className='noCarts' colSpan="8">No Carts</td>
                                 </tr>
                             )}
                         </tbody>

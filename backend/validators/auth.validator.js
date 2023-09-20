@@ -29,5 +29,4 @@ export const loginValidator = z.object({
     .email({ message: 'Invalid email' }),
 
     password: z.string().nonempty({ message: 'Password is required' })
-    .min(6, { message: 'Wrong Password' })
 });

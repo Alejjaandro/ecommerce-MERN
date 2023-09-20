@@ -7,6 +7,7 @@ import './styles/Settings.css';
 import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Settings() {
 
@@ -51,7 +52,7 @@ export default function Settings() {
 
                     <form className='settings-form' onSubmit={handleChange}>
 
-                        <div className="change-picture">
+                        <div className="change-data">
                             <label>Change Profile Picture: </label>
                             <input placeholder="New Picture URL" type='text' name='image' />
                             <span>
@@ -60,17 +61,27 @@ export default function Settings() {
                             </span>
                         </div>
 
-                        <div className="change-email">
+                        <div className="change-data">
+                            <label>Change your Name: </label>
+                            <input placeholder="New Name" type='email' name='name' />
+                        </div>
+
+                        <div className="change-data">
+                            <label>Change your Lastname: </label>
+                            <input placeholder="New Lastname" type='email' name='lastname' />
+                        </div>
+
+                        <div className="change-data">
                             <label>Change your Email: </label>
                             <input placeholder="New Email" type='email' name='email' />
                         </div>
 
-                        <div className="change-username">
+                        <div className="change-data">
                             <label>Change your Username: </label>
                             <input placeholder="New Username" type='text' name='username' />
                         </div>
 
-                        <div className="change-password">
+                        <div className="change-data">
                             <label>Change your Password: </label>
                             <input placeholder="New Password" type='password' name='password' />
                         </div>
@@ -91,7 +102,9 @@ export default function Settings() {
 
                         <div class="settings-buttons">
                             <button type='submit' className='settings-button'>CHANGE</button>
-                            <Link to={`/my-profile/${user._id}`} className="profile-link">Your Profile</Link>
+                            {user && (
+                                <Link to={`/my-profile/${user._id}`} className="profile-link">Your Profile</Link>
+                            )}
                         </div>
 
                     </form>

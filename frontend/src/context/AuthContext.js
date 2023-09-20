@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
-            setErrors(error.response.data);
+            setErrors(error.response.data.message);
             console.log(error.response.data);
         }
     }
@@ -56,10 +56,7 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(true);
 
         } catch (error) {
-            if (Array.isArray(error.response.data)) {
-                return setErrors(error.response.data)
-            }
-            setErrors([error.response.data.message]);
+            setErrors(error.response.data.message);
             console.log(error.response.data);
         }
     }
@@ -85,6 +82,7 @@ export const AuthProvider = ({ children }) => {
 
     // Function to verify the token with the backend.
     async function verifyToken(token) {
+
         try {
             const response = await axios.get('/auth/verifyToken', {
                 headers: { 'token': token }

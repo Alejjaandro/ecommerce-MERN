@@ -1,5 +1,5 @@
 import Footer from "../../components/Footer";
-import AdminNav from "../../components/AdminNavbar";
+import Navbar from "../../components/Navbar";
 import "./styles/OrderDetails.css";
 
 import { format } from 'date-fns';
@@ -22,7 +22,7 @@ export default function OrderDetails() {
 
     return (
         <>
-            <AdminNav />
+            <Navbar />
             {order && (
                 <div className="orderDetails-container">
                     <h1>Order - {order._id}</h1>

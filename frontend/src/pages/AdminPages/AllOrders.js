@@ -1,5 +1,5 @@
 import Footer from "../../components/Footer";
-import AdminNav from "../../components/AdminNavbar";
+import Navbar from "../../components/Navbar";
 import "./styles/AllOrders.css";
 
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ export default function AllOrders() {
 
     return (
         <>
-            <AdminNav />
+            <Navbar />
             <div className="allOrders-container">
                 <h1>All Products</h1>
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
-import AdminNavbar from '../../components/AdminNavbar';
+import Navbar from '../../components/Navbar';
 import { useAdmin } from '../../context/AdminContext';
 import { useAuth } from '../../context/AuthContext';
 import { useUser } from '../../context/UserContext';
@@ -42,7 +42,7 @@ export default function EditUser() {
 
     return (
         <>
-            <AdminNavbar />
+            <Navbar />
 
             <div className="editUser-container">
 

@@ -33,12 +33,13 @@ export const UserProvider = ({ children }) => {
     // ===== UPDATE user ===== //
     const updateUser = async (userId, data) => {
         try {
+            console.log(data);
             const response = await axios.put(`/users/${userId}`, data);
             getUser(userId);
             setSuccess(response.data);
-            console.log(response.data);
         } catch (error) {
-            setErrors(Object.values(error.response.data));
+            console.log(error);
+            // setErrors(error.response);
         }
     }
 
@@ -55,7 +56,7 @@ export const UserProvider = ({ children }) => {
 
         } catch (error) {
             console.log(error);
-            setErrors(Object.values(error.response.data));
+            setErrors(error.response);
         }
     }
 

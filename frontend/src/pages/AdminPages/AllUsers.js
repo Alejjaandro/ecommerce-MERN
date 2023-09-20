@@ -1,5 +1,5 @@
 import Footer from "../../components/Footer";
-import AdminNav from "../../components/AdminNavbar";
+import Navbar from "../../components/Navbar";
 
 import "./styles/AllUsers.css";
 
@@ -15,7 +15,7 @@ export default function AllUsers() {
 
   return (
     <>
-      <AdminNav />
+      <Navbar />
 
       <div className="allUsers-container">
         <h1>All Users</h1>
