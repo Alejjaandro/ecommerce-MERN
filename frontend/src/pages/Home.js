@@ -19,7 +19,9 @@ export default function Home() {
   const { getProducts} = useProducts();
   let { products } = useProducts();
 
-  useEffect(() => {getProducts()}, []);  
+  useEffect(() => {getProducts()}, []);
+
+  if (!products) { return <div>Loading...</div> }
   products = products.slice(0,15);
 
   return (

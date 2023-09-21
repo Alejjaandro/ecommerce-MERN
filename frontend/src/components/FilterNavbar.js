@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 
 export default function FilterNavbar({ useProducts, onFilter }) {
     // We extract what we need from context
-    const { 
-        getCategoriesAndBrands, 
-        categoriesAndBrands, 
-        brands, 
-        getCategories, 
+    const {
+        getCategoriesAndBrands,
+        categoriesAndBrands,
+        brands,
+        getCategories,
         categories,
         categoryFilter,
         brandFilter,
@@ -14,9 +14,9 @@ export default function FilterNavbar({ useProducts, onFilter }) {
         setBrandFilter
     } = useProducts();
 
-    // We use useEffect to call getCategories and getCategoriesAndBrands functions 
+    // We use useEffect to call getCategoriesAndBrands function
     // when the component mounts.
-    useEffect(() => { getCategories(); getCategoriesAndBrands(); }, []);
+    useEffect(() => { getCategoriesAndBrands() }, []);
 
     // Functions to update categoryFilter and brandFilter respectively 
     // when the user selects a different category or brand.
@@ -31,15 +31,15 @@ export default function FilterNavbar({ useProducts, onFilter }) {
     useEffect(() => { onFilter(categoryFilter, brandFilter) }, [categoryFilter, brandFilter]);
 
     // We reset the filters when the component unmounts.
-    useEffect(() => {return () => {setCategoryFilter('All'); setBrandFilter('All')}}, []);
+    useEffect(() => { return () => { setCategoryFilter('All'); setBrandFilter('All') } }, []);
 
     return (
         <div className='filter'>
             <span className='filter-text'>Filter Products:</span>
 
             {/* Category selector */}
-            <select className='select' onChange={handleCategories}>
-                <option disabled selected>Category:</option>
+            <select className='select' onChange={handleCategories} defaultValue="Category:">
+                <option disabled>Category:</option>
                 <option>All</option>
                 {categories.map((category, index) => {
                     return <option key={index}>{category}</option>
@@ -49,8 +49,8 @@ export default function FilterNavbar({ useProducts, onFilter }) {
             {/* Brand selector */}
             {categoryFilter && (categoryFilter !== "All") ? (
                 // If the user selects a category, we show the brands of that category.
-                <select className='select' onChange={handleBrands}>
-                    <option disabled selected>Brand:</option>
+                <select className='select' onChange={handleBrands} defaultValue="Brand:">
+                    <option disabled>Brand:</option>
                     <option>All</option>
                     {/* 
                     We search on {categoriesAndBrands} what matches with the value of {categoryFilter},
@@ -63,13 +63,14 @@ export default function FilterNavbar({ useProducts, onFilter }) {
                 </select>
             ) : (
                 // If the user selects "All" in the category selector, we show all brands.
-                <select className='select' onChange={handleBrands}>
-                    <option disabled selected>Brand:</option>
+                <select className='select' onChange={handleBrands} defaultValue="Brand:">
+                    <option disabled>Brand:</option>
                     <option>All</option>
-                    {brands.map((brand, index) => {
+                    {brands.map( (brand, index) => {
                         return <option key={index}>{brand}</option>
                     })}
                 </select>
+
             )}
         </div>
     );

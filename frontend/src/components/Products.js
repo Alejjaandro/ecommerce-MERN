@@ -5,9 +5,12 @@ import { useEffect } from 'react';
 
 export default function Products({ products, sort }) {
 
-// === SORT === //
-  useEffect(() => {
+  // console.log(products);
 
+  // === SORT === //
+  useEffect(() => {
+    if (!products) { return <div>Loading...</div> }
+    
     if (sort) {
       
       products.sort((a, b) => {

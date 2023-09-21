@@ -2,7 +2,7 @@
 .login-container {
     min-height: 100vh;
 
-    background: url("https://i.ibb.co/8DqrnRj/abstract-futuristic-background-with-3d-design.jpg");
+    background: url("../../assets/images/LoginBackImg.jpg");
     background-size: cover;
 
     display: flex;

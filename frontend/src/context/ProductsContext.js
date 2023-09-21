@@ -19,21 +19,25 @@ export const ProductsProvider = ({ children }) => {
     const [categoryFilter, setCategoryFilter] = useState('All');
     const [brandFilter, setBrandFilter] = useState('All');
 
-    const getProducts = async (categoryFilter) => {
-
+    const getProducts = async () => {
         try {
             // Make a get petition to the URL stablished in "/backend/routes/Product.js".
             const res = await axios.get('/products');
             let resProducts = res.data;
+            setProducts(resProducts);
+            // console.log(products);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-            // If we choose a category or brand filter, 
-            // then we filter the products and we save the ones that matches the filters.
-            if (categoryFilter && (categoryFilter !== "All")) {
-                resProducts = resProducts.filter(prod => prod.category === categoryFilter);
-                setFilteredProducts(resProducts.filter(prod => prod.category === categoryFilter));
-            } else {
-                setProducts(resProducts);
-            }
+    const getProductsByCategory = async (categoryFilter) => {
+        try {
+            const res = await axios.get('/products');
+            let resProducts = res.data;
+
+            resProducts = resProducts.filter(prod => prod.category === categoryFilter);
+            setFilteredProducts(resProducts.filter(prod => prod.category === categoryFilter));
 
         } catch (error) {
             console.log(error);
@@ -103,7 +107,7 @@ export const ProductsProvider = ({ children }) => {
         const products = res.data;
 
         const catAndBrands = {};
-        const brands = [];
+        const provBrands = [];
 
         products.forEach(product => {
 
@@ -122,16 +126,17 @@ export const ProductsProvider = ({ children }) => {
 
         setCategoriesAndBrands(catAndBrands);
 
-        for (const category in categoriesAndBrands) {
-            brands.push(...categoriesAndBrands[category]);
+        for (const category in catAndBrands) {
+            provBrands.push(...catAndBrands[category]);
         }
 
-        setBrands(brands);
+        setBrands(provBrands);
     };
 
     return (
         <ProductsContext.Provider value={{
             getProducts,
+            getProductsByCategory,
             products,
             filteredProducts,
             categoryFilter,

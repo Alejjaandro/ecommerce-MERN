@@ -16,12 +16,16 @@ export default function ProductList() {
 
     // We call getCategoriesAndBrands and getProducts when the page loads.
     useEffect(() => {
-        getCategoriesAndBrands(); 
+        getCategoriesAndBrands();
         getProducts();
     }, []);
-    
+
+    // console.log(products);
+
     // This function is called when the user filters the products.
     const [filteredProducts, setFilteredProducts] = useState([]);
+    useEffect(() => {setFilteredProducts(products)}, [products]);
+
     const onFilter = (category, brand) => {
         // We initialize "filtered" with all the products.
         let filtered = products;
