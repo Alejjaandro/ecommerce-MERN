@@ -19,19 +19,12 @@ Run in each dependency the following command:
 ```
 npm install
 ```
-### 3. If you want to clone my database in MongoDB Compass (JSON collections inside `/dataBaseCollections`):
-All the data in your MongoDB database is stored in JSON-like documents. You can import JSON data into MongoDB Compass by following these steps or [see official docs](https://www.mongodb.com/docs/compass/current/import-export/):
-
-   1. Open MongoDB Compass and connect to your MongoDB instance. Usually `mongodb://localhost:27017`
-
-   2. Select Database and Collection: In the left-hand panel, select the database into which you want to import data. If the database doesn't exist, you can create it by clicking on "CREATE DATABASE". Then, select the collection you want to import data into. If the collection doesn't exist, you can create it by clicking on "CREATE COLLECTION".
-
-   3. Import Data: Click on the "Collection" tab in the top menu, then select   
-`"Add Data" -> "Import JSON or CSV file"` to import the file or `"Insert Document"` if you want to copy/paste the info manually or edit it.
-
-   4. Choose File: In the dialog box that appears, click on the JSON file you want to import.
-
-Remember, the JSON file should contain an array of documents that you want to import. Each document should be a separate object in the array, like the data in your users.json file.
+### 3. Clone database:
+Open your terminal on the project main directory and execute:
+```
+mongorestore -h 127.0.0.1:27017 .\dataBaseCollections\ -d dataBaseCollections
+```
+You will need [MongoDB Database Tools](https://www.mongodb.com/docs/database-tools/installation/installation/) to use `mongorestore` command.
 
 ## Backend Documentation
 
