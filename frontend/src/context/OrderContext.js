@@ -20,7 +20,6 @@ export const OrderProvider = ({ children }) => {
     const createOrder = async (userId, order, cart) => {
 
         if (order.sameAsCustomer === false) {
-            console.log("billing info is different");
             if (
                 (!order.billingName || order.billingName === "") ||
                 (!order.billingAddress || order.billingAddress === "") ||

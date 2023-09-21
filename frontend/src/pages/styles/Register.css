@@ -26,10 +26,6 @@
     margin-bottom: 1rem;
 }
 
-.errors {
-    color: red;
-}
-
 /* FORM */
 .register-form {
     display: flex;
@@ -79,6 +75,20 @@
     }
 }
 
+/* ERRORS */
+.register-errors {
+    margin: 1rem 0;
+    font-size: 0.75rem;
+    
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.register-errors p {
+    color: darkred;
+}
+
 /* Tablet styles */
 @media (min-width: 768px) {
     .register-title {
@@ -92,4 +102,38 @@
     .register-button {
         font-size: 1.5rem;
     }
+
+    .register-errors {
+        font-size: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+}
+
+/* Deskop styles */
+@media (min-width: 1024px) {
+    .register-title {
+        font-size: 2.5rem;
+    }
+
+    .register-form input {
+        font-size: 1.25rem;
+    }
+
+    .form-footer {
+        gap: 1.5rem;
+    }
+    .form-footer a {
+        font-size: 2rem;
+    }
+    
+    .register-button {
+        font-size: 2rem;
+    }
+
+    .register-errors {
+        font-size: 1.25rem;
+        /* grid-template-columns: repeat(3, 1fr); */
+    }
+    
 }

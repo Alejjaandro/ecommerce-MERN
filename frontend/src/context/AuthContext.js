@@ -43,8 +43,8 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
-            setErrors(error.response.data.message);
             console.log(error.response.data);
+            setErrors(error.response.data.message);
         }
     }
 

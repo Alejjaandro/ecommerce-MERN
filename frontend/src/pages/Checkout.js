@@ -83,7 +83,7 @@ export default function Checkout() {
 
 
     const { user } = useAuth();
-    if (!user) return <h1>Loading...</h1>;
+    if (!user) {return <h1>Loading...</h1>}
 
     return (
         <>

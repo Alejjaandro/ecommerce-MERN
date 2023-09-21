@@ -14,14 +14,14 @@ export default function Login() {
     const navigate = useNavigate();
     const { login, isAuthenticated, errors: loginErrors } = useAuth();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
 
     useEffect(() => {
         if (isAuthenticated) {
-          navigate("/");
+            navigate("/");
         }
-      }, [isAuthenticated]);
+    }, [isAuthenticated]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -40,13 +40,14 @@ export default function Login() {
 
                     <h1 className='login-title'>SIGN IN</h1>
                     {/* Errors */}
-                    {
-                        loginErrors.map((error, i) => (
+                    <div className='login-errors'>
+                        {loginErrors.map((error, i) => (
                             <p className='errors' key={i}>
                                 {error}
                             </p>
                         ))
-                    }
+                        }
+                    </div>
 
                     <form className='login-form'>
 

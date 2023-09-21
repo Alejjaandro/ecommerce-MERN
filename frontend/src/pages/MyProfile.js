@@ -7,22 +7,27 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function MyProfile() {
 
   const { user } = useAuth();
   const { deleteUser } = useUser();
+  const navigate = useNavigate();
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+
+  if (!user) return <div>Loading...</div>
 
   const createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
   const createdHour = format(new Date(user.createdAt), "HH:mm:ss");
 
   const updatedDate = format(new Date(user.updatedAt), "dd/MM/yyyy");
   const updatedHour = format(new Date(user.updatedAt), "HH:mm:ss");
+
+  const handleDelete = async (userId) => {
+    await deleteUser(userId);
+    navigate('/');
+  }
 
   return (
     <>
@@ -67,7 +72,7 @@ export default function MyProfile() {
 
         <div className="profile-buttons">
           <button className="profile-edit"><Link to={`/settings/${user._id}`}>Edit Profile</Link></button>
-          <button className="profile-delete" onClick={() => deleteUser(user._id)}>Delete Account</button>
+          <button className="profile-delete" onClick={() => handleDelete(user._id)}>Delete Account</button>
         </div>
 
       </div>
