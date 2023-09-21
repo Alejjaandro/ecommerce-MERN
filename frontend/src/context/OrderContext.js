@@ -13,17 +13,31 @@ export const useOrder = () => {
 
 export const OrderProvider = ({ children }) => {
 
-    const [errors, setErrors] = useState([]);
-    const [success, setSuccess] = useState([]);
+    const [errors, setErrors] = useState();
+    const [success, setSuccess] = useState();
 
     // ===== CREATE ORDER ===== //
     const createOrder = async (userId, order, cart) => {
+
+        if (order.sameAsCustomer === false) {
+            console.log("billing info is different");
+            if (
+                (!order.billingName || order.billingName === "") ||
+                (!order.billingAddress || order.billingAddress === "") ||
+                (!order.billingCountry || order.billingCountry === "") ||
+                (!order.billingState || order.billingState === "") ||
+                (!order.billingCity || order.billingCity === "") ||
+                (!order.billingZipcode || order.billingZipcode === "")
+                ) {
+                return setErrors(["Click on the checkbox to use the same information for billing or fill billing info."])
+            }
+        }
+
         try {
-            const response = await axios.post("/orders/", {userId, order, cart});
-            console.log(response.data);
+            const response = await axios.post("/orders/", { userId, order, cart });
             setSuccess([response.data.message]);
         } catch (error) {
-            console.log(error);;
+            setErrors(error.response.data.message);
         }
     }
 
@@ -34,7 +48,7 @@ export const OrderProvider = ({ children }) => {
             const response = await axios.get(`/orders/find/${userId}`);
             setOrders(response.data);
         } catch (error) {
-            console.log(error);;
+            console.log(error);
         }
     }
 
@@ -53,7 +67,7 @@ export const OrderProvider = ({ children }) => {
     const deleteOrder = async (orderId) => {
         try {
             const response = await axios.delete(`/orders/${orderId}`);
-            console.log(response.data);        
+            console.log(response.data);
         } catch (error) {
             console.log(error);;
         }
@@ -61,9 +75,9 @@ export const OrderProvider = ({ children }) => {
 
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
-        if (errors.length > 0 || success) {
+        if (errors && errors.length > 0 || success) {
             const timer = setTimeout(() => {
-                setErrors([]);
+                setErrors(undefined);
                 setSuccess(undefined);
             }, 5000)
             return () => clearTimeout(timer);
@@ -80,6 +94,7 @@ export const OrderProvider = ({ children }) => {
             deleteOrder,
 
             success,
+            errors
         }}>
             {children}
         </OrderContext.Provider>

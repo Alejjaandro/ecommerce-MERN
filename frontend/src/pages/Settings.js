@@ -11,9 +11,9 @@ import { useEffect } from 'react';
 
 export default function Settings() {
 
-    const { user } = useAuth();
+    const userId = window.location.pathname.split('/')[2];
     const { updateUser, errors, success } = useUser();
-
+    
     const handleChange = async (e) => {
         e.preventDefault();
 
@@ -27,13 +27,13 @@ export default function Settings() {
         If both conditions are true, the field is deleted from req.body.
         */
         for (let field in data) {
-            if (data[field] === "" || ((typeof data[field] === 'object') && (Object.keys(data[field]).length === 0))) {
+            if (data[field] === "") {
                 delete data[field];
             }
         }
 
         // Petition to update user data.
-        await updateUser(user._id, data);
+        await updateUser(userId, data);
 
         // Timer to empty form fields when finished.
         setTimeout(() => {
@@ -63,12 +63,12 @@ export default function Settings() {
 
                         <div className="change-data">
                             <label>Change your Name: </label>
-                            <input placeholder="New Name" type='email' name='name' />
+                            <input placeholder="New Name" type='text' name='name' />
                         </div>
 
                         <div className="change-data">
                             <label>Change your Lastname: </label>
-                            <input placeholder="New Lastname" type='email' name='lastname' />
+                            <input placeholder="New Lastname" type='text' name='lastname' />
                         </div>
 
                         <div className="change-data">
@@ -100,11 +100,9 @@ export default function Settings() {
                             </div>
                         )}
 
-                        <div class="settings-buttons">
+                        <div className="settings-buttons">
                             <button type='submit' className='settings-button'>CHANGE</button>
-                            {user && (
-                                <Link to={`/my-profile/${user._id}`} className="profile-link">Your Profile</Link>
-                            )}
+                            <Link to={`/my-profile/${userId}`} className="profile-link">Your Profile</Link>
                         </div>
 
                     </form>

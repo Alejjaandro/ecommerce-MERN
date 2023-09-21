@@ -33,13 +33,17 @@ export const UserProvider = ({ children }) => {
     // ===== UPDATE user ===== //
     const updateUser = async (userId, data) => {
         try {
-            console.log(data);
-            const response = await axios.put(`/users/${userId}`, data);
-            getUser(userId);
-            setSuccess(response.data);
+            // Error if the fields are empty.
+            if (Object.keys(data).length === 0) {
+                return setErrors(['You must fill at least one field to update.']);
+            } else {
+                const response = await axios.put(`/users/${userId}`, data);
+                getUser(userId);
+                setSuccess([response.data.message]);
+            }
+    
         } catch (error) {
-            console.log(error);
-            // setErrors(error.response);
+            setErrors([error.response.data.message]);
         }
     }
 

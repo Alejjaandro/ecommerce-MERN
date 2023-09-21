@@ -44,50 +44,50 @@ export default function App() {
 
     <AuthProvider>
       <ProductsProvider>
-        <CartProvider>
-          <UserProvider>
+        <UserProvider>
+          <CartProvider>
             <AdminProvider>
               <OrderProvider>
 
-              <BrowserRouter>
-                <Routes>
-                  {/* Public Routes */}
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about-us" element={<AboutUs />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/products/" element={<ProductList />} />
-                  <Route path="/products/:category" element={<CategoryProducts />} />
-                  <Route path="/product/:id" element={<Product />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/login" element={<Login />} />
-                  {/* Users Routes */}
-                  <Route element={<ProtectedRoutes />}>
-                    <Route path="/my-profile/:userId" element={<MyProfile />} />
-                    <Route path="/settings/:userId" element={<Settings />} />
-                    <Route path="/cart/:userId" element={<Cart />} />
-                    <Route path="/my-orders/:userId" element={<MyOrders />} />
-                    <Route path="/checkout/:userId" element={<Checkout />} />
-                  <Route path="/thank-you/:userId" element={<ThankYou />} />
-                  </Route>
-                  {/* Admin Routes */}
-                  <Route element={<AdminRoutes />}>
-                    <Route path="/all-products/" element={<AllProducts />} />
-                    <Route path="/edit-product/:productId" element={<EditProduct />} />
-                    <Route path="/all-users/" element={<AllUsers />} />
-                    <Route path="/edit-user/:userId" element={<EditUser />} />
-                    <Route path="/all-carts/" element={<AllCarts />} />
-                    <Route path="/edit-cart/:cartId" element={<EditCart />} />
-                    <Route path="/all-orders/" element={<AllOrders />} />
-                    <Route path="/order-details/:orderId" element={<OrderDetails />} />
-                    <Route path="/create-product" element={<CreateProduct />} />
-                  </Route>
-                </Routes>
-              </BrowserRouter>
+                <BrowserRouter>
+                  <Routes>
+                    {/* Public Routes */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/products/" element={<ProductList />} />
+                    <Route path="/products/:category" element={<CategoryProducts />} />
+                    <Route path="/product/:id" element={<Product />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    {/* Users Routes */}
+                    <Route element={<ProtectedRoutes />}>
+                      <Route path="/my-profile/:userId" element={<MyProfile />} />
+                      <Route path="/settings/:userId" element={<Settings />} />
+                      <Route path="/cart/:userId" element={<Cart />} />
+                      <Route path="/my-orders/:userId" element={<MyOrders />} />
+                      <Route path="/checkout/:userId" element={<Checkout />} />
+                      <Route path="/thank-you/:userId" element={<ThankYou />} />
+                    </Route>
+                    {/* Admin Routes */}
+                    <Route element={<AdminRoutes />}>
+                      <Route path="/all-products/" element={<AllProducts />} />
+                      <Route path="/edit-product/:productId" element={<EditProduct />} />
+                      <Route path="/all-users/" element={<AllUsers />} />
+                      <Route path="/edit-user/:userId" element={<EditUser />} />
+                      <Route path="/all-carts/" element={<AllCarts />} />
+                      <Route path="/edit-cart/:cartId" element={<EditCart />} />
+                      <Route path="/all-orders/" element={<AllOrders />} />
+                      <Route path="/order-details/:orderId" element={<OrderDetails />} />
+                      <Route path="/create-product" element={<CreateProduct />} />
+                    </Route>
+                  </Routes>
+                </BrowserRouter>
 
               </OrderProvider>
             </AdminProvider>
-          </UserProvider>
-        </CartProvider>
+          </CartProvider>
+        </UserProvider>
       </ProductsProvider>
     </AuthProvider>
   );

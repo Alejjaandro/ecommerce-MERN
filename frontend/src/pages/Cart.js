@@ -5,21 +5,30 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
 import './styles/Cart.css';
-import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+
+import React from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Cart() {
+
+    const userId = window.location.pathname.split('/')[2];
+
     // We extract what we need from the context.
-    const { user } = useAuth();
     const { getCart, cart, productsNumber, deleteProduct, deleteCart, addToCart } = useCart();
 
-    useEffect(() => { getCart(user._id) }, []);
+    useEffect(() => { getCart(userId) }, []);
+    
+    useEffect(() => {
+        if (cart && cart.length < 1) {
+            deleteCart(userId);
+        }
+    }, [cart]);
 
     // Initialize some variables for later
-    let subtotal;
-    let shippingCost;
+    let subtotal = 0;
+    let shippingCost = 0;
     let quantity;
 
     // We calculate the subtotal by summing the products cost.
@@ -38,12 +47,6 @@ export default function Cart() {
         }
     }
 
-    useEffect(() => {
-        if (cart && cart.length < 1) {
-            deleteCart(user._id);
-        }
-    }, [cart]);
-
     return (
         <>
             <Navbar />
@@ -57,8 +60,7 @@ export default function Cart() {
                     <Link to='/products'><button className='cart-top-button'>CONTINUE SHOPPING</button></Link>
 
                     <span className='cart-top-texts'>Shopping Cart ({productsNumber})</span>
-
-                    <Link to={`/checkout/${user._id}`}><button className='cart-top-button'>CHECKOUT NOW</button></Link>
+                    <Link to={`/checkout/${userId}`}><button className='cart-top-button'>CHECKOUT NOW</button></Link>
                 </div>
 
                 {/* Body container */}
@@ -70,9 +72,9 @@ export default function Cart() {
                         We render the products only if "cart" exists and it has at least 1 product,
                         then we access its data to complete the info on the page.
                         */}
-                        {(cart && cart.length >= 1) ? Array.from(cart).map((product) => {
+                        {(cart && cart.length >= 1) ? cart.map((product, index) => {
                             return (
-                                <>
+                                <React.Fragment key={index}>
                                     <div className="cart-product" key={product.product._id}>
 
                                         <div className='cart-product-details'>
@@ -90,25 +92,25 @@ export default function Cart() {
                                         <div className="cart-product-price">
 
                                             <div className="cart-product-ammount">
-                                                <button onClick={() => decreaseAmmount(user._id, product)} className="cart-ammount-icon flex-center">
+                                                <button onClick={() => decreaseAmmount(userId, product)} className="cart-ammount-icon flex-center">
                                                     <RemoveIcon />
                                                 </button>
 
                                                 <span className="cart-amount-num flex-center">{product.quantity}</span>
 
-                                                <button onClick={() => addToCart(user._id, product.product)} className="cart-ammount-icon flex-center">
+                                                <button onClick={() => addToCart(userId, product.product)} className="cart-ammount-icon flex-center">
                                                     <AddIcon />
                                                 </button>
                                             </div>
 
                                             <div className="cart-price">${(product.product.price * product.quantity)}</div>
-                                            <button onClick={() => deleteProduct(user._id, product.product._id)} className='delete-button'>
+                                            <button onClick={() => deleteProduct(userId, product.product._id)} className='delete-button'>
                                                 Remove Product
                                             </button>
                                         </div>
 
                                     </div>
-                                </>
+                                </React.Fragment>
                             );
                         }) : (
                             <div> No Producs in Cart</div>
@@ -138,10 +140,9 @@ export default function Cart() {
                             <span className='cart-summary-item-totalPrice'>${subtotal + shippingCost}</span>
                         </div>
 
-                        <Link to={`/checkout/${user._id}`}>
+                        <Link to={`/checkout/${userId}`}>
                             <button className='cart-summary-button'>BUY NOW</button>
                         </Link>
-
                     </div>
                 </div>
             </div>

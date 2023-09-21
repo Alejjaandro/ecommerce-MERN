@@ -1,8 +1,8 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    gap: 2rem;
     padding: 1rem;
     min-height: 100vh;
 }
@@ -86,6 +86,9 @@
         font-size: x-large;
     }
     
+    .profile-edit a, .profile-delete {
+        font-size: 1.5rem;
+    }
 }
 /* Deskop Styles */
 @media (min-width: 1024px) {

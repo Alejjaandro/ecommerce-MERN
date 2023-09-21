@@ -31,14 +31,16 @@ export default function Navbar() {
     if (user) {
       getCart(user._id);
     }
-  }, [])
+  }, [user])
 
   // To navigate to the home page after logging out.
   const navigate = useNavigate();
 
   // If the user is an admin, it will show the admin navbar.
   if (user && user.isAdmin) {
+    
     return (<AdminNavbar />)
+
   } else {
 
     return (

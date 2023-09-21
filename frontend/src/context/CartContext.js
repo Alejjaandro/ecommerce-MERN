@@ -1,9 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode';
 
 import axios from '../api/axios.js';
 import { useAuth } from "./AuthContext";
+import { useUser } from "../context/UserContext.js";
 
 export const CartContext = createContext();
 
@@ -17,59 +16,51 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
 
-    const { user } = useAuth();
-
     const [productsNumber, setProductsNumber] = useState(0);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState();
 
     // ===== GET USER CART ===== //
     const getCart = async (userId) => {
+        // const response = await axios.get(`/users/find/${userId}`);
+        // const user = response.data;
 
-        if (user) {
-            try {
-                // We send a petition to get the cart of the user.
-                const res = await axios.get(`/carts/find/${userId}`);
+        try {
+            // We send a petition to get the cart of the user.
+            const res = await axios.get(`/carts/find/${userId}`);
 
-                // We update ProductsNumber and CartProducts with the new info.
-                setProductsNumber(res.data.products.length);
-                setCart(res.data.products);
+            // We update ProductsNumber and CartProducts with the new info.
+            setProductsNumber(res.data.products.length);
+            setCart(res.data.products);
 
-            } catch (error) {
-                // If the cart is empty we set ProductsNumber to 0 and CartProducts to an empty array.
-                if (error.response.status === 404) {
-                    setProductsNumber(0);
-                    setCart([]);
-                }
-                console.log(error.response.data);
+        } catch (error) {
+            // If the cart is empty we set ProductsNumber to 0 and CartProducts to an empty array.
+            if (error.response.status === 404) {
+                setProductsNumber(0);
+                setCart(null);
             }
+            console.log(error.response.data);
         }
     }
 
     // ===== ADD TO CART ===== //
     const addToCart = async (userId, product, quantity, color, ram) => {
 
-        // First we chack if user is logged. 
-        if (user) {
-            try {
-                // we send a post with the userId and the product with its features.
-                const response = await axios.post(`/carts/${userId}`, {
-                    userId: userId,
-                    product: product,
-                    quantity: quantity || 1,
-                    color: color ? color : null,
-                    ram: ram ? ram : null
-                });
+        try {
+            // we send a post with the userId and the product with its features.
+            const response = await axios.post(`/carts/${userId}`, {
+                userId: userId,
+                product: product,
+                quantity: quantity || 1,
+                color: color ? color : null,
+                ram: ram ? ram : null
+            });
 
-                // // We update the user cart.
-                setCart(response.data.newCart.products);
-                setProductsNumber(response.data.newCart.products.length);
+            // // We update the user cart.
+            setCart(response.data.newCart.products);
+            setProductsNumber(response.data.newCart.products.length);
 
-            } catch (error) {
-                console.log(error);
-            }
-
-        } else {
-            console.log("You need to be logged");
+        } catch (error) {
+            console.log(error);
         }
     }
 

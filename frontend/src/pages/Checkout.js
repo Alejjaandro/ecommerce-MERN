@@ -4,7 +4,7 @@ import './styles/Checkout.css';
 
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // "react-country-region-selector" provides a pair of React components to display connected country and region dropdowns.
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
@@ -15,12 +15,13 @@ import { useOrder } from '../context/OrderContext';
 
 export default function Checkout() {
 
-    const { user } = useAuth();
     const { getCart, cart } = useCart();
-    const { createOrder, success } = useOrder();
+    const { createOrder, success, errors } = useOrder();
     const navigate = useNavigate();
 
-    useEffect(() => { getCart(user._id) }, []);
+    const userId = window.location.pathname.split('/')[2];
+
+    useEffect(() => { getCart(userId) }, []);
 
     // Calculate the subtotal and shipping cost.
     let subtotal;
@@ -46,21 +47,43 @@ export default function Checkout() {
         e.preventDefault();
         const formData = new FormData(e.target);
         let data = Object.fromEntries(formData);
-        // Add the cost to the data object.
-        data = { ...data, subtotal, shippingCost, total };
-        createOrder(user._id, data, cart);
+
+        // Delete empty fields.
+        for (let field in data) {
+            if (data[field] === "") {
+                delete data[field];
+            }
+        }
+
+        // Transform the data to the correct type.
+        if (data.zipcode) data.zipcode = Number(data.zipcode);
+        if (data.cardNumber) data.cardNumber = Number(data.cardNumber);
+        if (data.expirationDate) data.expirationDate = startDate.toISOString();
+        if (data.cvc) data.cvc = Number(data.cvc);
+
+        if (data.billingZipcode) data.billingZipcode = Number(data.billingZipcode);
+
+        // Add the cost and checkbox to the data object.
+        data = { ...data, sameAsCustomer, subtotal, shippingCost, total };
+
+        // Create the order.
+        createOrder(userId, data, cart);
     };
 
-    // If the order is created successfully, redirect to home page after 3 seconds.
+    // If the order is created successfully, redirect to Thanks page after 3 seconds.
     useEffect(() => {
         if (success) {
             const timer = setTimeout(() => {
-                navigate(`/thank-you/${user._id}`);
+                navigate(`/thank-you/${userId}`);
             }, 3000);
             // Clear timeout if the component is unmounted.
             return () => clearTimeout(timer);
         }
     }, [success]);
+
+
+    const { user } = useAuth();
+    if (!user) return <h1>Loading...</h1>;
 
     return (
         <>
@@ -76,19 +99,19 @@ export default function Checkout() {
                         <div className="customer-info">
                             <div className="field">
                                 <label>Name:</label>
-                                <input className="checkout-input" type="text" name='name' defaultValue={user.name} required />
+                                <input className="checkout-input" type="text" name='name' defaultValue={user.name} />
                             </div>
                             <div className="field">
                                 <label>Last Name:</label>
-                                <input className="checkout-input" type="text" name='lastname' defaultValue={user.lastname} required />
+                                <input className="checkout-input" type="text" name='lastname' defaultValue={user.lastname} />
                             </div>
                             <div className="field">
                                 <label>Email:</label>
-                                <input className="checkout-input" type="email" name='email' defaultValue={user.email} required />
+                                <input className="checkout-input" type="email" name='email' defaultValue={user.email} />
                             </div>
                             <div className="field">
                                 <label>Address:</label>
-                                <input className="checkout-input" type="text" name='address' required />
+                                <input className="checkout-input" type="text" name='address' />
                             </div>
                             <div className="field">
                                 <label>Country:</label>
@@ -116,7 +139,7 @@ export default function Checkout() {
                             </div>
                             <div className="field">
                                 <label>Zip Code:</label>
-                                <input className="checkout-input" type="number" name='zipcode' required />
+                                <input className="checkout-input" type="number" name='zipcode' />
                             </div>
                         </div>
 
@@ -125,7 +148,7 @@ export default function Checkout() {
                         <div className="payment-info">
                             <div className="field">
                                 <label>Credit Card Number:</label>
-                                <input className="checkout-input" type="number" name='cardNumber' required />
+                                <input className="checkout-input" type="number" name='cardNumber' />
                             </div>
                             <div className="field">
                                 <label>Expiration Date:</label>
@@ -133,6 +156,7 @@ export default function Checkout() {
                                     name='expirationDate'
                                     className="checkout-input"
                                     selected={startDate}
+                                    minDate={startDate}
                                     onChange={(date) => setStartDate(date)}
                                     dateFormat="MM/yyyy"
                                     showMonthYearPicker
@@ -140,7 +164,7 @@ export default function Checkout() {
                             </div>
                             <div className="field">
                                 <label>CVC:</label>
-                                <input className="checkout-input" type="number" name='cvc' required />
+                                <input className="checkout-input" type="number" name='cvc' />
                             </div>
                         </div>
 
@@ -154,13 +178,13 @@ export default function Checkout() {
                                     disabled={sameAsCustomer}
                                     className="checkout-input"
                                     type="text"
-                                    name='billingName' required
+                                    name='billingName'
                                     defaultValue={`${user.name} ${user.lastname}`}
                                 />
                             </div>
                             <div className="field">
                                 <label>Address:</label>
-                                <input className="checkout-input" type="text" name='billingAddress' required disabled={sameAsCustomer} />
+                                <input className="checkout-input" type="text" name='billingAddress' disabled={sameAsCustomer} />
                             </div>
                             <div className="field">
                                 <label>Country:</label>
@@ -190,7 +214,7 @@ export default function Checkout() {
                             </div>
                             <div className="field">
                                 <label>Zip Code:</label>
-                                <input className="checkout-input" type="number" name='billingZipcode' required disabled={sameAsCustomer} />
+                                <input className="checkout-input" type="number" name='billingZipcode' disabled={sameAsCustomer} />
                             </div>
                         </div>
 
@@ -198,6 +222,13 @@ export default function Checkout() {
                         {success && success.map((message, index) => (
                             <p key={index} className="success">{message}</p>
                         ))}
+
+                        {/* Errors */}
+                        <div className="checkout-errors">
+                            {errors && errors.map((message, index) => (
+                                <p key={index} className="errors">{message}</p>
+                            ))}
+                        </div>
 
                         <div className="checkout-buttons">
                             <button className='checkout-button' type='submit'>CHECKOUT</button>
@@ -210,8 +241,8 @@ export default function Checkout() {
                 <div className='current-cart'>
                     <h1>CURRENT CART</h1>
                     <div className="current-cart-products">
-                        {(cart && cart.length >= 1) && Array.from(cart).map((product) => (
-                            <>
+                        {(cart && cart.length >= 1) && cart.map((product, index) => (
+                            <React.Fragment key={index}>
                                 <div className="current-cart-product" key={product.product._id}>
                                     <div className='current-cart-details'>
                                         <img className='current-cart-img' src={`${product.product.thumbnail}`} alt="" />
@@ -226,8 +257,8 @@ export default function Checkout() {
                                         <span><strong>${(product.product.price * product.quantity)}</strong></span>
                                     </div>
                                 </div>
-                                <hr className='hr'/>
-                            </>
+                                <hr className='hr' />
+                            </React.Fragment>
                         ))}
                     </div>
 

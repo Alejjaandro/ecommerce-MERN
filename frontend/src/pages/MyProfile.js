@@ -6,16 +6,17 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 export default function MyProfile() {
 
   const { user } = useAuth();
-  const { getUser, deleteUser } = useUser();
+  const { deleteUser } = useUser();
 
-  useEffect(() => { user && getUser(user._id) }, []);
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   const createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
   const createdHour = format(new Date(user.createdAt), "HH:mm:ss");
@@ -30,7 +31,7 @@ export default function MyProfile() {
       <div className="profile-container">
 
         <div className="profile-image">
-          {user.image ? <img src={user.image}/> : <AccountBoxIcon/> }
+          {user.image ? <img src={user.image} /> : <AccountBoxIcon />}
           <h1>Profile picture</h1>
         </div>
 

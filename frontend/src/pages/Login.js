@@ -29,8 +29,6 @@ export default function Login() {
         await login({ email, password })
     }
 
-    console.log(loginErrors);
-
     return (
 
         <>

@@ -13,7 +13,6 @@ export default function MyOrders() {
     const userId = window.location.pathname.split('/')[2];
 
     useEffect(() => { getUserOrders(userId) }, []);
-    console.log(orders);
 
     // Function to format the date.
     function formatDate(date) {
@@ -29,8 +28,8 @@ export default function MyOrders() {
                 <div className='myOrders'>
                     {orders ? orders.map(order => (
                         <div className='myOrder' key={order._id}>
-                            <div class="myOrder-info-container">
-                                <div class="myOrder-info">
+                            <div className="myOrder-info-container">
+                                <div className="myOrder-info">
                                     <h1><strong>Order Id:</strong> {order._id}</h1>
                                     <p><strong>Created:</strong> {formatDate(order.createdAt)}</p>
                                     <p><strong>Order Status:</strong> {order.status}</p>
@@ -43,8 +42,8 @@ export default function MyOrders() {
                                 </div>
                             </div>
                             <div className='myOrder-product'>
-                                {order.products.map(product => (
-                                    <div className='myOrder-product-info'>
+                                {order.products.map((product, index) => (
+                                    <div className='myOrder-product-info' key={index}>
                                         <img src={product.product.thumbnail} />
                                         <span>Quantity: {product.quantity}</span>
                                         <span>{product.product.title}</span>

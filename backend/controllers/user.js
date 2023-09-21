@@ -22,19 +22,19 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
 
     const user = await User.findById(req.params.id);
-
+    console.log(user);
     // We check if the body info it's the same that the one in the DB.
     if (req.body.email === user.email) {
-        return res.status(400).json({ error: 'New Email cannot be the same as the old Email.' });
+        return res.status(400).json({ message: ['New Email cannot be the same as the old Email.'] });
     }
     if (req.body.username === user.username) {
-        return res.status(400).json({ error: 'New Username cannot be the same as the old Username.' });
+        return res.status(400).json({ message: ['New Username cannot be the same as the old Username.'] });
     }
     if (req.body.password) {
         const passwordMatch = await bcrypt.compare(req.body.password, user.password);
 
         if (passwordMatch) {
-            return res.status(400).json({ error: 'New Password cannot be the same as the old Password.' });
+            return res.status(400).json({ message: ['New Password cannot be the same as the old Password.'] });
         } else {
             return req.body.password = bcrypt.hash(req.body.password, 10);
         }
