@@ -74,11 +74,9 @@ export const AdminProvider = ({ children }) => {
         try {
             console.log(data);
             const response = await axios.post(`/products`, data);
-            setSuccess(Object.values(response.data.message));
-            console.log(response.data.newProduct);
+            setSuccess(response.data.message);
         } catch (error) {
-            console.log(error);
-            setErrors(Object.values(error.response.data));
+            setErrors(error.response.data.message);
         }
     }
 
@@ -86,11 +84,10 @@ export const AdminProvider = ({ children }) => {
     const updateProduct = async (productId, data) => {
         try {
             const response = await axios.put(`/products/${productId}`, data);
-            console.log(response.data);
-            setSuccess(Object.values(response.data.message));
+            setSuccess(response.data.message);
         } catch (error) {
-            console.log(error);
-            setErrors(Object.values(error.response.data));
+            console.log(error.response.data.message);
+            setErrors(error.response.data.message);
         }
     }
 
@@ -98,7 +95,6 @@ export const AdminProvider = ({ children }) => {
     const deleteProduct = async (productId) => {
         try {
             const response = await axios.delete(`/products/${productId}`);
-            console.log(response.data.message);
             setSuccess(response.data.message);
             // We update the products after deleting.
             getProducts();

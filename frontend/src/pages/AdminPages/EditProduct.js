@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
+
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useProducts } from '../../context/ProductsContext';
 import { useAdmin } from '../../context/AdminContext';
 
@@ -9,7 +11,7 @@ import './styles/EditProduct.css';
 export default function EditProduct() {
 
     const { getProduct, product } = useProducts();
-    const { updateProduct, success } = useAdmin();
+    const { updateProduct, success, errors } = useAdmin();
 
     const productId = window.location.pathname.split("/")[2];
     useEffect(() => { getProduct(productId) }, []);
@@ -20,10 +22,23 @@ export default function EditProduct() {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
+        // We delete the empty fields.
+        for (let field in data) {
+            if (data[field] === "") {
+                delete data[field];
+            }
+        }
+
+        // Transform the data to the correct type.
+        if (data.price) data.price = Number(data.price);
+        if (data.discountPercentage) data.discountPercentage = Number(data.discountPercentage);
+        if (data.stock) data.stock = Number(data.stock);
+
         // Petition to modify product data.
         await updateProduct(productId, data);
     };
 
+    console.log(errors);
     return (
         <>
             <Navbar />
@@ -35,6 +50,13 @@ export default function EditProduct() {
                     <h1 className="editProduct-title">Edit {product.title}</h1>
                     <img className="editProduct-thumbnail" src={product.thumbnail} />
 
+                    {/* Errors */}
+                    <div className='editProduct-errors'>
+                    {errors && errors.map((message, index) => (
+                            <p key={index}>{message}</p>
+                        ))}
+                    </div>
+
                     <form onSubmit={handleSubmit} className="editProduct-form">
                         <div className="editProduct-form-group">
                             <label className="editProduct-form-label">Title: </label>
@@ -42,11 +64,11 @@ export default function EditProduct() {
                         </div>
                         <div className="editProduct-form-group">
                             <label className="editProduct-form-label">Price: </label>
-                            <input type="number" defaultValue={product.price} className="editProduct-form-input" name='price' />
+                            <input type="number" step="0.01" defaultValue={product.price} className="editProduct-form-input" name='price' />
                         </div>
                         <div className="editProduct-form-group">
                             <label className="editProduct-form-label">Discount %: </label>
-                            <input type="number" defaultValue={product.discountPercentage} className="editProduct-form-input" name='discountPercentage' />
+                            <input type="number" step="0.01" defaultValue={product.discountPercentage} className="editProduct-form-input" name='discountPercentage' />
                         </div>
                         <div className="editProduct-form-group">
                             <label className="editProduct-form-label">Category: </label>
@@ -72,7 +94,12 @@ export default function EditProduct() {
                             </div>
                         )}
 
-                        <button type="submit" className="editProduct-submit-button">Update Product</button>
+                        <div className="editProduct-foot-buttons">
+                            <button type="submit" className="editProduct-submit-button">Update Product</button>
+                            <button type="button" className="editProduct-back-link">
+                                <Link to={'/all-products/'}>Back To All Products</Link>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

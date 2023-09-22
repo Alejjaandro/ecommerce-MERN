@@ -78,6 +78,8 @@
 
 .allProducts-success {
     color: green;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 /* Tablet Styles */
@@ -96,5 +98,8 @@
     .allProducts-link-edit, .allProducts-btn-remove {
         font-size: 1.2rem;
         padding: 1rem;
+    }
+    .allProducts-success {
+        font-size: 1.5rem;
     }
 }

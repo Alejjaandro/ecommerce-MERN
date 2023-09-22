@@ -30,7 +30,6 @@ export default function CreateProduct() {
         setTimeout(() => {
             e.target.reset();
         }, 5000);
-
     };
 
     return (
@@ -42,6 +41,15 @@ export default function CreateProduct() {
                 <div className="create-product-wrapper">
 
                     <h1 className="newProduct-title">Create New Product</h1>
+
+                    {/* Errors */}
+                    {errors && (
+                        <div className='newProduct-errors'>
+                            {errors.map((error, index) => (
+                                <p key={index}>{error}</p>
+                            ))}
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="newProduct-form">
                         <div className="newProduct-form-group">
@@ -85,14 +93,6 @@ export default function CreateProduct() {
                         {success && (
                             <div className='newProduct-success'>
                                 <p>{success}</p>
-                            </div>
-                        )}
-                        {/* Errors */}
-                        {errors && (
-                            <div className='newProduct-errors'>
-                                {errors.map((error) => (
-                                    <p>{error}</p>
-                                ))}
                             </div>
                         )}
 

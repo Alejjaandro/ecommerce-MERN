@@ -64,11 +64,16 @@
 }
 
 .newProduct-errors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
     color: red;
+    font-weight: bold;
 }
 
 .newProduct-success {
     color: green;
+    font-weight: bold;
 }
 
 
