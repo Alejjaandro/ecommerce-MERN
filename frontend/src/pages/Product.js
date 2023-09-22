@@ -36,8 +36,6 @@ export default function Product() {
         setRam(e.target.value);
     }
 
-    console.log(color, ram);
-
     // Handle increase and decrease buttons.
     const addQuantity = () => {
         setQuantity(quantity + 1);
@@ -51,7 +49,16 @@ export default function Product() {
         e.preventDefault();
 
         if (user) {
-            await addToCart(user._id, product, quantity, color, ram);
+            const provProduct = {
+                _id: product._id,
+                thumbnail: product.thumbnail,
+                title: product.title,
+                price: product.price,
+                quantity: quantity,
+                color: color,
+                ram: ram
+            }
+            await addToCart(user._id, provProduct);
 
             setAddedMessage(true);
             setTimeout(() => {

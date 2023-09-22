@@ -26,7 +26,7 @@ export default function MyOrders() {
             <div className='myOrders-container'>
                 <h1>My Orders</h1>
                 <div className='myOrders'>
-                    {orders ? orders.map(order => (
+                    {(orders && orders.length > 0) ? orders.map(order => (
                         <div className='myOrder' key={order._id}>
                             <div className="myOrder-info-container">
                                 <div className="myOrder-info">
@@ -44,15 +44,15 @@ export default function MyOrders() {
                             <div className='myOrder-product'>
                                 {order.products.map((product, index) => (
                                     <div className='myOrder-product-info' key={index}>
-                                        <img src={product.product.thumbnail} />
+                                        <img src={product.thumbnail} />
                                         <span>Quantity: {product.quantity}</span>
-                                        <span>{product.product.title}</span>
+                                        <span>{product.title}</span>
                                     </div>
                                 ))}
                             </div>
                             <h1><strong>Total:</strong> ${order.orderInfo.total}</h1>
                         </div>
-                    )) : <h1>You don't have any orders yet.</h1>}
+                    )) : <h3>You don't have any orders yet.</h3>}
                 </div>
             </div>
             <Footer />

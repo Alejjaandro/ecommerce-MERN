@@ -24,16 +24,14 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    // To check errors.
-    const [errors, setErrors] = useState([]);
-
+    
     // Use the info sent by the form in "/pages/Register.js" to make the post request.
+    const [registerErrors, setRegisterErrors] = useState([]);
     const register = async (user) => {
         try {
             // Check if the passwords match.
             if (user.password !== user.confirmPassword) {
-                return setErrors(["Passwords don't match"]);
+                return setRegisterErrors(["Passwords don't match"]);
             }
 
             // Save the response sent after the post request.
@@ -43,11 +41,11 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
-            console.log(error.response.data);
-            setErrors(error.response.data.message);
+            setRegisterErrors(error.response.data.message);
         }
     }
 
+    const [loginErrors, setLoginErrors] = useState([]);
     const login = async (user) => {
         try {
             const response = await axios.post("/auth/login", user);
@@ -56,8 +54,7 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(true);
 
         } catch (error) {
-            setErrors(error.response.data.message);
-            console.log(error.response.data);
+            setLoginErrors(error.response.data.message);
         }
     }
 
@@ -72,13 +69,14 @@ export const AuthProvider = ({ children }) => {
 
     // Timeout so the errors don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
-        if (errors.length > 0) {
+        if ((loginErrors.length > 0) || (registerErrors.length > 0)) {
             const timer = setTimeout(() => {
-                setErrors([]);
+                setLoginErrors([]);
+                setRegisterErrors([]);
             }, 5000)
             return () => clearTimeout(timer);
         }
-    }, [errors]);
+    }, [loginErrors, registerErrors]);
 
     // Function to verify the token with the backend.
     async function verifyToken(token) {
@@ -148,10 +146,12 @@ export const AuthProvider = ({ children }) => {
             verifyToken,
 
             isAuthenticated,
-            errors,
             user,
             setUser,
-            setIsAuthenticated
+            setIsAuthenticated,
+
+            loginErrors,
+            registerErrors,
         }}>
             {children}
         </AuthContext.Provider>

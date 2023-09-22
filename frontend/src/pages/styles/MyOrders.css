@@ -24,7 +24,7 @@
     justify-content: space-between;
 }
 
-.myOrder > h1 {
+.myOrder > h1, .myOrders > h3 {
     text-align: center;
     margin-top: 1rem;
 }

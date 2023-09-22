@@ -25,7 +25,17 @@ export default function Product({ item }) {
     // We stablish a condition where you can only add if you are logged.
     // If not it will display an alert message.
     if (user) {
-      await addToCart(user._id, item);
+      const provProduct = {
+        _id: item._id,
+        thumbnail: item.thumbnail,
+        title: item.title,
+        price: item.price,
+        quantity: 1,
+        color: item.color || "black",
+        ram: item.ram || "500GB"
+      }
+
+      await addToCart(user._id, provProduct);
 
       setAddedMessage(true);
       setTimeout(() => {

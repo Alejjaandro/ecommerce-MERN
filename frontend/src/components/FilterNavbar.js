@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function FilterNavbar({ useProducts, onFilter }) {
     // We extract what we need from context

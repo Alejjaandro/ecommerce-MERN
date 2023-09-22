@@ -6,44 +6,56 @@ import Cart from '../models/Cart.js';
 export const createCart = async (req, res) => {
 
     // We extract what we need from req.
-    const { userId, product, quantity } = req.body;
-    let { color, ram } = req.body;
+    const { userId } = req.params;
+    const product = req.body;
 
-    // To avoid letting the fields empty if the user doesn't choose.
-    color ? color = color : color = " - ";
-    ram ? ram = ram : ram = " - ";
-    
     try {
-        let updatedCart;
-
-        // We check if the product already exists in the cart.
-        const productExists = await Cart.findOne({ _id: userId, 'products.product._id': product._id });
-
-        if (productExists) {
-            // If it does, update its quantity using $inc.
-            updatedCart = await Cart.findOneAndUpdate(
-                { _id: userId, 'products.product._id': product._id },
-                { $inc: { 'products.$.quantity': quantity } },
-                { new: true }
-            );
-            
-        } else {
-
-            // We search for a cart with the userId and we push into products array the new product and its features.
-            // The option {upsert: true} tells mongoDB to create one if it didn't find one.
-            updatedCart = await Cart.findOneAndUpdate(
-                { _id: userId},
-                { $push: { products: { product, quantity, color, ram } } },
+        // We check if the user has a cart.
+        let cartExist = await Cart.findOne({ _id: userId });
+        if (!cartExist) {
+            const newCart = await Cart.findOneAndUpdate(
+                { _id: userId },
+                {
+                    $push: { products: product },
+                    $inc: { productsQuantity: product.quantity }
+                },
                 { new: true, upsert: true }
             );
-    
-            if (!updatedCart) {
-                return res.status(404).json({ message: 'Cart not found' });
+            return res.status(200).json({ cart: newCart });
+        } else {
+            // We check if there is product with same properties in the cart.
+            let sameProduct = cartExist.products.find(prod =>
+                (prod._id === product._id) &&
+                (prod.color === product.color) &&
+                (prod.ram === product.ram)
+            );
+
+            if (sameProduct) {
+
+                // We increase the quantity of the product.
+                sameProduct.quantity += product.quantity;
+                cartExist.productsQuantity += product.quantity;
+
+                // Mark the cart as modified to save the changes.
+                cartExist.markModified('products');
+
+                // Save the updated cart.
+                const updatedCart = await cartExist.save();
+                return res.status(200).json({ cart: updatedCart });
+
+            } else {
+                // If there is no product with same properties, we add the product to the cart.
+                const updatedCart = await Cart.findOneAndUpdate(
+                    { _id: userId },
+                    {
+                        $push: { products: product },
+                        $inc: { productsQuantity: product.quantity }
+                    },
+                    { new: true }
+                );
+                return res.status(200).json({ cart: updatedCart });
             }
         }
-
-        return res.status(200).json({ message: 'Product added to Cart', newCart: updatedCart });
-
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -51,24 +63,40 @@ export const createCart = async (req, res) => {
 
 // ===== DELETE Product from Cart ===== //
 export const deleteProduct = async (req, res) => {
-    // We extract what we need from params
     const { userId, productId } = req.params;
+    const productToDelete = req.body;
 
     try {
-        // Find users cart.
+        // Find the cart of the user.
         const cart = await Cart.findOne({ _id: userId });
-        // Filter the products array in the cart to keep all except the one we want to remove.
-        cart.products = cart.products.filter((product) => product.product._id !== productId);
-        // Save changes.
-        await cart.save();
-        return res.status(200).json({ message: 'Product Deleted', updatedCart: cart });
+        // Find the products of the cart with the same id as the product to be deleted.
+        const products = cart.products.filter((product) => product._id === productId);
 
+        // Search for the product with the same properties to be deleted.
+        for (let product of products) {
+            if (product.color === productToDelete.color && product.ram === productToDelete.ram) {
+                // We use filter to create a new array without the product to be deleted.
+                cart.products = cart.products.filter(
+                    (prod) =>
+                    prod._id !== product._id ||
+                    prod.color !== product.color ||
+                    prod.ram !== product.ram
+                );
+
+                // We decrease the quantity of the product.
+                cart.productsQuantity -= product.quantity;
+
+                // Save changes.
+                const updatedCart = await cart.save();
+                return res.status(200).json({ message: 'Product Deleted', cart: updatedCart });
+            }
+        }
     } catch (error) {
         return res.status(500).json(error);
     }
 };
 
-// ===== DELETE Product from Cart ===== //
+// ===== DELETE User Cart ===== //
 export const deleteCart = async (req, res) => {
 
     const { userId } = req.params;
@@ -92,7 +120,7 @@ export const getUserCart = async (req, res) => {
             return res.status(404).json({ message: 'Cart not found' });
         }
 
-        return res.status(200).json(cart);
+        return res.status(200).json({ cart: cart });
 
     } catch (error) {
         return res.status(500).json(error);
@@ -104,7 +132,7 @@ export const getAllCarts = async (req, res) => {
 
     try {
         const carts = await Cart.find();
-        return res.status(200).json(carts);
+        return res.status(200).json({ carts: carts });
 
     } catch (error) {
         return res.status(500).json(error);

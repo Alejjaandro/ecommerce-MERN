@@ -44,8 +44,8 @@ export default function App() {
 
     <AuthProvider>
       <ProductsProvider>
-        <UserProvider>
-          <CartProvider>
+        <CartProvider>
+          <UserProvider>
             <AdminProvider>
               <OrderProvider>
 
@@ -86,8 +86,8 @@ export default function App() {
 
               </OrderProvider>
             </AdminProvider>
-          </CartProvider>
-        </UserProvider>
+          </UserProvider>
+        </CartProvider>
       </ProductsProvider>
     </AuthProvider>
   );

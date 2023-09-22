@@ -9,8 +9,12 @@ const CartSchema = new mongoose.Schema(
         },
 
         // Products is an array.
-        products: []
+        products: [],
 
+        productsQuantity: {
+            type: Number,
+            default: 0
+        }
     },
 
     { timestamps: true }

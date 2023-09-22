@@ -19,7 +19,7 @@ export default function Cart() {
     const { getCart, cart, productsNumber, deleteProduct, deleteCart, addToCart } = useCart();
 
     useEffect(() => { getCart(userId) }, []);
-    
+
     useEffect(() => {
         if (cart && cart.length < 1) {
             deleteCart(userId);
@@ -29,11 +29,10 @@ export default function Cart() {
     // Initialize some variables for later
     let subtotal = 0;
     let shippingCost = 0;
-    let quantity;
 
     // We calculate the subtotal by summing the products cost.
     if (cart) {
-        subtotal = cart.reduce((total, product) => total + (product.product.price * product.quantity), 0);
+        subtotal = cart.reduce((total, product) => total + (product.price * product.quantity), 0);
         // shippingCost is hard coded just as example.
         (subtotal > 0) ? shippingCost = 10.50 : shippingCost = 0;
     }
@@ -41,10 +40,16 @@ export default function Cart() {
     // Function to decrease product ammount and delete it if its quantity is 1.  
     const decreaseAmmount = (userId, product) => {
         if (product.quantity > 1) {
-            addToCart(userId, product.product, quantity = -1);
+            product.quantity = - 1;
+            addToCart(userId, product);
         } else {
-            deleteProduct(userId, product.product._id);
+            deleteProduct(userId, product);
         }
+    }
+    // Function to increase product ammount.  
+    const increaseAmmount = (userId, product) => {
+        product.quantity = 1;
+        addToCart(userId, product);
     }
 
     return (
@@ -72,20 +77,23 @@ export default function Cart() {
                         We render the products only if "cart" exists and it has at least 1 product,
                         then we access its data to complete the info on the page.
                         */}
-                        {(cart && cart.length >= 1) ? cart.map((product, index) => {
+                        {(cart && productsNumber >= 1) ? cart.map((product, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <div className="cart-product" key={product.product._id}>
+                                    <div className="cart-product" key={product._id}>
 
                                         <div className='cart-product-details'>
 
-                                            <img className='cart-info-img' src={`${product.product.thumbnail}`} alt="" />
+                                            <img className='cart-info-img' src={`${product.thumbnail}`} alt="" />
 
                                             <div className='cart-details'>
-                                                <span className='id'><b>ID:</b> {product.product._id}</span>
-                                                <span className='name'><b>Product:</b> {product.product.title}</span>
-                                                <span className='ram'><b>RAM:</b> {product.ram}</span>
-                                                <span><b>Color:</b> {product.color}</span>
+                                                <span className='id'>
+                                                    <b>ID:</b>
+                                                    <Link to={`/product/${product._id}`}>{product._id}</Link>
+                                                </span>
+                                                <span className='name'><b>Product:</b> {product.title}</span>
+                                                <span className='ram'><b>RAM: </b>{product.ram}</span>
+                                                <span className='color'><b>Color: </b>{product.color}</span>
                                             </div>
                                         </div>
 
@@ -98,13 +106,13 @@ export default function Cart() {
 
                                                 <span className="cart-amount-num flex-center">{product.quantity}</span>
 
-                                                <button onClick={() => addToCart(userId, product.product)} className="cart-ammount-icon flex-center">
+                                                <button onClick={() => increaseAmmount(userId, product)} className="cart-ammount-icon flex-center">
                                                     <AddIcon />
                                                 </button>
                                             </div>
 
-                                            <div className="cart-price">${(product.product.price * product.quantity)}</div>
-                                            <button onClick={() => deleteProduct(userId, product.product._id)} className='delete-button'>
+                                            <div className="cart-price">${(product.price * product.quantity).toFixed(2)}</div>
+                                            <button onClick={() => deleteProduct(userId, product)} className='delete-button'>
                                                 Remove Product
                                             </button>
                                         </div>
@@ -126,18 +134,18 @@ export default function Cart() {
                         <div className="cart-summary-item">
                             <span className='cart-summary-item-text'>Subtotal: </span>
                             <span className='cart-summary-item-price'>
-                                ${subtotal}
+                                ${subtotal.toFixed(2)}
                             </span>
                         </div>
 
                         <div className="cart-summary-item">
                             <span className='cart-summary-item-text'>Shipping: </span>
-                            <span className='cart-summary-item-price'>${shippingCost}</span>
+                            <span className='cart-summary-item-price'>${shippingCost.toFixed(2)}</span>
                         </div>
 
                         <div className="cart-summary-item summary-total">
                             <span className='cart-summary-item-totalText'>Total: </span>
-                            <span className='cart-summary-item-totalPrice'>${subtotal + shippingCost}</span>
+                            <span className='cart-summary-item-totalPrice'>${(subtotal + shippingCost).toFixed(2)}</span>
                         </div>
 
                         <Link to={`/checkout/${userId}`}>

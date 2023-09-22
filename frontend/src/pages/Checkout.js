@@ -28,7 +28,7 @@ export default function Checkout() {
     let total;
     let shippingCost;
     if (cart) {
-        subtotal = cart.reduce((total, product) => total + (product.product.price * product.quantity), 0);
+        subtotal = cart.reduce((total, product) => total + (product.price * product.quantity), 0);
         // shippingCost is hard coded just as example.
         (subtotal > 0) ? shippingCost = 10.50 : shippingCost = 0;
         total = subtotal + shippingCost;
@@ -243,18 +243,18 @@ export default function Checkout() {
                     <div className="current-cart-products">
                         {(cart && cart.length >= 1) && cart.map((product, index) => (
                             <React.Fragment key={index}>
-                                <div className="current-cart-product" key={product.product._id}>
+                                <div className="current-cart-product" key={product._id}>
                                     <div className='current-cart-details'>
-                                        <img className='current-cart-img' src={`${product.product.thumbnail}`} alt="" />
+                                        <img className='current-cart-img' src={`${product.thumbnail}`} alt="" />
                                         <div className="current-cart-productInfo">
-                                            <span>{product.product.title}</span>
+                                            <span>{product.title}</span>
                                             <span>{product.ram}</span>
                                             <span>{product.color}</span>
                                         </div>
                                     </div>
                                     <div className="current-cart-price">
                                         <span>{product.quantity}</span>
-                                        <span><strong>${(product.product.price * product.quantity)}</strong></span>
+                                        <span><strong>${(product.price * product.quantity)}</strong></span>
                                     </div>
                                 </div>
                                 <hr className='hr' />

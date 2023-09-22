@@ -48,10 +48,10 @@ export default function OrderDetails() {
                         <div className="orderDetails-products-wrapper">
                             {order.products.map(product => (
                                 <div className="orderDetails-product" key={product._id}>
-                                    <img src={product.product.thumbnail} />
+                                    <img src={product.thumbnail} />
                                     <div>
-                                        <p><strong>Title:</strong> {product.product.title}</p>
-                                        <p><strong>Price:</strong> ${product.product.price}</p>
+                                        <p><strong>Title:</strong> {product.title}</p>
+                                        <p><strong>Price:</strong> ${product.price}</p>
                                         <p><strong>Quantity:</strong> {product.quantity}</p>
                                     </div>
                                 </div>

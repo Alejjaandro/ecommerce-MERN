@@ -23,7 +23,6 @@ export default function ThankYou() {
     }, []);
     
     const lastOrder = orders[orders.length - 1];
-    console.log(lastOrder);
 
     // Function to format the date.
     function formatDate(date) {
@@ -51,8 +50,8 @@ export default function ThankYou() {
                             </div>
                             <div className='thankYou-order-products'>
                                 {lastOrder.products.map((product) => (
-                                    <div className='thankYou-order-product' key={product.product._id}>
-                                        <img src={product.product.thumbnail} />
+                                    <div className='thankYou-order-product' key={product._id}>
+                                        <img src={product.thumbnail} />
                                     </div>
                                 ))}
                             </div>

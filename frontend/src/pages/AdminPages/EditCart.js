@@ -24,16 +24,16 @@ export default function EditCart() {
 
     // We calculate the subtotal by summing the products cost.
     if (cart) {
-        subtotal = cart.reduce((total, product) => total + (product.product.price * product.quantity), 0);
+        subtotal = cart.reduce((total, product) => total + (product.price * product.quantity), 0);
         // shippingCost is hard coded just as example.
         (subtotal > 0) ? shippingCost = 10.50 : shippingCost = 0;
     }
 
     const decreaseAmmount = (userId, product) => {
         if (product.quantity > 1) {
-            addToCart(userId, product.product, quantity = -1);
+            addToCart(userId, product, quantity = -1);
         } else {
-            deleteProduct(userId, product.product._id);
+            deleteProduct(userId, product._id);
         }
     }
 
@@ -56,15 +56,15 @@ export default function EditCart() {
                         {(cart && cart.length >= 1) ? Array.from(cart).map((product) => {
                             return (
                                 <>
-                                    <div key={product.product._id} className="editCart-product-container">
+                                    <div key={product._id} className="editCart-product-container">
 
                                         <div className="editCart-imageContainer">
 
-                                            <img className='editCart-infoImg' src={`${product.product.thumbnail}`} alt="" />
+                                            <img className='editCart-infoImg' src={`${product.thumbnail}`} alt="" />
 
                                             <div className="editCart-details">
-                                                <span className="editCart-id"><b>ID:</b> {product.product._id}</span>
-                                                <span className="editCart-product"><b>Product:</b> {product.product.title}</span>
+                                                <span className="editCart-id"><b>ID:</b> {product._id}</span>
+                                                <span className="editCart-product"><b>Product:</b> {product.title}</span>
                                                 <span className="editCart-ram"><b>RAM:</b> {product.ram}</span>
                                                 <span className="editCart-color"><b>Color:</b> {product.color}</span>
                                             </div>
@@ -79,13 +79,13 @@ export default function EditCart() {
 
                                                 <span className="editCart-quantity">{product.quantity}</span>
 
-                                                <button onClick={() => addToCart(user._id, product.product)} className="editCart-ammountIcon editCart-flexCenter">
+                                                <button onClick={() => addToCart(user._id, product)} className="editCart-ammountIcon editCart-flexCenter">
                                                     <AddIcon />
                                                 </button>
                                             </div>
 
-                                            <div className="editCart-price">${(product.product.price * product.quantity)}</div>
-                                            <button onClick={() => deleteProduct(user._id, product.product._id)} className='editCart-deleteButton'>
+                                            <div className="editCart-price">${(product.price * product.quantity)}</div>
+                                            <button onClick={() => deleteProduct(user._id, product._id)} className='editCart-deleteButton'>
                                                 Remove Product
                                             </button>
                                         </div>

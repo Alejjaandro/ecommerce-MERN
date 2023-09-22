@@ -14,7 +14,7 @@ export default function Register() {
 
     const navigate = useNavigate();
     // Extract what we need.
-    const { register, isAuthenticated, errors } = useAuth();
+    const { register, isAuthenticated, registerErrors } = useAuth();
 
     // This redirects to the home page once the user is authenticated.
     useEffect(() => {
@@ -51,7 +51,7 @@ export default function Register() {
                     <h1 className='register-title'>CREATE AN ACCOUNT</h1>
                     {/* Errors */}
                     <div className='register-errors'>
-                        {errors && errors.map((error, i) => (
+                        {registerErrors && registerErrors.map((error, i) => (
                             <p className='errors' key={i}>
                                 {error}
                             </p>

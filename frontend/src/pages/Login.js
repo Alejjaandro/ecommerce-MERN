@@ -12,7 +12,7 @@ import { useAuth } from '../context/AuthContext.js';
 export default function Login() {
 
     const navigate = useNavigate();
-    const { login, isAuthenticated, errors: loginErrors } = useAuth();
+    const { login, isAuthenticated, loginErrors } = useAuth();
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
