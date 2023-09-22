@@ -6,12 +6,10 @@ import { Link } from "react-router-dom";
 import { format } from 'date-fns';
 import { useEffect } from "react";
 import { useAdmin } from "../../context/AdminContext";
-import { useOrder } from "../../context/OrderContext";
 
 export default function AllOrders() {
 
-    const { allOrders, getAllOrders } = useAdmin();
-    const { deleteOrder } = useOrder();
+    const { allOrders, getAllOrders, deleteOrder } = useAdmin();
 
     useEffect(() => { getAllOrders() }, []);
 
@@ -24,7 +22,7 @@ export default function AllOrders() {
         <>
             <Navbar />
             <div className="allOrders-container">
-                <h1>All Products</h1>
+                <h1>All Orders</h1>
 
                 <div className="allOrders-table-container">
                     <table className="allOrders-table">
@@ -50,7 +48,7 @@ export default function AllOrders() {
                                     <td>{order.orderInfo.address}, {order.orderInfo.zipcode}</td>
                                     <td className="allOrders-options">
                                         <Link to={`/order-details/${order._id}`} className="allOrders-link-details">Details</Link>
-                                        <button className="allOrders-btn-remove" onClick={async () => {await deleteOrder(order._id); await getAllOrders()}}>Remove</button>
+                                        <button className="allOrders-btn-remove" onClick={() => {deleteOrder(order._id)}}>Remove</button>
                                     </td>
                                 </tr>
                             ))}

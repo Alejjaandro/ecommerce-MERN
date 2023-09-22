@@ -5,43 +5,66 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import './styles/EditCart.css';
 
-import { useEffect } from 'react'
-import { useCart } from '../../context/CartContext';
+import React, { useEffect } from 'react'
 import { useAdmin } from '../../context/AdminContext';
+import { useAdminEditCart } from '../../context/AdminContextEditCart';
+import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 
 export default function EditCart() {
+    const { user: currentUser } = useAuth();
+    const { getCart } = useCart();
 
-    const { getCart, cart, deleteProduct, addToCart, deleteCart } = useCart();
-    const { adminGetUser, user, adminDeleteCart } = useAdmin();
+    const { user, adminGetUser } = useAdmin();
+
+    const { 
+        userProductsNumber,
+        userCart,
+        getUserCart,
+        adminAddToCart,
+        adminDeleteProduct,
+        adminDeleteCart } = useAdminEditCart();
 
     const userId = window.location.pathname.split("/")[2];
 
-    useEffect(() => { getCart(userId); adminGetUser(userId) }, []);
+    useEffect(() => { getUserCart(userId); adminGetUser(userId) }, []);
+        
+    useEffect(() => { 
+        if (currentUser._id === user._id) {
+            console.log('Own cart modified');
+            getCart(user._id);
+        }
+     }, [userProductsNumber]);
 
-    let subtotal;
-    let shippingCost;
-    let quantity;
+    let subtotal = 0;
+    let shippingCost = 0;
 
     // We calculate the subtotal by summing the products cost.
-    if (cart) {
-        subtotal = cart.reduce((total, product) => total + (product.price * product.quantity), 0);
+    if (userCart) {
+        subtotal = userCart.reduce((total, product) => total + (product.price * product.quantity), 0);
         // shippingCost is hard coded just as example.
         (subtotal > 0) ? shippingCost = 10.50 : shippingCost = 0;
     }
 
     const decreaseAmmount = (userId, product) => {
         if (product.quantity > 1) {
-            addToCart(userId, product, quantity = -1);
+            product.quantity = - 1;
+            adminAddToCart(userId, product);
         } else {
-            deleteProduct(userId, product._id);
+            adminDeleteProduct(userId, product);
         }
     }
 
+    const increaseAmmount = (userId, product) => {
+        product.quantity = 1;
+        adminAddToCart(userId, product);
+    }
+
     useEffect(() => {
-        if (cart && cart.length < 1) {
-            deleteCart(userId);
+        if (userCart && userCart.length < 1) {
+            adminDeleteCart(userId);
         }
-    }, [cart]);
+    }, [userCart]);
 
     return (
         <>
@@ -53,9 +76,9 @@ export default function EditCart() {
                 <div className="editCart-wrapper">
                     {/* Product list container */}
                     <div>
-                        {(cart && cart.length >= 1) ? Array.from(cart).map((product) => {
+                        {(userCart && userProductsNumber >= 1) ? userCart.map((product, index) => {
                             return (
-                                <>
+                                <React.Fragment key={index}>
                                     <div key={product._id} className="editCart-product-container">
 
                                         <div className="editCart-imageContainer">
@@ -73,26 +96,26 @@ export default function EditCart() {
                                         <div className="editCart-actions">
 
                                             <div className="editCart-quantityControl">
-                                                <button onClick={() => decreaseAmmount(user._id, product)} className="editCart-ammountIcon editCart-flexCenter">
+                                                <button onClick={() => decreaseAmmount(userId, product)} className="editCart-ammountIcon editCart-flexCenter">
                                                     <RemoveIcon />
                                                 </button>
 
                                                 <span className="editCart-quantity">{product.quantity}</span>
 
-                                                <button onClick={() => addToCart(user._id, product)} className="editCart-ammountIcon editCart-flexCenter">
+                                                <button onClick={() => increaseAmmount(userId, product)} className="editCart-ammountIcon editCart-flexCenter">
                                                     <AddIcon />
                                                 </button>
                                             </div>
 
-                                            <div className="editCart-price">${(product.price * product.quantity)}</div>
-                                            <button onClick={() => deleteProduct(user._id, product._id)} className='editCart-deleteButton'>
+                                            <div className="editCart-price">${(product.price * product.quantity).toFixed(2)}</div>
+                                            <button onClick={() => adminDeleteProduct(userId, product)} className='editCart-deleteButton'>
                                                 Remove Product
                                             </button>
                                         </div>
 
                                     </div>
                                     <hr className="editCart-divider" />
-                                </>
+                                </React.Fragment>
                             );
                         }) : (
                             <div className='noProducts'> No Producs in Cart</div>
@@ -107,21 +130,21 @@ export default function EditCart() {
                         <div className="editCart-summaryItem">
                             <span className='editCart-summaryItemText'>Subtotal: </span>
                             <span className='editCart-summaryItemPrice'>
-                                ${subtotal}
+                                ${subtotal.toFixed(2)}
                             </span>
                         </div>
 
                         <div className="editCart-summaryItem">
                             <span className='editCart-summaryItemText'>Shipping: </span>
-                            <span className='editCart-summaryItemPrice'>${shippingCost}</span>
+                            <span className='editCart-summaryItemPrice'>${shippingCost.toFixed(2)}</span>
                         </div>
 
                         <div className="editCart-summaryItem editCart-summaryTotal">
                             <span className='editCart-summaryItemTotalText'>Total: </span>
-                            <span className='editCart-summaryItemTotalPrice'>${subtotal + shippingCost}</span>
+                            <span className='editCart-summaryItemTotalPrice'>${(subtotal + shippingCost).toFixed(2)}</span>
                         </div>
                         <button className='editCart-btnRemove'
-                            onClick={() => { deleteCart(userId); getCart(userId) }}
+                            onClick={() => { adminDeleteCart(userId) }}
                         >
                             DELETE CART
                         </button>

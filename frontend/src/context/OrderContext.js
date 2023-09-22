@@ -62,16 +62,6 @@ export const OrderProvider = ({ children }) => {
         }
     }
 
-    // ===== DELETE ORDER ===== //
-    const deleteOrder = async (orderId) => {
-        try {
-            const response = await axios.delete(`/orders/${orderId}`);
-            console.log(response.data);
-        } catch (error) {
-            console.log(error);;
-        }
-    }
-
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
         if (errors && errors.length > 0 || success) {
@@ -86,11 +76,12 @@ export const OrderProvider = ({ children }) => {
     return (
         <OrderContext.Provider value={{
             createOrder,
+            
             getUserOrders,
             orders,
+
             getOrder,
             order,
-            deleteOrder,
 
             success,
             errors

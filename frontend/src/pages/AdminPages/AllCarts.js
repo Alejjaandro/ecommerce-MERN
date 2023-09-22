@@ -5,11 +5,24 @@ import { useAdmin } from '../../context/AdminContext.js';
 
 import './styles/AllCarts.css';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext.js';
+import { useAuth } from '../../context/AuthContext.js';
 
 export default function AllCarts() {
     const { allCarts, getAllCarts, adminDeleteCart } = useAdmin();
+    const { getCart } = useCart();
+    const { user } = useAuth();
 
     useEffect(() => { getAllCarts() }, []);
+
+    const handleAdminDeleteCart = async (cartId) => {
+        await adminDeleteCart(cartId);
+        // If the user deletes his own cart, we update the cart.
+        if (cartId === user._id) {
+            console.log('Own cart deleted');
+            getCart(user._id);
+        }
+    }
 
     return (
         <>
@@ -40,7 +53,7 @@ export default function AllCarts() {
                                     <td>
                                         <div className='allCarts-row-td-container'>
                                             {cart.products.map((item, index) => (
-                                                <p key={index}>{item.product.title}</p>
+                                                <p key={index}>{item.title}</p>
                                             ))}
                                         </div>
                                     </td>
@@ -68,16 +81,16 @@ export default function AllCarts() {
                                     <td>
                                         <div className='allCarts-row-td-container'>
                                             {cart.products.map((item, index) => (
-                                                <p key={index}>${item.product.price * item.quantity}</p>
+                                                <p key={index}>${item.price * item.quantity}</p>
                                             ))}
                                         </div>
                                     </td>
                                     <td className='allCarts-row-td allCarts-products-total'>
-                                        ${cart.products.reduce((total, item) => total + (item.product.price * item.quantity), 0)}
+                                        ${cart.products.reduce((total, item) => total + (item.price * item.quantity), 0)}
                                     </td>
                                     <td className='allCarts-options'>
                                         <Link to={`/edit-cart/${cart._id}`} className="allCarts-link-edit">Edit</Link>
-                                        <button className="allCarts-btn-remove" onClick={() => adminDeleteCart(cart._id)}>Remove</button>
+                                        <button className="allCarts-btn-remove" onClick={() => handleAdminDeleteCart(cart._id)}>Remove</button>
                                     </td>
                                 </tr>
                             )) : (

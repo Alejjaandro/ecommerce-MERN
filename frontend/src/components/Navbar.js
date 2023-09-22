@@ -26,13 +26,6 @@ export default function Navbar() {
     setMenuVisible(!menuVisible);
   }
 
-  // We check if there is a user logged and get its cart to show the number of items it has in the sub-menu.
-  useEffect(() => {
-    if (user) {
-      getCart(user._id);
-    }
-  }, [user])
-
   // To navigate to the home page after logging out.
   const navigate = useNavigate();
 

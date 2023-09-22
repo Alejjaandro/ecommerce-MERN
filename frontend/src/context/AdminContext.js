@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from '../api/axios.js';
 import { useProducts } from "./ProductsContext.js";
+import { useCart } from "./CartContext.js";
+import { useAuth } from "./AuthContext.js";
+// import { useAdminEditCart } from "./AdminContextEditCart.js";
 
 export const AdminContext = createContext();
 
@@ -17,7 +20,7 @@ export const AdminProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState([]);
     const { getProducts } = useProducts();
-    
+
     // ===== ADMIN GET user ===== //
     const [user, setUser] = useState([]);
     const adminGetUser = async (userId) => {
@@ -107,7 +110,7 @@ export const AdminProvider = ({ children }) => {
         try {
             // We send a petition to get the cart of the user.
             const res = await axios.get(`/carts/`);
-            setAllCarts(res.data);
+            setAllCarts(res.data.carts);
         } catch (error) {
             console.log(error.response.data);
         }
@@ -119,6 +122,7 @@ export const AdminProvider = ({ children }) => {
             await axios.delete(`/carts/${userId}`);
             // Update the allCarts.
             await getAllCarts();
+
         } catch (error) {
             console.log(error);
         }
@@ -132,6 +136,19 @@ export const AdminProvider = ({ children }) => {
             setAllOrders(response.data);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    // ===== DELETE ORDER ===== //
+    const deleteOrder = async (orderId) => {
+        console.log(orderId);
+        try {
+            const response = await axios.delete(`/orders/${orderId}`);
+            console.log(response.data);
+            // We update allOrders.
+            getAllOrders();
+        } catch (error) {
+            console.log(error);;
         }
     }
 
@@ -166,6 +183,7 @@ export const AdminProvider = ({ children }) => {
             allCarts,
 
             getAllOrders,
+            deleteOrder,
             allOrders,
 
             errors,
