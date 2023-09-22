@@ -16,13 +16,13 @@ export default function Home() {
 
   const { user } = useAuth();
 
-  const { getProducts} = useProducts();
+  const { getProducts } = useProducts();
   let { products } = useProducts();
 
-  useEffect(() => {getProducts()}, []);
+  useEffect(() => { getProducts() }, []);
 
   if (!products) { return <div>Loading...</div> }
-  products = products.slice(0,15);
+  products = products.slice(0, 15);
 
   return (
     <>
@@ -30,7 +30,6 @@ export default function Home() {
 
       <Slider />
       <Categories />
-
       <div className='home-container'>
 
         <h1 className='home-title'>SOME PRODUCTS</h1>

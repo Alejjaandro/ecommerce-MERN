@@ -1,29 +1,8 @@
 import './styles/Products.css'
 
 import Product from './Product';
-import { useEffect } from 'react';
 
-export default function Products({ products, sort }) {
-
-  // console.log(products);
-
-  // === SORT === //
-  useEffect(() => {
-    if (!products) { return <div>Loading...</div> }
-    
-    if (sort) {
-      
-      products.sort((a, b) => {
-        if (sort === "asc") {
-          return a.price - b.price;
-        } else if (sort === "desc") {
-          return b.price - a.price;
-        }
-        return 0;
-      });
-
-    }
-  }, [products, sort]);
+export default function Products({ products }) {
 
   return (
     <div className='products-container'>

@@ -6,7 +6,6 @@ export default function FilterNavbar({ useProducts, onFilter }) {
         getCategoriesAndBrands,
         categoriesAndBrands,
         brands,
-        getCategories,
         categories,
         categoryFilter,
         brandFilter,

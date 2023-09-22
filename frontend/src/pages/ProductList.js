@@ -24,7 +24,7 @@ export default function ProductList() {
 
     // This function is called when the user filters the products.
     const [filteredProducts, setFilteredProducts] = useState([]);
-    useEffect(() => {setFilteredProducts(products)}, [products]);
+    useEffect(() => { setFilteredProducts(products) }, [products]);
 
     const onFilter = (category, brand) => {
         // We initialize "filtered" with all the products.
@@ -40,7 +40,16 @@ export default function ProductList() {
         setFilteredProducts(filtered);
     }
 
-    const [sort, setSort] = useState('newest');
+    const [sort, setSort] = useState('desc');
+    if (sort) {
+        filteredProducts.sort((a, b) => {
+            if (sort === "asc") {
+                return a.price - b.price;
+            } else {
+                return b.price - a.price;
+            }
+        });
+    }
 
     return (
         <>
@@ -62,9 +71,8 @@ export default function ProductList() {
                     <div className='sort'>
                         <span className='filter-text'>Sort Products:</span>
                         <select className='select' onChange={(e) => setSort(e.target.value)}>
-                            <option value="newest">Newest</option>
-                            <option value="asc">Price (asc)</option>
                             <option value="desc">Price (desc)</option>
+                            <option value="asc">Price (asc)</option>
                         </select>
 
                     </div>

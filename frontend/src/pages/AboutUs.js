@@ -1,4 +1,6 @@
 import './styles/AboutUs.css';
+import AboutUsImg from '../assets/images/AboutUsImg.jpg';
+
 
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
@@ -13,7 +15,7 @@ export default function AboutUs() {
 
                 <div className="aboutUs-wrapper">
 
-                    <img className="aboutUs-image" src="https://i.ibb.co/4tVJk8W/about-us.webp" alt="" />
+                    <img className="aboutUs-image" src={AboutUsImg} alt="" />
                     <div className="aboutUs-text">
                         <h1>Who are we?</h1>
                         <p>

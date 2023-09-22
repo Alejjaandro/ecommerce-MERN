@@ -3,6 +3,7 @@
     margin: 0.5rem;
     min-width: 5rem;
     height: 5rem;
+    border-radius: 0.5rem;
 
     display: flex;
     align-items: center;
@@ -13,8 +14,9 @@
 }
 
 .prod-image {
-    width: 90%;
-    height: 90%;
+    width: 98%;
+    height: 98%;
+    border-radius: 0.5rem;
 }
 
 .prod-info {

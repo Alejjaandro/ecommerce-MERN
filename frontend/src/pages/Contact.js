@@ -1,4 +1,5 @@
 import './styles/Contact.css';
+import ContactUs from '../assets/images/ContactUsImg.webp';
 
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
@@ -19,7 +20,7 @@ export default function Contact() {
 
       <div className="contact-container">
 
-        <img className="contact-image" src="https://i.ibb.co/nRTB7cb/contact-us.webp" alt="contact-us" border="0"></img>
+        <img className="contact-image" src={ContactUs} alt="contact-us" border="0"></img>
 
 
         <div className="contact-text">
