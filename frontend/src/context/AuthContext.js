@@ -60,9 +60,7 @@ export const AuthProvider = ({ children }) => {
 
     // Remove the token from cookies.
     const logout = () => {
-
         Cookies.remove("token");
-
         setIsAuthenticated(false);
         setUser(null);
     }
@@ -82,26 +80,28 @@ export const AuthProvider = ({ children }) => {
     async function verifyToken(token) {
 
         try {
-            const response = await axios.get('/auth/verifyToken', {
-                headers: { 'token': token }
-            });
-
-            if (response.status === 200) {
-                // Token is valid and has not expired.
-                setIsAuthenticated(true);
-                setUser(response.data);
+            if (token) {
+                const response = await axios.get('/auth/verifyToken', {
+                    headers: { 'token': token }
+                });
+    
+                if (response.status === 200) {
+                    // Token is valid and has not expired.
+                    setIsAuthenticated(true);
+                    setUser(response.data);
+                } else {
+                    // Token is invalid.
+                    logout();
+                }
             } else {
-                // Token is invalid.
-                Cookies.remove('token');
+                // Token doesn't exist.
                 setIsAuthenticated(false);
                 setUser(null);
             }
         } catch (error) {
             if (error) {
                 // Token isn't valid or has expired.
-                Cookies.remove('token');
-                setIsAuthenticated(false);
-                setUser(null);
+                logout();
                 alert("Session Expired");
             }
         }
@@ -122,9 +122,7 @@ export const AuthProvider = ({ children }) => {
                 const currentTime = Date.now().valueOf() / 1000;
                 if (decodedToken.exp < currentTime) {
                     // If the token expired:
-                    Cookies.remove('token');
-                    setIsAuthenticated(false);
-                    setUser(null);
+                    logout();
                 }
 
             } catch (error) {
@@ -132,8 +130,7 @@ export const AuthProvider = ({ children }) => {
             }
             // If the token doesn't exist:
         } else {
-            setIsAuthenticated(false);
-            setUser(null);
+            logout();
         }
     }, [token]);
 

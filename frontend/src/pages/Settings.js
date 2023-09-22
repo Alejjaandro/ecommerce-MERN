@@ -4,10 +4,8 @@ import Footer from '../components/Footer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import './styles/Settings.css';
 
-import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 export default function Settings() {
 

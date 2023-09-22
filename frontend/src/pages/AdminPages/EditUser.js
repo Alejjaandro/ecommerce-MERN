@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
+
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAdmin } from '../../context/AdminContext';
 import { useAuth } from '../../context/AuthContext';
 import { useUser } from '../../context/UserContext';
@@ -10,8 +13,8 @@ import './styles/EditUser.css';
 export default function EditUser() {
 
     const { adminGetUser, user, setUser, adminUpdateUser, success, errors } = useAdmin();
-    const { getUser } = useUser();
-    const {user: currentAdmin} = useAuth();
+    const { user: currentAdmin, logout } = useAuth();
+    const navigate = useNavigate();
 
     const userId = window.location.pathname.split("/")[2];
     useEffect(() => {
@@ -28,13 +31,25 @@ export default function EditUser() {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        if (data.password === '') { delete data.password; }
+        for (let field in data) {
+            if (data[field] === "") {
+                delete data[field];
+            }
+        }
 
         // Petitions to modify user data.
         // If the admin is modifying his own data, we need to update the user state.
         if (user._id === currentAdmin._id) {
+            console.log("Updating current admin");
             await adminUpdateUser(currentAdmin._id, data);
-            await getUser(currentAdmin._id);
+            
+            // If the admin changes his isAdmin status, 
+            // we log out to reset the token with the info. 
+            if (data.isAdmin === 'false') {
+                alert("You are no longer an admin, please log in again.");
+                logout();
+                navigate('/');
+            }
         } else {
             await adminUpdateUser(userId, data);
         }
@@ -49,11 +64,13 @@ export default function EditUser() {
                 <div className="editUser-wrapper">
 
                     <h1 className="editUser-title">Edit {user.username}</h1>
-                    <div class="editUser-image"><img src={user.image} /></div>
+                    <div className="editUser-image"><img src={user.image} /></div>
 
-                    {errors && errors.map((message, index) => (
-                        <p key={index} className="editUser-errors">{message}</p>
-                    ))}
+                    <div className="editUser-errors">
+                        {errors && errors.map((message, index) => (
+                            <p key={index}>{message}</p>
+                        ))}
+                    </div>
                     {success && success.map((message, index) => (
                         <p key={index} className="editUser-success">{message}</p>
                     ))}
@@ -68,22 +85,30 @@ export default function EditUser() {
                             <input type="text" defaultValue={user.lastname} className="editUser-form-input" name='lastname' />
                         </div>
                         <div className="editUser-form-group">
-                            <label className="editUser-form-label">Username: </label>
-                            <input type="text" defaultValue={user.username} className="editUser-form-input" name='username' />
-                        </div>
-                        <div className="editUser-form-group">
                             <label className="editUser-form-label">Email: </label>
                             <input type="text" defaultValue={user.email} className="editUser-form-input" name='email' />
                         </div>
                         <div className="editUser-form-group">
+                            <label className="editUser-form-label">Username: </label>
+                            <input type="text" defaultValue={user.username} className="editUser-form-input" name='username' />
+                        </div>
+                        <div className="editUser-form-group">
                             <label className="editUser-form-label">Password: </label>
-                            <input type="text" className="editUser-form-input" name='password' />
+                            <input type="password" className="editUser-form-input" name='password' />
                         </div>
                         <div className="editUser-form-group">
                             <label className="editUser-form-label">isAdmin: </label>
-                            <input type="text" defaultValue={user.isAdmin} className="editUser-form-input" name='isAdmin' />
+                            <select defaultValue="{user.isAdmin}" className="editUser-form-input" name="isAdmin">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
                         </div>
-                        <button type="submit" className="editUser-submit-button">Update User</button>
+                        <div className="editUser-foot-buttons">
+                            <button type="submit" className="editUser-submit-button">Update User</button>
+                            <button type="button" className="editUser-back-link">
+                                <Link to={"/all-users/"}>Back To All Users</Link>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -5,13 +5,27 @@ import "./styles/AllUsers.css";
 
 import { useAdmin } from "../../context/AdminContext";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AllUsers() {
 
-  const { getAllUsers, allUsers, adminDeleteUser, success } = useAdmin();
+  const { getAllUsers, allUsers, adminDeleteUser } = useAdmin();
+  const { user: currentAdmin, logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => { getAllUsers() }, []);
+
+  const handleDeleteUser = async (userId) => {
+    await adminDeleteUser(userId);
+
+    // If the user we deleted is the current user, we logout.
+    if (userId === currentAdmin._id) {
+      alert("You deleted yourself");
+      logout();
+      navigate('/');
+    }
+  }
 
   return (
     <>
@@ -45,7 +59,7 @@ export default function AllUsers() {
                   <td>{user.isAdmin ? "Yes" : "No"}</td>
                   <td className="allUsers-options">
                     <Link to={`/edit-user/${user._id}`} className="allUsers-link-edit">Edit</Link>
-                    <button className="allUsers-btn-remove" onClick={() => adminDeleteUser(user._id)}>Remove</button>
+                    <button className="allUsers-btn-remove" onClick={() => handleDeleteUser(user._id) }>Remove</button>
                   </td>
                 </tr>
               ))}

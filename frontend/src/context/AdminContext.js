@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from '../api/axios.js';
 import { useProducts } from "./ProductsContext.js";
-import { useCart } from "./CartContext.js";
 import { useAuth } from "./AuthContext.js";
-// import { useAdminEditCart } from "./AdminContextEditCart.js";
 
 export const AdminContext = createContext();
 
@@ -20,6 +18,7 @@ export const AdminProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState([]);
     const { getProducts } = useProducts();
+    const { user: currentUser, logout } = useAuth();
 
     // ===== ADMIN GET user ===== //
     const [user, setUser] = useState([]);
@@ -38,7 +37,7 @@ export const AdminProvider = ({ children }) => {
             const response = await axios.put(`/users/adminUpdate/${userId}`, data);
             setSuccess([response.data.message]);
         } catch (error) {
-            setErrors(Object.values(error.response.data));
+            setErrors(error.response.data.message);
         }
     }
 
@@ -46,9 +45,14 @@ export const AdminProvider = ({ children }) => {
     const adminDeleteUser = async (userId) => {
         try {
             const response = await axios.delete(`/users/${userId}`);
-            console.log(response.data);
             // We update allUsers state so the user we deleted doesn't show up anymore.
             getAllUsers();
+
+            // If the user we deleted is the current user, we logout.
+            if (userId === currentUser._id) {
+                alert("You deleted yourself");
+                logout();
+            }
         } catch (error) {
             console.log(error);
         }

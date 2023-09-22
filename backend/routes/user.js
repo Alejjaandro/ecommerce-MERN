@@ -15,6 +15,6 @@ router.put("/:id",verifyUser, validator(updateUserValidator), updateUser);
 router.delete("/:id", verifyUser, deleteUser);
 
 router.get("/", verifyAdmin, getAllUsers);
-router.put("/adminUpdate/:userId", verifyAdmin, adminUpdateUser);
+router.put("/adminUpdate/:userId", verifyAdmin, validator(updateUserValidator), adminUpdateUser);
 
 export default router;

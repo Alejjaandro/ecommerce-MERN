@@ -54,34 +54,6 @@ export const updateUser = async (req, res) => {
     }
 };
 
-// ===== PUT for ADMIN Updates ===== //
-// In the admin form, we have the previous info of the user, so if we don't want to change it
-// we just send it back to the backend and we don't change it.
-export const adminUpdateUser = async (req, res) => {
-    try {
-        // We check if the admin change user isAdmin and if its a boolean.
-        if (req.body.isAdmin !== 'true' && req.body.isAdmin !== 'false') {
-            return res.status(400).json({error: 'isAdmin must be a boolean. Please enter "true" or "false".'});
-        } else {
-            req.body.isAdmin === 'true' ? req.body.isAdmin = true : req.body.isAdmin = false;
-        }
-
-        if (req.body.password) {
-            return req.body.password = bcrypt.hash(req.body.password, 10);
-        }
-
-        const updatedUser = await User.findByIdAndUpdate(req.params.userId, {
-            $set: req.body
-        }, { new: true })
-
-        const { password, ...noPasswordUpdatedUser } = updatedUser._doc;
-        return res.status(200).json({ message: 'User info Updated', updatedUser: noPasswordUpdatedUser });
-
-    } catch (error) {
-        return res.status(500).json(error);
-    }
-};
-
 // ===== DELETE to delete user ===== //
 export const deleteUser = async (req, res) => {
 
@@ -105,6 +77,28 @@ export const getAllUsers = async (req, res) => {
         // We find all users.
         const users = await User.find();
         return res.status(200).json(users);
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
+// ===== PUT for ADMIN Updates ===== //
+// In the admin form, we have the previous info of the user, so if we don't want to change it
+// we just send it back to the backend and we don't change it.
+export const adminUpdateUser = async (req, res) => {
+    try {
+
+        if (req.body.password) {
+            req.body.password = await bcrypt.hash(req.body.password, 10);
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(req.params.userId, {
+            $set: req.body
+        }, { new: true })
+
+        const { password, ...noPasswordUpdatedUser } = updatedUser._doc;
+        return res.status(200).json({ message: 'User info Updated', updatedUser: noPasswordUpdatedUser });
 
     } catch (error) {
         return res.status(500).json(error);

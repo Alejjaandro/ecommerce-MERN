@@ -18,8 +18,6 @@ export default function OrderDetails() {
         return createdDate;
     }
 
-    console.log(order);
-
     return (
         <>
             <Navbar />
