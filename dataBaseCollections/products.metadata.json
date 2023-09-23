@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"title":{"$numberInt":"1"}},"name":"title_1","background":true,"unique":true}],"uuid":"33768481507f4519b77aa447b3605e4a","collectionName":"products","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"3dd0d07a8dcf4cff836e5ec99a1aa8d8","collectionName":"products","type":"collection"}

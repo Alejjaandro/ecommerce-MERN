@@ -21,11 +21,7 @@ const ProductSchema = new mongoose.Schema(
         discountPercentage: {
             type: Number
         },
-        
-        rating: {
-            type: Number
-        },
-        
+                
         category: {
             type: String,
             required: true
@@ -44,10 +40,6 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-
-        images: {
-            type: Array
-        }
     },
 
     {timestamps: true}
