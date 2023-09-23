@@ -2,7 +2,7 @@
     flex: 1;
     margin: 0.5rem;
     min-width: 5rem;
-    height: 5rem;
+    height: auto;
     border-radius: 0.5rem;
 
     display: flex;
@@ -101,7 +101,6 @@
 @media (min-width: 425px) {
     .prod-container {
         min-width: 10rem;
-        height: 10rem;
     }
 
     .prod-icon {
@@ -120,7 +119,6 @@
 @media (min-width: 1024px) {
     .prod-container {
         min-width: 15rem;
-        height: 15rem;
     }
 
     .prod-icon {

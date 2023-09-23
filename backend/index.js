@@ -36,8 +36,10 @@ app.use(morgan('dev'));
 // To read json files.
 app.use(express.json());
 
-// ========== ENDPOINTS ========== //
+// Serve static files from the "images" directory
+app.use('/productImages', express.static('assets/productImages'));
 
+// ========== ENDPOINTS ========== //
 // Importing endpoints.
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';

@@ -98,10 +98,12 @@ export const AdminProvider = ({ children }) => {
                 }
             });
             data = filteredData;
+            console.log(data);
 
             const response = await axios.post(`/products`, data);
             setSuccess(response.data.message);
         } catch (error) {
+            console.log(error);
             setErrors(error.response.data.message);
         }
     }
@@ -109,7 +111,7 @@ export const AdminProvider = ({ children }) => {
     // ========== FUNCTION TO MODIIFY A PRODUCT ========== //
     const updateProduct = async (productId, data) => {
         try {
-            const validKeys = ['title', 'price', 'discountPercentage', 'category', 'brand', 'stock', 'description'];
+            const validKeys = ['thumbnail', 'title', 'price', 'discountPercentage', 'category', 'brand', 'stock', 'description'];
             let filteredData = {};
             validKeys.forEach((key) => {
                 if (key in data) {
@@ -117,7 +119,6 @@ export const AdminProvider = ({ children }) => {
                 }
             });
             data = filteredData;
-            console.log(data);
 
             const response = await axios.put(`/products/${productId}`, data);
             setSuccess(response.data.message);

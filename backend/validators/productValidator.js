@@ -6,6 +6,8 @@ export const productValidator = z.object({
         invalid_type_error: "Thumbnail must be a string"
     }).refine(thumbnail => isNaN(Number(thumbnail)), {
         message: "Thumbnail must not be a numeric string"
+    }).refine(thumbnail => thumbnail.includes('http://localhost:8000/productImages'), {
+        message: "Thumbnail URL must start with http://localhost:8000/productImages"
     }).optional(),
 
     title: z.string({

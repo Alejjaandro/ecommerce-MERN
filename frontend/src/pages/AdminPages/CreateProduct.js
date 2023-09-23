@@ -63,8 +63,8 @@ export default function CreateProduct() {
                             <label className="newProduct-form-label">Thumbnail Image: </label>
                             <input type="text" className="newProduct-form-input" name='thumbnail' />
                             <span>
-                                First you nedd to upload your picture to <Link to='https://imgbb.com/' target="_blank">ImgBB</Link>,
-                                then copy the URL and paste it here.
+                                First you nedd to upload your picture to "backend/assets/productImages/", 
+                                then use "http://localhost:8000/productImages/yourImageName.jpg" as the URL.
                             </span>
                         </div>
                         <div className="newProduct-form-group">

@@ -50,12 +50,21 @@ export default function EditProduct() {
 
                     {/* Errors */}
                     <div className='editProduct-errors'>
-                    {errors && errors.map((message, index) => (
+                        {errors && errors.map((message, index) => (
                             <p key={index}>{message}</p>
                         ))}
                     </div>
 
                     <form onSubmit={handleSubmit} className="editProduct-form">
+                        <div className="editProduct-form-group">
+                            <label className="editProduct-form-label">Thumbnail Image: </label>
+                            <input type="text" className="editProduct-form-input" name='thumbnail' />
+                            <span>
+                                First you nedd to upload your picture to "backend/assets/productImages/",
+                                then use "http://localhost:8000/productImages/yourImageName.jpg" as the URL.
+                            </span>
+                        </div>
+
                         <div className="editProduct-form-group">
                             <label className="editProduct-form-label">Title: </label>
                             <input type="text" defaultValue={product.title} className="editProduct-form-input" name='title' />
