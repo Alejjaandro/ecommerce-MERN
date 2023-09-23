@@ -55,26 +55,27 @@ The backend provides several API endpoints grouped by their functionality:
 | http://localhost:8000/api/auth/register | POST | Used to register a new user. | PUBLIC |
 | http://localhost:8000/api/auth/login | POST | Used to log in an existing user. | PUBLIC |
 
-Example of a user document:
+Example of a user document - THIS IS THE DEFAULT ADMIN USER (Password: ***admin123***) - :
+
 ```
 {
-    "_id": {
-      "$oid": "64d89579f4045cce8a0636e5"
-    },
-    "name": "manuel",
-    "lastname": "jimenez",
-    "username": "manueljimenez",
-    "email": "manuel@test.com",
-    "password": "$2b$10$ZRkvelLyhoiCIPXu0WkxCudavWED0cqdoa8O2etvTqu3TymZx/cmi",
-    "isAdmin": true,
-    "createdAt": {
-      "$date": "2023-08-13T08:34:01.045Z"
-    },
-    "updatedAt": {
-      "$date": "2023-08-29T09:31:08.934Z"
-    },
-    "__v": 0
-  }
+  "_id": {
+    "$oid": "650eafbd73b2cef683dea0d8"
+  },
+  "name": "AdminUser",
+  "lastname": "AdminUser",
+  "username": "AdminUser",
+  "email": "adminuser@admin.com",
+  "password": "$2b$10$h5oQbt/q9xHjDL4sJ2n5YO5wxZCy2fnF.VYk4KPtj1cdBiiuqLXV.",
+  "isAdmin": true,
+  "createdAt": {
+    "$date": "2023-09-23T09:28:29.217Z"
+  },
+  "updatedAt": {
+    "$date": "2023-09-23T09:28:29.217Z"
+  },
+  "__v": 0
+}
 ```
 2. User Routes:
 
@@ -269,10 +270,9 @@ The backend uses the following environment variables:
 - MONGO_URL: The connection string for the MongoDB database.
   
 ***On windows there is an error when trying to connect to the database using "mongodb://localhost:27017", so I used "mongodb://127.0.0.1:27017" instead.***
-
+- MONGO_URL= URL of your MongoDB database.
 - PORT: Port in wich the backend will run.
 - JWT_KEY: The secret key for signing JSON Web Tokens.
-- ADMIN_KEY: The key for creating admin users.
 
 These should be defined in a .env file in the root directory of the backend, like this:
 ```
