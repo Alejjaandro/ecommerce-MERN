@@ -22,7 +22,6 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
 
     const user = await User.findById(req.params.id);
-    console.log(user);
     // We check if the body info it's the same that the one in the DB.
     if (req.body.email === user.email) {
         return res.status(400).json({ message: ['New Email cannot be the same as the old Email.'] });

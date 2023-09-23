@@ -36,8 +36,7 @@ export default function EditUser() {
                 delete data[field];
             }
         }
-
-        // Petitions to modify user data.
+        
         // If the admin is modifying his own data, we need to update the user state.
         if (user._id === currentAdmin._id) {
             console.log("Updating current admin");
@@ -50,6 +49,7 @@ export default function EditUser() {
                 logout();
                 navigate('/');
             }
+            
         } else {
             await adminUpdateUser(userId, data);
         }
@@ -71,6 +71,7 @@ export default function EditUser() {
                             <p key={index}>{message}</p>
                         ))}
                     </div>
+
                     {success && success.map((message, index) => (
                         <p key={index} className="editUser-success">{message}</p>
                     ))}
@@ -98,7 +99,8 @@ export default function EditUser() {
                         </div>
                         <div className="editUser-form-group">
                             <label className="editUser-form-label">isAdmin: </label>
-                            <select defaultValue="{user.isAdmin}" className="editUser-form-input" name="isAdmin">
+                            <select defaultValue="Admin Permission" className="editUser-form-input" name="isAdmin">
+                                <option disabled value="Admin Permission">Admin Permission</option>
                                 <option value="true">Yes</option>
                                 <option value="false">No</option>
                             </select>

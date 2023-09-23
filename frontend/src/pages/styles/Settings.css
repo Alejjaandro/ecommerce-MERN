@@ -104,6 +104,10 @@
 .errors {
     color: red;
     font-weight: bold;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
+    font-size: 0.75rem;
 }
 
 .success {
@@ -123,6 +127,10 @@
     .settings-title svg {
         font-size: 2.5rem;
     }   
+
+    .errors, .success {
+        font-size: 1rem;
+    }    
 }
 /* Deskop Styles */
 @media (min-width: 1024px) {
@@ -147,4 +155,7 @@
         font-size: 1.5rem;
     }
     
+    .errors, .success {
+        font-size: 1.25rem;
+    }    
 }

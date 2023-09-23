@@ -7,10 +7,13 @@ export const validator = (schema) => (req, res, next) => {
         schema.parse(req.body);
         next();
     } catch (error) {
-        return res.status(400)
-        // ".errors" is an array inside zod that is not transformed to json, 
-        // so we go through the array to extract the message of each error &
-        // we send the errors as response.
-        .json({message: error.errors.map((error) => error.message)});
+        console.log('Error in validator middleware: ', error);
+        if (Array.isArray(error.errors)) {
+            return res.status(400)
+                .json({ message: error.errors.map((error) => error.message) });
+        } else {
+            // Handle other types of errors
+            return res.status(500).json({ message: ['An unexpected error occurred'] });
+        }
     }
 }

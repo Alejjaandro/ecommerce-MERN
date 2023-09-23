@@ -32,7 +32,18 @@ export const UserProvider = ({ children }) => {
 
     // ===== UPDATE user ===== //
     const updateUser = async (userId, data) => {
+        // Only allow the following fields to be updated.
+        const validKeys = ['image', 'name', 'lastname', 'email', 'username', 'password'];
+        let filteredData = {};
+        validKeys.forEach((key) => {
+            if (key in data) {
+                filteredData[key] = data[key];
+            }
+        });
+        data = filteredData;
+
         try {
+            console.log(data);
             // Error if the fields are empty.
             if (Object.keys(data).length === 0) {
                 return setErrors(['You must fill at least one field to update.']);
@@ -43,7 +54,7 @@ export const UserProvider = ({ children }) => {
             }
     
         } catch (error) {
-            setErrors([error.response.data.message]);
+            setErrors(error.response.data.message);
         }
     }
 

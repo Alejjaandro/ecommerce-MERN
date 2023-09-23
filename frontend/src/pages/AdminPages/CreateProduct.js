@@ -2,12 +2,14 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import { useAdmin } from '../../context/AdminContext';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import './styles/CreateProduct.css';
 
 export default function CreateProduct() {
 
     const { createProduct, success, errors } = useAdmin();
+    const [formElement, setFormElement] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,14 +25,19 @@ export default function CreateProduct() {
                 data[key] = Number(data[key]);
             }
         }
-
+        setFormElement(e.target);
         await createProduct(data);
-
-        // Timer to empty form fields when finished.
-        setTimeout(() => {
-            e.target.reset();
-        }, 5000);
     };
+
+    // Timer to empty form fields when finished.
+    useEffect(() => {
+        if (success && formElement) {
+            setTimeout(() => {
+                formElement.reset();
+                setFormElement(null);
+            }, 3000);
+        }
+    }, [success, formElement]);
 
     return (
         <>
@@ -70,7 +77,7 @@ export default function CreateProduct() {
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Discount %: </label>
-                            <input type="number" className="newProduct-form-input" name='discountPercentage' />
+                            <input type="number" max={100} step={0.01} className="newProduct-form-input" name='discountPercentage' />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Category: </label>
@@ -96,7 +103,12 @@ export default function CreateProduct() {
                             </div>
                         )}
 
-                        <button type="submit" className="newProduct-submit-button">Create Product</button>
+                        <div className="newProduct-foot-buttons">
+                            <button type="submit" className="newProduct-submit-button">Create Product</button>
+                            <button type="button" className="newProduct-allProducts-button">
+                                <Link to='/all-products'>To All Products</Link>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

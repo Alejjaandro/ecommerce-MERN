@@ -34,9 +34,26 @@ export const AdminProvider = ({ children }) => {
     // ===== ADMIN UPDATE user ===== //
     const adminUpdateUser = async (userId, data) => {
         try {
+            // We filter the data so we only send the keys that we want to update.
+            const validKeys = ['name', 'lastname', 'email', 'username', 'password', 'isAdmin'];
+            let filteredData = {};
+
+            validKeys.forEach((key) => {
+                if (key in data) {
+                    filteredData[key] = data[key];
+                }
+            });
+            data = filteredData;
+
+            // Turn isAdmin into a boolean.
+            if (data.isAdmin === 'false') data.isAdmin = false;
+            if (data.isAdmin === 'true') data.isAdmin = true;
+            if (typeof data.isAdmin != "boolean") return setErrors(["isAdmin must be a boolean. Please select an option."]);
+
             const response = await axios.put(`/users/adminUpdate/${userId}`, data);
             setSuccess([response.data.message]);
         } catch (error) {
+            console.log(error.response.data);
             setErrors(error.response.data.message);
         }
     }
@@ -72,7 +89,16 @@ export const AdminProvider = ({ children }) => {
     // ========== FUNCTION TO CREATE A PRODUCT ========== //
     const createProduct = async (data) => {
         try {
-            console.log(data);
+            // We filter the data so we only send the keys that we want to update.
+            const validKeys = ['thumbnail', 'title', 'price', 'discountPercentage', 'category', 'brand', 'stock', 'description'];
+            let filteredData = {};
+            validKeys.forEach((key) => {
+                if (key in data) {
+                    filteredData[key] = data[key];
+                }
+            });
+            data = filteredData;
+
             const response = await axios.post(`/products`, data);
             setSuccess(response.data.message);
         } catch (error) {
@@ -83,6 +109,16 @@ export const AdminProvider = ({ children }) => {
     // ========== FUNCTION TO MODIIFY A PRODUCT ========== //
     const updateProduct = async (productId, data) => {
         try {
+            const validKeys = ['title', 'price', 'discountPercentage', 'category', 'brand', 'stock', 'description'];
+            let filteredData = {};
+            validKeys.forEach((key) => {
+                if (key in data) {
+                    filteredData[key] = data[key];
+                }
+            });
+            data = filteredData;
+            console.log(data);
+
             const response = await axios.put(`/products/${productId}`, data);
             setSuccess(response.data.message);
         } catch (error) {

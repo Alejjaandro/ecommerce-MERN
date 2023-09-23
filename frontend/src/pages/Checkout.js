@@ -37,6 +37,8 @@ export default function Checkout() {
     // For the country and region dropdowns, and the expiration date.
     const [country, setCountry] = useState('');
     const [region, setRegion] = useState('');
+    const [billingCountry, setBillingCountry] = useState('');
+    const [billingRegion, setBillingRegion] = useState('');
     const [startDate, setStartDate] = useState(new Date());
 
     // For the checkbox "Same as Customer".
@@ -48,20 +50,14 @@ export default function Checkout() {
         const formData = new FormData(e.target);
         let data = Object.fromEntries(formData);
 
-        // Delete empty fields.
-        for (let field in data) {
-            if (data[field] === "") {
-                delete data[field];
+        // Removing empty fields and converting fields to numbers.
+        for (let key in data) {
+            if (data[key] === '') {
+                delete data[key];
+            } else if (!isNaN(data[key])) {
+                data[key] = Number(data[key]);
             }
         }
-
-        // Transform the data to the correct type.
-        if (data.zipcode) data.zipcode = Number(data.zipcode);
-        if (data.cardNumber) data.cardNumber = Number(data.cardNumber);
-        if (data.expirationDate) data.expirationDate = startDate.toISOString();
-        if (data.cvc) data.cvc = Number(data.cvc);
-
-        if (data.billingZipcode) data.billingZipcode = Number(data.billingZipcode);
 
         // Add the cost and checkbox to the data object.
         data = { ...data, sameAsCustomer, subtotal, shippingCost, total };
@@ -190,8 +186,8 @@ export default function Checkout() {
                                 <label>Country:</label>
                                 <CountryDropdown
                                     name='billingCountry'
-                                    value={country}
-                                    onChange={(value) => setCountry(value)}
+                                    value={billingCountry}
+                                    onChange={(value) => setBillingCountry(value)}
                                     className="checkout-input"
                                     disabled={sameAsCustomer}
                                 />
@@ -206,9 +202,9 @@ export default function Checkout() {
                                     name='billingCity'
                                     className="checkout-input"
                                     disableWhenEmpty={true}
-                                    country={country}
-                                    value={region}
-                                    onChange={setRegion}
+                                    country={billingCountry}
+                                    value={billingRegion}
+                                    onChange={setBillingRegion}
                                     disabled={sameAsCustomer}
                                 />
                             </div>

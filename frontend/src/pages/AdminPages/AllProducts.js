@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export default function AllProducts() {
 
-    const { products, getProducts, categoryFilter, brandFilter } = useProducts();
+    const { products, getProducts, categoryFilter, brandFilter, getCategoriesAndBrands } = useProducts();
     const { deleteProduct, success } = useAdmin();
     
     useEffect(() => { getProducts() }, []);
@@ -72,7 +72,7 @@ export default function AllProducts() {
                                     <td className="allProducts-stock">{product.stock}</td>
                                     <td className="allProducts-options">
                                         <Link to={`/edit-product/${product._id}`} className="allProducts-link-edit">Edit</Link>
-                                        <button className="allProducts-btn-remove" onClick={() => deleteProduct(product._id)}>Remove</button>
+                                        <button className="allProducts-btn-remove" onClick={() => {deleteProduct(product._id)}}>Remove</button>
                                     </td>
                                 </tr>
                             ))}

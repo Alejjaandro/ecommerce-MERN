@@ -22,7 +22,9 @@ export const productValidator = z.object({
     
     discountPercentage: z.number({
         invalid_type_error: "Discount % must be a string number"
-    }).optional(),
+    })
+    .max(100, {message: "Discount % must be less than 100"})
+    .optional(),
 
     category: z.string({
         invalid_type_error: "Category must be a string",

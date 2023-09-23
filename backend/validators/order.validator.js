@@ -116,7 +116,7 @@ export const userOrderValidator = z.object({
         .refine(zipcode => {
             const digitLength = zipcode.toString().length;
             return digitLength === 5;
-        }, { message: "Zip Code must be 5 digits" })
+        }, { message: "Billing Zip Code must be 5 digits" })
         .optional(),
 
     }),

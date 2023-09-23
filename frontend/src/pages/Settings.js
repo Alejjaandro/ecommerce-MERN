@@ -11,7 +11,7 @@ export default function Settings() {
 
     const userId = window.location.pathname.split('/')[2];
     const { updateUser, errors, success } = useUser();
-    
+
     const handleChange = async (e) => {
         e.preventDefault();
 
@@ -34,9 +34,11 @@ export default function Settings() {
         await updateUser(userId, data);
 
         // Timer to empty form fields when finished.
-        setTimeout(() => {
-            e.target.reset();
-        }, 5000);
+        if (success) {
+            setTimeout(() => {
+                e.target.reset();
+            }, 5000);
+        }
     };
 
     return (
@@ -85,18 +87,18 @@ export default function Settings() {
                         </div>
 
                         {/* Errors */}
-                        {errors.map((error, i) => (
-                            <div className='errors' key={i}>
-                                <p>{error}</p>
-                            </div>
-                        ))}
+                        <div className='errors'>
+                            {errors.map((error, i) => (
+                                <p key={i}>{error}</p>
+                            ))}
+                        </div>
 
                         {/* Success */}
-                        {success && (
-                            <div className='success'>
+                        <div className='success'>
+                            {success && (
                                 <p>{success}</p>
-                            </div>
-                        )}
+                            )}
+                        </div>
 
                         <div className="settings-buttons">
                             <button type='submit' className='settings-button'>CHANGE</button>

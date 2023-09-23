@@ -22,23 +22,21 @@ export default function EditProduct() {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        // We delete the empty fields.
-        for (let field in data) {
-            if (data[field] === "") {
-                delete data[field];
+        // Removing empty fields and converting fields to numbers.
+        for (let key in data) {
+            if (data[key] === '') {
+                delete data[key];
+            } else if (!isNaN(data[key])) {
+                data[key] = Number(data[key]);
             }
         }
 
-        // Transform the data to the correct type.
-        if (data.price) data.price = Number(data.price);
-        if (data.discountPercentage) data.discountPercentage = Number(data.discountPercentage);
-        if (data.stock) data.stock = Number(data.stock);
-
+        console.log(data);
         // Petition to modify product data.
         await updateProduct(productId, data);
+        getProduct(productId);
     };
 
-    console.log(errors);
     return (
         <>
             <Navbar />
