@@ -39,7 +39,8 @@ export default function Checkout() {
     const [region, setRegion] = useState('');
     const [billingCountry, setBillingCountry] = useState('');
     const [billingRegion, setBillingRegion] = useState('');
-    const [startDate, setStartDate] = useState(new Date());
+    const startDate  = new Date();
+    const [pickedDate, setPickedDate] = useState(startDate);
 
     // For the checkbox "Same as Customer".
     const [sameAsCustomer, setSameAsCustomer] = useState(false);
@@ -151,9 +152,9 @@ export default function Checkout() {
                                 <DatePicker
                                     name='expirationDate'
                                     className="checkout-input"
-                                    selected={startDate}
+                                    selected={pickedDate}
                                     minDate={startDate}
-                                    onChange={(date) => setStartDate(date)}
+                                    onChange={(date) => setPickedDate(date)}
                                     dateFormat="MM/yyyy"
                                     showMonthYearPicker
                                 />

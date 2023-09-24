@@ -53,7 +53,6 @@ export const AdminProvider = ({ children }) => {
             const response = await axios.put(`/users/adminUpdate/${userId}`, data);
             setSuccess([response.data.message]);
         } catch (error) {
-            console.log(error.response.data);
             setErrors(error.response.data.message);
         }
     }
@@ -98,7 +97,6 @@ export const AdminProvider = ({ children }) => {
                 }
             });
             data = filteredData;
-            console.log(data);
 
             const response = await axios.post(`/products`, data);
             setSuccess(response.data.message);
@@ -178,14 +176,12 @@ export const AdminProvider = ({ children }) => {
 
     // ===== DELETE ORDER ===== //
     const deleteOrder = async (orderId) => {
-        console.log(orderId);
         try {
             const response = await axios.delete(`/orders/${orderId}`);
-            console.log(response.data);
             // We update allOrders.
             getAllOrders();
         } catch (error) {
-            console.log(error);;
+            console.log(error);
         }
     }
 

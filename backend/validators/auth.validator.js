@@ -11,10 +11,12 @@ export const registerValidator = z.object({
 
     // You can customize some common error messages when creating a string schema.
     name: z.string({required_error: "Name is required"})
-    .refine(name => isNaN(Number(name)), {message: "Name must not be a numeric string"}),
-
+    .refine(name => isNaN(Number(name)), {message: "Name must not be a numeric string"})
+    .refine(name => !/\d/.test(name), {message: "Name must not contain a number"}),
+    
     lastname: z.string({required_error: "Lastname is required" })
-    .refine(lastname => isNaN(Number(lastname)), {message: "Lastname must not be a numeric string"}),
+    .refine(lastname => isNaN(Number(lastname)), {message: "Lastname must not be a numeric string"})
+    .refine(name => !/\d/.test(name), {message: "Lastname must not contain a number"}),
     
     email: z.string({required_error: "Email is required" })
     .email({ message: 'Invalid email' }),
