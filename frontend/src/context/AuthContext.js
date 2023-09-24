@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from '../api/axios.js';
+import { useNavigate } from "react-router-dom";
 
 import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode';
 
 /* 
 Context provides a way to pass data through the component tree 
@@ -59,10 +59,13 @@ export const AuthProvider = ({ children }) => {
     }
 
     // Remove the token from cookies.
+    const navigate = useNavigate();
     const logout = () => {
         Cookies.remove("token");
         setIsAuthenticated(false);
         setUser(null);
+        alert("You have been logged out");
+        navigate('/');
     }
 
     // Timeout so the errors don't stay on screen undefinetly. 5000 ms = 5 sec.
@@ -78,7 +81,6 @@ export const AuthProvider = ({ children }) => {
 
     // Function to verify the token with the backend.
     async function verifyToken(token) {
-
         try {
             if (token) {
                 const response = await axios.get('/auth/verifyToken', {
@@ -95,44 +97,33 @@ export const AuthProvider = ({ children }) => {
                 }
             } else {
                 // Token doesn't exist.
-                setIsAuthenticated(false);
-                setUser(null);
+                logout();
             }
         } catch (error) {
             if (error) {
                 // Token isn't valid or has expired.
-                logout();
                 alert("Session Expired");
+                logout();
             }
         }
     }
 
-    // This checks if the cookie token exists and it didn't expired,
-    // while it exists the user will be authenticated.
-    let token = Cookies.get('token');
+    // If the user is logged in, verify the token every second.
     useEffect(() => {
-        if (token) {
-            try {
-                // We verify the token with the backend.
+        if (user) {
+            const intervalId = setInterval(() => {
+                const token = Cookies.get('token');
+    
                 verifyToken(token);
-
-                const decodedToken = jwt_decode(token);
-
-                // Verifies if the token expired:
-                const currentTime = Date.now().valueOf() / 1000;
-                if (decodedToken.exp < currentTime) {
-                    // If the token expired:
+    
+                if (!token) {
                     logout();
                 }
-
-            } catch (error) {
-                console.log('Error decodifying the token: ', error);
-            }
-            // If the token doesn't exist:
-        } else {
-            logout();
+            }, 1000);
+            // Clear the interval when the component unmounts.
+            return () => clearInterval(intervalId);
         }
-    }, [token]);
+    }, [user]);
 
     // All the components inside AuthContext will be able to access it values.
     return (

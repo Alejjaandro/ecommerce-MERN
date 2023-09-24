@@ -36,7 +36,7 @@ export const updateUser = async (req, res) => {
         if (passwordMatch) {
             return res.status(400).json({ message: ['New Password cannot be the same as the old Password.'] });
         } else {
-            return req.body.password = bcrypt.hash(req.body.password, 10);
+            req.body.password = await bcrypt.hash(req.body.password, 10);
         }
     }
 
@@ -89,6 +89,7 @@ export const getAllUsers = async (req, res) => {
 // In the admin form, we have the previous info of the user, so if we don't want to change it
 // we just send it back to the backend and we don't change it.
 export const adminUpdateUser = async (req, res) => {
+
     try {
         const user = await User.findById(req.params.userId);
         if (req.body.password) {
@@ -97,7 +98,7 @@ export const adminUpdateUser = async (req, res) => {
             if (passwordMatch) {
                 return res.status(400).json({ message: ['New Password cannot be the same as the old Password.'] });
             } else {
-                return req.body.password = bcrypt.hash(req.body.password, 10);
+                req.body.password = await bcrypt.hash(req.body.password, 10);
             }
         }
 

@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 
 // Icons
@@ -12,7 +12,7 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 
 // Styles
 import './styles/AdminNavbar.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext.js';
 
 export default function Navbar() {
@@ -26,9 +26,6 @@ export default function Navbar() {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   }
-
-  // To navigate to the home page after logging out.
-  const navigate = useNavigate();
 
   return (
 
@@ -77,7 +74,7 @@ export default function Navbar() {
               <Link to={`/my-orders/${user._id}`}><AssessmentIcon /> My Orders</Link>
               <Link to={`/create-product`}><AddBoxIcon /> Create New Product</Link>
 
-              <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>
+              <button onClick={() => { logout() }}><LogoutIcon /> Logout</button>
 
             </div>
           </div>

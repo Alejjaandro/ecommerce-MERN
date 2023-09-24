@@ -63,12 +63,6 @@ export const UserProvider = ({ children }) => {
         try {
             const response = await axios.delete(`/users/${userId}`);
 
-            setUser(null);
-            setIsAuthenticated(false);
-            Cookies.remove('token');
-
-            alert(response.data);
-
         } catch (error) {
             console.log(error);
             setErrors(error.response);

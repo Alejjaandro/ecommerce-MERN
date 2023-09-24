@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 import AdminNavbar from './AdminNavbar.js';
 
@@ -11,13 +11,13 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 
 // Styles
 import './styles/Navbar.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext.js';
 
 export default function Navbar() {
   // We extract what we will nedd from the contexts files.
   const { isAuthenticated, user, logout } = useAuth();
-  const { productsNumber, getCart } = useCart();
+  const { productsNumber } = useCart();
 
   // We create a variable to control if the sub-menu appears or not.
   const [menuVisible, setMenuVisible] = useState(false);
@@ -25,9 +25,6 @@ export default function Navbar() {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   }
-
-  // To navigate to the home page after logging out.
-  const navigate = useNavigate();
 
   // If the user is an admin, it will show the admin navbar.
   if (user && user.isAdmin) {
@@ -92,7 +89,7 @@ export default function Navbar() {
                 <Link to={`/cart/${user._id}`}><ShoppingCartIcon /> Shopping Cart ({productsNumber})</Link>
                 <Link to={`/my-orders/${user._id}`}><AssessmentIcon /> My Orders</Link>
 
-                <button onClick={() => { logout(); navigate('/') }}><LogoutIcon /> Logout</button>
+                <button onClick={() => { logout() }}><LogoutIcon /> Logout</button>
 
               </div>
             </div>

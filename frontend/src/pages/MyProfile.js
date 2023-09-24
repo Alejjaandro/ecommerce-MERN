@@ -7,13 +7,12 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
 import { format } from 'date-fns';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function MyProfile() {
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { deleteUser } = useUser();
-  const navigate = useNavigate();
 
 
   if (!user) return <div>Loading...</div>
@@ -26,7 +25,8 @@ export default function MyProfile() {
 
   const handleDelete = async (userId) => {
     await deleteUser(userId);
-    navigate('/');
+    alert("Your account has been deleted");
+    logout();
   }
 
   return (

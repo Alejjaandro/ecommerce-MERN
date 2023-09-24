@@ -6,13 +6,12 @@ import "./styles/AllUsers.css";
 import { useAdmin } from "../../context/AdminContext";
 import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AllUsers() {
 
   const { getAllUsers, allUsers, adminDeleteUser } = useAdmin();
   const { user: currentAdmin, logout } = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => { getAllUsers() }, []);
 
@@ -23,7 +22,6 @@ export default function AllUsers() {
     if (userId === currentAdmin._id) {
       alert("You deleted yourself");
       logout();
-      navigate('/');
     }
   }
 

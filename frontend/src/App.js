@@ -42,16 +42,16 @@ import { AdminEditCartProvider } from './context/AdminContextEditCart';
 export default function App() {
 
   return (
+    <BrowserRouter>
 
-    <AuthProvider>
-      <ProductsProvider>
-        <CartProvider>
-          <UserProvider>
-            <OrderProvider>
-              <AdminProvider>
-                <AdminEditCartProvider>
+      <AuthProvider>
+        <ProductsProvider>
+          <CartProvider>
+            <UserProvider>
+              <OrderProvider>
+                <AdminProvider>
+                  <AdminEditCartProvider>
 
-                  <BrowserRouter>
                     <Routes>
                       {/* Public Routes */}
                       <Route path="/" element={<Home />} />
@@ -84,14 +84,15 @@ export default function App() {
                         <Route path="/create-product" element={<CreateProduct />} />
                       </Route>
                     </Routes>
-                  </BrowserRouter>
-                  
-                </AdminEditCartProvider>
-              </AdminProvider>
-            </OrderProvider>
-          </UserProvider>
-        </CartProvider>
-      </ProductsProvider>
-    </AuthProvider>
+
+                  </AdminEditCartProvider>
+                </AdminProvider>
+              </OrderProvider>
+            </UserProvider>
+          </CartProvider>
+        </ProductsProvider>
+      </AuthProvider>
+      
+    </BrowserRouter>
   );
 }

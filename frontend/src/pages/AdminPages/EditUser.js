@@ -1,12 +1,10 @@
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 
-import Cookies from 'js-cookie';
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAdmin } from '../../context/AdminContext';
 import { useAuth } from '../../context/AuthContext';
-import { useUser } from '../../context/UserContext';
 
 import './styles/EditUser.css';
 
@@ -14,7 +12,6 @@ export default function EditUser() {
 
     const { adminGetUser, user, setUser, adminUpdateUser, success, errors } = useAdmin();
     const { user: currentAdmin, logout } = useAuth();
-    const navigate = useNavigate();
 
     const userId = window.location.pathname.split("/")[2];
     useEffect(() => {
@@ -47,13 +44,26 @@ export default function EditUser() {
             if (data.isAdmin === 'false') {
                 alert("You are no longer an admin, please log in again.");
                 logout();
-                navigate('/');
             }
             
         } else {
             await adminUpdateUser(userId, data);
         }
     };
+
+    if (!user) {
+        return (
+            <>
+                <Navbar />
+                <div className="editUser-container">
+                    <div className="editUser-wrapper">
+                        <h1 className="editUser-title">Loading...</h1>
+                    </div>
+                </div>
+                <Footer />
+            </>
+        );
+    }
 
     return (
         <>
