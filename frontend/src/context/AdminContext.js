@@ -50,6 +50,11 @@ export const AdminProvider = ({ children }) => {
             if (data.isAdmin === 'true') data.isAdmin = true;
             if (typeof data.isAdmin != "boolean") return setErrors(["isAdmin must be a boolean. Please select an option."]);
 
+            if (userId === currentUser._id) {
+                const response = await axios.put(`/users/${userId}`, data);
+                setSuccess([response.data.message]);
+            }
+
             const response = await axios.put(`/users/adminUpdate/${userId}`, data);
             setSuccess([response.data.message]);
         } catch (error) {

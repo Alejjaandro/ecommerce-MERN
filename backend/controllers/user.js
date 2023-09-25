@@ -2,6 +2,7 @@ import User from '../models/User.js';
 import Cart from '../models/Cart.js';
 import bcrypt from 'bcrypt';
 import Order from '../models/Order.js';
+import jwt from 'jsonwebtoken';
 
 // ===== GET user ===== //
 export const getUser = async (req, res) => {
@@ -46,7 +47,17 @@ export const updateUser = async (req, res) => {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, { new: true })
+        console.log(updatedUser);
 
+        // Generate a new token with the updated user information.
+        const newToken = jwt.sign(
+            updatedUser.toObject(),
+            process.env.JWT_KEY,
+            { expiresIn: '1h' }
+        );
+
+        // Create a new token in a cookie.
+        res.cookie('token', newToken, { httpOnly: false });
         return res.status(200).json({ message: 'User info Updated', updatedUser: updatedUser });
 
     } catch (error) {

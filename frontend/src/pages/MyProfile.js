@@ -14,9 +14,6 @@ export default function MyProfile() {
   const { user, logout } = useAuth();
   const { deleteUser } = useUser();
 
-
-  if (!user) return <div>Loading...</div>
-
   const createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
   const createdHour = format(new Date(user.createdAt), "HH:mm:ss");
 

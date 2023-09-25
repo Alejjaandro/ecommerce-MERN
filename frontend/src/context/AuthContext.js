@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    
+
     // Use the info sent by the form in "/pages/Register.js" to make the post request.
     const [registerErrors, setRegisterErrors] = useState([]);
     const register = async (user) => {
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
                 const response = await axios.get('/auth/verifyToken', {
                     headers: { 'token': token }
                 });
-    
+
                 if (response.status === 200) {
                     // Token is valid and has not expired.
                     setIsAuthenticated(true);
@@ -108,14 +108,20 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    // Verify the token when the page loads.
+    useEffect(() => {
+        const token = Cookies.get('token');
+        verifyToken(token);
+    }, []);
+
     // If the user is logged in, verify the token every second.
     useEffect(() => {
         if (user) {
             const intervalId = setInterval(() => {
                 const token = Cookies.get('token');
-    
+
                 verifyToken(token);
-    
+
                 if (!token) {
                     logout();
                 }

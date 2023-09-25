@@ -43,18 +43,18 @@ export const UserProvider = ({ children }) => {
         data = filteredData;
 
         try {
-            console.log(data);
             // Error if the fields are empty.
             if (Object.keys(data).length === 0) {
                 return setErrors(['You must fill at least one field to update.']);
             } else {
                 const response = await axios.put(`/users/${userId}`, data);
-                getUser(userId);
                 setSuccess([response.data.message]);
+                getUser(userId);
             }
     
         } catch (error) {
-            setErrors(error.response.data.message);
+            console.log(error);
+            // setErrors(error.response.data.message);
         }
     }
 
