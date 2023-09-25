@@ -81,12 +81,12 @@ export default function AllCarts() {
                                     <td>
                                         <div className='allCarts-row-td-container'>
                                             {cart.products.map((item, index) => (
-                                                <p key={index}>${item.price * item.quantity}</p>
+                                                <p key={index}>${(item.price * item.quantity).toFixed(2)}</p>
                                             ))}
                                         </div>
                                     </td>
                                     <td className='allCarts-row-td allCarts-products-total'>
-                                        ${cart.products.reduce((total, item) => total + (item.price * item.quantity), 0)}
+                                        ${cart.products.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}
                                     </td>
                                     <td className='allCarts-options'>
                                         <Link to={`/edit-cart/${cart._id}`} className="allCarts-link-edit">Edit</Link>

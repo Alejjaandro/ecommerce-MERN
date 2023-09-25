@@ -111,7 +111,9 @@ export const AuthProvider = ({ children }) => {
     // Verify the token when the page loads.
     useEffect(() => {
         const token = Cookies.get('token');
-        verifyToken(token);
+        if (token) {
+            verifyToken(token);
+        }
     }, []);
 
     // If the user is logged in, verify the token every second.

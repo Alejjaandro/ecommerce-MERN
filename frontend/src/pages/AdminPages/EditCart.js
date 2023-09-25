@@ -5,7 +5,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import './styles/EditCart.css';
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAdmin } from '../../context/AdminContext';
 import { useAdminEditCart } from '../../context/AdminContextEditCart';
 import { useAuth } from '../../context/AuthContext';
@@ -17,7 +17,7 @@ export default function EditCart() {
 
     const { user, adminGetUser } = useAdmin();
 
-    const { 
+    const {
         userProductsNumber,
         userCart,
         getUserCart,
@@ -28,13 +28,15 @@ export default function EditCart() {
     const userId = window.location.pathname.split("/")[2];
 
     useEffect(() => { getUserCart(userId); adminGetUser(userId) }, []);
-        
-    useEffect(() => { 
-        if (currentUser._id === user._id) {
-            console.log('Own cart modified');
-            getCart(user._id);
+
+    useEffect(() => {
+        if (currentUser && user) {
+            if (currentUser._id === user._id) {
+                console.log('Own cart modified');
+                getCart(user._id);
+            }
         }
-     }, [userProductsNumber]);
+    }, [userProductsNumber]);
 
     let subtotal = 0;
     let shippingCost = 0;
