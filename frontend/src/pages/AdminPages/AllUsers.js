@@ -4,21 +4,36 @@ import Navbar from "../../components/Navbar";
 import "./styles/AllUsers.css";
 
 import { useAdmin } from "../../context/AdminContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 
 export default function AllUsers() {
 
   const { getAllUsers, allUsers, adminDeleteUser } = useAdmin();
   const { user: currentAdmin, logout } = useAuth();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState(null);
+
 
   useEffect(() => { getAllUsers() }, []);
 
+  // Function to display modal.
+  const handleDelete = (userId, userTitle) => {
+    setCurrentUserId(userId);
+    setCurrentUsername(userTitle);
+    setModalIsOpen(true);
+  }
+
+  // Function to delete user.
   const handleDeleteUser = async (userId) => {
     await adminDeleteUser(userId);
 
-    // If the user we deleted is the current user, we logout.
+    // // If the user we deleted is the current user, we logout.
     if (userId === currentAdmin._id) {
       alert("You deleted yourself");
       logout();
@@ -57,13 +72,32 @@ export default function AllUsers() {
                   <td>{user.isAdmin ? "Yes" : "No"}</td>
                   <td className="allUsers-options">
                     <Link to={`/edit-user/${user._id}`} className="allUsers-link-edit">Edit</Link>
-                    <button className="allUsers-btn-remove" onClick={() => handleDeleteUser(user._id) }>Remove</button>
+                    <button className="allUsers-btn-remove" onClick={() => handleDelete(user._id, user.username)}>Remove</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        <Modal
+          className="modal-container"
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          contentLabel="Delete Account Confirmation"
+        >
+          <div className="modal">
+            <h2>Are you sure you want to delete "{currentUsername}"?</h2>
+            <div className="modal-buttons">
+              <button className='yes-button' onClick={async () => {
+                await handleDeleteUser(currentUserId);
+                setModalIsOpen(false);
+              }}>Yes</button>
+              <button className='no-button' onClick={() => setModalIsOpen(false)}>No</button>
+            </div>
+          </div>
+        </Modal>
+
       </div>
       <Footer />
     </>

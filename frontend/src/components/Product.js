@@ -9,7 +9,6 @@ import { useCart } from '../context/CartContext';
 // Icons
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 export default function Product({ item }) {
 

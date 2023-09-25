@@ -9,12 +9,15 @@ import { useUser } from '../context/UserContext';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 export default function MyProfile() {
 
   const { user, logout } = useAuth();
   const { deleteUser } = useUser();
   const [loading, setLoading] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -87,10 +90,28 @@ export default function MyProfile() {
 
         <div className="profile-buttons">
           <button className="profile-edit"><Link to={`/settings/${user._id}`}>Edit Profile</Link></button>
-          <button className="profile-delete" onClick={() => handleDelete(user._id)}>Delete Account</button>
+          <button className="profile-delete" onClick={() => setModalIsOpen(true)}>Delete Account</button>
         </div>
 
+        <Modal
+          className="modal-container"
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          contentLabel="Delete Account Confirmation"
+        >
+          <div className="modal">
+            <h2>Are you sure you want to delete your account?</h2>
+            <div className="modal-buttons">
+              <button className='yes-button' onClick={async () => {
+                await handleDelete(user._id);
+                setModalIsOpen(false);
+              }}>Yes</button>
+              <button className='no-button' onClick={() => setModalIsOpen(false)}>No</button>
+            </div>
+          </div>
+        </Modal>
       </div>
+
 
       <Footer />
     </>

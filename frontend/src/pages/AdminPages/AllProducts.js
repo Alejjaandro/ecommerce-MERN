@@ -8,14 +8,20 @@ import { useProducts } from "../../context/ProductsContext";
 import { useAdmin } from "../../context/AdminContext";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 
 export default function AllProducts() {
 
     const { products, getProducts, categoryFilter, brandFilter, getCategoriesAndBrands } = useProducts();
     const { deleteProduct, success } = useAdmin();
-    
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [currentProductId, setCurrentProductId] = useState(null);
+    const [currentProductTitle, setCurrentProductTitle] = useState(null);
+
     useEffect(() => { getProducts() }, []);
-    
+
     const [filteredProducts, setFilteredProducts] = useState([]);
     const onFilter = (category, brand) => {
         let filtered = products;
@@ -30,7 +36,13 @@ export default function AllProducts() {
     }
 
     // We use useEffect to update the filteredProducts after deleting a product.
-    useEffect(() => {onFilter(categoryFilter, brandFilter)}, [products]);
+    useEffect(() => { onFilter(categoryFilter, brandFilter) }, [products]);
+
+    const handleDelete = (productId, productTitle) => {
+        setCurrentProductId(productId);
+        setCurrentProductTitle(productTitle);
+        setModalIsOpen(true);
+    }
 
     return (
         <>
@@ -40,7 +52,7 @@ export default function AllProducts() {
                 <h1>All Products</h1>
 
                 <FilterNavbar useProducts={useProducts} onFilter={onFilter} />
-                
+
                 {/* Success */}
                 {success && (
                     <div className='allProducts-success'>
@@ -72,13 +84,33 @@ export default function AllProducts() {
                                     <td className="allProducts-stock">{product.stock}</td>
                                     <td className="allProducts-options">
                                         <Link to={`/edit-product/${product._id}`} className="allProducts-link-edit">Edit</Link>
-                                        <button className="allProducts-btn-remove" onClick={() => {deleteProduct(product._id)}}>Remove</button>
+                                        <button className="allProducts-btn-remove" 
+                                        onClick={() =>  handleDelete(product._id, product.title)}>Remove</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
+
+                <Modal
+                    className="modal-container"
+                    isOpen={modalIsOpen}
+                    onRequestClose={() => setModalIsOpen(false)}
+                    contentLabel="Delete Account Confirmation"
+                >
+                    <div className="modal">
+                        <h2>Are you sure you want to delete {currentProductTitle}?</h2>
+                        <div className="modal-buttons">
+                            <button className='yes-button' onClick={async () => {
+                                await deleteProduct(currentProductId);
+                                setModalIsOpen(false);
+                            }}>Yes</button>
+                            <button className='no-button' onClick={() => setModalIsOpen(false)}>No</button>
+                        </div>
+                    </div>
+                </Modal>
+
             </div>
 
             <Footer />

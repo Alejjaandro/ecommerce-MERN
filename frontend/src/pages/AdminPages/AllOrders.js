@@ -4,18 +4,32 @@ import "./styles/AllOrders.css";
 
 import { Link } from "react-router-dom";
 import { format } from 'date-fns';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAdmin } from "../../context/AdminContext";
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 
 export default function AllOrders() {
 
     const { allOrders, getAllOrders, deleteOrder } = useAdmin();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [currentOrderId, setCurrentOrderId] = useState(null);
+    const [currentOrderName, setCurrentOrderName] = useState(null);
+
 
     useEffect(() => { getAllOrders() }, []);
 
     function formatDate(date) {
         const createdDate = format(new Date(date), "dd/MM/yyyy HH:mm:ss");
         return createdDate;
+    }
+
+    // Function to display modal.
+    const handleDelete = (orderId, userName) => {
+        setCurrentOrderId(orderId);
+        setCurrentOrderName(userName);
+        setModalIsOpen(true);
     }
 
     return (
@@ -48,13 +62,32 @@ export default function AllOrders() {
                                     <td>{order.orderInfo.address}, {order.orderInfo.zipcode}</td>
                                     <td className="allOrders-options">
                                         <Link to={`/order-details/${order._id}`} className="allOrders-link-details">Details</Link>
-                                        <button className="allOrders-btn-remove" onClick={() => {deleteOrder(order._id)}}>Remove</button>
+                                        <button className="allOrders-btn-remove" onClick={() => { handleDelete(order._id, order.orderInfo.name) }}>Remove</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
+
+                <Modal
+                    className="modal-container"
+                    isOpen={modalIsOpen}
+                    onRequestClose={() => setModalIsOpen(false)}
+                    contentLabel="Delete Account Confirmation"
+                >
+                    <div className="modal">
+                        <h2>Are you sure you want to delete "{currentOrderName}" Order?</h2>
+                        <div className="modal-buttons">
+                            <button className='yes-button' onClick={async () => {
+                                await deleteOrder(currentOrderId);
+                                setModalIsOpen(false);
+                            }}>Yes</button>
+                            <button className='no-button' onClick={() => setModalIsOpen(false)}>No</button>
+                        </div>
+                    </div>
+                </Modal>
+
             </div>
             <Footer />
         </>

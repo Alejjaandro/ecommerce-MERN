@@ -56,11 +56,7 @@ export const userOrderValidator = z.object({
         zipcode: z.number({
             required_error: "Zip Code is required",
             invalid_type_error: "Zip Code must be a number"
-        })
-        .refine(zipcode => {
-            const digitLength = zipcode.toString().length;
-            return digitLength === 5;
-        }, { message: "Zip Code must be 5 digits" }),
+        }),
 
         cardNumber: z.number({
             required_error: "Card Number is required",
@@ -124,10 +120,6 @@ export const userOrderValidator = z.object({
         billingZipcode: z.number({
             invalid_type_error: "Billing Zip Code must be a number"
         })
-        .refine(zipcode => {
-            const digitLength = zipcode.toString().length;
-            return digitLength === 5;
-        }, { message: "Billing Zip Code must be 5 digits" })
         .optional(),
 
     }),

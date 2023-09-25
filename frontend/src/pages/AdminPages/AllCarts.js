@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar.js';
 import Footer from '../../components/Footer.js';
 import { useAdmin } from '../../context/AdminContext.js';
@@ -7,11 +7,16 @@ import './styles/AllCarts.css';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext.js';
 import { useAuth } from '../../context/AuthContext.js';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 
 export default function AllCarts() {
     const { allCarts, getAllCarts, adminDeleteCart } = useAdmin();
     const { getCart } = useCart();
     const { user } = useAuth();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [currentCartId, setCurrentCartId] = useState(null);
 
     useEffect(() => { getAllCarts() }, []);
 
@@ -22,6 +27,12 @@ export default function AllCarts() {
             console.log('Own cart deleted');
             getCart(user._id);
         }
+    }
+
+    // Function to display modal.
+    const handleDelete = (cartId) => {
+        setCurrentCartId(cartId);
+        setModalIsOpen(true);
     }
 
     return (
@@ -90,7 +101,7 @@ export default function AllCarts() {
                                     </td>
                                     <td className='allCarts-options'>
                                         <Link to={`/edit-cart/${cart._id}`} className="allCarts-link-edit">Edit</Link>
-                                        <button className="allCarts-btn-remove" onClick={() => handleAdminDeleteCart(cart._id)}>Remove</button>
+                                        <button className="allCarts-btn-remove" onClick={() => handleDelete(cart._id)}>Remove</button>
                                     </td>
                                 </tr>
                             )) : (
@@ -101,6 +112,25 @@ export default function AllCarts() {
                         </tbody>
                     </table>
                 </div>
+
+                <Modal
+                    className="modal-container"
+                    isOpen={modalIsOpen}
+                    onRequestClose={() => setModalIsOpen(false)}
+                    contentLabel="Delete Account Confirmation"
+                >
+                    <div className="modal">
+                        <h2>Are you sure you want to delete "{currentCartId}" cart?</h2>
+                        <div className="modal-buttons">
+                            <button className='yes-button' onClick={async () => {
+                                await handleAdminDeleteCart(currentCartId);
+                                setModalIsOpen(false);
+                            }}>Yes</button>
+                            <button className='no-button' onClick={() => setModalIsOpen(false)}>No</button>
+                        </div>
+                    </div>
+                </Modal>
+
             </div >
             <Footer />
         </>

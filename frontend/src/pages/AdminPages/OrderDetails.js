@@ -44,8 +44,8 @@ export default function OrderDetails() {
                     <div className="orderDetails-products">
                         <h3>Products</h3>
                         <div className="orderDetails-products-wrapper">
-                            {order.products.map(product => (
-                                <div className="orderDetails-product" key={product._id}>
+                            {order.products.map((product, index) => (
+                                <div className="orderDetails-product" key={index}>
                                     <img src={product.thumbnail} />
                                     <div>
                                         <p><strong>Title:</strong> {product.title}</p>

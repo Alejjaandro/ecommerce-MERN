@@ -9,13 +9,12 @@
     align-items: center;
     justify-content: center;
 
-    background-color: lightgray;
     position: relative;
 }
 
 .prod-image {
-    width: 98%;
-    height: 98%;
+    width: 100%;
+    height: auto;
     border-radius: 0.5rem;
 }
 

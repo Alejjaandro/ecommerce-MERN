@@ -90,7 +90,7 @@ export const AdminProvider = ({ children }) => {
         }
     }
 
-    // ========== FUNCTION TO CREATE A PRODUCT ========== //
+    // ========== CREATE A PRODUCT ========== //
     const createProduct = async (data) => {
         try {
             // We filter the data so we only send the keys that we want to update.
@@ -111,7 +111,7 @@ export const AdminProvider = ({ children }) => {
         }
     }
 
-    // ========== FUNCTION TO MODIIFY A PRODUCT ========== //
+    // ========== MODIIFY A PRODUCT ========== //
     const updateProduct = async (productId, data) => {
         try {
             const validKeys = ['thumbnail', 'title', 'price', 'discountPercentage', 'category', 'brand', 'stock', 'description'];
@@ -131,7 +131,7 @@ export const AdminProvider = ({ children }) => {
         }
     }
 
-    // ========== FUNCTION TO DELETE A PRODUCT ========== //
+    // ========== DELETE A PRODUCT ========== //
     const deleteProduct = async (productId) => {
         try {
             const response = await axios.delete(`/products/${productId}`);
