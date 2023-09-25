@@ -51,11 +51,11 @@ export default function Login() {
 
                     <form className='login-form'>
 
-                        <input className='login-input' placeholder="Email" type='email'
+                        <input className='login-input' placeholder="Email" type='email' required
                             onChange={(e) => { setEmail(e.target.value) }}
                         />
 
-                        <input className='login-input' placeholder="Password" type='password'
+                        <input className='login-input' placeholder="Password" type='password' required
                             onChange={(e) => { setPassword(e.target.value) }}
                         />
 

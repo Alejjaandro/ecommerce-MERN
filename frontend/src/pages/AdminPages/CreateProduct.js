@@ -69,11 +69,11 @@ export default function CreateProduct() {
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Title: </label>
-                            <input type="text" className="newProduct-form-input" name='title' />
+                            <input type="text" className="newProduct-form-input" name='title' required/>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Price: </label>
-                            <input type="number" step="any" className="newProduct-form-input" name='price' />
+                            <input type="number" step="any" className="newProduct-form-input" name='price' required/>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Discount %: </label>
@@ -81,15 +81,15 @@ export default function CreateProduct() {
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Category: </label>
-                            <input type="text" className="newProduct-form-input" name='category' />
+                            <input type="text" className="newProduct-form-input" name='category' required/>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Brand: </label>
-                            <input type="text" className="newProduct-form-input" name='brand' />
+                            <input type="text" className="newProduct-form-input" name='brand' required/>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Stock: </label>
-                            <input type="number" className="newProduct-form-input" name='stock' />
+                            <input type="number" className="newProduct-form-input" name='stock' required/>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Description: </label>

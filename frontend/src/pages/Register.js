@@ -61,12 +61,12 @@ export default function Register() {
 
                     <form className='register-form' onSubmit={handleRegister}>
 
-                        <input className='register-input' name='name' placeholder="Name" type='text' />
-                        <input className='register-input' name='lastname' placeholder="Last name" type='text' />
-                        <input className='register-input' name='email' placeholder="Email" type='email' />
-                        <input className='register-input' name='username' placeholder="Username" type='text' />
-                        <input className='register-input' name='password' placeholder="Password" type='password' />
-                        <input className='register-input' name='confirmPassword' placeholder="Confirm Password" type='password' />
+                        <input className='register-input' name='name' placeholder="Name" type='text' required/>
+                        <input className='register-input' name='lastname' placeholder="Last name" type='text' required/>
+                        <input className='register-input' name='email' placeholder="Email" type='email' required/>
+                        <input className='register-input' name='username' placeholder="Username" type='text' required/>
+                        <input className='register-input' name='password' placeholder="Password" type='password' required/>
+                        <input className='register-input' name='confirmPassword' placeholder="Confirm Password" type='password' required/>
 
                         <span className="register-agreement">
                             By creating an account,

@@ -17,8 +17,7 @@ export const UserProvider = ({ children }) => {
 
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState([]);
-
-    const {setUser, setIsAuthenticated} = useAuth();
+    const {setUser} = useAuth();
 
     // ===== GET user ===== //
     const getUser = async (userId) => {
@@ -53,8 +52,7 @@ export const UserProvider = ({ children }) => {
             }
     
         } catch (error) {
-            console.log(error);
-            // setErrors(error.response.data.message);
+            setErrors(error.response.data.message);
         }
     }
 
@@ -70,7 +68,7 @@ export const UserProvider = ({ children }) => {
     }
 
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
-    useEffect(() => {
+    useEffect(() => {        
         if (errors.length > 0 || success) {
             const timer = setTimeout(() => {
                 setErrors([]);
@@ -78,6 +76,7 @@ export const UserProvider = ({ children }) => {
             }, 5000)
             return () => clearTimeout(timer);
         }
+
     }, [errors, success])
 
     return (

@@ -23,8 +23,8 @@ export const getUser = async (req, res) => {
 // ===== PUT to updated user data ===== //
 export const updateUser = async (req, res) => {
 
-    const user = await User.findById(req.params.id);
     // We check if the body info it's the same that the one in the DB.
+    const user = await User.findById(req.params.id);
     if (req.body.email === user.email) {
         return res.status(400).json({ message: ['New Email cannot be the same as the old Email.'] });
     }
@@ -33,7 +33,6 @@ export const updateUser = async (req, res) => {
     }
     if (req.body.password) {
         const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-
         if (passwordMatch) {
             return res.status(400).json({ message: ['New Password cannot be the same as the old Password.'] });
         } else {
@@ -47,7 +46,6 @@ export const updateUser = async (req, res) => {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, { new: true })
-        console.log(updatedUser);
 
         // Generate a new token with the updated user information.
         const newToken = jwt.sign(

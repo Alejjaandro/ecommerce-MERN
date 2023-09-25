@@ -48,6 +48,7 @@ export default function EditUser() {
             
         } else {
             await adminUpdateUser(userId, data);
+            adminGetUser(userId);
         }
     };
 
@@ -89,19 +90,19 @@ export default function EditUser() {
                     <form onSubmit={handleSubmit} className="editUser-form">
                         <div className="editUser-form-group">
                             <label className="editUser-form-label">Name: </label>
-                            <input type="text" defaultValue={user.name} className="editUser-form-input" name='name' />
+                            <input type="text" placeholder={user.name} className="editUser-form-input" name='name' />
                         </div>
                         <div className="editUser-form-group">
                             <label className="editUser-form-label">Lastname: </label>
-                            <input type="text" defaultValue={user.lastname} className="editUser-form-input" name='lastname' />
+                            <input type="text" placeholder={user.lastname} className="editUser-form-input" name='lastname' />
                         </div>
                         <div className="editUser-form-group">
                             <label className="editUser-form-label">Email: </label>
-                            <input type="text" defaultValue={user.email} className="editUser-form-input" name='email' />
+                            <input type="text" placeholder={user.email} className="editUser-form-input" name='email' />
                         </div>
                         <div className="editUser-form-group">
                             <label className="editUser-form-label">Username: </label>
-                            <input type="text" defaultValue={user.username} className="editUser-form-input" name='username' />
+                            <input type="text" placeholder={user.username} className="editUser-form-input" name='username' />
                         </div>
                         <div className="editUser-form-group">
                             <label className="editUser-form-label">Password: </label>
