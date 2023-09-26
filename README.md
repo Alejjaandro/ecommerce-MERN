@@ -38,7 +38,7 @@ You will need [MongoDB Database Tools](https://www.mongodb.com/docs/database-too
 - [Jsonwebtoken:](https://github.com/auth0/node-jsonwebtoken#readme) An implementation of JSON Web Tokens.
 - [zod:](https://zod.dev/) A TypeScript-first schema declaration and validation library.
 - [nodemon:](https://nodemon.io/) Simple monitor script for use during development of a Node.js app.
-- [multer:](https://github.com/expressjs/multer#readme) S node.js middleware primarily used for uploading files.
+- [multer:](https://github.com/expressjs/multer#readme) A node.js middleware primarily used for uploading files.
 
 ### Backend Structure
 - Models: Define the structure of the data for a certain object (like users, products, etc.) and interact with the database.
