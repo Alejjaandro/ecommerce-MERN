@@ -38,6 +38,7 @@ You will need [MongoDB Database Tools](https://www.mongodb.com/docs/database-too
 - [Jsonwebtoken:](https://github.com/auth0/node-jsonwebtoken#readme) An implementation of JSON Web Tokens.
 - [zod:](https://zod.dev/) A TypeScript-first schema declaration and validation library.
 - [nodemon:](https://nodemon.io/) Simple monitor script for use during development of a Node.js app.
+- [multer:](https://github.com/expressjs/multer#readme) A node.js middleware primarily used for uploading files.
 
 ### Backend Structure
 - Models: Define the structure of the data for a certain object (like users, products, etc.) and interact with the database.
@@ -301,6 +302,9 @@ This will start the server at <http://localhost:8000/api>.
 - [JWT Decode:](https://github.com/auth0/jwt-decode#readme) Allows you to decode, verify and generate JWT.
 - [JS Cookie:](https://github.com/auth0/jwt-decode#readme) A simple, lightweight JavaScript API for handling browser cookies.
 - [Date-fns:](https://github.com/date-fns/date-fns#readme) Modern JavaScript date utility library.
+- [react-country-region-selector:](https://github.com/country-regions/react-country-region-selector#readme) React components to display connected country and region dropdowns.
+- [react-datepicker:](https://github.com/Hacker0x01/react-datepicker) Datepicker component for React.
+- [react-modal:](https://github.com/reactjs/react-modal) Library to create simple modals for React.
 - [@mui/material and @mui/icons-material:](https://mui.com/material-ui/material-icons/) React components for faster and easier web development, with Google's Material Design.
 
 ## Project Structure
