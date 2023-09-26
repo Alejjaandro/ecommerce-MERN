@@ -9,7 +9,7 @@ import { useCart } from '../context/CartContext';
 
 import React from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Cart() {
 
@@ -17,6 +17,7 @@ export default function Cart() {
 
     // We extract what we need from the context.
     const { getCart, cart, productsNumber, deleteProduct, deleteCart, addToCart } = useCart();
+    const navigate = useNavigate();
 
     useEffect(() => { getCart(userId) }, []);
 
@@ -84,13 +85,13 @@ export default function Cart() {
 
                                         <div className='cart-product-details'>
 
-                                            <img className='cart-info-img' src={`${product.thumbnail}`} alt="" />
+                                            <img className='cart-info-img' src={`${product.thumbnail}`} alt="" onClick={() => navigate(`/product/${product._id}`)}/>
 
                                             <div className='cart-details'>
-                                                <span className='id'>
+                                                {/* <span className='id'>
                                                     <b>ID:</b>
                                                     <Link to={`/product/${product._id}`}>{product._id}</Link>
-                                                </span>
+                                                </span> */}
                                                 <span className='name'><b>Product:</b> {product.title}</span>
                                                 <span className='ram'><b>RAM: </b>{product.ram}</span>
                                                 <span className='color'><b>Color: </b>{product.color}</span>

@@ -126,7 +126,7 @@ export const AdminProvider = ({ children }) => {
             const response = await axios.put(`/products/${productId}`, data);
             setSuccess(response.data.message);
         } catch (error) {
-            console.log(error.response.data.message);
+            console.log(error.response);
             setErrors(error.response.data.message);
         }
     }

@@ -4,6 +4,9 @@ import Product from '../models/Product.js';
 
 // ===== CREATE Product ===== //
 export const createProduct = async (req, res) => {
+    const productExists = await Product.findOne({ title: req.body.title });
+    if (productExists) { return res.status(400).json({ message: ['There is already a product with this name.'] }) }
+
     const newProduct = new Product(req.body);
     try {
         const savedProduct = await newProduct.save();

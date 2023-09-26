@@ -28,9 +28,18 @@ export const updateUser = async (req, res) => {
     if (req.body.email === user.email) {
         return res.status(400).json({ message: ['New Email cannot be the same as the old Email.'] });
     }
+    // Check if the new email already exists in the database
+    const emailExists = await User.findOne({ email: req.body.email });
+    if (emailExists) { return res.status(400).json({ message: ['This email is not avaiable.'] }) }
+
     if (req.body.username === user.username) {
         return res.status(400).json({ message: ['New Username cannot be the same as the old Username.'] });
     }
+
+    // Check if the new username already exists in the database
+    const usernameExists = await User.findOne({ username: req.body.username });
+    if (usernameExists) { return res.status(400).json({ message: ['This Username is not avaiable.'] }) }
+
     if (req.body.password) {
         const passwordMatch = await bcrypt.compare(req.body.password, user.password);
         if (passwordMatch) {
@@ -101,6 +110,15 @@ export const adminUpdateUser = async (req, res) => {
 
     try {
         const user = await User.findById(req.params.userId);
+
+        // Check if the new email already exists in the database
+        const emailExists = await User.findOne({ email: req.body.email });
+        if (emailExists) { return res.status(400).json({ message: ['This email is not avaiable.'] }) }
+
+        // Check if the new username already exists in the database
+        const usernameExists = await User.findOne({ username: req.body.username });
+        if (usernameExists) { return res.status(400).json({ message: ['This Username is not avaiable.'] }) }
+
         if (req.body.password) {
             const passwordMatch = await bcrypt.compare(req.body.password, user.password);
 

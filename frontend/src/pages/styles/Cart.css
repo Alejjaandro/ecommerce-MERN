@@ -81,11 +81,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
 }
 
 /* img */
 .cart-info-img {
     width: 10rem;
+    cursor: pointer;
 }
 
 /* details */
@@ -240,6 +242,7 @@
 
     .cart-product {
         flex-direction: row;
+        justify-content: space-between;
         gap: 1rem;
     }
 
@@ -308,7 +311,6 @@
     }
 
     .cart-product {
-        justify-content: space-between;
         padding: 0.5rem;
     }
     .cart-details {

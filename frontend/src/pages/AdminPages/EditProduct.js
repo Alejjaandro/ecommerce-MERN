@@ -1,10 +1,11 @@
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../context/ProductsContext';
 import { useAdmin } from '../../context/AdminContext';
+import axios from '../../api/axios.js';
 
 import './styles/EditProduct.css';
 
@@ -12,15 +13,45 @@ export default function EditProduct() {
 
     const { getProduct, product } = useProducts();
     const { updateProduct, success, errors } = useAdmin();
+    const [loading, setLoading] = useState(true);
 
     const productId = window.location.pathname.split("/")[2];
-    useEffect(() => { getProduct(productId) }, []);
+    /*
+    When we edit a product and change to another, it still has
+    the info of the prev. product when it first renders.
+    This way we make sure that it wait until it has the current prod info.
+    */
+    useEffect(() => {
+        const fetchProduct = async () => {
+            await getProduct(productId);
+            setLoading(false);
+        };
+        fetchProduct();
+    }, [productId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
+
+        // Check if there is a file
+        if (e.target.elements.thumbnail.files && e.target.elements.thumbnail.files.length > 0) {
+
+            // Create a new FormData object for the image
+            const imageFormData = new FormData();
+            imageFormData.append('thumbnail', e.target.elements.thumbnail.files[0]);
+
+            // Send the image to the server
+            const response = await axios.post('/products/saveProdImage', imageFormData);
+            const fileName = response.data.fileName;
+
+            // Add the image URL to the form data
+            data.thumbnail = `http://localhost:8000/productImages/${fileName}`;
+        } else {
+            // If no file, use the previous URL.
+            data.thumbnail = product.thumbnail;
+        }
 
         // Removing empty fields and converting fields to numbers.
         for (let key in data) {
@@ -31,11 +62,12 @@ export default function EditProduct() {
             }
         }
 
-        console.log(data);
         // Petition to modify product data.
         await updateProduct(productId, data);
         getProduct(productId);
     };
+
+    if (loading) return <div>Loading...</div>
 
     return (
         <>
@@ -55,14 +87,10 @@ export default function EditProduct() {
                         ))}
                     </div>
 
-                    <form onSubmit={handleSubmit} className="editProduct-form">
+                    <form onSubmit={handleSubmit} className="editProduct-form" encType="multipart/form-data">
                         <div className="editProduct-form-group">
                             <label className="editProduct-form-label">Thumbnail Image: </label>
-                            <input type="text" className="editProduct-form-input" name='thumbnail' />
-                            <span>
-                                First you nedd to upload your picture to "backend/assets/productImages/",
-                                then use "http://localhost:8000/productImages/yourImageName.jpg" as the URL.
-                            </span>
+                            <input type="file" className="editProduct-form-input" name='thumbnail' />
                         </div>
 
                         <div className="editProduct-form-group">
@@ -110,7 +138,6 @@ export default function EditProduct() {
                     </form>
                 </div>
             </div>
-
             <Footer />
         </>
     );
