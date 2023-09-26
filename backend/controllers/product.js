@@ -1,4 +1,6 @@
 import Product from '../models/Product.js';
+import fs from 'fs';
+import path from 'path';
 
 // MORE EXPLANATIONS ON "/auth.js" & "/user.js" //
 
@@ -32,14 +34,28 @@ export const updateProduct = async (req, res) => {
 
 // ===== DELETE Product ===== //
 export const deleteProduct = async (req, res) => {
-
     try {
-        await Product.findByIdAndDelete(req.params.id);
-        res.status(200).json({message: 'Product Deleted'});
+        const product = await Product.findById(req.params.id);
+        if (product) {
+            const productImageName = product.thumbnail.split("/")[4];
+
+            const imagePath = path.join('assets', 'productImages', productImageName);
+            
+            fs.unlink(imagePath, async (error) => {
+                if (error) {
+                    console.error(error);
+                    return res.status(500).json({ message: 'Failed to delete image file.' });
+                }
+
+                await Product.findByIdAndDelete(req.params.id);
+                res.status(200).json({message: 'Product and its image deleted'});
+            });
+        } else {
+            res.status(404).json({message: 'Product not found'});
+        }
     } catch (error) {
         res.status(500).json(error);
-    }
-};
+    }};
 
 // ===== GET Product ===== //
 export const getProduct = async (req, res) => {
