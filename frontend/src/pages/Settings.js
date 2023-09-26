@@ -18,12 +18,6 @@ export default function Settings() {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        // Remove any fields that have an empty string value or an empty object.
-        /* 
-        (typeof req.body[field] === 'object') && (Object.keys(req.body[field]).length === 0)
-        verifies if the value of the field is an object and if that object has no properties.
-        If both conditions are true, the field is deleted from req.body.
-        */
         for (let field in data) {
             if (data[field] === "") {
                 delete data[field];

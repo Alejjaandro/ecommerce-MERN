@@ -225,6 +225,7 @@ export const AdminProvider = ({ children }) => {
             allOrders,
 
             errors,
+            setErrors,
             success
         }}>
             {children}

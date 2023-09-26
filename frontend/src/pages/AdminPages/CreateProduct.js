@@ -3,19 +3,38 @@ import Navbar from '../../components/Navbar';
 import { useAdmin } from '../../context/AdminContext';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import axios from '../../api/axios.js';
 
 import './styles/CreateProduct.css';
 
 export default function CreateProduct() {
 
-    const { createProduct, success, errors } = useAdmin();
+    const { createProduct, success, errors, setErrors } = useAdmin();
     const [formElement, setFormElement] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Create a new FormData object for the image
+        const imageFormData = new FormData();
+        // Check if there is a file
+        if (!e.target.elements.thumbnail.files || e.target.elements.thumbnail.files.length === 0) {
+            console.log('No file detected');
+            return setErrors(['No file detected']);
+        } else {
+            imageFormData.append('thumbnail', e.target.elements.thumbnail.files[0]);
+        }
+
+        // Send the image to the server
+        const response = await axios.post('/products/saveProdImage', imageFormData);
+        const fileName = response.data.fileName;
+
+        // Create a new FormData object for the rest of the form data
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
+
+        // Add the image URL to the form data
+        data.thumbnail = `http://localhost:8000/productImages/${fileName}`;
 
         // Removing empty fields and converting fields to numbers.
         for (let key in data) {
@@ -58,22 +77,22 @@ export default function CreateProduct() {
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="newProduct-form">
+                    <form onSubmit={handleSubmit} className="newProduct-form" encType="multipart/form-data">
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Thumbnail Image: </label>
-                            <input type="text" className="newProduct-form-input" name='thumbnail' />
+                            <input type="file" className="newProduct-form-input" name='thumbnail' />
                             <span>
-                                First you nedd to upload your picture to "backend/assets/productImages/", 
+                                First you nedd to upload your picture to "backend/assets/productImages/",
                                 then use "http://localhost:8000/productImages/yourImageName.jpg" as the URL.
                             </span>
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Title: </label>
-                            <input type="text" className="newProduct-form-input" name='title' required/>
+                            <input type="text" className="newProduct-form-input" name='title' required />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Price: </label>
-                            <input type="number" step="any" className="newProduct-form-input" name='price' required/>
+                            <input type="number" step="any" className="newProduct-form-input" name='price' required />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Discount %: </label>
@@ -81,15 +100,15 @@ export default function CreateProduct() {
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Category: </label>
-                            <input type="text" className="newProduct-form-input" name='category' required/>
+                            <input type="text" className="newProduct-form-input" name='category' required />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Brand: </label>
-                            <input type="text" className="newProduct-form-input" name='brand' required/>
+                            <input type="text" className="newProduct-form-input" name='brand' required />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Stock: </label>
-                            <input type="number" className="newProduct-form-input" name='stock' required/>
+                            <input type="number" className="newProduct-form-input" name='stock' required />
                         </div>
                         <div className="newProduct-form-group">
                             <label className="newProduct-form-label">Description: </label>
