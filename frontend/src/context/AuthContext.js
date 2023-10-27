@@ -80,58 +80,59 @@ export const AuthProvider = ({ children }) => {
     }, [loginErrors, registerErrors]);
 
     // Function to verify the token with the backend.
-    async function verifyToken(token) {
-        try {
-            if (token) {
-                const response = await axios.get('/auth/verifyToken', {
-                    headers: { 'token': token }
-                });
+    // async function verifyToken(token) {
+    //     try {
+    //         if (token) {
+    //             const response = await axios.get('/auth/verifyToken', {
+    //                 headers: { 'token': token }
+    //             });
 
-                if (response.status === 200) {
-                    // Token is valid and has not expired.
-                    setIsAuthenticated(true);
-                    setUser(response.data);
-                } else {
-                    // Token is invalid.
-                    logout();
-                }
-            } else {
-                // Token doesn't exist.
-                logout();
-            }
-        } catch (error) {
-            if (error) {
-                // Token isn't valid or has expired.
-                alert("Session Expired");
-                logout();
-            }
-        }
-    }
+    //             if (response.status === 200) {
+    //                 // Token is valid and has not expired.
+    //                 setIsAuthenticated(true);
+    //                 setUser(response.data);
+    //             } else {
+    //                 // Token is invalid.
+    //                 logout();
+    //             }
+    //         } else {
+    //             // Token doesn't exist.
+    //             logout();
+    //         }
+    //     } catch (error) {
+    //         if (error) {
+    //             // Token isn't valid or has expired.
+    //             alert("Session Expired");
+    //             logout();
+    //         }
+    //     }
+    // }
 
     // Verify the token when the page loads.
-    useEffect(() => {
-        const token = Cookies.get('token');
-        if (token) {
-            verifyToken(token);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const token = Cookies.get('token');
+    //     console.log(token);
+    //     if (token) {
+    //         verifyToken(token);
+    //     }
+    // }, []);
 
     // If the user is logged in, verify the token every second.
-    useEffect(() => {
-        if (user) {
-            const intervalId = setInterval(() => {
-                const token = Cookies.get('token');
+    // useEffect(() => {
+    //     if (user) {
+    //         const intervalId = setInterval(() => {
+    //             const token = Cookies.get('token');
 
-                verifyToken(token);
+    //             verifyToken(token);
 
-                if (!token) {
-                    logout();
-                }
-            }, 1000);
-            // Clear the interval when the component unmounts.
-            return () => clearInterval(intervalId);
-        }
-    }, [user]);
+    //             if (!token) {
+    //                 logout();
+    //             }
+    //         }, 1000);
+    //         // Clear the interval when the component unmounts.
+    //         return () => clearInterval(intervalId);
+    //     }
+    // }, [user]);
 
     // All the components inside AuthContext will be able to access it values.
     return (
@@ -139,7 +140,7 @@ export const AuthProvider = ({ children }) => {
             register,
             login,
             logout,
-            verifyToken,
+            // verifyToken,
 
             isAuthenticated,
             user,
