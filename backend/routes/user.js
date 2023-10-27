@@ -11,9 +11,9 @@ import { updateUserValidator } from "../validators/user.validator.js";
 import { adminUpdateUserValidator } from "../validators/adminUpdateUser.validator.js";
 
 // We create the endpoints. 
-router.get("/find/:id", verifyUser, getUser);
-router.put("/:id",verifyUser, validator(updateUserValidator), updateUser);
-router.delete("/:id", verifyUser, deleteUser);
+router.get("/find/:userId", verifyUser, getUser);
+router.put("/:userId",verifyUser, validator(updateUserValidator), updateUser);
+router.delete("/:userId", verifyUser, deleteUser);
 
 router.get("/", verifyAdmin, getAllUsers);
 router.put("/adminUpdate/:userId", verifyAdmin, validator(adminUpdateUserValidator), adminUpdateUser);
