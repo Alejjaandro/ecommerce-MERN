@@ -49,6 +49,10 @@ import orderRoutes from './routes/order.js';
 
 
 // Using the endpoints. We stablish some prefix for organization.
+app.get("/api", (req, res) => {
+    res.send({ message: "Successfully connected!" });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
