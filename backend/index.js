@@ -45,15 +45,15 @@ import cartRoutes from './routes/cart.js';
 import orderRoutes from './routes/order.js';
 
 // Using the endpoints. We stablish some prefix for organization.
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
     res.send({ message: "Successfully connected!" });
 });
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/carts', cartRoutes);
-app.use('/api/orders', orderRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/products', productRoutes);
+app.use('/carts', cartRoutes);
+app.use('/orders', orderRoutes);
 
 // Serve static files from the "images" directory
 app.use('/productImages', express.static('assets/productImages'));
@@ -61,5 +61,5 @@ app.use('/productImages', express.static('assets/productImages'));
 // Stablish what port should the app listen to and a message to show it works.
 const PORT = process.env.PORT;
 app.listen(PORT || 8000, () => {
-    console.log(`Backend running at http://localhost:${PORT}/api`);
+    console.log(`Backend running at http://localhost:${PORT}`);
 });
