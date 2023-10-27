@@ -9,7 +9,7 @@ export const getUser = async (req, res) => {
 
     try {
         // We find the user by its id.
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.params.id);
 
         // In this case we don't want to show the password.
         const { password, ...noPassword } = user._doc;
