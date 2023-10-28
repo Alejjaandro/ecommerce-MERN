@@ -27,7 +27,8 @@ mongoose.connect(process.env.MONGO_URL)
 
 app.use(cors({ 
     origin: ['http://localhost:3000', 'https://classy-bunny-6c9b1e.netlify.app', 'https://sprightly-monstera-dc2542.netlify.app'],
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 app.use(cookieParser());

@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 
 export default function ProtectedRoutes() {
     const { token } = useAuth();
-    console.log(token);
     
     if (!token) {
         console.log("No token");
