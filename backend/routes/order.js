@@ -12,7 +12,7 @@ import { userOrderValidator } from '../validators/order.validator.js';
 router.get("/findOrder/:orderId", verifyUser, getOrder);
 router.get("/find/:userId", verifyUser, getUserOrder);
 
-router.post("/", verifyUser, validator(userOrderValidator), createOrder);
+router.post("/:userId", verifyUser, validator(userOrderValidator), createOrder);
 router.put("/:orderId", verifyUser, updateOrder);
 router.delete("/:orderId", verifyUser, deleteOrder);
 

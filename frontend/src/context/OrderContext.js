@@ -33,7 +33,7 @@ export const OrderProvider = ({ children }) => {
         }
 
         try {
-            const response = await axios.post("/orders/", { userId, order, cart });
+            const response = await axios.post(`/orders/${userId}`, { userId, order, cart });
             setSuccess([response.data.message]);
         } catch (error) {
             setErrors(error.response.data.message);

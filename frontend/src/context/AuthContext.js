@@ -23,6 +23,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // Use the info sent by the form in "/pages/Register.js" to make the post request.
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
             const response = await axios.post("/auth/register", user);
 
             setUser(response.data.user);
+            setToken(response.data.token);
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
@@ -49,8 +51,8 @@ export const AuthProvider = ({ children }) => {
     const login = async (user) => {
         try {
             const response = await axios.post("/auth/login", user);
-
             setUser(response.data.user);
+            setToken(response.data.token);
             setIsAuthenticated(true);
 
         } catch (error) {
@@ -64,6 +66,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove("token");
         setIsAuthenticated(false);
         setUser(null);
+        setToken(null);
         alert("You have been logged out");
         navigate('/');
     }
@@ -80,38 +83,37 @@ export const AuthProvider = ({ children }) => {
     }, [loginErrors, registerErrors]);
 
     // Function to verify the token with the backend.
-    // async function verifyToken(token) {
-    //     try {
-    //         if (token) {
-    //             const response = await axios.get('/auth/verifyToken', {
-    //                 headers: { 'token': token }
-    //             });
+    // console.log(token);
+    async function verifyToken(token) {
+        try {
+            if (token) {
+                const response = await axios.get('/auth/verifyToken', {
+                    headers: { 'token': token }
+                });
 
-    //             if (response.status === 200) {
-    //                 // Token is valid and has not expired.
-    //                 setIsAuthenticated(true);
-    //                 setUser(response.data);
-    //             } else {
-    //                 // Token is invalid.
-    //                 logout();
-    //             }
-    //         } else {
-    //             // Token doesn't exist.
-    //             logout();
-    //         }
-    //     } catch (error) {
-    //         if (error) {
-    //             // Token isn't valid or has expired.
-    //             alert("Session Expired");
-    //             logout();
-    //         }
-    //     }
-    // }
+                if (response.status === 200) {
+                    // Token is valid and has not expired.
+                    setIsAuthenticated(true);
+                    setUser(response.data);
+                } else {
+                    // Token is invalid.
+                    logout();
+                }
+            } else {
+                // Token doesn't exist.
+                logout();
+            }
+        } catch (error) {
+            if (error) {
+                // Token isn't valid or has expired.
+                alert("Session Expired");
+                logout();
+            }
+        }
+    }
 
     // Verify the token when the page loads.
     // useEffect(() => {
-    //     const token = Cookies.get('token');
-    //     console.log(token);
     //     if (token) {
     //         verifyToken(token);
     //     }
@@ -140,10 +142,11 @@ export const AuthProvider = ({ children }) => {
             register,
             login,
             logout,
-            // verifyToken,
+            verifyToken,
 
             isAuthenticated,
             user,
+            token,
             setUser,
             setIsAuthenticated,
 

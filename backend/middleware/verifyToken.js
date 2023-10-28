@@ -12,7 +12,6 @@ export const verifyToken = (req, res, next, callback) => {
             if (error) { return res.status(403).json({ message: "Token is not valid!" }) };
             
             req.user = user;
-            console.log(req.user);
             // next();
             if (callback) callback();
         });
@@ -28,8 +27,8 @@ export const verifyUser = (req, res, next) => {
     // This verifies the token & checks if the user id of the DB and the one send by URL params match.
     // If they don't match sends an error.
     verifyToken(req, res, next, () => {
-        // console.log(req.user._id, req.params.userId);
-        // console.log(req.user._id === req.params.id);
+        console.log(req.user._id, req.params.userId);
+        console.log(req.user._id === req.params.id);
 
         if (req.user._id === req.params.userId || req.user.isAdmin) {
             console.log("Authorized");
