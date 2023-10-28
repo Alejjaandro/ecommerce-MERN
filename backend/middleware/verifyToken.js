@@ -3,14 +3,15 @@ import jwt from 'jsonwebtoken';
 // Function to validate Token.
 export const verifyToken = (req, res, next, callback) => {
     try {
-        // Extract the cookie "token".
-        const token = req.cookies.token;
-
+        // Extract the Bearer token from the Authorization header.
+        const authHeader = req.headers.authorization;
+        const token = authHeader && authHeader.split(' ')[1];
+        
         if (!token) { return res.status(401).json({ message: "Unauthorized" }) }
         // Verify cookie token.
         jwt.verify(token, process.env.JWT_KEY, (error, user) => {
             if (error) { return res.status(403).json({ message: "Token is not valid!" }) };
-            
+
             req.user = user;
             // next();
             if (callback) callback();
@@ -27,9 +28,6 @@ export const verifyUser = (req, res, next) => {
     // This verifies the token & checks if the user id of the DB and the one send by URL params match.
     // If they don't match sends an error.
     verifyToken(req, res, next, () => {
-        console.log(req.user._id, req.params.userId);
-        console.log(req.user._id === req.params.id);
-
         if (req.user._id === req.params.userId || req.user.isAdmin) {
             console.log("Authorized");
             next();

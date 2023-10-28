@@ -43,9 +43,11 @@ export const register = async (req, res, next) => {
             { expiresIn: '1h' }
         );
         
-        return res.cookie('token', accessToken, { httpOnly: false })
-        .status(200)
-        .json({ message: ['Login successfull'], user: userWithoutPassword, token: accessToken });
+        return res.status(200).json({ 
+            message: ['Login successfull'], 
+            user: userWithoutPassword, 
+            token: accessToken 
+        });
 
     } catch (error) {
         return res.status(500).json(error.message);
@@ -88,15 +90,6 @@ export const login = async (req, res) => {
     } catch (error) {
         return res.status(500).json(error);
     }
-};
-
-// ----- LOGOUT ----- //
-export const logout = async (req, res) => {
-
-    // We clear the token to logout
-    return res.clearCookie('token')
-        .status(200)
-        .json({ message: ["Successfully Logout"] });
 };
 
 // ----- VERIFY TOKEN ----- //
