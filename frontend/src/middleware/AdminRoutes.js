@@ -1,12 +1,9 @@
 import Cookies from "js-cookie";
 import jwt_decode from 'jwt-decode';
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 
 export default function AdminRoutes() {
-
-    const { token } = useAuth();
-    console.log(token);
+    const token = localStorage.getItem('token');
 
     if (!token) {
         return <Navigate to="/" replace />

@@ -79,15 +79,11 @@ export const login = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        console.log(accessToken);
-
-        return res.cookie('token', accessToken, { 
-            httpOnly: false,
-            sameSite: 'none',
-            secure: true
-        })
-            .status(200)
-            .json({ message: ['Login successfull'], user: userWithoutPassword, token: accessToken });
+        return res.status(200).json({ 
+            message: ['Login successfull'], 
+            user: userWithoutPassword, 
+            token: accessToken 
+        });
 
     } catch (error) {
         return res.status(500).json(error);

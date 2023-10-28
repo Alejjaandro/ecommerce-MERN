@@ -48,10 +48,12 @@ export const UserProvider = ({ children }) => {
             } else {
                 const response = await axios.put(`/users/${userId}`, data);
                 setSuccess([response.data.message]);
+                localStorage.setItem('token', response.data.newToken);
                 getUser(userId);
             }
     
         } catch (error) {
+            console.log(error);
             setErrors(error.response.data.message);
         }
     }
@@ -62,7 +64,6 @@ export const UserProvider = ({ children }) => {
             const response = await axios.delete(`/users/${userId}`);
 
         } catch (error) {
-            console.log(error);
             setErrors(error.response);
         }
     }

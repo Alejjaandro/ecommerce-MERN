@@ -23,7 +23,6 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // Use the info sent by the form in "/pages/Register.js" to make the post request.
@@ -39,7 +38,7 @@ export const AuthProvider = ({ children }) => {
             const response = await axios.post("/auth/register", user);
 
             setUser(response.data.user);
-            setToken(response.data.token);
+            localStorage.setItem('token', response.data.token);
             setIsAuthenticated(true);
         } catch (error) {
             // Save the error response send by backend in "/Back-End/middlewares/validator.js".
@@ -52,7 +51,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await axios.post("/auth/login", user);
             setUser(response.data.user);
-            setToken(response.data.token);
+            localStorage.setItem('token', response.data.token);
             setIsAuthenticated(true);
 
         } catch (error) {
@@ -66,7 +65,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove("token");
         setIsAuthenticated(false);
         setUser(null);
-        setToken(null);
+        localStorage.clear();
         alert("You have been logged out");
         navigate('/');
     }
@@ -83,7 +82,6 @@ export const AuthProvider = ({ children }) => {
     }, [loginErrors, registerErrors]);
 
     // Function to verify the token with the backend.
-    // console.log(token);
     async function verifyToken(token) {
         try {
             if (token) {
@@ -113,11 +111,12 @@ export const AuthProvider = ({ children }) => {
     }
 
     // Verify the token when the page loads.
-    // useEffect(() => {
-    //     if (token) {
-    //         verifyToken(token);
-    //     }
-    // }, []);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            verifyToken(token);
+        }
+    }, []);
 
     // If the user is logged in, verify the token every second.
     // useEffect(() => {
@@ -146,7 +145,6 @@ export const AuthProvider = ({ children }) => {
 
             isAuthenticated,
             user,
-            token,
             setUser,
             setIsAuthenticated,
 

@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { useAuth } from "../context/AuthContext";
 
 export default function ProtectedRoutes() {
-    const { token } = useAuth();
+    const token = localStorage.getItem('token');
     
     if (!token) {
         console.log("No token");
