@@ -52,7 +52,7 @@ export default function Navbar() {
       <div className='admin-right-container'>
         <span>ADMIN {user.username}</span>
         <button className='admin-userIcon' onClick={toggleMenu}>
-          {user.image ? <img src={user.image}></img> : <AccountBoxIcon />}
+          {user.image ? <img src={user.image} alt=''></img> : <AccountBoxIcon />}
         </button>
       </div>
 
