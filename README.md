@@ -268,8 +268,7 @@ Example of a Order document:
 ### Environment Variables
 
 The backend uses the following environment variables:
-- MONGO_URL: The connection string for the MongoDB database.
-  
+
 ***On windows there is an error when trying to connect to the database using "mongodb://localhost:27017", so I used "mongodb://127.0.0.1:27017" instead.***
 - MONGO_URL= URL of your MongoDB database.
 - PORT: Port in wich the backend will run.
@@ -280,7 +279,6 @@ These should be defined in a .env file in the root directory of the backend, lik
 MONGO_URL='mongodb://127.0.0.1:27017/final_project'
 JWT_KEY=secretKey
 PORT=8000
-ADMIN_KEY=adminKey
 ```
 
 ### Running the Backend
@@ -310,7 +308,10 @@ This will start the server at <http://localhost:8000/api>.
 ## Project Structure
 - Components: Reusable parts of the user interface.
 - Pages: Different sections of the website, each corresponding to a route.
-- API: Functions for making requests to the backend.
+- API: Axios configuration file.
+- Context: Files that provide a way to pass data through the component tree without having to pass props down manually at every level.
+- Middlewares: Files used to protect routes before entering them.
+- Assets: Images used for backgrounds and other resources.
 
 ### Frontend Environment Variables
 
