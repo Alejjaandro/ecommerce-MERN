@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.23.2",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.2",
     "axios": "^1.4.0",
