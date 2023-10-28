@@ -18,7 +18,7 @@ import { useCart } from '../context/CartContext.js';
 export default function Navbar() {
   // We extract what we will nedd from the contexts files.
   const { user, logout } = useAuth();
-  const { productsNumber, getCart } = useCart();
+  const { productsNumber } = useCart();
 
   // We create a variable to control if the sub-menu appears or not.
   const [menuVisible, setMenuVisible] = useState(false);

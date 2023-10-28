@@ -5,7 +5,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import './styles/EditCart.css';
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useAdmin } from '../../context/AdminContext';
 import { useAdminEditCart } from '../../context/AdminContextEditCart';
 import { useAuth } from '../../context/AuthContext';

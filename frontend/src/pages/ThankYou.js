@@ -1,7 +1,7 @@
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { format } from 'date-fns';
 import { useCart } from '../context/CartContext';
 import { useOrder } from '../context/OrderContext';

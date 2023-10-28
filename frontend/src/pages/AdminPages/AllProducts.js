@@ -14,7 +14,7 @@ Modal.setAppElement('#root');
 
 export default function AllProducts() {
 
-    const { products, getProducts, categoryFilter, brandFilter, getCategoriesAndBrands } = useProducts();
+    const { products, getProducts, categoryFilter, brandFilter } = useProducts();
     const { deleteProduct, success } = useAdmin();
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [currentProductId, setCurrentProductId] = useState(null);

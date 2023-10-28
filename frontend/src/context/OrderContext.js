@@ -64,7 +64,7 @@ export const OrderProvider = ({ children }) => {
 
     // Timeout so the messages don't stay on screen undefinetly. 5000 ms = 5 sec.
     useEffect(() => {
-        if (errors && errors.length > 0 || success) {
+        if ((errors && errors.length > 0) || success) {
             const timer = setTimeout(() => {
                 setErrors(undefined);
                 setSuccess(undefined);
