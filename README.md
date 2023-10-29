@@ -1,12 +1,17 @@
 # CODE SPACE Final Proyect
 
 ## Presentation
-Hi, i'm Alejandro Olaso and this is an e-commerce project that provides a complete user management system including registration and login functionality. It also includes CRUD operations on several database models and implements a REST API for communication between the frontend and backend.
+Hi, i'm Alejandro Olaso and this is an e-commerce project that provides:
+- Full front-end and back-end development, as well as the design and implementation of the database.
+- Complete user management (registration and login functionalities)
+- CRUD operations on multiple models
+- Implementation of a REST API to facilitate communication between different parts of the application.
+
 
 **You can check the fully functional project here:**  
 https://alejjaandro-ecommerce-project.netlify.app
 
-It might take a moment to charge all the products from the database, reload if neccessary.
+It might take a moment to charge all the products from the database because the DB is hosted in [render](https://render.com/), and the free tier spin down after 15 minutes of inactivity, so the first request after the service is spun down make take a while, but subsequent requests should be faster.
 
 ## Requirements
 Please check that you have installed:
