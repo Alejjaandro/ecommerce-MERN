@@ -1,7 +1,12 @@
 # CODE SPACE Final Proyect
 
 ## Presentation
-Hi, i'm Alejandro Olaso and this is my final project for CodeSpace Academy. It's an e-commerce aplication that provides a complete user management system including registration and login functionality. It also includes CRUD operations on several database models and implements a REST API for communication between the frontend and backend.
+Hi, i'm Alejandro Olaso and this is an e-commerce project that provides a complete user management system including registration and login functionality. It also includes CRUD operations on several database models and implements a REST API for communication between the frontend and backend.
+
+**You can check the fully functional project here:**  
+https://alejjaandro-ecommerce-project.netlify.app
+
+It might take a moment to charge all the products from the database, reload if neccessary.
 
 ## Requirements
 Please check that you have installed:
