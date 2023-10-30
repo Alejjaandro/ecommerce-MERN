@@ -1,7 +1,17 @@
 # CODE SPACE Final Proyect
 
 ## Presentation
-Hi, i'm Alejandro Olaso and this is my final project for CodeSpace Academy. It's an e-commerce aplication that provides a complete user management system including registration and login functionality. It also includes CRUD operations on several database models and implements a REST API for communication between the frontend and backend.
+Hi, i'm Alejandro Olaso and this is an e-commerce project that provides:
+- Full front-end and back-end development, as well as the design and implementation of the database.
+- Complete user management (registration and login functionalities)
+- CRUD operations on multiple models
+- Implementation of a REST API to facilitate communication between different parts of the application.
+
+
+**You can check the fully functional project here:**  
+https://alejjaandro-ecommerce-project.netlify.app
+
+It might take a moment to charge all the products from the database because the DB is hosted in [render](https://render.com/), and the free tier spin down after 15 minutes of inactivity, so the first request after the service is spun down make take a while, but subsequent requests should be faster.
 
 ## Requirements
 Please check that you have installed:
@@ -268,8 +278,7 @@ Example of a Order document:
 ### Environment Variables
 
 The backend uses the following environment variables:
-- MONGO_URL: The connection string for the MongoDB database.
-  
+
 ***On windows there is an error when trying to connect to the database using "mongodb://localhost:27017", so I used "mongodb://127.0.0.1:27017" instead.***
 - MONGO_URL= URL of your MongoDB database.
 - PORT: Port in wich the backend will run.
@@ -280,7 +289,6 @@ These should be defined in a .env file in the root directory of the backend, lik
 MONGO_URL='mongodb://127.0.0.1:27017/final_project'
 JWT_KEY=secretKey
 PORT=8000
-ADMIN_KEY=adminKey
 ```
 
 ### Running the Backend
@@ -310,7 +318,10 @@ This will start the server at <http://localhost:8000/api>.
 ## Project Structure
 - Components: Reusable parts of the user interface.
 - Pages: Different sections of the website, each corresponding to a route.
-- API: Functions for making requests to the backend.
+- API: Axios configuration file.
+- Context: Files that provide a way to pass data through the component tree without having to pass props down manually at every level.
+- Middlewares: Files used to protect routes before entering them.
+- Assets: Images used for backgrounds and other resources.
 
 ### Frontend Environment Variables
 
