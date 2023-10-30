@@ -9,6 +9,7 @@
 .aboutUs-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 2rem;
 }
 
@@ -20,6 +21,7 @@
     font-weight: 800;
     font-size: xx-large;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .aboutUs-text p {

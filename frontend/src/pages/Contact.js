@@ -23,33 +23,37 @@ export default function Contact() {
         <img className="contact-image" src={ContactUs} alt="contact-us" border="0"></img>
 
 
-        <div className="contact-text">
-          <h1>Contact:</h1>
-          <p><RoomIcon /> C/ example, 23</p>
-          <p><LocalPhoneIcon />+34 952 827 549</p>
-          <p><AlternateEmailIcon /> example@example.com</p>
-        </div>
+        <div className='contact-info'>
 
-        <div className="social-media">
-          <h1>You can also contact us through our social media:</h1>
-          <div className="icons">
-            <div className='icon-info'>
-              <span className="whatsapp"><WhatsAppIcon /></span>
-              <span>+34 653 914 672</span>
-            </div>
-            <div className='icon-info'>
-              <span className="facebook"><FacebookIcon /></span>
-              <span>@companyName</span>
-            </div>
-            <div className='icon-info'>
-              <span className="twitter"><TwitterIcon /></span>
-              <span>@companyName</span>
-            </div>
-            <div className='icon-info'>
-              <span className="insta"><InstagramIcon /></span>
-              <span>@companyName</span>
+          <div className="contact-text">
+            <h1>Contact:</h1>
+            <p><RoomIcon /> C/ example, 23</p>
+            <p><LocalPhoneIcon />+34 952 827 549</p>
+            <p><AlternateEmailIcon /> example@example.com</p>
+          </div>
+
+          <div className="social-media">
+            <h1>You can also contact us through our social media:</h1>
+            <div className="icons">
+              <div className='icon-info'>
+                <span className="whatsapp"><WhatsAppIcon /></span>
+                <span>+34 653 914 672</span>
+              </div>
+              <div className='icon-info'>
+                <span className="facebook"><FacebookIcon /></span>
+                <span>@companyName</span>
+              </div>
+              <div className='icon-info'>
+                <span className="twitter"><TwitterIcon /></span>
+                <span>@companyName</span>
+              </div>
+              <div className='icon-info'>
+                <span className="insta"><InstagramIcon /></span>
+                <span>@companyName</span>
+              </div>
             </div>
           </div>
+
         </div>
 
       </div>

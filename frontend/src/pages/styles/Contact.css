@@ -118,4 +118,29 @@
     .contact-container {
         gap: 2rem;
     }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+}
+
+@media (min-width: 1100px) {
+    .contact-container {
+        gap: 2rem;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contact-image {
+        width: 50%;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
 }
