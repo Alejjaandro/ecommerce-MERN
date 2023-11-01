@@ -11,7 +11,7 @@ Hi, i'm Alejandro Olaso and this is an e-commerce project that provides:
 **You can check the fully functional project here:**  
 https://alejjaandro-ecommerce-project.netlify.app
 
-It might take a moment to charge all the products from the database because the DB is hosted in [render](https://render.com/), and the free tier spin down after 15 minutes of inactivity, so the first request after the service is spun down make take a while, but subsequent requests should be faster.
+It might take a moment to charge all the products from the database because the DB is hosted in [render](https://render.com/), and the free tier shuts down after 15 minutes of inactivity, so the first request after the service is shut down may take a bit, but subsequent requests should be faster.
 
 ## Requirements
 Please check that you have installed:
