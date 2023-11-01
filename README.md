@@ -1,4 +1,4 @@
-# CODE SPACE Final Proyect
+# Ecommerce Proyect
 
 ## Presentation
 Hi, i'm Alejandro Olaso and this is an e-commerce project that provides:
