@@ -53,7 +53,7 @@ export default function Product({ item }) {
   return (
     <div className='prod-container'>
 
-      <img className="prod-image" src={item.thumbnail} alt="" />
+      <img className="prod-image" src={`../../${item.thumbnail}`} alt="" />
 
       <div className="prod-info">
 

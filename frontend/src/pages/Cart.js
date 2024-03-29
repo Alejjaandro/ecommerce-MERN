@@ -85,7 +85,7 @@ export default function Cart() {
 
                                         <div className='cart-product-details'>
 
-                                            <img className='cart-info-img' src={`${product.thumbnail}`} alt="" onClick={() => navigate(`/product/${product._id}`)}/>
+                                            <img className='cart-info-img' src={`../../${product.thumbnail}`} alt="" onClick={() => navigate(`/product/${product._id}`)}/>
 
                                             <div className='cart-details'>
                                                 {/* <span className='id'>

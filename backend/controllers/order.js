@@ -23,7 +23,7 @@ export const createOrder = async (req, res) => {
 // ===== UPDATE Order ===== //
 export const updateOrder = async (req, res) => {
     try {
-        const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {
+        const updatedOrder = await Order.findByIdAndUpdate(req.params.orderId, {
             $set: req.body
         }, { new: true })
 
