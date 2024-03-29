@@ -46,7 +46,7 @@ export default function OrderDetails() {
                         <div className="orderDetails-products-wrapper">
                             {order.products.map((product, index) => (
                                 <div className="orderDetails-product" key={index}>
-                                    <img src={product.thumbnail} />
+                                    <img src={`../../${product.thumbnail}`} alt=""/>
                                     <div>
                                         <p><strong>Title:</strong> {product.title}</p>
                                         <p><strong>Price:</strong> ${product.price}</p>

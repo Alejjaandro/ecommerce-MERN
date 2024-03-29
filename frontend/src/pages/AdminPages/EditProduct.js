@@ -47,7 +47,7 @@ export default function EditProduct() {
             const fileName = response.data.fileName;
 
             // Add the image URL to the form data
-            data.thumbnail = `http://localhost:8000/productImages/${fileName}`;
+            data.thumbnail = `productImages/${fileName}`;
         } else {
             // If no file, use the previous URL.
             data.thumbnail = product.thumbnail;
@@ -78,7 +78,7 @@ export default function EditProduct() {
                 <div className="editProduct-wrapper">
 
                     <h1 className="editProduct-title">Edit {product.title}</h1>
-                    <img className="editProduct-thumbnail" src={product.thumbnail} />
+                    <img className="editProduct-thumbnail" src={`../../${product.thumbnail}`} alt=''/>
 
                     {/* Errors */}
                     <div className='editProduct-errors'>

@@ -51,7 +51,7 @@ export default function ThankYou() {
                             <div className='thankYou-order-products'>
                                 {lastOrder.products.map((product, index) => (
                                     <div className='thankYou-order-product' key={index}>
-                                        <img src={product.thumbnail} />
+                                        <img src={`../../${product.thumbnail}`} alt=''/>
                                     </div>
                                 ))}
                             </div>

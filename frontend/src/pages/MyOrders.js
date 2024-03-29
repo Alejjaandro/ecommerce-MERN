@@ -44,7 +44,7 @@ export default function MyOrders() {
                             <div className='myOrder-product'>
                                 {order.products.map((product, index) => (
                                     <div className='myOrder-product-info' key={index}>
-                                        <img src={product.thumbnail} />
+                                        <img src={`../../${product.thumbnail}`} alt=''/>
                                         <span>Quantity: {product.quantity}</span>
                                         <span>{product.title}</span>
                                     </div>

@@ -32,7 +32,7 @@ export default function CreateProduct() {
             const fileName = response.data.fileName;
 
             // Add the image URL to the form data
-            data.thumbnail = `http://localhost:8000/productImages/${fileName}`;
+            data.thumbnail = `productImages/${fileName}`;
         }
 
         // Removing empty fields and converting fields to numbers.
