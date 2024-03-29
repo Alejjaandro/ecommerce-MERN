@@ -85,7 +85,7 @@ export default function EditCart() {
 
                                         <div className="editCart-imageContainer">
 
-                                            <img className='editCart-infoImg' src={`${product.thumbnail}`} alt="" />
+                                            <img className='editCart-infoImg' src={`../../${product.thumbnail}`} alt="" />
 
                                             <div className="editCart-details">
                                                 <span className="editCart-id"><b>ID:</b> {product._id}</span>

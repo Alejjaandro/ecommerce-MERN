@@ -31,7 +31,7 @@ router.post("/saveProdImage", verifyAdmin, upload.single('thumbnail'), (req, res
 });
 
 router.post("/", verifyAdmin, validator(productValidator), createProduct);
-router.put("/:userId", verifyAdmin, validator(productValidator), updateProduct);
-router.delete("/:userId", verifyAdmin, deleteProduct);
+router.put("/:id", verifyAdmin, validator(productValidator), updateProduct);
+router.delete("/:id", verifyAdmin, deleteProduct);
 
 export default router;

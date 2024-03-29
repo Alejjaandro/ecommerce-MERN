@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://ecommerce-project-0asp.onrender.com',
+    baseURL: 'https://alejjaandro-ecommerce-backend.vercel.app',
     withCredentials: true
 });
 

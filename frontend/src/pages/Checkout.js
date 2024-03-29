@@ -242,7 +242,7 @@ export default function Checkout() {
                             <React.Fragment key={index}>
                                 <div className="current-cart-product" key={product._id}>
                                     <div className='current-cart-details'>
-                                        <img className='current-cart-img' src={`${product.thumbnail}`} alt="" />
+                                        <img className='current-cart-img' src={`../../${product.thumbnail}`} alt="" />
                                         <div className="current-cart-productInfo">
                                             <span>{product.title}</span>
                                             <span>{product.ram}</span>
