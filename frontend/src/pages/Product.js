@@ -78,8 +78,10 @@ export default function Product() {
 
             <div className='product-container'>
 
-                <img className='product-img' src={`../../${product.thumbnail}`} alt="" />
-                
+                <div className='product-img'>
+                    <img src={`../../${product.thumbnail}`} alt="" />
+                </div>
+
                 <div className="product-wrapper">
 
                     <div className="product-info-container">

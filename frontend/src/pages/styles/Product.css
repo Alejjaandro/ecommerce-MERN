@@ -15,8 +15,11 @@
 }
 
 .product-img {
-    margin-bottom: 1rem;
+    min-width: fit-content;
     width: 50%;
+}
+.product-img img {
+    max-width: 20rem;
 }
 
 .product-info-container {
@@ -192,6 +195,7 @@
 @media (min-width: 768px) {
     .product-container {
         flex-direction: row;
+        align-items: flex-start;
     }
 }
 
