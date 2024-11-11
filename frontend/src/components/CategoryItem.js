@@ -10,9 +10,7 @@ export default function CategoryItem({ product }) {
             <img className="cat-image" src={product.thumbnail} alt="" />
 
             <div className="cat-info">
-
-                <h3 className='cat-title'>{product.category}</h3>
-                <Link to={`/products/${product.category}`} className="cat-link">See now</Link>
+                <Link to={`/products/${product.category}`} className="cat-link">{product.category}</Link>
             </div>
         
         </div>

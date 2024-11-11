@@ -78,10 +78,9 @@ export default function Product() {
 
             <div className='product-container'>
 
-
+                <img className='product-img' src={`../../${product.thumbnail}`} alt="" />
+                
                 <div className="product-wrapper">
-
-                    <img className='product-img' src={`../../${product.thumbnail}`} alt="" />
 
                     <div className="product-info-container">
                         <h1 className='product-title'>{product.title}</h1>
@@ -128,20 +127,21 @@ export default function Product() {
 
                         </div>
 
-                        <span className='product-price'>${product.price}</span>
 
                         {/* ADD CONTAINER */}
                         <div className="add-container">
-
-                            <div className="ammount-container">
-
-                                <div className="remove flex-center" onClick={removeQuantity}><RemoveIcon /></div>
-                                <span className="ammount flex-center">{quantity}</span>
-                                <div className="add flex-center" onClick={addQuantity}><AddIcon /></div>
-
+                            <div className='price-ammount'>
+                                <span className='product-price'>${product.price}</span>
+                                <div className="ammount-container">
+                                    <div className="remove flex-center" onClick={removeQuantity}><RemoveIcon /></div>
+                                    <span className="ammount flex-center">{quantity}</span>
+                                    <div className="add flex-center" onClick={addQuantity}><AddIcon /></div>
+                                </div>
                             </div>
-
-                            <button onClick={(e) => handleAddToCart(e)} className='to-cart'>ADD TO CART</button>
+                            
+                            <div className='add-button-container'>
+                                <button onClick={(e) => handleAddToCart(e)} className='add-button'>ADD TO CART</button>
+                            </div>
                         </div>
                     </div>
 

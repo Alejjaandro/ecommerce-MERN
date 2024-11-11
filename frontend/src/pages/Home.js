@@ -31,27 +31,25 @@ export default function Home() {
   }, []);
 
   if (!products) { return <div>Loading...</div> }
-  products = products.slice(0, 15);
+  products = products.slice(0, 16);
 
   return (
     <>
       {(!user || !user.isAdmin) ? <Navbar /> : <AdminNavbar />}
 
-      <Slider />
-      <Categories />
+      {/* <Slider /> */}
       <div className='home-container'>
+        <Categories />
 
-        <h1 className='home-title'>SOME PRODUCTS</h1>
-
-        <div className='products-container'>
-
-          {products && products.map((item) => (
-            <Product item={item} key={item._id} />
-          ))}
-
+        <div className='home-left'>
+          <h1 className='home-title'>SOME PRODUCTS</h1>
+          <div className='products-container'>
+            {products && products.map((item) => (
+              <Product item={item} key={item._id} />
+            ))}
+          </div>
+          <Link className='home-link' to='/products'>See All Products</Link>
         </div>
-
-        <Link className='home-link' to='/products'>See All Products</Link>
 
       </div>
 

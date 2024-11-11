@@ -1,18 +1,18 @@
 .home-container {
     display: flex;
     flex-direction: column;
-    
-    justify-content: center;
-    align-items: center;
-
-    background-color: grey;
 }
 
 .home-title {
     margin-top: 1rem;
     font-weight: 500;
     text-align: center;
-    color: white;
+}
+
+.home-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .home-link {
@@ -33,5 +33,17 @@
         background-color: rgb(95, 95, 95);
         cursor: pointer;
     }
+
+}
+
+/* Tablet styles */
+@media screen and (min-width: 768px) {
+    .home-container {
+        flex-direction: row;
+    }
+}
+
+/* Deskop styles */
+@media screen and (min-width: 1024px) {
 
 }

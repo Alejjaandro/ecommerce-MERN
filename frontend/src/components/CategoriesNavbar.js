@@ -11,6 +11,7 @@ export default function CategoriesNavbar() {
 
     return (
         <div className="categories">
+            <NavLink to={`/products`} className={"all"}> ALL </NavLink>
             {categories.map((category, index) => {
                 return <NavLink to={`/products/${category}`} key={index}> {category} </NavLink>
             })}

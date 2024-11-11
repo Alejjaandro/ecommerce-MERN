@@ -6,6 +6,16 @@
     background-color: lightgrey;
 }
 
+.all {
+    font-weight: bold;
+    background-color: rgb(44, 44, 44);
+    color: white !important;
+
+    &&:hover {
+        background-color: black !important;
+    }
+}
+
 .categories a {
     text-transform: uppercase;
     text-decoration: none;
