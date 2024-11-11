@@ -3,38 +3,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: grey;
-    box-shadow: 0 2px 2px black;
+    background-color: black;
     z-index: 1;
-
-    position: relative;
 }
 
-/* LEFT CONTAINER */
-.left-container {
-    display: none;
-}
-
-/* CENTER CONTAINER */
-.center-container ul {
-    display: flex;
-    gap: 0.5rem;
-    list-style: none;
-}
-
-.center-container ul a {
+.nav-container a {
+    color: white;
     text-decoration: none;
-    color: black;
+
     &:hover {
-        color: silver;
+        color: grey;
     }
+}
+
+/* LOGO */
+.logo img {
+    width: 3rem;
+}
+
+/* CENTER LINKS */
+.nav-about {
+    display: none;
 }
 
 /* RIGHT CONTAINER */
 .right-container {
     display: flex;
     align-items: center;
-    flex-direction: column;
     gap: 0.5rem;
 }
 
@@ -43,12 +38,13 @@
 
     padding: 0.5rem;
     border-radius: 0.25rem;
-    background-color: silver;
+    background-color: rgba(255, 255, 255, 0.726);
+    color: rgba(0, 0, 0, 0.63);
     text-decoration: none;
-    color: black;
 
     &:hover {
-        background-color: rgb(151, 151, 151);
+        background-color: white;
+        color: black;
     }
 }
 
@@ -78,16 +74,15 @@
 /* SUB MENU */
 .sub-menu-wrap {
     position: absolute;
-    top: 100%;
+    top: 56px;
     right: 0;
-    width: 40%;
 
     z-index: 1;
 }
 
 .sub-menu {
     border-radius: 10%;
-    background-color: whitesmoke;
+    background-color: black;
     padding: 1rem;
     margin: 0.5rem;
 
@@ -106,12 +101,12 @@
 }
 
 .user-info {
-    color: black;
+    color: white;
     text-align: center;
 }
 
 .user-info hr {
-    background-color: black;
+    background-color: white;
     margin: 0.5rem auto;
 }
 
@@ -121,10 +116,11 @@
     gap: 0.5rem;
 
     text-decoration: none;
-    color: #333;
+    color: rgba(255, 255, 255, 0.712);
 
     &:hover {
         text-decoration: underline;
+        color: white;
     }
 }
 
@@ -144,8 +140,8 @@
 
 /* Mobile L styles */
 @media (min-width: 425px) {
-    .nav-container {
-        padding: 1rem;
+    .nav-about {
+        display: inline;
     }
 
     .right-container {
@@ -170,27 +166,22 @@
 /* Tablet styles */
 @media (min-width: 768px) {
     .nav-container {
-        padding: 1rem;
         font-size: x-large;
-    }
-
-    .left-container {
-        flex: 0.5;
-        display: inline;
-        font-size: xx-large;
-        font-weight: bold;
-    }
-
-    .center-container {
-        flex: 2;
-    }
-
-    .center-container ul {
         justify-content: space-around;
+    }
+    .logo {
+        display: inline;
+    }
+
+    .logo img {
+        width: 5rem;
+    }
+
+    .nav-contact {
+        display: inline;
     }
 
     .right-container {
-        flex: 1;
         flex-direction: row;
         justify-content: flex-end;
     }
@@ -202,6 +193,10 @@
     .userIcon {
         width: 2.5rem;
         height: 2.5rem;
+    }
+
+    .sub-menu-wrap {
+        top: 82px;
     }
 
     .sub-menu,

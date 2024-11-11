@@ -47,15 +47,6 @@ export default function Settings() {
                     <form className='settings-form' onSubmit={handleChange}>
 
                         <div className="change-data">
-                            <label>Change Profile Picture: </label>
-                            <input placeholder="New Picture URL" type='text' name='image'/>
-                            <span>
-                                First you nedd to upload your picture to <Link to='https://imgbb.com/' target="_blank">ImgBB</Link>,
-                                then copy the URL and paste it here.
-                            </span>
-                        </div>
-
-                        <div className="change-data">
                             <label>Change your Name: </label>
                             <input placeholder="New Name" type='text' name='name'/>
                         </div>

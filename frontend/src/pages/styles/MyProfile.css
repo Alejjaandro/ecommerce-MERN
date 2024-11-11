@@ -3,20 +3,28 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 1rem;
-    min-height: 100vh;
+    margin-bottom: 1rem;
 }
 
 .profile-name h1, .profile-lastname h1, .profile-username h1, .profile-email h1, .profile-created h1, .profile-updated h1 {
-    font-size: x-large;
+    font-size: large;
+}
+
+.name-lastname, .username-email, .created-updated {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
 }
 .profile-name, .profile-lastname, .profile-username, .profile-email, .profile-created, .profile-updated {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+}
 
-    font-size: large;
+.profile-created, .profile-updated {
+    font-size: small;
 }
 
 /* Profile Image */
@@ -39,7 +47,6 @@
 .profile-image h1 {
     font-size: x-large;
     font-weight: 400;
-    margin-bottom: 2rem;
 }
 
 /* Profile Buttons */
@@ -80,10 +87,18 @@
 /* Tablet Styles */
 @media (min-width: 768px) {
     .profile-name h1, .profile-lastname h1, .profile-username h1, .profile-email h1, .profile-created h1, .profile-updated h1 {
-        font-size: xx-large;
-    }
-    .profile-name, .profile-lastname, .profile-username, .profile-email, .profile-created, .profile-updated {
         font-size: x-large;
+    }
+
+    .name-lastname, .username-email, .created-updated {
+        flex-direction: row;
+    }
+    .profile-name, .profile-lastname, .profile-username, .profile-email {
+        font-size: x-large;
+    }
+
+    .profile-created, .profile-updated {
+        font-size: medium;
     }
     
     .profile-edit a, .profile-delete {
@@ -93,9 +108,13 @@
 /* Deskop Styles */
 @media (min-width: 1024px) {
     .profile-name h1, .profile-lastname h1, .profile-username h1, .profile-email h1, .profile-created h1, .profile-updated h1 {
-        font-size: 3rem;
+        font-size: xx-large;
     }
-    .profile-name, .profile-lastname, .profile-username, .profile-email, .profile-created, .profile-updated {
-        font-size: 2rem;
+    .profile-name, .profile-lastname, .profile-username, .profile-email {
+        font-size: xx-large;
+    }
+
+    .profile-created, .profile-updated {
+        font-size: large;
     }
 }
