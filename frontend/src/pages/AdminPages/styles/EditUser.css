@@ -1,0 +1,138 @@
+.editUser-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.editUser-wrapper {
+    width: 90%;
+    background-color: lightgray;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.editUser-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.editUser-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.editUser-image img {
+    max-height: 10rem;
+}
+
+.editUser-errors, .editUser-success {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.editUser-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.editUser-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.editUser-form-label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.editUser-form-input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.editUser-foot-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.editUser-submit-button, .editUser-back-link {
+    width: 50%;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.editUser-submit-button {
+    background-color: #007bff;
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+.editUser-back-link {
+    background-color: rgba(255, 166, 0, 0.685);
+    &:hover {
+        background-color: orange;
+    }
+}
+
+.editUser-back-link a {
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+.editUser-errors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
+    color: red;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.editUser-success {
+    font-size: 1rem;
+    color: green;
+    font-weight: bold;
+}
+
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .editUser-title {
+        font-size: 3rem;
+    }
+
+    .editUser-form-label, .editUser-form-input {
+        font-size: 1.5rem;
+    }
+    
+    .editUser-submit-button, .editUser-back-link {
+        font-size: 1.5rem;
+    }
+
+    .editUser-errors, .editUser-success {
+        font-size: 1.5rem;
+    }    
+}
+/* Deskop Styles */
+@media (min-width: 1024px) {
+
+    .editUser-errors, .editUser-success {
+        font-size: 1.75rem;
+    }
+
+}

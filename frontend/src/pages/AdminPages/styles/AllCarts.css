@@ -1,0 +1,122 @@
+.allCarts-container {
+    min-height: 100vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.allCarts-container h1 {
+    text-align: center;
+    margin: 1rem;
+}
+
+.allCarts-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.allCarts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.allCarts-table, .allCarts-row, .allCarts-row > td, .allCarts-row-td-container, .allCarts-options {
+    height: 100%;
+}
+
+.allCarts-table-head, .allCarts-row {
+    border: .15rem solid #ddd;
+    text-align: center;
+}
+
+/* TABLE HEAD */
+.allCarts-table-head {
+    background-color: #f5f5f5;
+}
+.allCarts-table-head th {
+    padding: 0.5rem;
+}
+
+/* TABLE BODY */
+.allCarts-table-body {
+    background-color: #fff;
+}
+
+.allCarts-row > td {
+    padding: 0.5rem;
+    white-space: nowrap;
+}
+
+.allCarts-products-ram, .allCarts-products-color, .allCarts-products-price, .allCarts-products-quantity {
+    display: none;
+}
+
+.allCarts-row-td-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.allCarts-products-total {
+    font-weight: bold;
+}
+
+.noCarts {
+    font-size: 1.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.allCarts-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.allCarts-link-edit, .allCarts-btn-remove {
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+.allCarts-link-edit {
+    background-color: #4CAF50;
+    &:hover {
+        background-color: #317a34;
+    }
+}
+
+.allCarts-btn-remove {
+    background-color: #f44336;
+    &:hover {
+        background-color: #a52a1c;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .allCarts-products-quantity, .allCarts-products-price {
+        display: table-cell;
+    }
+
+    .allCarts-options {
+        margin-left: 1rem;
+        gap: 1rem;
+    }
+}
+
+/* Deskop Styles */
+@media (min-width: 1024px) {
+    .allCarts-products-ram, .allCarts-products-color {
+        display: table-cell;
+    }
+
+    .allCarts-options {
+        margin-left: 1rem;
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,84 @@
+.allUsers-container {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    min-height: 100vh;
+}
+
+.allUsers-container h1 {
+    text-align: center;
+
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.allUsers-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.allUsers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.allUsers-table th, .allUsers-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 0.15rem solid #ddd;
+}
+
+.allUsers-table th {
+    background-color: #f2f2f2;
+}
+
+.allUsers-id, .allUsers-name, .allUsers-lastname {
+    display: none;
+}
+
+.admin-row {
+    background-color: rgba(218, 165, 32, 0.329);
+}
+
+.allUsers-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.allUsers-link-edit, .allUsers-btn-remove {
+    text-decoration: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+.allUsers-link-edit {
+    background-color: #4CAF50;
+    &:hover {
+        background-color: #317a34;
+    }
+}
+.allUsers-btn-remove {
+    background-color: #f44336;
+    &:hover {
+        background-color: #a52a1c;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .allUsers-name, .allUsers-lastname {
+        display: table-cell;
+    }
+}
+
+/* Deskop Styles */
+@media (min-width: 1024px) {
+    .allUsers-id {
+        display: table-cell;
+    }
+}

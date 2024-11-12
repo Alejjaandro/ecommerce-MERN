@@ -1,0 +1,115 @@
+/* CONATINERS */
+.login-container {
+    min-height: 100vh;
+
+    background: url("../../assets/images/LoginBackImg.jpg");
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-wrapper {
+    width: 75%;
+    padding: 2rem;
+
+    background: linear-gradient(90deg, rgba(194, 194, 194, 1) 0%, rgba(104, 104, 105, 1) 100%);
+}
+
+/* TITLE */
+.login-title {
+    text-align: center;
+    font-weight: 300;
+}
+
+/* FORM */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-input {
+    flex: 1;
+    width: auto;
+
+    padding: 1rem;
+    margin: 1rem 0.5rem 0 0;
+}
+
+/* FORM FOOTER */
+.login-link {
+    margin: 0.25rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.login-button {
+    font-weight: 500;
+    text-align: center;
+
+    width: min-content;
+    border: none;
+    padding: 1rem 1rem;
+    margin: 1rem 0;
+
+    background-color: grey;
+    color: white;
+
+    &:hover {
+        background-color: rgb(95, 95, 95);
+        cursor: pointer;
+    }
+}
+
+/* ERRORS */
+.login-errors {
+    margin: 1rem 0;
+    font-size: 1rem;
+
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.login-errors p {
+    color: darkred;
+}
+
+
+/* Tablet styles */
+@media (min-width: 768px) {
+    .login-title {
+        font-size: 2rem;
+    }
+
+    .login-input {
+        font-size: 1.5rem;
+    }
+
+    .login-link {
+        font-size: large;
+    }
+
+    .login-button {
+        font-size: 1.5rem;
+    }
+
+    .login-errors {
+        font-size: 1.25rem;
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* Deskop styles */
+@media (min-width: 1024px) {
+    .login-wrapper {
+        width: 50%;
+    }
+
+    .login-title {
+        font-size: 2.5rem;
+    }
+}

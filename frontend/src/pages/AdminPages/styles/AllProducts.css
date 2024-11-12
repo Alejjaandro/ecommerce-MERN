@@ -1,0 +1,104 @@
+.allProducts-container {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-x: auto;
+}
+
+.allProducts-container h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.allUsers-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.allProducts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.allProducts-table th, .allProducts-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.allProducts-table th {
+    background-color: #f2f2f2;
+}
+
+.allProducts-table td {
+    vertical-align: middle;
+}
+
+.allProducts-id, .allProducts-stock, .allProducts-price {
+    display: none;
+}
+
+.allProducts-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.allProducts-link-edit, .allProducts-btn-remove {
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+.allProducts-link-edit {
+    background-color: #4CAF50;
+    &:hover {
+        background-color: #317a34;
+    }
+}
+
+.allProducts-btn-remove {
+    background-color: #f44336;
+    &:hover {
+        background-color: #a52a1c;
+    }
+}
+
+.allProducts-success {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.allProducts-success {
+    color: green;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .allProducts-stock, .allProducts-price {
+        display: table-cell;
+    }
+
+}
+/* Deskop Styles */
+@media (min-width: 1024px) {
+    .allProducts-id {
+        display: table-cell;
+    }
+
+    .allProducts-link-edit, .allProducts-btn-remove {
+        font-size: 1rem;
+    }
+    .allProducts-success {
+        font-size: 1.5rem;
+    }
+}

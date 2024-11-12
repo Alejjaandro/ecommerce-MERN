@@ -1,0 +1,80 @@
+.allOrders-container {
+    width: 100%;
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+.allOrders-container h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.allOrders-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.allOrders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.allOrders-table-head th {
+    text-align: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    background-color: #f2f2f2;
+}
+
+.allOrders-table-body td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.allOrders-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+}
+
+.allOrders-link-details, .allOrders-btn-remove {
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+.allOrders-link-details {
+    background-color: lightskyblue;
+    &:hover {
+        background-color: skyblue;
+    }
+}
+
+.allOrders-btn-remove {
+    background-color: #f44336;
+    &:hover {
+        background-color: #a52a1c;
+    }
+}
+
+.allOrders-id, .allOrders-user, .allOrders-country, .allOrders-address {
+    display: none;
+    text-align: center;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {   
+    .allOrders-id, .allOrders-country {
+        display: table-cell;
+    }
+}
+/* Deskop styles */
+@media (min-width: 1024px) {
+    .allOrders-user, .allOrders-address {
+        display: table-cell;
+    }
+}
