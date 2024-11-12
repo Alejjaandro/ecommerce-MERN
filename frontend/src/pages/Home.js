@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import AdminNavbar from '../components/AdminNavbar';
-import Slider from '../components/Slider';
 import Categories from '../components/Categories';
 import Product from '../components/Product';
 import Footer from '../components/Footer';
@@ -15,45 +13,44 @@ import './styles/Home.css';
 
 export default function Home() {
 
-  const { user } = useAuth();
-  const { getCart } = useCart();
+	const { user } = useAuth();
+	const { getCart } = useCart();
 
-  const { getProducts } = useProducts();
-  let { products } = useProducts();
+	const { getProducts } = useProducts();
+	let { products } = useProducts();
 
-  // We get the products. If the user is logged in, we get the cart.
-  useEffect(() => { 
-    getProducts();
+	// We get the products. If the user is logged in, we get the cart.
+	useEffect(() => {
+		getProducts();
 
-    if (user) {
-      getCart(user._id);
-    }
-  }, []);
+		if (user) {
+			getCart(user._id);
+		}
+	}, []);
 
-  if (!products) { return <div>Loading...</div> }
-  products = products.slice(0, 16);
+	products = products.slice(0, 16);
 
-  return (
-    <>
-      {(!user || !user.isAdmin) ? <Navbar /> : <AdminNavbar />}
+	return (
+		<>
+			<Navbar />
 
-      {/* <Slider /> */}
-      <div className='home-container'>
-        <Categories />
+			{/* <Slider /> */}
+			<div className='home-container'>
+				<Categories />
 
-        <div className='home-left'>
-          <h1 className='home-title'>SOME PRODUCTS</h1>
-          <div className='products-container'>
-            {products && products.map((item) => (
-              <Product item={item} key={item._id} />
-            ))}
-          </div>
-          <Link className='home-link' to='/products'>See All Products</Link>
-        </div>
+				<div className='home-left'>
+					<h1 className='home-title'>SOME PRODUCTS</h1>
+					<div className='products-container'>
+						{products && products.map((item) => (
+							<Product item={item} key={item._id} />
+						))}
+					</div>
+					<Link className='home-link' to='/products'>See All Products</Link>
+				</div>
 
-      </div>
+			</div>
 
-      <Footer />
-    </>
-  )
+			<Footer />
+		</>
+	)
 }

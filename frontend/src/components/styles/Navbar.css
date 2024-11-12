@@ -1,4 +1,4 @@
-.nav-container {
+.nav-container, .nav-container-admin {
     padding: 0.5rem;
     display: flex;
     align-items: center;
@@ -7,7 +7,11 @@
     z-index: 1;
 }
 
-.nav-container a {
+.nav-container-admin {
+    background-color: goldenrod;
+}
+
+.nav-container a, .nav-container-admin a {
     color: white;
     text-decoration: none;
 
@@ -22,7 +26,7 @@
 }
 
 /* CENTER LINKS */
-.nav-about {
+.nav-about, .admin-options {
     display: none;
 }
 
@@ -51,6 +55,7 @@
 /* RIGHT CONTAINER / USER LOGGED */
 .right-container span {
     display: none;
+    color: white;
 }
 
 .userIcon {
@@ -72,7 +77,7 @@
 }
 
 /* SUB MENU */
-.sub-menu-wrap {
+.sub-menu-wrap, .sub-menu-wrap-admin {
     position: absolute;
     top: 56px;
     right: 0;
@@ -80,7 +85,7 @@
     z-index: 1;
 }
 
-.sub-menu {
+.sub-menu, .sub-menu-admin {
     border-radius: 10%;
     background-color: black;
     padding: 1rem;
@@ -89,13 +94,20 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
 
+.sub-menu-admin {
+    background-color: goldenrod;
 }
 
 .sub-menu,
+.sub-menu-admin,
 .sub-menu a,
+.sub-menu-admin a,
 .sub-menu a svg,
+.sub-menu-admin a svg,
 .sub-menu button,
+.sub-menu-admin button,
 .sub-menu button svg {
     font-size: small;
 }
@@ -110,7 +122,7 @@
     margin: 0.5rem auto;
 }
 
-.sub-menu a {
+.sub-menu a, .sub-menu-admin a {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -124,7 +136,7 @@
     }
 }
 
-.sub-menu button {
+.sub-menu button, .sub-menu-admin button {
     background-color: inherit;
     display: flex;
     align-items: center;
@@ -142,6 +154,10 @@
 @media (min-width: 425px) {
     .nav-about {
         display: inline;
+    }
+
+    .nav-container-admin .nav-about {
+        display: none;
     }
 
     .right-container {
@@ -165,11 +181,12 @@
 
 /* Tablet styles */
 @media (min-width: 768px) {
-    .nav-container {
-        font-size: x-large;
+    .nav-container, .nav-container-admin {
+        font-size: large;
         justify-content: space-around;
     }
-    .logo {
+    
+    .logo, .nav-container-admin .nav-about {
         display: inline;
     }
 
@@ -181,11 +198,6 @@
         display: inline;
     }
 
-    .right-container {
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-
     .right-container a {
         padding: 0.75rem;
     }
@@ -195,21 +207,33 @@
         height: 2.5rem;
     }
 
-    .sub-menu-wrap {
+    .sub-menu-wrap, .sub-menu-wrap-admin {
         top: 82px;
     }
 
     .sub-menu,
+    .sub-menu-admin,
     .sub-menu a,
+    .sub-menu-admin a,
     .sub-menu a svg,
+    .sub-menu-admin a svg,
     .sub-menu button,
-    .sub-menu button svg {
+    .sub-menu-admin button,
+    .sub-menu button svg,
+    .sub-menu-admin button svg {
         font-size: x-large;
     }
 }
 
 /* Desktop styles */
 @media (min-width: 1024px) {
+    .admin-options {
+        display: inline;
+    }
+
+    .admin-options-submenu {
+        display: none !important;
+    }
 
     .right-container a {
         font-weight: bold;
@@ -219,13 +243,5 @@
     .userIcon {
         width: 3rem;
         height: 3rem;
-    }
-
-    .sub-menu,
-    .sub-menu a,
-    .sub-menu a svg,
-    .sub-menu button,
-    .sub-menu button svg {
-        font-size: xx-large;
     }
 }
