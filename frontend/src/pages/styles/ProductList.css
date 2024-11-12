@@ -42,6 +42,10 @@
     .select {
         width: 100%;
     }
+
+    .productList-container .products-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 /* Deskop styles */
 @media (min-width: 1024px) {
@@ -50,5 +54,16 @@
     }
     .filter-text {
         font-size: 1.5rem;
+    }
+
+    .productList-container .products-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Deskop styles */
+@media (min-width: 1440px) {
+    .productList-container .products-container {
+        grid-template-columns: repeat(5, 1fr);
     }
 }

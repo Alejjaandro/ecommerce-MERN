@@ -48,10 +48,10 @@ export default function AllCarts() {
                             <tr>
                                 <th>User ID</th>
                                 <th>Items</th>
-                                <th>Quantity</th>
+                                <th className='allCarts-products-quantity'>Quantity</th>
                                 <th className='allCarts-products-color'>Color</th>
                                 <th className='allCarts-products-ram'>RAM</th>
-                                <th>Price</th>
+                                <th className='allCarts-products-price'>Price</th>
                                 <th>Total Price</th>
                                 <th></th>
                             </tr>
@@ -68,7 +68,7 @@ export default function AllCarts() {
                                             ))}
                                         </div>
                                     </td>
-                                    <td>
+                                    <td className='allCarts-products-quantity'>
                                         <div className='allCarts-row-td-container'>
                                             {cart.products.map((item, index) => (
                                                 <p key={index}>{item.quantity}</p>
@@ -89,7 +89,7 @@ export default function AllCarts() {
                                             ))}
                                         </div>
                                     </td>
-                                    <td>
+                                    <td className='allCarts-products-price'>
                                         <div className='allCarts-row-td-container'>
                                             {cart.products.map((item, index) => (
                                                 <p key={index}>${(item.price * item.quantity).toFixed(2)}</p>

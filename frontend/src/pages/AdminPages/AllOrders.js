@@ -42,24 +42,24 @@ export default function AllOrders() {
                     <table className="allOrders-table">
                         <thead className="allOrders-table-head">
                             <tr>
-                                <th>Order ID</th>
-                                <th>User</th>
+                                <th className='allOrders-id'>Order ID</th>
+                                <th className='allOrders-user'>User</th>
                                 <th>Email</th>
                                 <th>Order Date</th>
-                                <th>Country</th>
-                                <th>Address</th>
+                                <th className='allOrders-country'>Country</th>
+                                <th className='allOrders-address'>Address</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody className="allOrders-table-body">
                             {allOrders.map((order) => (
                                 <tr key={order._id}>
-                                    <td>{order._id}</td>
-                                    <td>{order.orderInfo.name} {order.orderInfo.lastname}</td>
+                                    <td className='allOrders-id'>{order._id}</td>
+                                    <td className='allOrders-user'>{order.orderInfo.name} {order.orderInfo.lastname}</td>
                                     <td>{order.orderInfo.email}</td>
                                     <td>{formatDate(order.createdAt)}</td>
-                                    <td>{order.orderInfo.country}</td>
-                                    <td>{order.orderInfo.address}, {order.orderInfo.zipcode}</td>
+                                    <td className='allOrders-country'>{order.orderInfo.country}</td>
+                                    <td className='allOrders-address'>{order.orderInfo.address}, {order.orderInfo.zipcode}</td>
                                     <td className="allOrders-options">
                                         <Link to={`/order-details/${order._id}`} className="allOrders-link-details">Details</Link>
                                         <button className="allOrders-btn-remove" onClick={() => { handleDelete(order._id, order.orderInfo.name) }}>Remove</button>

@@ -51,7 +51,7 @@ export default function AllUsers() {
           <table className="allUsers-table">
             <thead className="allUsers-table-head">
               <tr>
-                <th>ID</th>
+                <th className="allUsers-id">ID</th>
                 <th className="allUsers-name">Name</th>
                 <th className="allUsers-lastname">Lastname</th>
                 <th>Username</th>
@@ -64,7 +64,7 @@ export default function AllUsers() {
               {/* We map all users and we show them in a table. Added a distinction for admin users. */}
               {allUsers.map((user) => (
                 <tr key={user._id} className={user.isAdmin ? 'admin-row' : ''}>
-                  <td>{user._id}</td>
+                  <td className="allUsers-id">{user._id}</td>
                   <td className="allUsers-name">{user.name}</td>
                   <td className="allUsers-lastname">{user.lastname}</td>
                   <td >{user.username}</td>

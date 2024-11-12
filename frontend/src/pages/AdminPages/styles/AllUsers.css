@@ -34,7 +34,7 @@
     background-color: #f2f2f2;
 }
 
-.allUsers-name, .allUsers-lastname {
+.allUsers-id, .allUsers-name, .allUsers-lastname {
     display: none;
 }
 
@@ -78,7 +78,7 @@
 
 /* Deskop Styles */
 @media (min-width: 1024px) {
-    .allUsers-table th, .allUsers-table td, .allUsers-link-edit, .allUsers-btn-remove {
-        font-size: 1.25rem;
+    .allUsers-id {
+        display: table-cell;
     }
 }

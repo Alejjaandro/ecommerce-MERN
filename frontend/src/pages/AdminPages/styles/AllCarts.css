@@ -46,7 +46,7 @@
     white-space: nowrap;
 }
 
-.allCarts-products-ram, .allCarts-products-color {
+.allCarts-products-ram, .allCarts-products-color, .allCarts-products-price, .allCarts-products-quantity {
     display: none;
 }
 
@@ -99,12 +99,8 @@
 
 /* Tablet Styles */
 @media (min-width: 768px) {
-    .allCarts-products-ram, .allCarts-products-color {
+    .allCarts-products-quantity, .allCarts-products-price {
         display: table-cell;
-    }
-
-    .allCarts-products-total {
-        font-size: 1.2rem;
     }
 
     .allCarts-options {
@@ -115,21 +111,12 @@
 
 /* Deskop Styles */
 @media (min-width: 1024px) {
-    .allCarts-table-head, .allCarts-row td {
-        font-size: 1.2rem;
-    }
-
-    .allCarts-products-total {
-        font-size: 1.5rem;
+    .allCarts-products-ram, .allCarts-products-color {
+        display: table-cell;
     }
 
     .allCarts-options {
         margin-left: 1rem;
         gap: 1rem;
-    }
-
-    .allCarts-link-edit, .allCarts-btn-remove {
-        font-size: 1.2rem;
-        padding: 0.75rem;
     }
 }
