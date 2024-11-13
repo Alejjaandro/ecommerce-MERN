@@ -21,12 +21,12 @@ const Navbar = () => {
     const user = useSelector(state => state.user)
 
     return (
-        <div>
-            <div className='w-1/4 fixed h-[90%] mt-[10%] font-medium uppercase hidden md:flex flex-col justify-around'>
+        <div >
+            <div className='bg-black w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'>
                 {/* LOGO & MENU */}
                 <div className='flex flex-col items-center'>
                     <img src={CompanyLogo} alt="image" width={150} height={150} className='mb-10' />
-                    <ul className='w-full'>
+                    <ul className='w-full text-white'>
                         <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                         <li className='p-4 list-none group border-b-2'>
                             <a href={`/whatWeDo`} className='hover:line-through'>What we Do</a>
@@ -51,13 +51,13 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <div className='mt-10 p-4'>
-                        <p>Welcome! {user.username}</p>
+                        <p className='text-white'>Welcome! {user.username}</p>
                         <button onClick={() => dispatch(logout())} className='w-1/2 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
                     </div>
                 )}
 
                 {/* CONTACT */}
-                <div className='p-4'>
+                <div className='p-4 text-white'>
                     <p className='mt-10 mb-4'>Contact</p>
                     <span className='capitalize block m-2'>Adress: <span className='font-light normal-case'>C/Example, 29001 Málaga</span></span>
                     <span className='capitalize block m-2'>Phone: <span className='font-light'> +34 952 999 999</span></span>
@@ -66,8 +66,8 @@ const Navbar = () => {
             </div>
 
             {/* MOBILE NAVBAR */}
-            <div className='md:hidden p-4 flex justify-between'>
-                <div onClick={handleSidebar} className="flex items-center">
+            <div className='md:hidden p-4 flex justify-between bg-black'>
+                <div onClick={handleSidebar} className="flex items-center text-white">
                     <AiOutlineMenu size={25} />
                 </div>
                 <img src={CompanyLogo} alt="image" width={50} height={50} />
@@ -76,13 +76,13 @@ const Navbar = () => {
             <div className={sidebar ? "md:hidden fixed w-full h-screen bg-black/70 z-10" : ""}>
                 <div className={
                     sidebar
-                        ? "fixed h-screen bg-white ease-in duration-500"
+                        ? "fixed h-screen bg-black ease-in duration-500"
                         : "fixed left-[-100%] ease-in duration-500"
                 }>
                     <div className="flex w-full">
 
                         <div>
-                            <ul className='w-full'>
+                            <ul className='w-full text-white'>
                                 <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                                 <li className='p-4 list-none group border-b-2'>
                                     <a href={`/whatWeDo`} className='hover:line-through'>What we Do</a>
@@ -106,13 +106,13 @@ const Navbar = () => {
                                 </div>
                             ) : (
                                 <div className='mt-10 p-4'>
-                                    <p>Welcome! {user.username}</p>
+                                    <p className='text-white'>Welcome! {user.username}</p>
                                     <button onClick={() => dispatch(logout())} className='w-1/2 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
                                 </div>
                             )}
 
                             {/* CONTACT */}
-                            <div className='p-4'>
+                            <div className='p-4 text-white'>
                                 <p className='mt-10 mb-4'>Contact</p>
                                 <span className='capitalize block m-2'>Adress: <span className='font-light normal-case'>C/Example, 29001 Málaga</span></span>
                                 <span className='capitalize block m-2'>Phone: <span className='font-light'> +34 952 999 999</span></span>
