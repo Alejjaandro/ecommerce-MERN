@@ -1,10 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/userSlice'
+import { useEffect } from 'react'
 
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            navigate('/')
+        }
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault()

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getUser, logout } from '../redux/userSlice'
 
-import CompanyLogo from '../assets/CompanyLogo.png'
+import CompanyLogo from '../public/CompanyLogo.png'
 
 
 const Navbar = () => {

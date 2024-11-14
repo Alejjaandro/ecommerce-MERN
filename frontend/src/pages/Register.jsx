@@ -1,8 +1,18 @@
 import { useDispatch } from 'react-redux'
 import { register } from '../redux/userSlice'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            navigate('/')
+        }
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -18,6 +28,7 @@ const Register = () => {
         }
      
         dispatch(register(user))
+        navigate('/')
     }
 
     return (

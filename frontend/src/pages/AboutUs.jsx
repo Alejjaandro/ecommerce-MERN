@@ -1,6 +1,5 @@
-'use client'
-import React, { useState } from 'react'
-import CompanyLogo from '../assets/CompanyLogo.png'
+import { useState } from 'react'
+import CompanyLogo from '../public/CompanyLogo.png'
 
 const AboutUs = () => {
 
