@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
+import { useEffect, useState } from 'react'
+import { AiOutlineMenu } from 'react-icons/ai'
 
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -18,14 +18,16 @@ const Navbar = () => {
         dispatch(getUser())
     }, [dispatch])
     
-    const user = useSelector(state => state.user)
-
+    const user = useSelector(state => state.user)    
+    
     return (
         <div >
-            <div className='bg-black w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'>
+            <div className={(user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + ' w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'}>
                 {/* LOGO & MENU */}
                 <div className='flex flex-col items-center'>
                     <img src={CompanyLogo} alt="image" width={150} height={150} className='mb-10' />
+                    {(user && user.isAdmin) && (<p className='text-white mb-10'>Admin</p>)}
+
                     <ul className='w-full text-white'>
                         <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                         <li className='p-4 list-none group border-b-2'>
@@ -64,7 +66,7 @@ const Navbar = () => {
             </div>
 
             {/* MOBILE NAVBAR */}
-            <div className='md:hidden p-4 flex justify-between bg-black'>
+            <div className={(user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + ' md:hidden p-4 flex justify-between'}>
                 <div onClick={handleSidebar} className="flex items-center text-white">
                     <AiOutlineMenu size={25} />
                 </div>
@@ -74,13 +76,12 @@ const Navbar = () => {
             <div className={sidebar ? "md:hidden fixed w-full h-screen bg-black/70 z-10" : ""}>
                 <div className={
                     sidebar
-                        ? "fixed h-screen bg-black ease-in duration-500"
+                        ? (user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + " fixed h-screen ease-in duration-500"
                         : "fixed left-[-100%] ease-in duration-500"
                 }>
                     <div className="flex w-full">
-
                         <div>
-                            <ul className='w-full text-white'>
+                            <ul className='w-full text-white uppercase'>
                                 <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                                 <li className='p-4 list-none group border-b-2'>
                                     <a href={`/whatWeDo`} className='hover:line-through'>What we Do</a>

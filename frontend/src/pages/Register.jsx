@@ -1,10 +1,7 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { register } from '../redux/userSlice'
 
 const Register = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const onSubmit = (e) => {
@@ -17,12 +14,10 @@ const Register = () => {
             email: e.target[2].value,
             username: e.target[3].value,
             password: e.target[4].value,
+            confirmPassword: e.target[5].value,
         }
-
+     
         dispatch(register(user))
-
-        // Redirect to home page
-        navigate('/')
     }
 
     return (
@@ -41,7 +36,7 @@ const Register = () => {
                                 <input type="text" placeholder='Username' className='p-2 border-2 border-gray-300' required/>
                                 <input type="password" placeholder='Password' className='p-2 border-2 border-gray-300' required/>
                                 <input type="password" placeholder='Confirm password' className='p-2 border-2 border-gray-300' />
-                                <button type='submit' className='bg-sky-600 hover:bg-sky-700 text-white p-2 uppercase'>Login</button>
+                                <button type='submit' className='bg-sky-600 hover:bg-sky-700 text-white p-2 uppercase'>Register</button>
                             </div>
                         </form>
 
