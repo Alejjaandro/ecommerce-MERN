@@ -14,12 +14,25 @@ export const getProducts = createAsyncThunk(
         }
     }
 );
+export const getSingleProduct = createAsyncThunk(
+    "products/getSingleProduct",
+    async (id, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(`/products/find/${id}`);
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
 
 
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
         allProducts: [],
+        singleProduct: {},
         filteredProducts: [],
         allCategories: [],
         allBrands: [],
@@ -32,7 +45,7 @@ export const productsSlice = createSlice({
             const category = action.payload.toLowerCase();
             state.selectedCategory = category;
             // const brand = state.selectedBrand;
-            
+
             // If the category is "all", show all products and get all brands. Otherwise, filter products by category and get all brands from the filtered products
             if (category === "all") {
                 state.filteredProducts = state.allProducts;
@@ -82,6 +95,10 @@ export const productsSlice = createSlice({
                 state.allCategories = [...new Set(action.payload.map(product => product.category))];
                 state.allBrands = [...new Set(action.payload.map(product => product.brand))];
             })
+            .addCase(getSingleProduct.fulfilled, (state, action) => {
+                state.singleProduct = action.payload;
+            }
+        );
     },
 });
 

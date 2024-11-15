@@ -68,7 +68,7 @@ const Navbar = () => {
                 <div onClick={handleSidebar} className="flex items-center text-white">
                     <AiOutlineMenu size={25} />
                 </div>
-                <img src={"CompanyLogo.png"} alt="image" width={50} height={50} />
+                <img src={"/CompanyLogo.png"} alt="image" width={50} height={50} />
             </div>
 
             <div className={sidebar ? "md:hidden fixed w-full h-screen bg-black/70 z-10" : ""}>

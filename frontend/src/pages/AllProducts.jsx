@@ -1,4 +1,4 @@
-// import { useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { filterByCategory, filterByBrand } from '../redux/productsSlice'
@@ -9,12 +9,17 @@ function AllProducts() {
     const products = useSelector(state => state.products.filteredProducts)
     const categories = useSelector(state => state.products.allCategories)
     const brands = useSelector(state => state.products.allBrands)
-   
+    
+    // Variable to store the selected brand for the brand filter. The default value is "all".
+    const [selectedBrand, setSelectedBrand] = useState("all");
+
     const changeCategory = (e) => {
         dispatch(filterByCategory(e.target.value))
+        setSelectedBrand("all");
     }
     const changeBrand = (e) => {
         dispatch(filterByBrand(e.target.value))
+        setSelectedBrand(e.target.value);
     }
 
     return (
@@ -38,7 +43,7 @@ function AllProducts() {
                             {/* Brand filter */}
                             <div className='flex flex-col gap-4'>
                                 <span>Brands:</span>
-                                <select defaultValue="all" className='bg-gray-200' onChange={changeBrand}>
+                                <select value={selectedBrand} className='bg-gray-200' onChange={changeBrand}>
                                     <option value="all">All</option>
                                     {brands.map((brand, index) => (
                                         <option key={index} value={brand} className='capitalize'>{brand}</option>
