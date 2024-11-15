@@ -18,20 +18,22 @@ function ProductPage() {
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center lg:items-center'>
             <div className='w-[90%] p-4 bg-white lg:h-[50%] rounded-md'>
-                <h1 className='text-4xl md:my-10 font-bold text-center'>{product.title}</h1>
+                
+                <h1 className='text-4xl md:mt-10 font-bold text-center'>{product.title}</h1>
+                
                 {product ? (
                     <div className='mt-6'>
                         <div className='flex justify-around md:text-xl'>
-                            <div className='flex flex-col items-center lg:items-start lg:flex-row'>
+                            <div className='flex flex-col items-center gap-4 lg:items-start'>
 
-                                <img src={`/${product.thumbnail}`} alt={product.title} className='w-80 h-80 object-contain' />
+                                <div className='flex flex-col gap-4 items-center lg:flex-row'>
+                                    <img src={`/${product.thumbnail}`} alt={product.title} className='object-contain' />
+                                    <span className='text-justify'>{product.description}</span>
+                                </div>
 
-                                <div className='flex flex-col gap-4 items-center'>
-                                    <span className='md:w-3/4 text-justify'>{product.description}</span>
-                                    <div className="w-full md:w-3/4 flex gap-4 items-center justify-end">
-                                        <span>${product.price}</span>
-                                        <button className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
-                                    </div>
+                                <div className="w-full flex gap-8 items-center justify-end">
+                                    <span className='text-2xl'>${product.price}</span>
+                                    <button className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
                                 </div>
                             </div>
                         </div>
