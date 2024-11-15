@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import CompanyLogo from '../public/CompanyLogo.png'
+import CompanyLogo from '../../public/CompanyLogo.png'
 
 const AboutUs = () => {
 
@@ -45,16 +45,16 @@ const AboutUs = () => {
                 <div>
                     <h1 className='md:text-4xl text-2xl m-4 uppercase font-medium'>Our Values</h1>
                     <div className="w-full grid grid-cols-2 text-center">
-                        <div className={"mr-1 mb-1 md:p-20 p-10 cursor-pointer font-bold bg-[url('./assets/TeamWork.jpg')] bg-cover bg-center hover:opacity-100" + (show1 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value1")}>
+                        <div className={"mr-1 mb-1 md:p-20 p-10 cursor-pointer font-bold bg-[url('/TeamWork.jpg')] bg-cover bg-center hover:opacity-100" + (show1 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value1")}>
                             <a href='#value1' className='block w-full bg-white'>Team Work</a>
                         </div>
-                        <div className={"mb-1 md:p-20 p-10 cursor-pointer font-bold bg-[url('./assets/CompanyProject.jpg')] bg-cover bg-center hover:opacity-100" + (show2 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value2")}>
+                        <div className={"mb-1 md:p-20 p-10 cursor-pointer font-bold bg-[url('/CompanyProject.jpg')] bg-cover bg-center hover:opacity-100" + (show2 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value2")}>
                             <a href='#value2' className='block w-full bg-white'>Company Project</a>
                         </div>
-                        <div className={"mr-1 md:p-20 p-10 cursor-pointer text-center font-bold bg-[url('./assets/Compromise.jpg')] bg-cover bg-center hover:opacity-100" + (show3 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value3")}>
+                        <div className={"mr-1 md:p-20 p-10 cursor-pointer text-center font-bold bg-[url('/Compromise.jpg')] bg-cover bg-center hover:opacity-100" + (show3 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value3")}>
                             <a href='#value3' className='block w-full bg-white'>Compromise</a>
                         </div>
-                        <div className={"md:p-20 p-10 cursor-pointer font-bold bg-[url('./assets/Environment.jpg')] bg-cover bg-center hover:opacity-100" + (show4 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value4")}>
+                        <div className={"md:p-20 p-10 cursor-pointer font-bold bg-[url('/Environment.jpg')] bg-cover bg-center hover:opacity-100" + (show4 ? " opacity-100" : " opacity-80")} onClick={() => toggleShow("value4")}>
                             <a href='#value4' className='block w-full bg-white'>Environment</a>
                         </div>
                     </div>

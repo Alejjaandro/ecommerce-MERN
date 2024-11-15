@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
-import Asus from '../public/productImages/AsusVivabook.jpg';
 
 function ProductCard({ product }) {
     return (
         <div className='border border-gray-300 p-4'>
-            <img src={Asus} alt={product.title} className='w-full h-52 object-contain' />
+            <img src={`/${product.thumbnail}`} alt={product.title} className='w-full h-52 object-contain' />
             <p className='text-lg font-semibold mt-2'>{product.title}</p>
             <p className='text-sm font-light mt-2'>${product.price}</p>
         </div>
