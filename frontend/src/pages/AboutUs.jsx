@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import CompanyLogo from '../../public/CompanyLogo.png'
 
 const AboutUs = () => {
 
@@ -30,7 +29,7 @@ const AboutUs = () => {
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum officiis quam repellendus. Aspernatur veniam fuga incidunt? Deleniti animi, accusantium, id mollitia illo, eos voluptatibus fugiat eveniet officia quia saepe maiores?
                     </p>
                     <div className='my-10 w-full h-full flex justify-center'>
-                        <img src={CompanyLogo} alt="" />
+                        <img src="/CompanyLogo.png" alt="" />
                     </div>
                 </div>
                 {/* WE ARE ..... */}

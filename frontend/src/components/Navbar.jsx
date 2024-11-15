@@ -5,9 +5,6 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getUser, logout } from '../redux/userSlice'
 
-import CompanyLogo from '../../public/CompanyLogo.png'
-
-
 const Navbar = () => {
     const [sidebar, setSidebar] = useState(false);
     const handleSidebar = () => setSidebar(!sidebar);
@@ -25,7 +22,7 @@ const Navbar = () => {
             <div className={(user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + ' w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'}>
                 {/* LOGO & MENU */}
                 <div className='flex flex-col items-center'>
-                    <img src={CompanyLogo} alt="image" width={150} height={150} className='mb-10' />
+                    <img src="/CompanyLogo.png" alt="image" width={150} height={150} className='mb-10' />
                     {(user && user.isAdmin) && (<p className='text-white mb-10'>Admin</p>)}
 
                     <ul className='w-full text-white'>
@@ -71,7 +68,7 @@ const Navbar = () => {
                 <div onClick={handleSidebar} className="flex items-center text-white">
                     <AiOutlineMenu size={25} />
                 </div>
-                <img src={CompanyLogo} alt="image" width={50} height={50} />
+                <img src={"CompanyLogo.png"} alt="image" width={50} height={50} />
             </div>
 
             <div className={sidebar ? "md:hidden fixed w-full h-screen bg-black/70 z-10" : ""}>
