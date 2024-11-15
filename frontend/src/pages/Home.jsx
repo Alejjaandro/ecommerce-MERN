@@ -1,17 +1,8 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { getProducts } from '../redux/productsSlice'
 import ProductCard from '../components/ProductCard'
 
 function Home() {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getProducts())
-    }, [dispatch])
-
-    const products = useSelector(state => state.products)
+    const products = useSelector(state => state.products.allProducts)
 
     // Filter products by category and get the first 3 products
     let laptops

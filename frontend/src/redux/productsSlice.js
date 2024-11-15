@@ -16,33 +16,47 @@ export const getProducts = createAsyncThunk(
 );
 
 
-export const userSlice = createSlice({
+export const productsSlice = createSlice({
     name: "products",
-    initialState: null,
+    initialState: {
+        allProducts: [],
+        filteredProducts: [],
+        error: null
+    },
+
     reducers: {
         filterByCategory: (state, action) => {
-            return state.filter(product => product.category === action.payload);
+            const category = action.payload.toLowerCase();
+            console.log(category);
+            
+            if (category === "all") {
+                state.filteredProducts = state.allProducts;
+            } else {
+                state.filteredProducts = state.allProducts.filter(product => product.category.toLowerCase() === category);
+            }
         },
+
         filterByBrand: (state, action) => {
-            console.log(state);
-            return state.filter(product => product.brand === action.payload);
+            state.filteredProducts = state.allProducts.filter(product => product.brand.toLowerCase() === action.payload);
         },
+
         sortByPrice: (state, action) => {
             if (action.payload === "asc") {
-                return state.sort((a, b) => a.price - b.price);
+                state.filteredProducts = state.filteredProducts.sort((a, b) => a.price - b.price);
             } else {
-                return state.sort((a, b) => a.price - b.price);
+                state.filteredProducts = state.filteredProducts.sort((a, b) => b.price - a.price);
             }
         }
     },
-    
+
     extraReducers: (builder) => {
         builder
-        .addCase(getProducts.fulfilled, (state, action) => {
-            return action.payload;
-        })
+            .addCase(getProducts.fulfilled, (state, action) => {
+                state.allProducts = action.payload;
+                state.filteredProducts = action.payload;
+            })
     },
 });
 
-export const { filterByCategory, filterByBrand, sortByPrice } = userSlice.actions;
-export default userSlice.reducer;
+export const { filterByCategory, filterByBrand, sortByPrice } = productsSlice.actions;
+export default productsSlice.reducer;

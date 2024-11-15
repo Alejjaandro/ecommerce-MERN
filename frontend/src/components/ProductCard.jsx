@@ -4,7 +4,7 @@ function ProductCard({ product }) {
     return (
         <div className='border border-gray-300 p-4'>
             <img src={`/${product.thumbnail}`} alt={product.title} className='w-full h-52 object-contain' />
-            <p className='text-lg font-semibold mt-2'>{product.title}</p>
+            <a href='/' className='text-lg font-semibold mt-2 hover:underline'>{product.title}</a>
             <p className='text-sm font-light mt-2'>${product.price}</p>
         </div>
     )

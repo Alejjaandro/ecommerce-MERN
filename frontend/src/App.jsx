@@ -1,13 +1,22 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar'
+import { useEffect } from 'react';
+import { getProducts } from './redux/productsSlice';
+import { useDispatch } from 'react-redux';
 
+import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import AboutUs from './pages/AboutUs'
+import AllProducts from './pages/AllProducts';
 
 function App() {
+	const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [dispatch])
 
 	return (
 		<BrowserRouter>
@@ -19,7 +28,7 @@ function App() {
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/aboutUs' element={<AboutUs />} />
-				<Route path='/products' element={<AboutUs />} />
+				<Route path='/products' element={<AllProducts />} />
 				<Route path='/products/:id' element={<AboutUs />} />
 			</Routes>
 			

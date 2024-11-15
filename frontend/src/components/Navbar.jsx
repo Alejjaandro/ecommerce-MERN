@@ -17,9 +17,9 @@ const Navbar = () => {
     useEffect(() => {
         dispatch(getUser())
     }, [dispatch])
-    
-    const user = useSelector(state => state.user)    
-    
+
+    const user = useSelector(state => state.user)
+
     return (
         <div >
             <div className={(user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + ' w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'}>
@@ -31,8 +31,9 @@ const Navbar = () => {
                     <ul className='w-full text-white'>
                         <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                         <li className='p-4 list-none group border-b-2'>
-                            <a href={`/products`} className='hover:line-through'>Products</a>
+                            <p className='hover:line-through'>Products</p>
                             <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal normal-case'>
+                                <a href="/products" className='hover:line-through border-b-2'>All</a>
                                 <a href="/products/pc" className='hover:line-through border-b-2'>PC</a>
                                 <a href="/products/laptops" className='hover:line-through border-b-2'>Laptops</a>
                                 <a href="/products/headphones" className='hover:line-through border-b-2'>Headphones</a>
@@ -84,14 +85,13 @@ const Navbar = () => {
                             <ul className='w-full text-white uppercase'>
                                 <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                                 <li className='p-4 list-none group border-b-2'>
-                                    <a href={`/whatWeDo`} className='hover:line-through'>What we Do</a>
+                                    <p className='hover:line-through'>Products</p>
                                     <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal normal-case'>
-                                        <a href="/whatWeDo/consulting" className='hover:line-through border-b-2'>Consulting</a>
-                                        <a href="/whatWeDo/design" className='hover:line-through border-b-2'>Design</a>
-                                        <a href="/whatWeDo/digitalTransformation" className='hover:line-through border-b-2'>Digital Tranformation</a>
-                                        <a href="/whatWeDo/projectManagement" className='hover:line-through border-b-2'>Project Management</a>
-                                        <a href="/whatWeDo/marketing" className='hover:line-through border-b-2'>Marketing and Branding</a>
-                                        <a href="/whatWeDo/financialAdvisory" className='hover:line-through border-b-2'>Financial Advisory</a>
+                                        <a href="/products" className='hover:line-through border-b-2'>All</a>
+                                        <a href="/products/pc" className='hover:line-through border-b-2'>PC</a>
+                                        <a href="/products/laptops" className='hover:line-through border-b-2'>Laptops</a>
+                                        <a href="/products/headphones" className='hover:line-through border-b-2'>Headphones</a>
+                                        <a href="/products/smartphones" className='hover:line-through border-b-2'>Smartphones</a>
                                     </div>
                                 </li>
                                 <li className='p-4 hover:line-through border-b-2'><a href={`/whoAreWe`}>Who we Are</a></li>
