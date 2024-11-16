@@ -10,6 +10,7 @@ const Navbar = () => {
     const handleSidebar = () => setSidebar(!sidebar);
 
     const dispatch = useDispatch()
+    const categories = useSelector(state => state.products.allCategories)
 
     useEffect(() => {
         dispatch(getUser())
@@ -29,12 +30,11 @@ const Navbar = () => {
                         <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                         <li className='p-4 list-none group border-b-2'>
                             <p className='hover:line-through'>Products</p>
-                            <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal normal-case'>
-                                <a href="/products" className='hover:line-through border-b-2'>All</a>
-                                <a href="/products/pc" className='hover:line-through border-b-2'>PC</a>
-                                <a href="/products/laptops" className='hover:line-through border-b-2'>Laptops</a>
-                                <a href="/products/headphones" className='hover:line-through border-b-2'>Headphones</a>
-                                <a href="/products/smartphones" className='hover:line-through border-b-2'>Smartphones</a>
+                            <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal capitalize'>
+                                <a href="/products" className='hover:line-through border-b-2'>All Products</a>
+                                {categories.map((category, index) => (
+                                    <a key={index} href={`/products/${category}`} className='hover:line-through border-b-2'>{category}</a>
+                                ))}
                             </div>
                         </li>
                         <li className='p-4 hover:line-through border-b-2'><a href={`/aboutUs`}>Who we Are</a></li>
@@ -83,12 +83,11 @@ const Navbar = () => {
                                 <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                                 <li className='p-4 list-none group border-b-2'>
                                     <p className='hover:line-through'>Products</p>
-                                    <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal normal-case'>
-                                        <a href="/products" className='hover:line-through border-b-2'>All</a>
-                                        <a href="/products/pc" className='hover:line-through border-b-2'>PC</a>
-                                        <a href="/products/laptops" className='hover:line-through border-b-2'>Laptops</a>
-                                        <a href="/products/headphones" className='hover:line-through border-b-2'>Headphones</a>
-                                        <a href="/products/smartphones" className='hover:line-through border-b-2'>Smartphones</a>
+                                    <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal capitalize'>
+                                        <a href="/products" className='hover:line-through border-b-2'>All Products</a>
+                                        {categories.map((category, index) => (
+                                            <a key={index} href={`/products/${category}`} className='hover:line-through border-b-2'>{category}</a>
+                                        ))}
                                     </div>
                                 </li>
                                 <li className='p-4 hover:line-through border-b-2'><a href={`/whoAreWe`}>Who we Are</a></li>

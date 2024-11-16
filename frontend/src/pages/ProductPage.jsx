@@ -27,7 +27,7 @@ function ProductPage() {
                             <div className='flex flex-col items-center gap-4 lg:items-start'>
 
                                 <div className='flex flex-col gap-4 items-center lg:flex-row'>
-                                    <img src={`/${product.thumbnail}`} alt={product.title} className='object-contain' />
+                                    <img src={`/${product.thumbnail}`} alt={product.title} className='w-1/2 object-contain' />
                                     <span className='text-justify'>{product.description}</span>
                                 </div>
 
