@@ -1,18 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
+import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { logout } from '../redux/authSlice'
+import { getCart } from '../redux/cartSlice';
 
 const Navbar = () => {
     const [sidebar, setSidebar] = useState(false);
+    const [menu, setMenu] = useState(false);
     const handleSidebar = () => setSidebar(!sidebar);
 
     const dispatch = useDispatch()
     const categories = useSelector(state => state.products.allCategories)
-
     const user = useSelector(state => state.auth.user)
+
+    const displayMenu = () => {
+        setMenu(!menu)
+    }    
+
+    const cartTotal = useSelector(state => state.cart.cartTotal)
+
+    useEffect(() => {       
+        if (user) {
+            dispatch(getCart())
+        }
+    }, [dispatch, user, cartTotal])
     
     return (
         <div >
@@ -25,13 +39,17 @@ const Navbar = () => {
                     <ul className='w-full text-white'>
                         <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                         <li className='p-4 list-none group border-b-2'>
-                            <p className='hover:line-through'>Products</p>
-                            <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal capitalize'>
+                            <p onClick={displayMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
+                                Products {menu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
+                            </p>
+
+                            <div className={!menu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
                                 <a href="/products" className='hover:line-through border-b-2'>All Products</a>
                                 {categories.map((category, index) => (
                                     <a key={index} href={`/products/${category}`} className='hover:line-through border-b-2'>{category}</a>
                                 ))}
                             </div>
+
                         </li>
                         <li className='p-4 hover:line-through border-b-2'><a href={`/aboutUs`}>Who we Are</a></li>
                     </ul>
@@ -44,9 +62,12 @@ const Navbar = () => {
                         <a href="/register" className='w-1/2 hover:underline text-sky-800'>Register</a>
                     </div>
                 ) : (
-                    <div className='mt-10 p-4'>
-                        <p className='text-white'>Welcome! {user.username}</p>
-                        <button onClick={() => dispatch(logout())} className='w-1/2 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
+                    <div className='mt-10 p-4 flex flex-col'>
+                        <p className='text-white my-4'>Welcome! {user.username}</p>
+                        <a href='/' className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
+                        <a href='/' className='w-fit text-white hover:underline capitalize'>Your profile</a>
+                        <a href='/' className='w-fit text-white hover:underline capitalize'>Settings</a>
+                        <button onClick={() => dispatch(logout())} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
                     </div>
                 )}
 
@@ -78,8 +99,11 @@ const Navbar = () => {
                             <ul className='w-full text-white'>
                                 <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                                 <li className='p-4 list-none group border-b-2'>
-                                    <p className='hover:line-through'>Products</p>
-                                    <div className='hidden group-hover:flex flex-col gap-4 p-4 font-normal capitalize'>
+                                    <p onClick={displayMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
+                                        Products {menu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
+                                    </p>
+
+                                    <div className={!menu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
                                         <a href="/products" className='hover:line-through border-b-2'>All Products</a>
                                         {categories.map((category, index) => (
                                             <a key={index} href={`/products/${category}`} className='hover:line-through border-b-2'>{category}</a>
@@ -96,9 +120,12 @@ const Navbar = () => {
                                     <a href="/register" className='w-1/2 hover:underline text-sky-800'>Register</a>
                                 </div>
                             ) : (
-                                <div className='mt-10 p-4'>
-                                    <p className='text-white'>Welcome! {user.username}</p>
-                                    <button onClick={() => dispatch(logout())} className='w-1/2 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
+                                <div className='mt-10 p-4 flex flex-col'>
+                                    <p className='text-white my-4'>Welcome! {user.username}</p>
+                                    <a href='/' className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
+                                    <a href='/' className='w-fit text-white hover:underline capitalize'>Your profile</a>
+                                    <a href='/' className='w-fit text-white hover:underline capitalize'>Settings</a>
+                                    <button onClick={() => dispatch(logout())} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
                                 </div>
                             )}
 

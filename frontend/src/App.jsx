@@ -17,12 +17,12 @@ import CategoryPage from './pages/CategoryPage';
 
 function App() {
 	const dispatch = useDispatch()
-
+	
     useEffect(() => {
         dispatch(getProducts())
 		dispatch(getUser())
     }, [dispatch])
-
+	
 	return (
 		<BrowserRouter>
 

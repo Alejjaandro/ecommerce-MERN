@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../redux/productsSlice'
+import { addToCart } from '../redux/cartSlice'
 
 function ProductPage() {
 
@@ -13,11 +14,11 @@ function ProductPage() {
     }, [dispatch, id])
 
     const product = useSelector(state => state.products.singleProduct)
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.auth.user)
 
     const [error, setError] = useState(null)
 
-    const addToCart = (product) => {
+    const addToCartButton = (product) => {
         if (!user) {
             setError('You need to be logged in to add products to the cart')
             setTimeout(() => {
@@ -26,7 +27,7 @@ function ProductPage() {
 
             return
         } else {
-            console.log(product);
+            dispatch(addToCart({ userId: user._id, product }))
         }
     }
     return (
@@ -47,7 +48,7 @@ function ProductPage() {
 
                                 <div className="w-full flex gap-8 items-center justify-end">
                                     <span className='text-2xl'>${product.price}</span>
-                                    <button onClick={() => addToCart(product)} className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
+                                    <button onClick={() => addToCartButton(product)} className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
                                 </div>
                             </div>
                         </div>

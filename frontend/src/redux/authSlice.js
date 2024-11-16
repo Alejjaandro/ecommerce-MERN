@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../api/axios";
+import { jwtDecode } from "jwt-decode";
 
 // Async thunk for login
 export const login = createAsyncThunk(
@@ -8,7 +9,9 @@ export const login = createAsyncThunk(
         try {
             const response = await axios.post("/auth/login", userData);
             const user = JSON.stringify(response.data.user);
-            localStorage.setItem("token", user);
+            
+            const token = response.data.token;
+            localStorage.setItem("token", token);
 
             return JSON.parse(user);
         } catch (error) {
@@ -27,7 +30,9 @@ export const register = createAsyncThunk(
             }
             const response = await axios.post("/auth/register", userData);
             const user = JSON.stringify(response.data.user);
-            localStorage.setItem('token', user);
+
+            const token = response.data.token;
+            localStorage.setItem('token', token);
 
             return JSON.parse(user);
         } catch (error) {
@@ -46,9 +51,12 @@ export const authSlice = createSlice({
     reducers: {
 
         getUser: (state) => {
-            const user = JSON.parse(localStorage.getItem("token"));
-
-            if (user) { state.user = user }
+            // Get token from local storage and decode it to get the user
+            const token = localStorage.getItem("token");
+            if (token) { 
+                const user = jwtDecode(token);
+                state.user = user
+            }
             else { state.user = null }
         },
 
