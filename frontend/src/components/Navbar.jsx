@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { getUser, logout } from '../redux/userSlice'
+import { logout } from '../redux/authSlice'
 
 const Navbar = () => {
     const [sidebar, setSidebar] = useState(false);
@@ -12,12 +12,8 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const categories = useSelector(state => state.products.allCategories)
 
-    useEffect(() => {
-        dispatch(getUser())
-    }, [dispatch])
-
-    const user = useSelector(state => state.user)
-
+    const user = useSelector(state => state.auth.user)
+    
     return (
         <div >
             <div className={(user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + ' w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'}>

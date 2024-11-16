@@ -1,8 +1,10 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getProducts } from './redux/productsSlice';
 import { useDispatch } from 'react-redux';
+
+import { getUser } from './redux/authSlice';
+import { getProducts } from './redux/productsSlice';
 
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -18,6 +20,7 @@ function App() {
 
     useEffect(() => {
         dispatch(getProducts())
+		dispatch(getUser())
     }, [dispatch])
 
 	return (

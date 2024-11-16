@@ -23,7 +23,7 @@ export const register = createAsyncThunk(
     async (userData, { rejectWithValue }) => {
         try {
             if (userData.password !== userData.confirmPassword) {
-                return rejectWithValue("Passwords do not match.");
+                return rejectWithValue(["Passwords do not match."]);
             }
             const response = await axios.post("/auth/register", userData);
             const user = JSON.stringify(response.data.user);
@@ -36,42 +36,46 @@ export const register = createAsyncThunk(
     }
 );
 
-export const userSlice = createSlice({
-    name: "user",
-    initialState: null,
+export const authSlice = createSlice({
+    name: "auth",
+    initialState: {
+        user: undefined,
+        error: undefined,
+        success: false,
+    },
     reducers: {
 
-        getUser: () => {
+        getUser: (state) => {
             const user = JSON.parse(localStorage.getItem("token"));
 
-            if (user) { return user }
-            else { return null }
+            if (user) { state.user = user }
+            else { state.user = null }
         },
 
-        logout: () => {
+        logout: (state) => {
             localStorage.removeItem("token");
-            return null;
+            state.user = null;
         },
     },
     
     extraReducers: (builder) => {
         builder
             .addCase(login.fulfilled, (state, action) => {
-                return action.payload;
+                state.success = true;
+                state.user = action.payload;
             })
             .addCase(login.rejected, (state, action) => {
-                console.log(action.payload);
-                return null;
+                state.error = action.payload;
             })
             .addCase(register.fulfilled, (state, action) => {
-                return action.payload;
+                state.success = true;
+                state.user = action.payload;
             })
             .addCase(register.rejected, (state, action) => {
-                console.log(action.payload);
-                return null;
+                state.error = action.payload;
             });
     },
 });
 
-export const { getUser, logout } = userSlice.actions;
-export default userSlice.reducer;
+export const { getUser, logout } = authSlice.actions;
+export default authSlice.reducer;

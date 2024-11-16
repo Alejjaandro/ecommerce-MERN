@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../redux/productsSlice'
 
@@ -13,14 +13,28 @@ function ProductPage() {
     }, [dispatch, id])
 
     const product = useSelector(state => state.products.singleProduct)
-    console.log(product);
+    const user = useSelector(state => state.user)
 
+    const [error, setError] = useState(null)
+
+    const addToCart = (product) => {
+        if (!user) {
+            setError('You need to be logged in to add products to the cart')
+            setTimeout(() => {
+                setError(null)
+            }, 3000)
+
+            return
+        } else {
+            console.log(product);
+        }
+    }
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center lg:items-center'>
             <div className='w-[90%] p-4 bg-white lg:h-[50%] rounded-md'>
-                
+
                 <h1 className='text-4xl md:mt-10 font-bold text-center'>{product.title}</h1>
-                
+
                 {product ? (
                     <div className='mt-6'>
                         <div className='flex justify-around md:text-xl'>
@@ -33,7 +47,7 @@ function ProductPage() {
 
                                 <div className="w-full flex gap-8 items-center justify-end">
                                     <span className='text-2xl'>${product.price}</span>
-                                    <button className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
+                                    <button onClick={() => addToCart(product)} className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
                                 </div>
                             </div>
                         </div>
@@ -41,6 +55,11 @@ function ProductPage() {
                 ) : (
                     <p>Loading...</p>
                 )}
+
+                {error && (
+                    <p className='text-red-500 text-center mt-4'>{error}</p>
+                )}
+
             </div>
         </div>
     )

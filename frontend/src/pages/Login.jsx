@@ -1,12 +1,16 @@
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { login } from '../redux/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../redux/authSlice'
 import { useEffect } from 'react'
 
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const error = useSelector(state => state.auth.error)
+    const success = useSelector(state => state.auth.success)
+
+    // Check if user is already logged in
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
@@ -24,10 +28,11 @@ const Login = () => {
         }
 
         dispatch(login(user))
-
-        // Redirect to home page
-        navigate('/')
     }
+
+    if (success) {
+        navigate('/')
+    } 
 
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center'>
@@ -45,6 +50,7 @@ const Login = () => {
                             </div>
                         </form>
 
+                        {error && <p className='text-red-500 my-4'>{error}</p>}
                         <a href="/register" className='text-white hover:underline'>Don&apos;t have an account? Register</a>
                     </div>
 

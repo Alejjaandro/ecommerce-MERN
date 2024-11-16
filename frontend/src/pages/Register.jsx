@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux'
-import { register } from '../redux/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../redux/authSlice'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,6 +7,9 @@ const Register = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const error = useSelector(state => state.auth.error)
+    const success = useSelector(state => state.auth.success)
+    
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
@@ -28,8 +31,11 @@ const Register = () => {
         }
      
         dispatch(register(user))
-        navigate('/')
     }
+
+    if (success) {
+        navigate('/')
+    } 
 
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center'>
@@ -51,6 +57,7 @@ const Register = () => {
                             </div>
                         </form>
 
+                        {error && <p className='text-red-500 my-4'>{error[0]}</p>}
                         <a href="/login" className='text-white hover:underline'>Alredy have an account? Login</a>
                     </div>
 
