@@ -43,9 +43,8 @@ export const productsSlice = createSlice({
     reducers: {
         filterByCategory: (state, action) => {
             const category = action.payload.toLowerCase();
-            state.selectedCategory = category;
-            // const brand = state.selectedBrand;
-
+            state.selectedCategory = category;            
+            
             // If the category is "all", show all products and get all brands. Otherwise, filter products by category and get all brands from the filtered products
             if (category === "all") {
                 state.filteredProducts = state.allProducts;

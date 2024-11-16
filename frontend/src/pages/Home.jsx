@@ -26,7 +26,7 @@ function Home() {
                 {products ? (
                     <>
                         <div className='mt-4'>
-                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products'>Laptops</a>
+                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products/laptops'>Laptops</a>
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
                                 {laptops.map(product => (
                                     <ProductCard key={product._id} product={product} />
@@ -35,7 +35,7 @@ function Home() {
                         </div>
 
                         <div className='mt-4'>
-                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products'>PCs</a>
+                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products/pc'>PCs</a>
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
                                 {pcs.map(product => (
                                     <ProductCard key={product._id} product={product} />
@@ -44,7 +44,7 @@ function Home() {
                         </div>
 
                         <div className='mt-4'>
-                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products'>Smartphones</a>
+                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products/smartphones'>Smartphones</a>
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
                                 {smartphones.map(product => (
                                     <ProductCard key={product._id} product={product} />
@@ -53,7 +53,7 @@ function Home() {
                         </div>
 
                         <div className='mt-4'>
-                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products'>Headphones</a>
+                            <a className='block p-2 bg-gray-200 text-2xl uppercase hover:underline' href='/products/headphones'>Headphones</a>
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
                                 {headphones.map(product => (
                                     <ProductCard key={product._id} product={product} />

@@ -55,11 +55,11 @@ const Navbar = () => {
                 )}
 
                 {/* CONTACT */}
-                <div className='p-4 text-white'>
+                <div className='p-4 text-white text-sm lg:text-base'>
                     <p className='mt-10 mb-4'>Contact</p>
-                    <span className='capitalize block m-2'>Adress: <span className='font-light normal-case'>C/Example, 29001 Málaga</span></span>
-                    <span className='capitalize block m-2'>Phone: <span className='font-light'> +34 952 999 999</span></span>
-                    <span className='capitalize block m-2'>Email: <span className='font-light normal-case'>company@email.com</span></span>
+                    <span className='capitalize block my-2'>Adress: <span className='font-light normal-case'>C/Example, 29001 Málaga</span></span>
+                    <span className='capitalize block my-2'>Phone: <span className='font-light'> +34 952 999 999</span></span>
+                    <span className='capitalize block my-2'>Email: <span className='font-light normal-case'>company@email.com</span></span>
                 </div>
             </div>
 
@@ -77,9 +77,9 @@ const Navbar = () => {
                         ? (user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + " fixed h-screen ease-in duration-500"
                         : "fixed left-[-100%] ease-in duration-500"
                 }>
-                    <div className="flex w-full">
+                    <div className="flex w-full uppercase">
                         <div>
-                            <ul className='w-full text-white uppercase'>
+                            <ul className='w-full text-white'>
                                 <li className='p-4 hover:line-through border-t-2 border-b-2'><a href={`/`}>Home</a></li>
                                 <li className='p-4 list-none group border-b-2'>
                                     <p className='hover:line-through'>Products</p>
@@ -108,11 +108,11 @@ const Navbar = () => {
                             )}
 
                             {/* CONTACT */}
-                            <div className='p-4 text-white'>
+                            <div className='p-4 text-white text-sm'>
                                 <p className='mt-10 mb-4'>Contact</p>
-                                <span className='capitalize block m-2'>Adress: <span className='font-light normal-case'>C/Example, 29001 Málaga</span></span>
-                                <span className='capitalize block m-2'>Phone: <span className='font-light'> +34 952 999 999</span></span>
-                                <span className='capitalize block m-2'>Email: <span className='font-light normal-case'>company@email.com</span></span>
+                                <span className='capitalize block my-2'>Adress: <span className='font-light normal-case'>C/Example, 29001 Málaga</span></span>
+                                <span className='capitalize block my-2'>Phone: <span className='font-light'> +34 952 999 999</span></span>
+                                <span className='capitalize block my-2'>Email: <span className='font-light normal-case'>company@email.com</span></span>
                             </div>
 
                         </div>
