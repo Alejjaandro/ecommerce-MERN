@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../redux/productsSlice'
 import { addToCart } from '../redux/cartSlice'
 
+import { FaCircleArrowLeft } from "react-icons/fa6";
+
 function ProductPage() {
 
     const dispatch = useDispatch()
@@ -17,6 +19,7 @@ function ProductPage() {
     const user = useSelector(state => state.auth.user)
 
     const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(null)
 
     const addToCartButton = (product) => {
         if (!user) {
@@ -28,16 +31,22 @@ function ProductPage() {
             return
         } else {
             dispatch(addToCart({ userId: user._id, product }))
+            setSuccess('Added to cart')
+            setTimeout(() => {
+                setSuccess(null)
+            }, 3000)
         }
     }
+
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center lg:items-center'>
             <div className='w-[90%] p-4 bg-white lg:h-[50%] rounded-md'>
-
-                <h1 className='text-4xl md:mt-10 font-bold text-center'>{product.title}</h1>
-
+                
+                <a href="/products" className='flex items-center gap-2 hover:underline'><FaCircleArrowLeft/> Back to products page</a>
+                
                 {product ? (
                     <div className='mt-6'>
+                        <h1 className='my-4 text-4xl md:mt-10 font-bold text-center'>{product.title}</h1>
                         <div className='flex justify-around md:text-xl'>
                             <div className='flex flex-col items-center gap-4 lg:items-start'>
 
@@ -59,6 +68,9 @@ function ProductPage() {
 
                 {error && (
                     <p className='text-red-500 text-center mt-4'>{error}</p>
+                )}
+                {success && (
+                    <p className='text-green-500 text-center mt-4'>{success}</p>
                 )}
 
             </div>
