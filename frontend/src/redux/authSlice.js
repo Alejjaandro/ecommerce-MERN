@@ -9,7 +9,7 @@ export const login = createAsyncThunk(
         try {
             const response = await axios.post("/auth/login", userData);
             const user = JSON.stringify(response.data.user);
-            
+
             const token = response.data.token;
             localStorage.setItem("token", token);
 
@@ -41,6 +41,24 @@ export const register = createAsyncThunk(
     }
 );
 
+export const verifyToken = createAsyncThunk(
+    "user/verifyToken",
+    async (_, { rejectWithValue }) => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get("/auth/verifyToken", {
+                headers: {
+                    token: token,
+                },
+            });
+           
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
+
 export const authSlice = createSlice({
     name: "auth",
     initialState: {
@@ -53,7 +71,7 @@ export const authSlice = createSlice({
         getUser: (state) => {
             // Get token from local storage and decode it to get the user
             const token = localStorage.getItem("token");
-            if (token) { 
+            if (token) {
                 const user = jwtDecode(token);
                 state.user = user
             }
@@ -65,7 +83,7 @@ export const authSlice = createSlice({
             state.user = null;
         },
     },
-    
+
     extraReducers: (builder) => {
         builder
             .addCase(login.fulfilled, (state, action) => {
@@ -81,6 +99,16 @@ export const authSlice = createSlice({
             })
             .addCase(register.rejected, (state, action) => {
                 state.error = action.payload;
+            })
+            .addCase(verifyToken.fulfilled, () => {
+                return
+            })
+            .addCase(verifyToken.rejected, (state, action) => {
+                if (action.payload[0] === "Token expired.") {
+                    state.user = null;
+                    localStorage.removeItem("token");
+                    alert("Session expired. Please login again.");
+                }
             });
     },
 });

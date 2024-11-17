@@ -56,9 +56,6 @@ app.use('/products', productRoutes);
 app.use('/carts', cartRoutes);
 app.use('/orders', orderRoutes);
 
-// Serve static files from the "images" directory
-app.use('/productImages', express.static('assets/productImages'));
-
 // Stablish what port should the app listen to and a message to show it works.
 const PORT = process.env.PORT;
 app.listen(PORT || 8000, () => {

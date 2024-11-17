@@ -4,7 +4,7 @@ import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { logout } from '../redux/authSlice'
+import { logout, verifyToken } from '../redux/authSlice'
 import { getCart } from '../redux/cartSlice';
 
 const Navbar = () => {
@@ -25,6 +25,7 @@ const Navbar = () => {
     useEffect(() => {       
         if (user) {
             dispatch(getCart())
+            dispatch(verifyToken())
         }
     }, [dispatch, user, cartTotal])
     
@@ -58,15 +59,15 @@ const Navbar = () => {
                 {/* LOGIN */}
                 {!user ? (
                     <div className='mt-10 p-4 flex flex-col gap-4'>
-                        <a href="/login" className='w-1/2 hover:underline text-pink-700'>Login</a>
-                        <a href="/register" className='w-1/2 hover:underline text-sky-800'>Register</a>
+                        <a href="/login" className='w-1/2 hover:underline text-pink-700 lg:text-xl'>Login</a>
+                        <a href="/register" className='w-1/2 hover:underline text-sky-800 lg:text-xl'>Register</a>
                     </div>
                 ) : (
-                    <div className='mt-10 p-4 flex flex-col'>
+                    <div className='mt-10 p-4 flex flex-col lg:text-xl'>
                         <p className='text-white my-4'>Welcome! {user.username}</p>
-                        <a href='/' className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
-                        <a href='/' className='w-fit text-white hover:underline capitalize'>Your profile</a>
-                        <a href='/' className='w-fit text-white hover:underline capitalize'>Settings</a>
+                        <a href={`/cart/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
+                        <a href={`/profile/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your profile</a>
+                        <a href={`/settings/${user._id}`} className='w-fit text-white hover:underline capitalize'>Settings</a>
                         <button onClick={() => dispatch(logout())} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
                     </div>
                 )}
@@ -122,9 +123,9 @@ const Navbar = () => {
                             ) : (
                                 <div className='mt-10 p-4 flex flex-col'>
                                     <p className='text-white my-4'>Welcome! {user.username}</p>
-                                    <a href='/' className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
-                                    <a href='/' className='w-fit text-white hover:underline capitalize'>Your profile</a>
-                                    <a href='/' className='w-fit text-white hover:underline capitalize'>Settings</a>
+                                    <a href={`/cart/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
+                                    <a href={`/profile/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your profile</a>
+                                    <a href={`/settings/${user._id}`} className='w-fit text-white hover:underline capitalize'>Settings</a>
                                     <button onClick={() => dispatch(logout())} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
                                 </div>
                             )}
