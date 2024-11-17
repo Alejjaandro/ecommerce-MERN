@@ -25,6 +25,7 @@ const Navbar = () => {
     useEffect(() => {       
         if (user) {
             dispatch(getCart())
+            // Chack if the token has expired
             dispatch(verifyToken())
         }
     }, [dispatch, user, cartTotal])

@@ -41,6 +41,7 @@ export const register = createAsyncThunk(
     }
 );
 
+// Async thunk for verifying token on page refresh or component mount
 export const verifyToken = createAsyncThunk(
     "user/verifyToken",
     async (_, { rejectWithValue }) => {
