@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 // Async thunk for login
 export const login = createAsyncThunk(
-    "user/login",
+    "auth/login",
     async (userData, { rejectWithValue }) => {
         try {
             const response = await axios.post("/auth/login", userData);
@@ -22,7 +22,7 @@ export const login = createAsyncThunk(
 
 // Async thunk for register
 export const register = createAsyncThunk(
-    "user/register",
+    "auth/register",
     async (userData, { rejectWithValue }) => {
         try {
             if (userData.password !== userData.confirmPassword) {
@@ -43,7 +43,7 @@ export const register = createAsyncThunk(
 
 // Async thunk for verifying token on page refresh or component mount
 export const verifyToken = createAsyncThunk(
-    "user/verifyToken",
+    "auth/verifyToken",
     async (_, { rejectWithValue }) => {
         try {
             const token = localStorage.getItem("token");
@@ -114,5 +114,5 @@ export const authSlice = createSlice({
     },
 });
 
-export const { getUser, logout } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

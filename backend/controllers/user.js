@@ -55,9 +55,10 @@ export const updateUser = async (req, res) => {
             $set: req.body
         }, { new: true })
 
-        // Generate a new token with the updated user information.
+        // Create a security Token without the password.
+        const { password, ...userWithoutPassword } = updatedUser.toObject();
         const newToken = jwt.sign(
-            updatedUser.toObject(),
+            userWithoutPassword,
             process.env.JWT_KEY,
             { expiresIn: '1h' }
         );

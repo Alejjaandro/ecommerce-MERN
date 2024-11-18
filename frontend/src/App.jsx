@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getUser } from './redux/authSlice';
+import { getUser } from './redux/userSlice';
 import { getProducts } from './redux/productsSlice';
 
 import Navbar from './components/Navbar'
@@ -16,6 +16,7 @@ import ProductPage from './pages/ProductPage';
 import CategoryPage from './pages/CategoryPage';
 import UserCart from './pages/UserCart';
 import UserProfile from './pages/UserProfile';
+import Settings from './pages/Settings';
 
 function App() {
 	const dispatch = useDispatch()
@@ -41,6 +42,7 @@ function App() {
 
 				<Route path='/cart/:id' element={<UserCart />} />
 				<Route path='/profile/:id' element={<UserProfile />} />
+				<Route path='/settings/:id' element={<Settings />} />
 
 			</Routes>
 			

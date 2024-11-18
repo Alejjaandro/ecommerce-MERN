@@ -6,7 +6,7 @@ import { useState } from 'react';
 function ProductCard({ product }) {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.user)
 
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)

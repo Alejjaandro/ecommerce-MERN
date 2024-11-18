@@ -14,7 +14,7 @@ const Navbar = () => {
 
     const dispatch = useDispatch()
     const categories = useSelector(state => state.products.allCategories)
-    const user = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.user)
 
     const displayMenu = () => {
         setMenu(!menu)

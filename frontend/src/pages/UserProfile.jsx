@@ -1,26 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { format } from 'date-fns';
-import { logout } from '../redux/authSlice';
+// import { format } from 'date-fns';
+// import { logout } from '../redux/authSlice';
 import { useState } from 'react';
 
 function UserProfile() {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.user)
     const [warning ,setWarning] = useState(false)
 
-    let createdDate;
-    let createdHour;
-    let updatedDate;
-    let updatedHour;
+    // let createdDate;
+    // let createdHour;
+    // let updatedDate;
+    // let updatedHour;
+   
+    // if (user) {
+    //     createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
+    //     createdHour = format(new Date(user.createdAt), "HH:mm:ss");
 
-    if (user) {
-        createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
-        createdHour = format(new Date(user.createdAt), "HH:mm:ss");
-
-        updatedDate = format(new Date(user.updatedAt), "dd/MM/yyyy");
-        updatedHour = format(new Date(user.updatedAt), "HH:mm:ss");
-    }
+    //     updatedDate = format(new Date(user.updatedAt), "dd/MM/yyyy");
+    //     updatedHour = format(new Date(user.updatedAt), "HH:mm:ss");
+    // }
 
     const displayWarning = () => {
         setWarning(!warning)
@@ -66,18 +66,18 @@ function UserProfile() {
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Created:</span>
-                                    <span className=''>{createdDate} at {createdHour}</span>
+                                    <span className=''>{user.createdAt}</span>
                                 </p>
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Last Update:</span>
-                                    <span className=''>{updatedDate} at {updatedHour}</span>
+                                    <span className=''>{user.updatedAt}</span>
                                 </p>
 
                             </div>
 
                             <div className="my-4 w-full md:w-3/4 text-center grid grid-cols-2 gap-4">
-                                <button className="p-2 md:p-4 bg-blue-400 hover:bg-blue-700"><a to={`/settings/${user._id}`}>Edit Profile</a></button>
+                                <a href={`/settings/${user._id}`} className="p-2 md:p-4 bg-blue-400 hover:bg-blue-700">Edit Profile</a>
                                 <button onClick={displayWarning} className="p-2 md:p-4 bg-red-400 hover:bg-red-700">Delete Account</button>
                             </div>
 
