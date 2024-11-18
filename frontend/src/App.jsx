@@ -15,6 +15,7 @@ import AllProducts from './pages/AllProducts';
 import ProductPage from './pages/ProductPage';
 import CategoryPage from './pages/CategoryPage';
 import UserCart from './pages/UserCart';
+import UserProfile from './pages/UserProfile';
 
 function App() {
 	const dispatch = useDispatch()
@@ -39,6 +40,8 @@ function App() {
 				<Route path='/product/:id' element={<ProductPage />} />
 
 				<Route path='/cart/:id' element={<UserCart />} />
+				<Route path='/profile/:id' element={<UserProfile />} />
+
 			</Routes>
 			
 		</BrowserRouter>
