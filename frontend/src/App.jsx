@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-// import { getUser } from './redux/userSlice';
 import { getUser } from './redux/authSlice';
 import { getProducts } from './redux/productsSlice';
 
@@ -19,6 +18,9 @@ import UserCart from './pages/UserCart';
 import UserProfile from './pages/UserProfile';
 import Settings from './pages/Settings';
 import UserOrders from './pages/UserOrders';
+import Checkout from './pages/Checkout';
+
+import ProtectedRoutes from './middleware/ProtectedRoutes';
 
 function App() {
 	const dispatch = useDispatch()
@@ -42,12 +44,14 @@ function App() {
 				<Route path='/products/:category' element={<CategoryPage />} />
 				<Route path='/product/:id' element={<ProductPage />} />
 
-				<Route path='/cart/:id' element={<UserCart />} />
-				<Route path='/orders/:id' element={<UserOrders />} />
-				<Route path='/checkout/:id' element={<Settings />} />
-				<Route path='/thank-you/:id' element={<Settings />} />
-				<Route path='/profile/:id' element={<UserProfile />} />
-				<Route path='/settings/:id' element={<Settings />} />
+				<Route element={<ProtectedRoutes />}>
+					<Route path='/cart/:id' element={<UserCart />} />
+					<Route path='/orders/:id' element={<UserOrders />} />
+					<Route path='/checkout/:id' element={<Checkout />} />
+					<Route path='/thank-you/:id' element={<Settings />} />
+					<Route path='/profile/:id' element={<UserProfile />} />
+					<Route path='/settings/:id' element={<Settings />} />
+				</Route>
 
 			</Routes>
 			
