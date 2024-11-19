@@ -56,7 +56,7 @@ function UserCart() {
                             <h1 className='text-xl md:text-2xl uppercase'>Your cart:</h1>
                             <div className='flex gap-4'>
                                 <button onClick={removeAll} className='bg-red-500 text-white font-bold p-2 rounded-md hover:bg-red-700'>Remove All</button>
-                                <a href='/' className='bg-green-500 text-white font-bold p-2 rounded-md hover:bg-green-700'>Checkout Now!</a>
+                                <a href={`/checkout/${user._id}`} className='bg-green-500 text-white font-bold p-2 rounded-md hover:bg-green-700'>Checkout Now!</a>
                             </div>
                         </div>
 

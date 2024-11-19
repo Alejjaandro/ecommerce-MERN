@@ -21,6 +21,7 @@ import UserOrders from './pages/UserOrders';
 import Checkout from './pages/Checkout';
 
 import ProtectedRoutes from './middleware/ProtectedRoutes';
+import ThankYou from './pages/ThankYou';
 
 function App() {
 	const dispatch = useDispatch()
@@ -48,7 +49,7 @@ function App() {
 					<Route path='/cart/:id' element={<UserCart />} />
 					<Route path='/orders/:id' element={<UserOrders />} />
 					<Route path='/checkout/:id' element={<Checkout />} />
-					<Route path='/thank-you/:id' element={<Settings />} />
+					<Route path='/thank-you/:id' element={<ThankYou />} />
 					<Route path='/profile/:id' element={<UserProfile />} />
 					<Route path='/settings/:id' element={<Settings />} />
 				</Route>

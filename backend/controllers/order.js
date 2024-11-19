@@ -6,9 +6,11 @@ import Order from '../models/Order.js';
 export const createOrder = async (req, res) => {
     const { userId, order, cart } = req.body;
     try {
+        console.log(cart.products);
+        
         const newOrder = new Order({
             userId: userId,
-            products: cart,
+            products: cart.products,
             orderInfo: order
         });
 
