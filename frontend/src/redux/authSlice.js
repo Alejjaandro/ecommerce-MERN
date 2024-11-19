@@ -41,6 +41,51 @@ export const register = createAsyncThunk(
     }
 );
 
+export const updateUser = createAsyncThunk(
+    "user/updateUser",
+    async (data, { rejectWithValue }) => {
+        try {
+            const { userId, info } = data;
+            
+            if (info.password !== info.confirmPassword) {
+                return rejectWithValue({ message: ["Passwords do not match."] });
+            }
+
+            // Only allow the following fields to be updated.
+            const validKeys = ['image', 'name', 'lastname', 'email', 'username', 'password'];
+            let filteredInfo = {};
+            validKeys.forEach((key) => {
+                if (key in info) {
+                    filteredInfo[key] = info[key];
+                }
+            });
+
+            data = filteredInfo;            
+            const response = await axios.put(`/users/${userId}`, info);
+            
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const deleteUser = createAsyncThunk(
+    "user/deleteUser",
+    async (userId, { rejectWithValue }) => {
+        try {
+            console.log(userId);
+            
+            const response = await axios.delete(`/users/${userId}`);
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 // Async thunk for verifying token on page refresh or component mount
 export const verifyToken = createAsyncThunk(
     "auth/verifyToken",
@@ -65,7 +110,7 @@ export const authSlice = createSlice({
     initialState: {
         user: undefined,
         error: undefined,
-        success: false,
+        success: undefined,
     },
     reducers: {
 
@@ -81,7 +126,7 @@ export const authSlice = createSlice({
 
         logout: (state) => {
             localStorage.removeItem("token");
-            state.user = null;
+            state.user = undefined;
         },
     },
 
@@ -110,9 +155,36 @@ export const authSlice = createSlice({
                     localStorage.removeItem("token");
                     alert("Session expired. Please login again.");
                 }
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {    
+                state.user = action.payload.updatedUser;       
+                state.error = null;
+                state.success = action.payload.message;
+
+                localStorage.setItem("token", action.payload.newToken);
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                console.log(action.payload);
+                
+                state.error = action.payload.message[0];
+                state.success = null;
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                console.log(action.payload);
+                
+                state.user = null;
+                localStorage.removeItem("token");
+                state.error = null;
+                state.success = action.payload.message;
+            })
+            .addCase(deleteUser.rejected, (state, action) => {
+                console.log(action.payload);
+                
+                state.error = action.payload.message;
+                state.success = null;
             });
     },
 });
 
-export const { logout } = authSlice.actions;
+export const { getUser, logout } = authSlice.actions;
 export default authSlice.reducer;

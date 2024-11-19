@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../redux/userSlice'
+import { updateUser } from '../redux/authSlice'
 function Settings() {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.user)
-    const errors = useSelector(state => state.user.error)
-    const success = useSelector(state => state.user.success)
+    const user = useSelector(state => state.auth.user)
+    const errors = useSelector(state => state.auth.error)
+    const success = useSelector(state => state.auth.success)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +22,7 @@ function Settings() {
         // Petition to update user data.
         dispatch(updateUser({ userId: user._id, info: data }));
     }
-
+    
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center items-center'>
             <div className='w-[90%] p-4 bg-white md:h-[50%] rounded-md'>

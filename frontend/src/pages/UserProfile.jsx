@@ -1,29 +1,36 @@
-import { useDispatch, useSelector } from 'react-redux'
-// import { format } from 'date-fns';
-// import { logout } from '../redux/authSlice';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
+import { deleteUser } from '../redux/authSlice';
 
 function UserProfile() {
-
+    const  navigate = useNavigate()
     const dispatch = useDispatch()
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.auth.user)
     const [warning ,setWarning] = useState(false)
 
-    // let createdDate;
-    // let createdHour;
-    // let updatedDate;
-    // let updatedHour;
+    let createdDate;
+    let createdHour;
+    let updatedDate;
+    let updatedHour;
    
-    // if (user) {
-    //     createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
-    //     createdHour = format(new Date(user.createdAt), "HH:mm:ss");
+    if (user) {
+        createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
+        createdHour = format(new Date(user.createdAt), "HH:mm:ss");
 
-    //     updatedDate = format(new Date(user.updatedAt), "dd/MM/yyyy");
-    //     updatedHour = format(new Date(user.updatedAt), "HH:mm:ss");
-    // }
+        updatedDate = format(new Date(user.updatedAt), "dd/MM/yyyy");
+        updatedHour = format(new Date(user.updatedAt), "HH:mm:ss");
+    }
 
     const displayWarning = () => {
         setWarning(!warning)
+    }
+
+    const handleDelete = () => {
+        dispatch(deleteUser(user._id))
+        alert('Your account has been deleted')
+        navigate('/')
     }
     
     return (
@@ -66,12 +73,12 @@ function UserProfile() {
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Created:</span>
-                                    <span className=''>{user.createdAt}</span>
+                                    <span className=''>{createdDate} at {createdHour}</span>
                                 </p>
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Last Update:</span>
-                                    <span className=''>{user.updatedAt}</span>
+                                    <span className=''>{updatedDate} at {updatedHour}</span>
                                 </p>
 
                             </div>
@@ -87,7 +94,7 @@ function UserProfile() {
                             <div className="p-4 flex flex-col items-center gap-4 bg-red-400 text-white uppercase">
                                 <p className='text-center'>Are you sure you want to delete your account?</p>
                                 <div className='w-full md:w-1/2 flex gap-1'>
-                                    <button onClick={() => console.log('delete')} className="w-full p-4 bg-red-700 hover:bg-red-900">Yes</button>
+                                    <button onClick={() => handleDelete(user._id)} className="w-full p-4 bg-red-700 hover:bg-red-900">Yes</button>
                                     <button onClick={() => setWarning(false)} className="w-full p-4 bg-blue-700 hover:bg-blue-900">No</button>
                                 </div>
                             </div>

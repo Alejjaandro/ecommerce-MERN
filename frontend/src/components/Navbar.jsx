@@ -14,7 +14,7 @@ const Navbar = () => {
 
     const dispatch = useDispatch()
     const categories = useSelector(state => state.products.allCategories)
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.auth.user)
 
     const displayMenu = () => {
         setMenu(!menu)
@@ -29,7 +29,7 @@ const Navbar = () => {
             dispatch(verifyToken())
         }
     }, [dispatch, user, cartTotal])
-    
+        
     return (
         <div >
             <div className={(user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + ' w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'}>

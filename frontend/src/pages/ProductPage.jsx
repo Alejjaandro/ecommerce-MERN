@@ -16,7 +16,7 @@ function ProductPage() {
     }, [dispatch, id])
 
     const product = useSelector(state => state.products.singleProduct)
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.auth.user)
 
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)

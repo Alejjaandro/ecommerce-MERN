@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getUser } from './redux/userSlice';
+// import { getUser } from './redux/userSlice';
+import { getUser } from './redux/authSlice';
 import { getProducts } from './redux/productsSlice';
 
 import Navbar from './components/Navbar'
