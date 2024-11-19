@@ -18,6 +18,7 @@ import CategoryPage from './pages/CategoryPage';
 import UserCart from './pages/UserCart';
 import UserProfile from './pages/UserProfile';
 import Settings from './pages/Settings';
+import UserOrders from './pages/UserOrders';
 
 function App() {
 	const dispatch = useDispatch()
@@ -42,6 +43,9 @@ function App() {
 				<Route path='/product/:id' element={<ProductPage />} />
 
 				<Route path='/cart/:id' element={<UserCart />} />
+				<Route path='/orders/:id' element={<UserOrders />} />
+				<Route path='/checkout/:id' element={<Settings />} />
+				<Route path='/thank-you/:id' element={<Settings />} />
 				<Route path='/profile/:id' element={<UserProfile />} />
 				<Route path='/settings/:id' element={<Settings />} />
 

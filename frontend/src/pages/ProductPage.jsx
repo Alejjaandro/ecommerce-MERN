@@ -4,6 +4,8 @@ import { getSingleProduct } from '../redux/productsSlice'
 import { addToCart } from '../redux/cartSlice'
 
 import { FaCircleArrowLeft } from "react-icons/fa6";
+import { IoIosAddCircle } from "react-icons/io";
+import { IoIosRemoveCircle } from "react-icons/io";
 
 function ProductPage() {
 
@@ -20,6 +22,7 @@ function ProductPage() {
 
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
+    const [quantity, setQuantity] = useState(1)
 
     const addToCartButton = (product) => {
         if (!user) {
@@ -30,7 +33,7 @@ function ProductPage() {
 
             return
         } else {
-            dispatch(addToCart({ userId: user._id, product }))
+            dispatch(addToCart({ userId: user._id, product, quantity }))
             setSuccess('Added to cart')
             setTimeout(() => {
                 setSuccess(null)
@@ -38,9 +41,14 @@ function ProductPage() {
         }
     }
 
+    const increaseQuantity = () => setQuantity(quantity + 1)
+    const decreaseQuantity = () => {
+        if (quantity > 1) setQuantity(quantity - 1)
+    }
+
     return (
-        <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center lg:items-center'>
-            <div className='w-[90%] p-4 bg-white lg:h-[50%] rounded-md'>
+        <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center items-center'>
+            <div className='w-[90%] p-4 bg-white rounded-md'>
                 
                 <a href="/products" className='flex items-center gap-2 hover:underline'><FaCircleArrowLeft/> Back to products page</a>
                 
@@ -55,8 +63,13 @@ function ProductPage() {
                                     <span className='text-justify'>{product.description}</span>
                                 </div>
 
-                                <div className="w-full flex gap-8 items-center justify-end">
-                                    <span className='text-2xl'>${product.price}</span>
+                                <div className="w-full flex flex-col md:flex-row gap-8 items-center justify-end">
+                                    <div className="flex gap-4 items-center">
+                                        <button onClick={decreaseQuantity} className='text-2xl'><IoIosRemoveCircle/></button>
+                                        <span className='text-2xl'>{quantity}</span>
+                                        <button onClick={increaseQuantity} className='text-2xl'><IoIosAddCircle/></button>
+                                    </div>
+                                    <span className='text-2xl'>{product.price}€</span>
                                     <button onClick={() => addToCartButton(product)} className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
                                 </div>
                             </div>

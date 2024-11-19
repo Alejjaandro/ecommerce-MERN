@@ -128,6 +128,11 @@ export const authSlice = createSlice({
             localStorage.removeItem("token");
             state.user = undefined;
         },
+
+        clearMessage: (state) => {
+            state.error = null;
+            state.success = null;
+        },
     },
 
     extraReducers: (builder) => {
@@ -156,7 +161,7 @@ export const authSlice = createSlice({
                     alert("Session expired. Please login again.");
                 }
             })
-            .addCase(updateUser.fulfilled, (state, action) => {    
+            .addCase(updateUser.fulfilled, (state, action) => {
                 state.user = action.payload.updatedUser;       
                 state.error = null;
                 state.success = action.payload.message;
@@ -164,27 +169,21 @@ export const authSlice = createSlice({
                 localStorage.setItem("token", action.payload.newToken);
             })
             .addCase(updateUser.rejected, (state, action) => {
-                console.log(action.payload);
-                
                 state.error = action.payload.message[0];
                 state.success = null;
             })
             .addCase(deleteUser.fulfilled, (state, action) => {
-                console.log(action.payload);
-                
                 state.user = null;
                 localStorage.removeItem("token");
                 state.error = null;
                 state.success = action.payload.message;
             })
             .addCase(deleteUser.rejected, (state, action) => {
-                console.log(action.payload);
-                
                 state.error = action.payload.message;
                 state.success = null;
             });
     },
 });
 
-export const { getUser, logout } = authSlice.actions;
+export const { getUser, logout, clearMessage } = authSlice.actions;
 export default authSlice.reducer;

@@ -41,7 +41,7 @@ function UserProfile() {
                     <div className='mt-6'>
                         <div className='flex flex-col items-center gap-4 lg:text-xl'>
 
-                            <div className='w-3/4 text-center grid grid-cols-2 gap-4'>
+                            <div className='w-3/4 text-center grid grid-cols-1 md:grid-cols-2 gap-4'>
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Name:</span>
@@ -55,7 +55,7 @@ function UserProfile() {
 
                             </div>
 
-                            <div className='w-3/4 text-center grid grid-cols-2 gap-4'>
+                            <div className='w-3/4 text-center grid grid-cols-1 md:grid-cols-2 gap-4'>
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Userame:</span>

@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../redux/authSlice'
+import { updateUser, clearMessage } from '../redux/authSlice'
+import { useEffect } from 'react'
+
 function Settings() {
 
     const dispatch = useDispatch()
@@ -21,8 +23,17 @@ function Settings() {
 
         // Petition to update user data.
         dispatch(updateUser({ userId: user._id, info: data }));
+        // Clear form after 3 seconds
+        setTimeout(() => e.target.reset(), 3000)
     }
-    
+
+    // Clear messages after 3 seconds
+    useEffect(() => {
+        if (errors || success) {
+            setTimeout(() => dispatch(clearMessage()), 3000)
+        }
+    }, [errors, success, dispatch])
+        
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center items-center'>
             <div className='w-[90%] p-4 bg-white md:h-[50%] rounded-md'>

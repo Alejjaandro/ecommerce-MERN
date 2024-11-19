@@ -34,7 +34,7 @@ function ProductCard({ product }) {
             <div className='mb-4'>
                 <img src={`/${product.thumbnail}`} alt={product.title} className='w-full h-52 object-contain' />
                 <a href={`/product/${product._id}`} className='text-lg font-semibold mt-2 hover:underline'>{product.title}</a>
-                <p className='text-sm font-light mt-2'>${product.price}</p>
+                <p className='text-sm font-light mt-2'>{product.price.toFixed(2)}€</p>
             </div>
             
             {error && (

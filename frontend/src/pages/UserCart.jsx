@@ -1,25 +1,27 @@
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { removeFromCart, deleteCart } from '../redux/cartSlice'
+import { removeFromCart, deleteCart, addToCart } from '../redux/cartSlice'
+import { IoIosAddCircle } from "react-icons/io";
+import { IoIosRemoveCircle } from "react-icons/io";
 
 function UserCart() {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
     const cart = useSelector(state => state.cart.cart)
-    let cartTotal
-    
+        
     // Calculate the total price of the cart
+    let cartTotal
     if (cart) {
         cartTotal = cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)
     }
 
-    const onRemove = (product) => {       
-        dispatch(removeFromCart({ 
-                userId: user._id, 
-                productId: product._id, 
-                product 
-            })
+    const onRemove = (product) => {
+        dispatch(removeFromCart({
+            userId: user._id,
+            productId: product._id,
+            product
+        })
         )
     }
 
@@ -27,7 +29,21 @@ function UserCart() {
         dispatch(deleteCart(user._id))
     }
 
-    
+    const increaseQuantity = (product) => {
+        dispatch(addToCart({ userId: user._id, product, quantity: 1 }))
+    }
+    const decreaseQuantity = (product) => {
+        if (product.quantity > 1) {
+            dispatch(addToCart({ userId: user._id, product, quantity: -1 }))
+        } else {
+            dispatch(removeFromCart({
+                userId: user._id,
+                productId: product._id,
+                product
+            }))
+        }
+    }
+
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center'>
             <div className='w-[90%] p-4 bg-white'>
@@ -50,16 +66,20 @@ function UserCart() {
 
                                     <div className='h-full flex flex-col justify-around text-center'>
                                         <img src={`/${product.thumbnail}`} className='w-1/2 self-center' alt={product.title} />
-                                        <h1 className='text-xl font-bold flex flex-col'>
-                                            {product.title}
+                                        <div>
+                                            <a href={`/product/${product._id}`} className='text-xl font-bold flex flex-col hover:underline'>{product.title}</a>
                                             <span className='font-light text-base'> x {product.quantity}</span>
-                                        </h1>
-                                        <p className='md:text-lg mt-4'>{(product.price*product.quantity)}€</p>
+                                        </div>
+                                        <p className='md:text-lg mt-4'>{(product.price * product.quantity).toFixed(2)}€</p>
                                     </div>
 
-                                    <div className='flex gap-2'>
-                                        <button className='w-1/2 self-center bg-blue-500 text-white font-bold p-2 rounded-md hover:bg-blue-700'>Buy</button>
-                                        <button onClick={()=>onRemove(product)} className='w-1/2 self-center bg-red-500 text-white font-bold p-2 rounded-md hover:bg-red-700'>Remove</button>
+                                    <div className='flex flex-col items-center lg:flex-row gap-2'>
+                                        <div className="flex gap-4 items-center">
+                                            <button onClick={()=> decreaseQuantity(product)} className='text-2xl'><IoIosRemoveCircle /></button>
+                                            <span className='text-2xl'>{product.quantity}</span>
+                                            <button onClick={()=> increaseQuantity(product)} className='text-2xl'><IoIosAddCircle /></button>
+                                        </div>
+                                        <button onClick={() => onRemove(product)} className='w-1/2 self-center bg-red-500 text-white font-bold p-2 rounded-md hover:bg-red-700'>Remove</button>
                                     </div>
                                 </div>
                             ))}
@@ -67,7 +87,7 @@ function UserCart() {
 
                         <div className='mt-4 uppercase gap-4 flex justify-end'>
                             <h1 className='text-2xl font-bold'>Total:</h1>
-                            <p className='text-2xl font-bold'>{cartTotal}€</p>
+                            <p className='text-2xl font-bold'>{cartTotal.toFixed(2)}€</p>
                         </div>
                     </div>
                 )

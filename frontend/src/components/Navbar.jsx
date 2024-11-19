@@ -67,6 +67,7 @@ const Navbar = () => {
                     <div className='mt-10 p-4 flex flex-col lg:text-xl'>
                         <p className='text-white my-4'>Welcome! {user.username}</p>
                         <a href={`/cart/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
+                        <a href={`/orders/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your Orders</a>
                         <a href={`/profile/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your profile</a>
                         <a href={`/settings/${user._id}`} className='w-fit text-white hover:underline capitalize'>Settings</a>
                         <button onClick={() => dispatch(logout())} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
@@ -125,6 +126,7 @@ const Navbar = () => {
                                 <div className='mt-10 p-4 flex flex-col'>
                                     <p className='text-white my-4'>Welcome! {user.username}</p>
                                     <a href={`/cart/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your cart ({cartTotal})</a>
+                                    <a href={`/orders/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your Orders</a>
                                     <a href={`/profile/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your profile</a>
                                     <a href={`/settings/${user._id}`} className='w-fit text-white hover:underline capitalize'>Settings</a>
                                     <button onClick={() => dispatch(logout())} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
@@ -144,7 +146,6 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
