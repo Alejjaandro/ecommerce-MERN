@@ -10,17 +10,10 @@ function UserProfile() {
     const user = useSelector(state => state.auth.user)
     const [warning ,setWarning] = useState(false)
 
-    let createdDate;
-    let createdHour;
-    let updatedDate;
-    let updatedHour;
-   
-    if (user) {
-        createdDate = format(new Date(user.createdAt), "dd/MM/yyyy");
-        createdHour = format(new Date(user.createdAt), "HH:mm:ss");
-
-        updatedDate = format(new Date(user.updatedAt), "dd/MM/yyyy");
-        updatedHour = format(new Date(user.updatedAt), "HH:mm:ss");
+    // Function to format the date.
+    function formatDate(date) {
+        const createdDate = format(new Date(date), "dd/MM/yyyy HH:mm:ss");
+        return createdDate;
     }
 
     const displayWarning = () => {
@@ -73,12 +66,12 @@ function UserProfile() {
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Created:</span>
-                                    <span className=''>{createdDate} at {createdHour}</span>
+                                    <span className=''>{formatDate(user.createdAt)}</span>
                                 </p>
 
                                 <p className='flex flex-col'>
                                     <span className='uppercase font-bold'>Last Update:</span>
-                                    <span className=''>{updatedDate} at {updatedHour}</span>
+                                    <span className=''>{formatDate(user.updatedAt)}</span>
                                 </p>
 
                             </div>

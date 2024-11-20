@@ -28,10 +28,37 @@ export const createOrder = createAsyncThunk(
         }
     }
 );
+export const getOrders = createAsyncThunk(
+    "cart/getOrders",
+    async (userId, { rejectWithValue }) => {
+       
+        try {
+            const response = await axios.get(`/orders/find/${userId}`);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
+
+export const getSingleOrder = createAsyncThunk(
+    "cart/getSingleOrder",
+    async (orderId, { rejectWithValue }) => {
+        console.log(orderId);
+        
+        try {
+            const response = await axios.get(`/orders/findOrder/${orderId}`);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
 
 export const orderSlice = createSlice({
     name: "order",
     initialState: {
+        userOrders:null,
         order: null,
         success: false,
         error: null,
@@ -47,6 +74,18 @@ export const orderSlice = createSlice({
             })
             .addCase(createOrder.rejected, (state, action) => {
                 state.error = action.payload[0];
+            })
+            .addCase(getOrders.fulfilled, (state, action) => {               
+                state.userOrders = action.payload;
+            })
+            .addCase(getOrders.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            .addCase(getSingleOrder.fulfilled, (state, action) => {
+                state.order = action.payload;
+            })
+            .addCase(getSingleOrder.rejected, (state, action) => {
+                state.error = action.payload;
             });
     },
 });

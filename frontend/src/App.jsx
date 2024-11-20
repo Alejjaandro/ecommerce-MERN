@@ -22,6 +22,7 @@ import Checkout from './pages/Checkout';
 
 import ProtectedRoutes from './middleware/ProtectedRoutes';
 import ThankYou from './pages/ThankYou';
+// import ViewOrder from './pages/ViewOrder';
 
 function App() {
 	const dispatch = useDispatch()
