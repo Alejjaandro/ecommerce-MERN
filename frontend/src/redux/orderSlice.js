@@ -60,7 +60,7 @@ export const orderSlice = createSlice({
     initialState: {
         userOrders:null,
         order: null,
-        success: false,
+        success: null,
         error: null,
     },
 
@@ -71,14 +71,17 @@ export const orderSlice = createSlice({
             .addCase(createOrder.fulfilled, (state, action) => {
                 state.order = action.payload.newOrder;
                 state.success = action.payload.message;
+                state.error = null;
             })
             .addCase(createOrder.rejected, (state, action) => {
                 state.error = action.payload[0];
+                state.success = null;
             })
             .addCase(getOrders.fulfilled, (state, action) => {               
                 state.userOrders = action.payload;
             })
             .addCase(getOrders.rejected, (state, action) => {
+                state.userOrders = null;
                 state.error = action.payload;
             })
             .addCase(getSingleOrder.fulfilled, (state, action) => {

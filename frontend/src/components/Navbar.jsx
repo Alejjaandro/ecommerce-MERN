@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
-
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { logout, verifyToken } from '../redux/authSlice'
@@ -13,6 +13,7 @@ const Navbar = () => {
     const handleSidebar = () => setSidebar(!sidebar);
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const categories = useSelector(state => state.products.allCategories)
     const user = useSelector(state => state.auth.user)
 
@@ -29,7 +30,11 @@ const Navbar = () => {
             dispatch(verifyToken())
         }
     }, [dispatch, user, cartTotal])
-        
+    
+    const handleLogout = () => {
+        dispatch(logout())
+        navigate('/')
+    }
     return (
         <div >
             <div className={(user && user.isAdmin ? 'bg-amber-500' : 'bg-black') + ' w-1/4 fixed h-full font-medium uppercase hidden md:flex flex-col justify-around'}>
@@ -70,7 +75,7 @@ const Navbar = () => {
                         <a href={`/orders/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your Orders</a>
                         <a href={`/profile/${user._id}`} className='w-fit text-white hover:underline capitalize'>Your profile</a>
                         <a href={`/settings/${user._id}`} className='w-fit text-white hover:underline capitalize'>Settings</a>
-                        <button onClick={() => dispatch(logout())} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
+                        <button onClick={handleLogout} className='w-1/2 my-4 text-justify uppercase text-pink-700 hover:underline'>Logout</button>
                     </div>
                 )}
 
