@@ -1,12 +1,11 @@
 # Ecommerce Project
 
 ## Presentation
-Hi, i'm Alejandro Olaso and this is an e-commerce project that provides:
+Hi, i'm Alejandro and this is an Ecommerce project that provides:
 - Full front-end and back-end development, as well as the design and implementation of the database.
 - Complete user management (registration and login functionalities)
 - CRUD operations on multiple models
 - Implementation of a REST API to facilitate communication between different parts of the application.
-
 
 **You can check the fully functional project here:**  
 [https://alejjaandro-ecommerce-project.vercel.app](https://alejjaandro-ecommerce-frontend.vercel.app/)
@@ -20,7 +19,7 @@ Please check that you have installed:
 ## How To Install
 ### 1. First clone this repository:
 ```
-git clone https://github.com/Alejjaandro/FinalProject.git
+git clone https://github.com/Alejjaandro/ecommerce-MERN.git
 ```
 ### 2. Then install both Backend and Frontend dependencies, they are listed below with more info.
 Run in each dependency the following command:
@@ -53,6 +52,7 @@ You will need [MongoDB Database Tools](https://www.mongodb.com/docs/database-too
 - Routes: Define the endpoints of the API.
 - Controllers: Handle the logic for each endpoint.
 - Middleware: Handle tasks that should be done before the request hits the controller.
+- Validators: Schemas for [zod:](https://zod.dev/) to validate.
 
 ### API Endpoints
 
@@ -301,25 +301,26 @@ This will start the server at <http://localhost:8000/api>.
 
 ### Frotend Dependencies
 
+- [Vite:](https://vite.dev/)) A fast frontend build tool to use with react.
+- [Redux Toolkit:](https://redux-toolkit.js.org/) A library for state managments.
+- [Tailwind](https://tailwindcss.com/) A utility-first CSS framework packed with premade classes that can be directly apllied.
 - [Axios:](https://axios-http.com/) A promise-based HTTP client for the browser and Node.js.
 - [React Router Dom:](https://github.com/remix-run/react-router#readme) A collection of navigational components that compose declaratively with your application.
 - [React Datepicker:](https://github.com/Hacker0x01/react-datepicker) A simple and reusable datepicker component for React.
 - [React Country Region Selector:](https://github.com/country-regions/react-country-region-selector#readme) Country / region react dropdown selector for forms.
 - [JWT Decode:](https://github.com/auth0/jwt-decode#readme) Allows you to decode, verify and generate JWT.
-- [JS Cookie:](https://github.com/auth0/jwt-decode#readme) A simple, lightweight JavaScript API for handling browser cookies.
 - [Date-fns:](https://github.com/date-fns/date-fns#readme) Modern JavaScript date utility library.
 - [react-country-region-selector:](https://github.com/country-regions/react-country-region-selector#readme) React components to display connected country and region dropdowns.
 - [react-datepicker:](https://github.com/Hacker0x01/react-datepicker) Datepicker component for React.
-- [react-modal:](https://github.com/reactjs/react-modal) Library to create simple modals for React.
-- [@mui/material and @mui/icons-material:](https://mui.com/material-ui/material-icons/) React components for faster and easier web development, with Google's Material Design.
+- [React Icons](https://react-icons.github.io/react-icons/) Icons library for react.
 
 ## Project Structure
 - Components: Reusable parts of the user interface.
 - Pages: Different sections of the website, each corresponding to a route.
 - API: Axios configuration file.
-- Context: Files that provide a way to pass data through the component tree without having to pass props down manually at every level.
+- Redux: The files where we manage the changes of differents states.
 - Middlewares: Files used to protect routes before entering them.
-- Assets: Images used for backgrounds and other resources.
+- Public: Images used for backgrounds and other resources.
 
 ### Frontend Environment Variables
 
@@ -332,14 +333,10 @@ It is an axios setting file inside `/src/api`.
 
 To run the frontend, use the following command: 
 ```
-npm start
+npm run dev
 ```
 This will start the server at <http://localhost:3000>.
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 ## License
 
-This project is licensed under the ISC License.
+This project is licensed under the MIT License.
