@@ -19,19 +19,24 @@ import UserProfile from './pages/UserProfile';
 import Settings from './pages/Settings';
 import UserOrders from './pages/UserOrders';
 import Checkout from './pages/Checkout';
+import ThankYou from './pages/ThankYou';
+
+import AdminAllProducts from './pages/AdminPages/AdminAllProducts';
+import AdminCreateProduct from './pages/AdminPages/AdminCreateProduct';
+import AdminEditProduct from './pages/AdminPages/AdminEditProduct';
+// import ViewOrder from './pages/ViewOrder';
 
 import ProtectedRoutes from './middleware/ProtectedRoutes';
-import ThankYou from './pages/ThankYou';
-// import ViewOrder from './pages/ViewOrder';
+import AdminRoutes from './middleware/AdminRoutes';
 
 function App() {
 	const dispatch = useDispatch()
-	
-    useEffect(() => {
-        dispatch(getProducts())
+
+	useEffect(() => {
+		dispatch(getProducts())
 		dispatch(getUser())
-    }, [dispatch])
-	
+	}, [dispatch])
+
 	return (
 		<BrowserRouter>
 
@@ -55,8 +60,20 @@ function App() {
 					<Route path='/settings/:id' element={<Settings />} />
 				</Route>
 
+				<Route element={<AdminRoutes />}>
+					<Route path="/admin-all-products/" element={<AdminAllProducts />} />
+					<Route path="/edit-product/:productId" element={<AdminEditProduct />} />
+					<Route path="/create-product" element={<AdminCreateProduct />} />
+					{/* <Route path="/all-users/" element={<AllUsers />} />
+					<Route path="/edit-user/:userId" element={<EditUser />} />
+					<Route path="/all-carts/" element={<AllCarts />} />
+					<Route path="/edit-cart/:cartId" element={<EditCart />} />
+					<Route path="/all-orders/" element={<AllOrders />} />
+					<Route path="/order-details/:orderId" element={<OrderDetails />} /> */}
+				</Route>
+
 			</Routes>
-			
+
 		</BrowserRouter>
 	)
 }

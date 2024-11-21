@@ -14,6 +14,7 @@ export const getProducts = createAsyncThunk(
         }
     }
 );
+
 export const getSingleProduct = createAsyncThunk(
     "products/getSingleProduct",
     async (id, { rejectWithValue }) => {
@@ -26,7 +27,6 @@ export const getSingleProduct = createAsyncThunk(
         }
     }
 );
-
 
 export const productsSlice = createSlice({
     name: "products",

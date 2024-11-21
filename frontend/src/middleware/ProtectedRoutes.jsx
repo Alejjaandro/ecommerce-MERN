@@ -7,7 +7,7 @@ export default function ProtectedRoutes() {
 
     useEffect(() => {
         if (!token) {
-            console.log("No token");
+            alert('You need to be logged in to access this page.');
             navigate("/");
         }
     }, [token, navigate]);

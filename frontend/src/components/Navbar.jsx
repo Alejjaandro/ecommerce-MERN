@@ -8,8 +8,9 @@ import { logout, verifyToken } from '../redux/authSlice'
 import { getCart } from '../redux/cartSlice';
 
 const Navbar = () => {
-    const [sidebar, setSidebar] = useState(false);
     const [menu, setMenu] = useState(false);
+    const [adminMenu, setAdminMenu] = useState(false);
+    const [sidebar, setSidebar] = useState(false);
     const handleSidebar = () => setSidebar(!sidebar);
 
     const dispatch = useDispatch()
@@ -17,20 +18,19 @@ const Navbar = () => {
     const categories = useSelector(state => state.products.allCategories)
     const user = useSelector(state => state.auth.user)
 
-    const displayMenu = () => {
-        setMenu(!menu)
-    }    
+    const displayMenu = () => setMenu(!menu)
+    const displayAdminMenu = () => setAdminMenu(!adminMenu)
 
     const cartTotal = useSelector(state => state.cart.cartTotal)
 
-    useEffect(() => {       
+    useEffect(() => {
         if (user) {
             dispatch(getCart())
             // Chack if the token has expired
             dispatch(verifyToken())
         }
     }, [dispatch, user, cartTotal])
-    
+
     const handleLogout = () => {
         dispatch(logout())
         navigate('/')
@@ -59,6 +59,18 @@ const Navbar = () => {
 
                         </li>
                         <li className='p-4 hover:line-through border-b-2'><a href={`/aboutUs`}>Who we Are</a></li>
+
+                        {/* ADMIN ROUTES */}
+                        <li className='p-4 list-none group border-b-2'>
+                            <p onClick={displayAdminMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
+                                Admin Options {adminMenu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
+                            </p>
+
+                            <div className={!adminMenu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
+                                <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
+                                <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
@@ -119,6 +131,19 @@ const Navbar = () => {
                                     </div>
                                 </li>
                                 <li className='p-4 hover:line-through border-b-2'><a href={`/whoAreWe`}>Who we Are</a></li>
+                                
+                                {/* ADMIN ROUTES */}
+                                <li className='p-4 list-none group border-b-2'>
+                                    <p onClick={displayAdminMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
+                                        Admin Options {adminMenu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
+                                    </p>
+
+                                    <div className={!adminMenu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
+                                        <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
+                                        <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
+                                    </div>
+                                </li>
+
                             </ul>
 
                             {/* LOGIN */}
