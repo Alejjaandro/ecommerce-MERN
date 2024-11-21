@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGO_URL)
 .catch( (error) => console.log(error) );
 
 app.use(cors({ 
-    origin: ['*', 'http://localhost:3000', 'https://alejjaandro-ecommerce-frontend.vercel.app', 'https://ecommerce-frontend-git-project-alejjaandros-projects.vercel.app'],
+    origin: ['*', 'http://localhost:3000', 'https://tech-ecommerce-frontend.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
