@@ -23,9 +23,10 @@ export const productValidator = z.object({
     }),
     
     discountPercentage: z.number({
-        invalid_type_error: "Discount % must be a string number"
+        invalid_type_error: "Discount % must not be a string number"
     })
     .max(100, {message: "Discount % must be less than 100"})
+    .min(0, {message: "Discount % can't be less than 0"})
     .optional(),
 
     category: z.string({
@@ -44,7 +45,7 @@ export const productValidator = z.object({
 
     stock: z.number({
         required_error: 'A Stock number is required',
-        invalid_type_error: "Stock must be a string number"
+        invalid_type_error: "Stock must not be a string number"
     }),
 
     description: z.string({

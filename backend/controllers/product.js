@@ -14,7 +14,7 @@ export const createProduct = async (req, res) => {
         const savedProduct = await newProduct.save();
         res.status(200).json({message: "Product Created", newProduct: newProduct});
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({message: error.message});
     }
 };
 
@@ -37,50 +37,10 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
-        if (product) {
-            const productImageName = product.thumbnail.split("/")[4];
-            const productName = product.title
-            const dirPath = path.join('assets', 'productImages');
-
-            fs.readdir(dirPath, (err, files) => {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).json({ message: 'Failed to read directory.' });
-                }
-
-                // Array of all files that contains the product title.
-                const filesToDelete = files.filter(file => file.includes(productName));
-
-                if (filesToDelete.length > 0) {
-                    filesToDelete.forEach(file => {
-                        const filePath = path.join(dirPath, file);
-                        fs.unlink(filePath, (err) => {
-                            if (err) {
-                                console.error(err);
-                                return res.status(500).json({ message: 'Failed to delete image file.' });
-                            }
-                        });
-                    });
-                } else {
-                    // If the file has a different name from the product title,
-                    // we find the image by its prodImageName.
-                    const filePath = path.join(dirPath, productImageName);
-                    fs.unlink(filePath, (err) => {
-                        if (err) {
-                            console.error(err);
-                            return res.status(500).json({ message: 'Failed to delete image file.' });
-                        }
-                    });
-                }
-
-                Product.findByIdAndDelete(req.params.id)
-                .then(() => res.status(200).json({message: 'Product and its images deleted'}))
-                .catch(error => res.status(500).json(error));
-            });
+        const response = await Product.findByIdAndDelete(req.params.id);
+        
+        res.status(200).json({message: 'Product deleted', deletedProduct: product});
                
-        } else {
-            res.status(404).json({message: 'Product not found'});
-        }
     } catch (error) {
         res.status(500).json(error);
     }};

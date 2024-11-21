@@ -8,7 +8,6 @@ import { validator } from '../middleware/validator.js';
 import { userOrderValidator } from '../validators/order.validator.js';
 
 // We create the endpoints. 
-
 router.get("/findOrder/:orderId", verifyUser, getOrder);
 router.get("/find/:userId", verifyUser, getUserOrder);
 
