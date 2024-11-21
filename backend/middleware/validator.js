@@ -7,7 +7,7 @@ export const validator = (schema) => (req, res, next) => {
         schema.parse(req.body);
         next();
     } catch (error) {
-        console.log('Error in validator middleware: ', error);
+        console.log('Error in validator middleware: ', error.errors);
         if (Array.isArray(error.errors)) {
             return res.status(400)
                 .json({ message: error.errors.map((error) => error.message) });

@@ -28,6 +28,41 @@ export const getSingleProduct = createAsyncThunk(
     }
 );
 
+export const createProduct = createAsyncThunk(
+    "admin/createProduct",
+    async (data, { rejectWithValue }) => {
+        try {
+            console.log(data);
+
+            // Check if the thumbnail is a number
+            if (!isNaN(data.thumbnail)) {
+                return rejectWithValue(["Thumbnail must be a string"]);
+            }            
+            data.thumbnail = `productImages/${data.thumbnail}`;
+    
+            const response = await axios.post(`/products/`, data);
+            return response.data;            
+
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
+export const deleteProduct = createAsyncThunk(
+    "admin/deleteProduct",
+    async (productId, { rejectWithValue }) => {
+        try {
+            // console.log(productId);
+            
+            const response = await axios.delete(`/products/${productId}`);
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
+
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
@@ -38,6 +73,9 @@ export const productsSlice = createSlice({
         allBrands: [],
         selectedCategory: "all",
         selectedBrand: "all",
+
+        error: null,
+        success: null
     },
 
     reducers: {
@@ -96,6 +134,22 @@ export const productsSlice = createSlice({
             })
             .addCase(getSingleProduct.fulfilled, (state, action) => {
                 state.singleProduct = action.payload;
+            })
+            .addCase(createProduct.fulfilled, (state, action) => {
+                state.allProducts.push(action.payload.newProduct);
+                state.filteredProducts.push(action.payload.newProduct);
+                state.success = action.payload.message;
+                state.error = null;
+            })
+            .addCase(createProduct.rejected, (state, action) => {                
+                state.error = action.payload[0];
+                state.success = null;
+            })
+            .addCase(deleteProduct.fulfilled, (state, action) => {
+                const productDeleted = action.payload.deletedProduct;
+                state.allProducts = state.allProducts.filter(product => product._id !== productDeleted._id);
+                state.filteredProducts = state.filteredProducts.filter(product => product._id !== productDeleted._id);
+                state.success = action.payload.message;
             }
         );
     },

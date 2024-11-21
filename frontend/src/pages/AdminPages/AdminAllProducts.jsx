@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { filterByCategory, filterByBrand } from '../../redux/productsSlice'
-
-import { deleteProduct } from '../../redux/adminSlice'
+import { deleteProduct, filterByCategory, filterByBrand } from '../../redux/productsSlice'
 
 function AdminAllProducts() {
 	const dispatch = useDispatch()
@@ -58,8 +56,9 @@ function AdminAllProducts() {
 								</select>
 							</div>
 						</div>
-
+						
 						<div className='my-6 border-t-2 border-gray-300'>
+
 							<ul>
 								{products.map((product, index) => (
 									<li key={index} className='flex flex-col border-b-2 border-gray-300 py-4'>
@@ -95,6 +94,7 @@ function AdminAllProducts() {
 									</li>
 								))}
 							</ul>
+							
 						</div>
 					</div>
 				)
