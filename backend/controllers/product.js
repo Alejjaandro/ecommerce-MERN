@@ -21,15 +21,13 @@ export const createProduct = async (req, res) => {
 // ===== UPDATE Product ===== //
 export const updateProduct = async (req, res) => {
 
-    // console.log(req.body);
-    console.log(req.params.id);
     try {
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, { new: true })
-        res.status(200).json({message: "Product Updated", updateProduct: updatedProduct});
+        res.status(200).json({message: "Product Updated", updatedProduct: updatedProduct});
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({message: error.message});
     }
 };
 

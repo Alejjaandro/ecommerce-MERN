@@ -61,16 +61,19 @@ const Navbar = () => {
                         <li className='p-4 hover:line-through border-b-2'><a href={`/aboutUs`}>Who we Are</a></li>
 
                         {/* ADMIN ROUTES */}
-                        <li className='p-4 list-none group border-b-2'>
-                            <p onClick={displayAdminMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
-                                Admin Options {adminMenu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
-                            </p>
+                        {user && user.isAdmin && (
+                            <li className='p-4 list-none group border-b-2'>
+                                <p onClick={displayAdminMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
+                                    Admin Options {adminMenu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
+                                </p>
 
-                            <div className={!adminMenu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
-                                <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
-                                <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
-                            </div>
-                        </li>
+                                <div className={!adminMenu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
+                                    <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
+                                    <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
+                                </div>
+                            </li>
+                        )}
+
                     </ul>
                 </div>
 
@@ -131,18 +134,20 @@ const Navbar = () => {
                                     </div>
                                 </li>
                                 <li className='p-4 hover:line-through border-b-2'><a href={`/whoAreWe`}>Who we Are</a></li>
-                                
-                                {/* ADMIN ROUTES */}
-                                <li className='p-4 list-none group border-b-2'>
-                                    <p onClick={displayAdminMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
-                                        Admin Options {adminMenu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
-                                    </p>
 
-                                    <div className={!adminMenu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
-                                        <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
-                                        <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
-                                    </div>
-                                </li>
+                                {/* ADMIN ROUTES */}
+                                {user && user.isAdmin && (
+                                    <li className='p-4 list-none group border-b-2'>
+                                        <p onClick={displayAdminMenu} className='hover:line-through hover:cursor-pointer flex justify-between items-center'>
+                                            Admin Options {adminMenu ? <FaCircleArrowUp /> : <FaCircleArrowDown />}
+                                        </p>
+
+                                        <div className={!adminMenu ? 'hidden' : 'flex flex-col gap-4 p-4 font-normal capitalize'}>
+                                            <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
+                                            <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
+                                        </div>
+                                    </li>
+                                )}
 
                             </ul>
 
