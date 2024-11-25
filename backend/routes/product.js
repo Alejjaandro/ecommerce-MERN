@@ -19,7 +19,7 @@ const upload = multer({ storage: storage });
 import { createProduct, updateProduct, deleteProduct, getProduct, getAllProducts } from '../controllers/product.js';
 import { verifyAdmin } from '../middleware/verifyToken.js';
 import { validator } from '../middleware/validator.js';
-import { productValidator } from '../validators/productValidator.js';
+import { productValidator, updateProductValidator } from '../validators/productValidator.js';
 
 // We create the endpoints. 
 router.get("/find/:id", getProduct);
@@ -31,7 +31,7 @@ router.post("/saveProdImage", verifyAdmin, upload.single('thumbnail'), (req, res
 });
 
 router.post("/", verifyAdmin, validator(productValidator), createProduct);
-router.put("/:id", verifyAdmin, validator(productValidator), updateProduct);
+router.put("/:id", verifyAdmin, validator(updateProductValidator), updateProduct);
 router.delete("/:id", verifyAdmin, deleteProduct);
 
 export default router;

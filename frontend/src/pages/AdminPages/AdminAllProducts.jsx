@@ -30,7 +30,7 @@ function AdminAllProducts() {
 	return (
 		<div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center'>
 			<div className='w-[90%] p-4 bg-white'>
-				<h1 className='text-4xl md:my-10 font-bold text-center uppercase'>Product Administration</h1>
+				<h1 className='text-lg md:text-4xl my-10 font-bold text-center uppercase'>Product Administration</h1>
 
 				{products ? (
 					<div className=''>
@@ -63,21 +63,27 @@ function AdminAllProducts() {
 								{products.map((product, index) => (
 									<li key={index} className='flex flex-col border-b-2 border-gray-300 py-4'>
 
-										<div className='mb-2 flex justify-between items-center'>
-											<div className='flex items-center gap-4'>
+										<div className='mb-2 flex flex-col md:flex-row justify-between items-center gap-4'>
+
+											<div className='flex justify-center md:justify-start items-center gap-4'>
 												<img src={`/${product.thumbnail}`} alt={product.title} className='w-20 h-20 object-contain' />
-												<div>
+												<div className='w-1/2'>
 													<h1 className='text-xl'>{product.title}</h1>
 													<p className='text-gray-500 capitalize'>{product.category}</p>
 												</div>
 											</div>
-											<p>{product._id}</p>
+
+											<p className='hidden lg:inline'>
+												{product._id}
+											</p>
+
 											<div>
 												<p className='text-xl font-bold'>{product.price.toFixed(2)}€</p>
 											</div>
-											<div className='flex flex-col gap-2 text-center'>
-												<a href={`/edit-product/${product._id}`} className='p-2 bg-yellow-500 hover:bg-yellow-700 rounded-md'>Edit</a>
-												<button onClick={() => setWarningProductId(product._id)} className='p-2 bg-red-500 hover:bg-red-700 rounded-md'>Delete</button>
+
+											<div className='w-full md:w-auto mt-2 flex md:flex-col gap-2 text-center justify-end'>
+												<a href={`/edit-product/${product._id}`} className='w-full md:w-auto p-2 bg-yellow-500 hover:bg-yellow-700 rounded-md'>Edit</a>
+												<button onClick={() => setWarningProductId(product._id)} className='w-full md:w-auto p-2 bg-red-500 hover:bg-red-700 rounded-md'>Delete</button>
 											</div>
 										</div>
 

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../api/axios";
 
-// Async thunk for products. This will fetch all products from the backend
 export const deleteProduct = createAsyncThunk(
     "admin/deleteProduct",
     async (productId, { rejectWithValue }) => {
@@ -17,9 +16,23 @@ export const deleteProduct = createAsyncThunk(
     }
 );
 
+export const getAllUsers = createAsyncThunk(
+    "admin/getAllUsers",
+    async (_, { rejectWithValue }) => {
+        try {            
+            const response = await axios.get('/users/');
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
+
 export const adminSlice = createSlice({
-    name: "products",
+    name: "admin",
     initialState: {
+        allUsers: null,
         error: null,
         success: null,
     },
@@ -33,6 +46,13 @@ export const adminSlice = createSlice({
                 state.success = action.payload.message;
             })
             .addCase(deleteProduct.rejected, (state, action) => {
+                console.log(action.payload);
+                state.error = action.payload.message;
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                state.allUsers = action.payload;
+            })
+            .addCase(getAllUsers.rejected, (state, action) => {
                 console.log(action.payload);
                 state.error = action.payload.message;
             }

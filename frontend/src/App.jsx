@@ -24,6 +24,8 @@ import ThankYou from './pages/ThankYou';
 import AdminAllProducts from './pages/AdminPages/AdminAllProducts';
 import AdminCreateProduct from './pages/AdminPages/AdminCreateProduct';
 import AdminEditProduct from './pages/AdminPages/AdminEditProduct';
+import AdminAllUsers from './pages/AdminPages/AdminAllUsers';
+import AdminEditUser from './pages/AdminPages/AdminEditUser';
 // import ViewOrder from './pages/ViewOrder';
 
 import ProtectedRoutes from './middleware/ProtectedRoutes';
@@ -64,9 +66,9 @@ function App() {
 					<Route path="/admin-all-products/" element={<AdminAllProducts />} />
 					<Route path="/edit-product/:productId" element={<AdminEditProduct />} />
 					<Route path="/create-product" element={<AdminCreateProduct />} />
-					{/* <Route path="/all-users/" element={<AllUsers />} />
-					<Route path="/edit-user/:userId" element={<EditUser />} />
-					<Route path="/all-carts/" element={<AllCarts />} />
+					<Route path="/all-users/" element={<AdminAllUsers />} />
+					<Route path="/edit-user/:userId" element={<AdminEditUser />} />
+					{/* <Route path="/all-carts/" element={<AllCarts />} />
 					<Route path="/edit-cart/:cartId" element={<EditCart />} />
 					<Route path="/all-orders/" element={<AllOrders />} />
 					<Route path="/order-details/:orderId" element={<OrderDetails />} /> */}

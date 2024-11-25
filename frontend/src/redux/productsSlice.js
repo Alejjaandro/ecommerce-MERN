@@ -37,23 +37,58 @@ export const createProduct = createAsyncThunk(
             // Check if the thumbnail is a number
             if (!isNaN(data.thumbnail)) {
                 return rejectWithValue(["Thumbnail must be a string"]);
-            }            
+            }
             data.thumbnail = `productImages/${data.thumbnail}`;
-    
+
             const response = await axios.post(`/products/`, data);
-            return response.data;            
+            return response.data;
 
         } catch (error) {
             return rejectWithValue(error.response.data.message);
         }
     }
 );
+
+export const updateProduct = createAsyncThunk(
+    "admin/updateProduct",
+    async (info, { rejectWithValue }) => {
+        try {
+            const { productId, data } = info;
+
+            // If data is empty, return an error
+            if (Object.keys(data).length === 0) {
+                return rejectWithValue(["No fields to update"]);
+            }
+
+            // Check if the thumbnail is a number.
+            if (data.thumbnail && !isNaN(data.thumbnail)) {
+                return rejectWithValue(["Thumbnail must be a string"]);
+
+            } else if (!data.thumbnail) {
+                delete data.thumbnail
+
+            } else {
+                data.thumbnail = (data.thumbnail.split('/')[0] === 'productImages') ? data.thumbnail : `productImages/${data.thumbnail}`;
+                console.log(data.thumbnail);
+            }
+
+            console.log(data);
+
+            const response = await axios.put(`/products/${productId}`, data);
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+);
+
 export const deleteProduct = createAsyncThunk(
     "admin/deleteProduct",
     async (productId, { rejectWithValue }) => {
         try {
             // console.log(productId);
-            
+
             const response = await axios.delete(`/products/${productId}`);
             return response.data;
 
@@ -81,8 +116,8 @@ export const productsSlice = createSlice({
     reducers: {
         filterByCategory: (state, action) => {
             const category = action.payload.toLowerCase();
-            state.selectedCategory = category;            
-            
+            state.selectedCategory = category;
+
             // If the category is "all", show all products and get all brands. Otherwise, filter products by category and get all brands from the filtered products
             if (category === "all") {
                 state.filteredProducts = state.allProducts;
@@ -141,9 +176,27 @@ export const productsSlice = createSlice({
                 state.success = action.payload.message;
                 state.error = null;
             })
-            .addCase(createProduct.rejected, (state, action) => {                
+            .addCase(createProduct.rejected, (state, action) => {
                 state.error = action.payload[0];
                 state.success = null;
+            })
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                console.log(action.payload);
+
+                const updatedProduct = action.payload.updatedProduct;
+                state.allProducts = state.allProducts.map(product => product._id === updatedProduct._id ? updatedProduct : product);
+                state.filteredProducts = state.filteredProducts.map(product => product._id === updatedProduct._id ? updatedProduct : product);
+                state.success = action.payload.message;
+                state.error = null;
+            })
+            .addCase(updateProduct.rejected, (state, action) => {
+                state.error = action.payload[0];
+                state.success = null;
+            })
+            .addCase(deleteProduct.rejected, (state, action) => {
+                console.log(action.payload);
+
+                state.error = action.payload.message[0];
             })
             .addCase(deleteProduct.fulfilled, (state, action) => {
                 const productDeleted = action.payload.deletedProduct;
@@ -151,7 +204,7 @@ export const productsSlice = createSlice({
                 state.filteredProducts = state.filteredProducts.filter(product => product._id !== productDeleted._id);
                 state.success = action.payload.message;
             }
-        );
+            );
     },
 });
 
