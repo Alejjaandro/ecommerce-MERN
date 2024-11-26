@@ -25,7 +25,6 @@ export const createCart = async (req, res) => {
                 { new: true, upsert: true }
             );
 
-            console.log(newCart);
             return res.status(200).json({ cart: newCart });
         } else {
             // We check if there is product with same properties in the cart.
@@ -43,8 +42,6 @@ export const createCart = async (req, res) => {
 
                 // Save the updated cart.
                 const updatedCart = await cartExist.save();
-                console.log(updatedCart);
-
                 return res.status(200).json({ cart: updatedCart });
 
             } else {
@@ -60,7 +57,6 @@ export const createCart = async (req, res) => {
                     },
                     { new: true }
                 );
-                console.log(updatedCart);
 
                 return res.status(200).json({ cart: updatedCart });
             }

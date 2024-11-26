@@ -75,12 +75,26 @@ export const getAllCarts = createAsyncThunk(
     }
 );
 
+export const getAllOrders = createAsyncThunk(
+    "admin/getAllOrders",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.get('/orders/');
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue([error.response.data.message]);
+        }
+    }
+);
+
 export const adminSlice = createSlice({
     name: "admin",
     initialState: {
         userToEdit: null,
         allUsers: null,
         allCarts: null,
+        allOrders: null,
         error: null,
         success: null,
     },
@@ -128,6 +142,13 @@ export const adminSlice = createSlice({
                 console.log(action.payload);
                 state.error = action.payload.message;
             })
+            .addCase(getAllOrders.fulfilled, (state, action) => {
+                state.allOrders = action.payload;
+            })
+            .addCase(getAllOrders.rejected, (state, action) => {
+                console.log(action.payload);
+                state.error = action.payload.message;
+            });
     },
 });
 
