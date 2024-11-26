@@ -2,12 +2,6 @@ import { z } from 'zod';
 
 export const updateUserValidator = z.object({
 
-    image: z.string({ message: 'Image must be a String' })
-    .refine(image => isNaN(Number(image)), {
-        message: 'Image cannot be a numeric string',
-    })
-    .optional(),
-
     name: z.string({ message: 'Name must be a String' })
     .refine(name => isNaN(Number(name)), {message: 'Name cannot be a numeric string'})
     .refine(name => !/\d/.test(name), {message: "Name must not contain a number"})

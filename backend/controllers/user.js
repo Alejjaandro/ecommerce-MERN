@@ -26,23 +26,23 @@ export const updateUser = async (req, res) => {
     // We check if the body info it's the same that the one in the DB.
     const user = await User.findById(req.params.userId);
     if (req.body.email && (req.body.email === user.email)) {
-        return res.status(400).json({ message: ['New Email cannot be the same as the old Email.'] });
+        return res.status(400).json(['New Email cannot be the same as the old Email.']);
     }
     // Check if the new email already exists in the database
     const emailExists = await User.findOne({ email: req.body.email });
     if (emailExists) { return res.status(400).json({ message: ['This email is not avaiable.'] }) }
 
     if (req.body.username && (req.body.username === user.username)) {
-        return res.status(400).json({ message: ['New Username cannot be the same as the old Username.'] });
+        return res.status(400).json(['New Username cannot be the same as the old Username.']);
     }
     // Check if the new username already exists in the database
     const usernameExists = await User.findOne({ username: req.body.username });
-    if (usernameExists) { return res.status(400).json({ message: ['This Username is not avaiable.'] }) }
+    if (usernameExists) { return res.status(400).json(['This Username is not avaiable.']) }
 
     if (req.body.password) {
         const passwordMatch = await bcrypt.compare(req.body.password, user.password);
         if (passwordMatch) {
-            return res.status(400).json({ message: ['New Password cannot be the same as the old Password.'] });
+            return res.status(400).json(['New Password cannot be the same as the old Password.']);
         } else {
             req.body.password = await bcrypt.hash(req.body.password, 10);
         }

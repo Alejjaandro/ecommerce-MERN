@@ -12,7 +12,7 @@ import { adminUpdateUserValidator } from "../validators/adminUpdateUser.validato
 
 // We create the endpoints. 
 router.get("/find/:userId", verifyUser, getUser);
-router.put("/:userId",verifyUser, validator(updateUserValidator), updateUser);
+router.put("/:userId", verifyUser, validator(updateUserValidator), updateUser);
 router.delete("/:userId", verifyUser, deleteUser);
 
 router.get("/", verifyAdmin, getAllUsers);
