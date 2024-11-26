@@ -25,4 +25,7 @@ export const updateUserValidator = z.object({
     password: z.string()
     .min(6, { message: 'Password must be at least 6 characters' })
     .optional(),
+
+    isAdmin: z.boolean({invalid_type_error: 'isAdmin must be a boolean. Please select an option.'})
+    .optional()
 });
