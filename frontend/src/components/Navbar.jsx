@@ -71,6 +71,7 @@ const Navbar = () => {
                                     <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
                                     <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
                                     <a href="/all-users" className='hover:line-through border-b-2'>All Users</a>
+                                    <a href="/all-carts" className='hover:line-through border-b-2'>All Carts</a>
                                 </div>
                             </li>
                         )}
@@ -147,6 +148,7 @@ const Navbar = () => {
                                             <a href="/admin-all-products" className='hover:line-through border-b-2'>All Products</a>
                                             <a href="/create-product" className='hover:line-through border-b-2'>Create Product</a>
                                             <a href="/all-users" className='hover:line-through border-b-2'>All Users</a>
+                                            <a href="/all-carts" className='hover:line-through border-b-2'>All Carts</a>
                                         </div>
                                     </li>
                                 )}

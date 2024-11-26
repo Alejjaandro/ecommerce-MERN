@@ -30,6 +30,7 @@ import AdminEditUser from './pages/AdminPages/AdminEditUser';
 
 import ProtectedRoutes from './middleware/ProtectedRoutes';
 import AdminRoutes from './middleware/AdminRoutes';
+import AdminAllCarts from './pages/AdminPages/AdminAllCarts';
 
 function App() {
 	const dispatch = useDispatch()
@@ -68,8 +69,8 @@ function App() {
 					<Route path="/create-product" element={<AdminCreateProduct />} />
 					<Route path="/all-users/" element={<AdminAllUsers />} />
 					<Route path="/edit-user/:userId" element={<AdminEditUser />} />
-					{/* <Route path="/all-carts/" element={<AllCarts />} />
-					<Route path="/edit-cart/:cartId" element={<EditCart />} />
+					<Route path="/all-carts/" element={<AdminAllCarts />} />
+					{/* <Route path="/edit-cart/:cartId" element={<EditCart />} />
 					<Route path="/all-orders/" element={<AllOrders />} />
 					<Route path="/order-details/:orderId" element={<OrderDetails />} /> */}
 				</Route>

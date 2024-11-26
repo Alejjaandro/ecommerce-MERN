@@ -9,12 +9,6 @@ function UserCart() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
     const cart = useSelector(state => state.cart.cart)
-        
-    // Calculate the total price of the cart
-    let cartTotal
-    if (cart) {
-        cartTotal = cart.products.reduce((acc, product) => acc + product.price * product.quantity, 0)
-    }
 
     const onRemove = (product) => {
         dispatch(removeFromCart({
@@ -87,7 +81,7 @@ function UserCart() {
 
                         <div className='mt-4 uppercase gap-4 flex justify-end'>
                             <h1 className='text-2xl font-bold'>Total:</h1>
-                            <p className='text-2xl font-bold'>{cartTotal.toFixed(2)}€</p>
+                            <p className='text-2xl font-bold'>{cart.totalPrice.toFixed(2)}€</p>
                         </div>
                     </div>
                 )

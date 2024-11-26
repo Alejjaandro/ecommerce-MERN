@@ -250,7 +250,7 @@ function Checkout() {
 
                                 <div className='mt-2 lg:text-xl uppercase text-center font-bold'>
                                     <p>Total Purchase:</p>
-                                    <p>{cartTotal.toFixed(2)}€</p>
+                                    <p>{cart.totalPrice.toFixed(2)}€</p>
                                 </div>
                             </div>
                         ) : (

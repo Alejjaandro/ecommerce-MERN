@@ -53,9 +53,20 @@ export const editUser = createAsyncThunk(
                 return rejectWithValue(["No fields to update"]);
             }
 
-            // console.log(userId, info);
-
             const response = await axios.put(`users/${userId}`, info);
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue([error.response.data.message]);
+        }
+    }
+);
+
+export const getAllCarts = createAsyncThunk(
+    "admin/getAllCarts",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.get('/carts/');
             return response.data;
 
         } catch (error) {
@@ -69,6 +80,7 @@ export const adminSlice = createSlice({
     initialState: {
         userToEdit: null,
         allUsers: null,
+        allCarts: null,
         error: null,
         success: null,
     },
@@ -108,7 +120,14 @@ export const adminSlice = createSlice({
                 console.log(action.payload);
                 state.error = action.payload[0];
                 state.success = null;
-            });
+            })
+            .addCase(getAllCarts.fulfilled, (state, action) => {
+                state.allCarts = action.payload;
+            })
+            .addCase(getAllCarts.rejected, (state, action) => {
+                console.log(action.payload);
+                state.error = action.payload.message;
+            })
     },
 });
 
