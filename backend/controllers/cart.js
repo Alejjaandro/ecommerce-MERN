@@ -17,24 +17,25 @@ export const createCart = async (req, res) => {
                 { _id: userId },
                 {
                     $push: { products: product },
-                    $inc: { productsQuantity: product.quantity }
+                    $inc: {
+                        productsQuantity: product.quantity,
+                        totalPrice: product.price * product.quantity
+                    },
                 },
                 { new: true, upsert: true }
             );
+
             return res.status(200).json({ cart: newCart });
         } else {
             // We check if there is product with same properties in the cart.
-            let sameProduct = cartExist.products.find(prod =>
-                (prod._id === product._id) &&
-                (prod.color === product.color) &&
-                (prod.ram === product.ram)
-            );
+            let sameProduct = cartExist.products.find(prod => (prod._id === product._id));
 
             if (sameProduct) {
 
                 // We increase the quantity of the product.
                 sameProduct.quantity += product.quantity;
                 cartExist.productsQuantity += product.quantity;
+                cartExist.totalPrice += product.price * product.quantity;
 
                 // Mark the cart as modified to save the changes.
                 cartExist.markModified('products');
@@ -49,10 +50,14 @@ export const createCart = async (req, res) => {
                     { _id: userId },
                     {
                         $push: { products: product },
-                        $inc: { productsQuantity: product.quantity }
+                        $inc: {
+                            productsQuantity: product.quantity,
+                            totalPrice: product.price * product.quantity
+                        },
                     },
                     { new: true }
                 );
+
                 return res.status(200).json({ cart: updatedCart });
             }
         }
@@ -78,9 +83,9 @@ export const deleteProduct = async (req, res) => {
                 // We use filter to create a new array without the product to be deleted.
                 cart.products = cart.products.filter(
                     (prod) =>
-                    prod._id !== product._id ||
-                    prod.color !== product.color ||
-                    prod.ram !== product.ram
+                        prod._id !== product._id ||
+                        prod.color !== product.color ||
+                        prod.ram !== product.ram
                 );
 
                 // We decrease the quantity of the product.
@@ -132,7 +137,7 @@ export const getAllCarts = async (req, res) => {
 
     try {
         const carts = await Cart.find();
-        return res.status(200).json({ carts: carts });
+        return res.status(200).json(carts);
 
     } catch (error) {
         return res.status(500).json(error);
