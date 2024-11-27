@@ -8,7 +8,7 @@ Hi, i'm Alejandro and this is an Ecommerce project that provides:
 - Implementation of a REST API to facilitate communication between different parts of the application.
 
 **You can check the fully functional project here:**  
-[https://alejjaandro-ecommerce-project.vercel.app](https://alejjaandro-ecommerce-frontend.vercel.app/)
+[https://tech-ecommerce-frontend.vercel.app/](https://tech-ecommerce-frontend.vercel.app/)
 
 ## Requirements
 Please check that you have installed:
