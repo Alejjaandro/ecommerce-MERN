@@ -8,7 +8,7 @@ Hi, i'm Alejandro and this is an Ecommerce project that provides:
 - Implementation of a REST API to facilitate communication between different parts of the application.
 
 **You can check the fully functional project here:**  
-[https://alejjaandro-ecommerce-project.vercel.app](https://alejjaandro-ecommerce-frontend.vercel.app/)
+[https://tech-ecommerce-frontend.vercel.app/](https://tech-ecommerce-frontend.vercel.app/)
 
 ## Requirements
 Please check that you have installed:
@@ -69,19 +69,19 @@ Example of a user document - THIS IS THE DEFAULT ADMIN USER (Password: ***admin1
 ```
 {
   "_id": {
-    "$oid": "650eafbd73b2cef683dea0d8"
+    "$oid": "674032b0295762259a6557e9"
   },
-  "name": "AdminUser",
-  "lastname": "AdminUser",
+  "name": "Admin",
+  "lastname": "Admin",
   "username": "AdminUser",
   "email": "adminuser@admin.com",
-  "password": "$2b$10$h5oQbt/q9xHjDL4sJ2n5YO5wxZCy2fnF.VYk4KPtj1cdBiiuqLXV.",
+  "password": "$2b$10$Rt13cKu7NGliJmDBt8KkEelNDvodjjsrM/fdcS1ojG2PO6ArOBkxK",
   "isAdmin": true,
   "createdAt": {
-    "$date": "2023-09-23T09:28:29.217Z"
+    "$date": "2024-11-22T07:28:48.456Z"
   },
   "updatedAt": {
-    "$date": "2023-09-23T09:28:29.217Z"
+    "$date": "2024-11-26T09:33:12.680Z"
   },
   "__v": 0
 }
@@ -115,18 +115,10 @@ Example of a product document:
     "description": "An apple mobile which is nothing like apple",
     "price": 549,
     "discountPercentage": 12.96,
-    "rating": 4.69,
     "stock": 93,
     "brand": "Apple",
     "category": "smartphones",
     "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-    "images": [
-      "https://i.dummyjson.com/data/products/1/1.jpg",
-      "https://i.dummyjson.com/data/products/1/2.jpg",
-      "https://i.dummyjson.com/data/products/1/3.jpg",
-      "https://i.dummyjson.com/data/products/1/4.jpg",
-      "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-    ],
     "createdAt": {
       "$date": "2023-08-07T16:18:55.819Z"
     },
@@ -150,45 +142,39 @@ Example of a product document:
 Example of a Cart document:
 ```
 {
-    "_id": {
-      "$oid": "64d8c2d85ea9fac06225e507"
+  "_id": {
+    "$oid": "673c538451d419d83075bfd7"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-26T10:50:05.508Z"
+  },
+  "products": [
+    {
+      "_id": "66067d697f03d4f5f06bde73",
+      "title": "ASUS Vivabook",
+      "price": 1150,
+      "thumbnail": "productImages/AsusVivabook.jpg",
+      "quantity": 3,
+      "color": "N/A",
+      "ram": "N/A"
     },
-    "__v": 0,
-    "createdAt": {
-      "$date": "2023-09-04T16:57:00.078Z"
+    {
+      "_id": "66067d697f03d4f5f06bde77",
+      "title": "MSI Thin GF63",
+      "price": 1099,
+      "thumbnail": "productImages/MSIThinGF63.webp",
+      "quantity": 1,
+      "color": "N/A",
+      "ram": "N/A"
     },
-    "products": [
-      {
-        "product": {
-          "_id": "64d1196ffec7f4af5c10667f",
-          "title": "iPhone 9",
-          "description": "An apple mobile which is nothing like apple",
-          "price": 549,
-          "discountPercentage": 12.96,
-          "rating": 4.69,
-          "stock": 93,
-          "brand": "Apple",
-          "category": "smartphones",
-          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/1/1.jpg",
-            "https://i.dummyjson.com/data/products/1/2.jpg",
-            "https://i.dummyjson.com/data/products/1/3.jpg",
-            "https://i.dummyjson.com/data/products/1/4.jpg",
-            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-          ],
-          "createdAt": "2023-08-07T16:18:55.819Z",
-          "updatedAt": "2023-08-29T10:09:48.564Z",
-          "__v": 0
-        },
-        "quantity": 1,
-        "color": " - ",
-        "ram": " - "
-      }
-    ],
-    "updatedAt": {
-      "$date": "2023-09-05T16:26:22.976Z"
-    }
+  ],
+  "productsQuantity": 8,
+  "totalPrice": 5911.5,
+  "updatedAt": {
+    "$date": "2024-11-26T10:50:11.569Z"
+  }
+}
 ```
 
 5. Orders Routes:
@@ -219,18 +205,10 @@ Example of a Order document:
           "description": "An apple mobile which is nothing like apple",
           "price": 549,
           "discountPercentage": 12.96,
-          "rating": 4.69,
           "stock": 93,
           "brand": "Apple",
           "category": "smartphones",
           "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/1/1.jpg",
-            "https://i.dummyjson.com/data/products/1/2.jpg",
-            "https://i.dummyjson.com/data/products/1/3.jpg",
-            "https://i.dummyjson.com/data/products/1/4.jpg",
-            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-          ],
           "createdAt": "2023-08-07T16:18:55.819Z",
           "updatedAt": "2023-08-29T10:09:48.564Z",
           "__v": 0
