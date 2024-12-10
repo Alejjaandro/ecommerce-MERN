@@ -102,7 +102,7 @@ export const productsSlice = createSlice({
     name: "products",
     initialState: {
         allProducts: null,
-        singleProduct: {},
+        singleProduct: null,
         filteredProducts: [],
         allCategories: [],
         allBrands: [],

@@ -49,35 +49,37 @@ function ProductPage() {
     return (
         <div className='bg-gray-200 md:ml-[25%] min-h-screen flex justify-center items-center'>
             <div className='w-[90%] p-4 bg-white rounded-md'>
-                
-                <a href="/products" className='flex items-center gap-2 hover:underline'><FaCircleArrowLeft/> Back to products page</a>
-                
-                {product ? (
-                    <div className='mt-6'>
-                        <h1 className='my-4 text-4xl md:mt-10 font-bold text-center'>{product.title}</h1>
-                        <div className='flex justify-around md:text-xl'>
-                            <div className='flex flex-col items-center gap-4 lg:items-start'>
 
-                                <div className='flex flex-col gap-4 items-center lg:flex-row'>
-                                    <img src={`/${product.thumbnail}`} alt={product.title} className='w-1/2 object-contain' />
-                                    <span className='text-justify'>{product.description}</span>
-                                </div>
+                <a href="/products" className='flex items-center gap-2 hover:underline'><FaCircleArrowLeft /> Back to products page</a>
 
-                                <div className="w-full flex flex-col md:flex-row gap-8 items-center justify-end">
-                                    <div className="flex gap-4 items-center">
-                                        <button onClick={decreaseQuantity} className='text-2xl'><IoIosRemoveCircle/></button>
-                                        <span className='text-2xl'>{quantity}</span>
-                                        <button onClick={increaseQuantity} className='text-2xl'><IoIosAddCircle/></button>
+                <div className='mt-6'>
+                    {product ? (
+                        <>
+                            <h1 className='my-4 text-4xl md:mt-10 font-bold text-center'>{product.title}</h1>
+                            <div className='flex justify-around md:text-xl'>
+                                <div className='flex flex-col items-center gap-4 lg:items-start'>
+
+                                    <div className='flex flex-col gap-4 items-center lg:flex-row'>
+                                        <img src={`/${product.thumbnail}`} alt={product.title} className='w-1/2 object-contain' />
+                                        <span className='text-justify'>{product.description}</span>
                                     </div>
-                                    <span className='text-2xl'>{product.price}€</span>
-                                    <button onClick={() => addToCartButton(product)} className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
+
+                                    <div className="w-full flex flex-col md:flex-row gap-8 items-center justify-end">
+                                        <div className="flex gap-4 items-center">
+                                            <button onClick={decreaseQuantity} className='text-2xl'><IoIosRemoveCircle /></button>
+                                            <span className='text-2xl'>{quantity}</span>
+                                            <button onClick={increaseQuantity} className='text-2xl'><IoIosAddCircle /></button>
+                                        </div>
+                                        <span className='text-2xl'>{product.price}€</span>
+                                        <button onClick={() => addToCartButton(product)} className='bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>Add to cart</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )}
+                        </>
+                    ) : (
+                        <h1 className='my-4 text-4xl md:mt-10 font-bold text-center'>Loading product...</h1>
+                    )}
+                </div>
 
                 {error && (
                     <p className='text-red-500 text-center mt-4'>{error}</p>
