@@ -10,7 +10,7 @@ export const createCart = async (req, res) => {
     const product = req.body;
 
     try {
-        // We check if the user has a cart.
+        // We check if the user has a cart. If not, we create one. If yes, we update it.
         let cartExist = await Cart.findOne({ _id: userId });
         if (!cartExist) {
             const newCart = await Cart.findOneAndUpdate(
