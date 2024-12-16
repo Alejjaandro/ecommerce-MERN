@@ -136,6 +136,10 @@ export const adminSlice = createSlice({
                 state.success = null;
             })
             .addCase(getAllCarts.fulfilled, (state, action) => {
+                if (action.payload.length === 0) {
+                    state.allCarts = null;
+                    return;
+                }
                 state.allCarts = action.payload;
             })
             .addCase(getAllCarts.rejected, (state, action) => {
